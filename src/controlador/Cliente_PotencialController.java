@@ -83,7 +83,7 @@ public class Cliente_PotencialController implements ActionListener {
     public void iniciar() {
         busqueda();
         formulario.setTitle("Cliente Potencial");
-//        formulario.setLocationRelativeTo(null);
+        formulario.setLocationRelativeTo(null);
         model.addColumn("Servicio/Producto");
         model.addColumn("Fecha de inicio");
         formulario.tablaservicios.setModel(model);
@@ -91,6 +91,38 @@ public class Cliente_PotencialController implements ActionListener {
         model1.addColumn("Fecha de inicial");
         model1.addColumn("Fecha de vencimiento");
         formulario.tabladocumentos.setModel(model1);
+        
+        formulario.txtservicio.removeAllItems();
+
+        ArrayList<String> lista = new ArrayList<String>();
+        Consultas_Servicio modc = new Consultas_Servicio();
+        lista = modc.llenar();
+        for (int i = 0; i < lista.size(); i++) {
+            formulario.txtservicio.addItem(lista.get(i));
+        }
+
+        formulario.txtclase.removeAllItems();
+        ArrayList<String> lista2 = new ArrayList<String>();
+        Consultas_Clase mod = new Consultas_Clase();
+        lista2 = mod.llenar();
+        for (int i = 0; i < lista2.size(); i++) {
+            formulario.txtclase.addItem(lista2.get(i));
+        }
+
+        formulario.txtllego.removeAllItems();
+        ArrayList<String> lista3 = new ArrayList<String>();
+        Consultas_Llego modelo = new Consultas_Llego();
+        lista3 = modelo.llenar();
+        for (int i = 0; i < lista3.size(); i++) {
+            formulario.txtllego.addItem(lista3.get(i));
+        }
+        
+        formulario.txtservicio.removeAllItems();
+        ArrayList<String> lista1 = new ArrayList<String>();
+        lista1 = cons.llenar();
+        for (int i = 0; i < lista1.size(); i++) {
+            formulario.txtservicio.addItem(lista1.get(i));
+        }
 
     }
 

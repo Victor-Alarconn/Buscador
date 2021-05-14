@@ -9,12 +9,42 @@ import Consultas.Consultas_Servicio;
 import java.util.ArrayList;
 import modelo.Servicio;
 
-
 /**
  *
  * @author Yonathan Carvajal
  */
 public class Formulario extends javax.swing.JDialog {
+
+    public void transparecia() {
+        botro.setOpaque(false);
+        bsoftware.setOpaque(false);
+        bequipos.setOpaque(false);
+        bredes.setOpaque(false);
+
+        guardarformulario.setOpaque(false);
+        guardarformulario.setContentAreaFilled(false);
+        guardarformulario.setBorderPainted(false);
+
+        agregardocumento.setOpaque(false);
+        agregardocumento.setContentAreaFilled(false);
+        agregardocumento.setBorderPainted(false);
+
+        eliminardocumento.setOpaque(false);
+        eliminardocumento.setContentAreaFilled(false);
+        eliminardocumento.setBorderPainted(false);
+
+        agregarservicio.setOpaque(false);
+        agregarservicio.setContentAreaFilled(false);
+        agregarservicio.setBorderPainted(false);
+
+        eliminarservicio.setOpaque(false);
+        eliminarservicio.setContentAreaFilled(false);
+        eliminarservicio.setBorderPainted(false);
+
+        subpanel4.setOpaque(false);
+        subpanel3.setOpaque(false);
+
+    }
 
     /**
      * Creates new form Form
@@ -22,13 +52,8 @@ public class Formulario extends javax.swing.JDialog {
     public Formulario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        txtservicio.removeAllItems();
-        ArrayList<String> lista = new ArrayList<String>();
-        Consultas_Servicio modc = new Consultas_Servicio();
-        lista=modc.llenar(); 
-        for (int i = 0; i < lista.size(); i++) {
-           txtservicio.addItem(lista.get(i)); 
-        }
+        transparecia();
+        
     }
 
     /**
