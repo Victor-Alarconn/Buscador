@@ -1,0 +1,41 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package modelo;
+
+/**
+ *
+ * @author yonathan
+ */
+public class Configuracion {
+    private int idconfiguracion;
+    private String directorio;
+    private String prefijo;
+
+    public int getIdconfiguracion() {
+        return idconfiguracion;
+    }
+
+    public void setIdconfiguracion(int idconfiguracion) {
+        this.idconfiguracion = idconfiguracion;
+    }
+
+    public String getDirectorio() {
+        return directorio;
+    }
+
+    public void setDirectorio(String directorio) {
+        this.directorio = directorio;
+    }
+
+    public String getPrefijo() {
+        return prefijo;
+    }
+
+    public void setPrefijo(String prefijo) {
+        this.prefijo = prefijo;
+    }
+    
+}
