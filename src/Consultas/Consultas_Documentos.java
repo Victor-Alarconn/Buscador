@@ -8,6 +8,7 @@ package Consultas;
 import Conexion.Conexion;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelo.Documentos;
 
@@ -31,6 +32,32 @@ public class Consultas_Documentos extends Conexion {
             ps.setInt(4, documentos.getClientes_potenciales_idclientes_potenciales());
             ps.execute();
             return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+
+    }
+    
+    public boolean buscar(int documentos) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = " SELECT * FROM documentos WHERE iddocumentos=?";
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps.setInt(1, documentos);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+            return false;
         } catch (SQLException e) {
             System.err.println(e);
             return false;

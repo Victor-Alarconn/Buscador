@@ -63,6 +63,7 @@ public class Editarcliente extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         paneleditar = new javax.swing.JPanel();
         txtnit1 = new rojerusan.RSMetroTextFullPlaceHolder();
         txtnombre1 = new rojerusan.RSMetroTextFullPlaceHolder();
@@ -247,7 +248,7 @@ public class Editarcliente extends javax.swing.JDialog {
                                 .addComponent(agregarservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(eliminarservicio1))
                             .addComponent(guardarformulario1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 9, Short.MAX_VALUE))
                     .addGroup(subpanel6Layout.createSequentialGroup()
                         .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fecha_vencimineto_docum1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -362,18 +363,22 @@ public class Editarcliente extends javax.swing.JDialog {
         jLabel50.setForeground(new java.awt.Color(255, 255, 255));
         jLabel50.setText("EMPRESA");
 
+        buttonGroup1.add(botro1);
         botro1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botro1.setForeground(new java.awt.Color(255, 255, 255));
         botro1.setText("otro");
 
+        buttonGroup1.add(bsoftware1);
         bsoftware1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bsoftware1.setForeground(new java.awt.Color(255, 255, 255));
         bsoftware1.setText("Software");
 
+        buttonGroup1.add(bredes1);
         bredes1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bredes1.setForeground(new java.awt.Color(255, 255, 255));
         bredes1.setText("Redes");
 
+        buttonGroup1.add(bequipos1);
         bequipos1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bequipos1.setForeground(new java.awt.Color(255, 255, 255));
         bequipos1.setText("Equipos");
@@ -450,7 +455,8 @@ public class Editarcliente extends javax.swing.JDialog {
                                         .addComponent(txtempresa1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jScrollPane14))
                         .addGap(18, 18, 18)
-                        .addComponent(subpanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(subpanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4))))
         );
         paneleditarLayout.setVerticalGroup(
             paneleditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,8 +531,8 @@ public class Editarcliente extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(paneleditar, javax.swing.GroupLayout.PREFERRED_SIZE, 1060, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addComponent(paneleditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -599,6 +605,7 @@ public class Editarcliente extends javax.swing.JDialog {
     public javax.swing.JRadioButton botro1;
     public javax.swing.JRadioButton bredes1;
     public javax.swing.JRadioButton bsoftware1;
+    public javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JButton eliminardocumento1;
     public javax.swing.JButton eliminarservicio1;
     public com.toedter.calendar.JDateChooser fecha_inicio_docum1;

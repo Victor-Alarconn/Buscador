@@ -47,31 +47,12 @@ public class Buscador {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Configuracion mconfiguracion = new Configuracion();
-        Consultas_Configuraciones cconfiguraciones = new Consultas_Configuraciones();
-        Servicio mods = new Servicio();
-        Cliente_Potencial modelo = new Cliente_Potencial();
-        Documentos documento = new Documentos();
-        Servicios_has_Clientes_Potenciales shcp = new Servicios_has_Clientes_Potenciales();
-        Consultas_Servicios_has_Clientes_Potenciales cshcp = new Consultas_Servicios_has_Clientes_Potenciales();
-        Consultas_Cliente_Potencial consulta = new Consultas_Cliente_Potencial();
-        Consultas_Documentos cdocumentos = new Consultas_Documentos();
         Principal principal = new Principal();
         ////////cliente
         Cliente_Potencial mod = new Cliente_Potencial();
         Consultas_Cliente_Potencial modcp = new Consultas_Cliente_Potencial();
         BusquedaController bctrl = new BusquedaController(mod, modcp, principal);
         bctrl.iniciar();
-        ///editar
-        Consultas_Clase cc = new Consultas_Clase();
-        Consultas_Llego cl = new Consultas_Llego();
-        Consultas_Servicio modc = new Consultas_Servicio();
-        EditarController edic = new EditarController(modelo,
-                mods, shcp, documento, mconfiguracion, modc, consulta,
-                cshcp, cdocumentos, cconfiguraciones, cc, cl,
-                principal);
-        edic.iniciar();
-
         principal.setExtendedState(MAXIMIZED_BOTH);
         principal.setVisible(true);
     }

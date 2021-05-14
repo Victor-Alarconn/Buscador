@@ -126,15 +126,6 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="botro" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                          <Component id="bsoftware" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="bequipos" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                          <Component id="bredes" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -184,8 +175,17 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="subpanel4" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="botro" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="bsoftware" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="bequipos" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="bredes" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                  <EmptySpace min="71" pref="71" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

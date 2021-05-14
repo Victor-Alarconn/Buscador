@@ -12,6 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.Cliente_Potencial;
+import modelo.Documentos;
+import modelo.Servicio;
+import modelo.Servicios_has_Clientes_Potenciales;
 
 /**
  *
@@ -239,7 +242,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
         return null;
     }
     
-    public ArrayList<String> llenar(Cliente_Potencial cliente) {
+    public ArrayList<Servicio> llenar(Cliente_Potencial cliente) {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -254,7 +257,44 @@ public class Consultas_Cliente_Potencial extends Conexion {
             ps.setInt(1, cliente.getIdclientes_potenciales());
             rs = ps.executeQuery();
             while (rs.next()) {
-                lista.add(rs.getString("servicio"));
+                Servicio servicio = new Servicio();
+                servicio.setServicio(rs.getString(1));
+                servicio.setFecha(rs.getString(2));
+                lista.add(servicio);
+            }
+            return lista;
+        } catch (SQLException e) {
+            System.err.println(e);
+            //return null;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        return null;
+    }
+    
+     public ArrayList<Documentos> clientedocumentos(Cliente_Potencial cliente) {
+        ArrayList lista = new ArrayList();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = " SELECT * FROM `documentos` WHERE documentos.clientes_potenciales_idclientes_potenciales=?";
+        try {
+//            ps = (PreparedStatement) con.prepareStatement(sql);
+//            rs = ps.executeQuery();
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps.setInt(1, cliente.getIdclientes_potenciales());
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                Documentos documento = new Documentos();
+                documento.setIddocumentos(rs.getInt(1));
+                documento.setDocumento(rs.getString(2));
+                documento.setFecha_inicio(rs.getString(3));
+                documento.setFecha_vencimiento(rs.getString(4));
+                lista.add(documento);
             }
             return lista;
         } catch (SQLException e) {

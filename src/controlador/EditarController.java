@@ -30,6 +30,7 @@ import modelo.Configuracion;
 import modelo.Documentos;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
+import vistas.Editarcliente;
 import vistas.Principal;
 
 /**
@@ -54,13 +55,18 @@ public class EditarController implements ActionListener {
     private final Consultas_Clase cc;
     private final Consultas_Llego cl;
 
-    private final Principal formulario;
+    private final Editarcliente formulario;
     private String directorio = null;
     private String prefijo = null;
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model1 = new DefaultTableModel();
 
-    public EditarController(Cliente_Potencial modelo, Servicio mods, Servicios_has_Clientes_Potenciales shcp, Documentos mdocumento, Configuracion mconfiguracion, Consultas_Servicio cons, Consultas_Cliente_Potencial consultas, Consultas_Servicios_has_Clientes_Potenciales cshcp, Consultas_Documentos cdocumentos, Consultas_Configuraciones cconfiguraciones, Consultas_Clase cc, Consultas_Llego cl, Principal formulario) {
+    public EditarController(Cliente_Potencial modelo, Servicio mods,
+            Servicios_has_Clientes_Potenciales shcp, Documentos mdocumento, Configuracion mconfiguracion,
+            Consultas_Servicio cons, Consultas_Cliente_Potencial consultas,
+            Consultas_Servicios_has_Clientes_Potenciales cshcp, Consultas_Documentos cdocumentos,
+            Consultas_Configuraciones cconfiguraciones, Consultas_Clase cc, Consultas_Llego cl,
+            Editarcliente formulario) {
         this.modelo = modelo;
         this.mods = mods;
         this.shcp = shcp;
@@ -75,20 +81,199 @@ public class EditarController implements ActionListener {
         this.cl = cl;
         this.formulario = formulario;
         this.formulario.guardarformulario1.addActionListener(this);
+        this.formulario.agregarservicio1.addActionListener(this);
+        this.formulario.eliminarservicio1.addActionListener(this);
+        this.formulario.agregardocumento1.addActionListener(this);
+        this.formulario.eliminardocumento1.addActionListener(this);
     }
-
-    
 
     public void iniciar() {
         busqueda();
         formulario.setTitle("Ediatr Cliente Potencial");
-//        formulario.setLocationRelativeTo(null);
+        formulario.setLocationRelativeTo(null);
         model.addColumn("Servicio/Producto");
         model.addColumn("Fecha de inicio");
+
         formulario.tablaservicios1.setModel(model);
+        model1.addColumn("id");
         model1.addColumn("Docu");
         model1.addColumn("Fecha de inicial");
         model1.addColumn("Fecha de vencimiento");
+        inicializarcliente();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == formulario.guardarformulario1) {
+            modelo.setNit(formulario.txtnit1.getText());
+            modelo.setNombre(formulario.txtnombre1.getText());
+            modelo.setEmpresa(formulario.txtempresa1.getText());
+            modelo.setCelular1(formulario.txtcelular11.getText());
+            modelo.setCelular2(formulario.txtcelular21.getText());
+            modelo.setEmail(formulario.txtemail1.getText());
+            modelo.setClase(formulario.txtclase1.getSelectedItem().toString());
+            modelo.setLlego(formulario.txtllego1.getSelectedItem().toString());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            modelo.setFecha_llegada(sdf.format(formulario.txtfecha_llegada1.getDate()));
+            modelo.setRetiro(formulario.txtretiro1.getText());
+            modelo.setNotas(formulario.txtnotas1.getText());
+            modelo.setDv(formulario.txtdv1.getText());
+//            modelo.setCodigo(formulario.txtcodigo1.getText());
+            //condicionales de selecion  de categoria 
+            if (formulario.bequipos1.isSelected()) {
+                modelo.setCategoria("Equipos");
+            }
+            if (formulario.bredes1.isSelected()) {
+                modelo.setCategoria("Redes");
+            }
+            if (formulario.bsoftware1.isSelected()) {
+                modelo.setCategoria("Software");
+            }
+            if (formulario.botro1.isSelected()) {
+                modelo.setCategoria("Otro");
+            }
+            if (consultas.modificar(modelo)) {
+                for (int i = 0; i < formulario.tablaservicios1.getRowCount(); i++) {
+                    mods.setServicio(formulario.tablaservicios1.getValueAt(i, 0).toString());
+                    if (cons.buscar(mods)) {
+                        shcp.setServicios_idservicio(mods.getIdservicio());
+                        shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                        System.out.println(modelo.getIdclientes_potenciales());
+                        shcp.setFecha_de_inicio(formulario.tablaservicios1.getValueAt(i, 1).toString());
+                        if (!cshcp.buscar(shcp)) {
+                            if (!cshcp.registrarservicio(shcp)) {
+                                JOptionPane.showMessageDialog(null, "error guardado de servicios");
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "error guardado");
+                    }
+                }
+                //guardando la tabla documnetos
+                for (int i = 0; i < formulario.tabladocumentos1.getRowCount(); i++) {
+                    System.out.println(formulario.tabladocumentos1.getValueAt(i, 0));
+//                    int doc = Integer.parseInt(formulario.tabladocumentos1.getValueAt(i, 0).toString());
+                    mdocumento.setDocumento(formulario.tabladocumentos1.getValueAt(i, 1).toString());
+                    mdocumento.setFecha_inicio(formulario.tabladocumentos1.getValueAt(i, 2).toString());
+                    mdocumento.setFecha_vencimiento(formulario.tabladocumentos1.getValueAt(i, 3).toString());
+                    mdocumento.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                  
+//                    if (cdocumentos.buscar(doc)) {
+//                        System.out.println("el documento existe");
+////                        if (!cdocumentos.registrar(mdocumento)) {
+////                            JOptionPane.showMessageDialog(null, "error guardado de documento");
+////                        }
+//                    } else {
+//                        System.out.println("el docuemento existe");
+//                    }
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "error guardado el cliente");
+            }
+        }
+
+        //boton agregar servicio
+        Object[] dato = new Object[5];
+        if (e.getSource() == formulario.agregarservicio1) {
+            dato[0] = formulario.txtservicio1.getSelectedItem().toString();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            dato[1] = sdf.format(formulario.txtfecha_inicio1.getDate());
+            model.addRow(dato);
+            formulario.tablaservicios1.setModel(model);
+            formulario.txtfecha_inicio1.setCalendar(null);
+        }
+        //boton agregar documento
+        Object[] tabladocumentos = new Object[5];
+        if (e.getSource() == formulario.agregardocumento1) {
+            tabladocumentos[1] = formulario.txtdocumento1.getText();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            tabladocumentos[2] = sdf.format(formulario.fecha_inicio_docum1.getDate());
+            tabladocumentos[3] = sdf.format(formulario.fecha_vencimineto_docum1.getDate());
+            model1.addRow(tabladocumentos);
+            formulario.tabladocumentos1.setModel(model1);
+//            formulario.fecha_inicio_docum1.setCalendar(null);
+//            formulario.fecha_vencimineto_docum1.setCalendar(null);
+            formulario.txtdocumento1.setText("");
+        }
+        //boton eliminar servicio
+        if (e.getSource() == formulario.eliminarservicio1) {
+            int fila = formulario.tablaservicios1.getSelectedRow();
+            mods.setServicio(formulario.tablaservicios1.getValueAt(fila, 0).toString());
+            if (cons.buscar(mods)) {
+                shcp.setServicios_idservicio(mods.getIdservicio());
+                shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                System.out.println(modelo.getIdclientes_potenciales());
+                shcp.setFecha_de_inicio(formulario.tablaservicios1.getValueAt(fila, 1).toString());
+                if (fila >= 0) {
+                    if (cshcp.eliminar(shcp)) {
+                        model.removeRow(fila);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "error guardado");
+            }
+
+        }
+        //boton eliminar documnento
+        if (e.getSource() == formulario.eliminardocumento1) {
+            int fila = formulario.tabladocumentos1.getSelectedRow();
+            if (fila >= 0) {
+                model1.removeRow(fila);
+            } else {
+                JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
+            }
+        }
+
+    }
+
+    public void busqueda() {
+        Consultas_Directorio cd = new Consultas_Directorio();
+        Object[] dato = new Object[1];
+        for (int i = 0; i < cd.llenar().size(); i++) {
+            dato[0] = cd.llenar().get(i);
+        }
+
+    }
+
+    public void limpiar() {
+        formulario.txtnit1.setText("");
+        formulario.txtnombre1.setText("");
+        formulario.txtcelular11.setText("");
+        formulario.txtcelular21.setText("");
+        formulario.txtdv1.setText("");
+        formulario.txtcodigo1.setText("");
+        formulario.txtemail1.setText("");
+        formulario.txtempresa1.setText("");
+        formulario.txtretiro1.setText("");
+        formulario.txtdocumento1.setText("");
+        formulario.txtnotas1.setText("");
+        formulario.txtfecha_llegada1.setCalendar(null);
+        formulario.buttonGroup1.clearSelection();
+    }
+
+    public void limpiarservicios() {
+        if (formulario.tablaservicios1.getRowCount() >= 0) {
+            int count = formulario.tablaservicios1.getRowCount();
+            for (int i = 0; i < count; i++) {
+                model.removeRow(0);
+            }
+        }
+    }
+
+    public void limpiardocumentos() {
+        if (formulario.tabladocumentos1.getRowCount() >= 0) {
+            int count = formulario.tabladocumentos1.getRowCount();
+            for (int i = 0; i < count; i++) {
+                model1.removeRow(0);
+            }
+        }
+    }
+
+    public void inicializarcliente() {
         formulario.tabladocumentos1.setModel(model1);
         if (cconfiguraciones.cargar(mconfiguracion)) {
             directorio = mconfiguracion.getDirectorio();
@@ -110,16 +295,27 @@ public class EditarController implements ActionListener {
 
         formulario.txtllego1.removeAllItems();
         ArrayList<String> lista3 = new ArrayList<String>();
-        modelo.setIdclientes_potenciales(148);
-        
-        ArrayList<String> lista4 = new ArrayList<String>();
-        lista4 = consultas.llenar(modelo);
-        Object[] datos = new Object[5];
-        for (int i = 0; i < lista4.size(); i++) {
-            datos[0] = consultas.llenar(modelo).get(i);
+        //llena la tabla de servicios 
+        int con = consultas.llenar(modelo).size();
+        Object[] datos = new Object[2];
+        for (int i = 0; i < con; i++) {
+            datos[0] = consultas.llenar(modelo).get(i).getServicio();
+            datos[1] = consultas.llenar(modelo).get(i).getFecha();
             model.addRow(datos);
             formulario.tablaservicios1.setModel(model);
         }
+
+        int cantidad = consultas.clientedocumentos(modelo).size();
+        Object[] datos5 = new Object[4];
+        for (int i = 0; i < cantidad; i++) {
+            datos5[0] = consultas.clientedocumentos(modelo).get(i).getIddocumentos();
+            datos5[1] = consultas.clientedocumentos(modelo).get(i).getDocumento();
+            datos5[2] = consultas.clientedocumentos(modelo).get(i).getFecha_inicio();
+            datos5[3] = consultas.clientedocumentos(modelo).get(i).getFecha_vencimiento();
+            model1.addRow(datos5);
+            formulario.tabladocumentos1.setModel(model1);
+        }
+
         if (consultas.buscar(modelo)) {
             try {
                 formulario.txtnit1.setText(modelo.getNit());
@@ -156,15 +352,11 @@ public class EditarController implements ActionListener {
                             }
 
                         }
-
                     }
-
                 }
-
             } catch (ParseException ex) {
                 Logger.getLogger(EditarController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
         lista2 = cc.llenar();
         for (int i = 0; i < lista2.size(); i++) {
@@ -173,174 +365,6 @@ public class EditarController implements ActionListener {
         lista3 = cl.llenar();
         for (int i = 0; i < lista3.size(); i++) {
             formulario.txtllego1.addItem(lista3.get(i));
-        }
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
-        if (e.getSource() == formulario.guardarformulario1) {
-            modelo.setNit(formulario.txtnit1.getText());
-            modelo.setNombre(formulario.txtnombre1.getText());
-            modelo.setEmpresa(formulario.txtempresa1.getText());
-            modelo.setCelular1(formulario.txtcelular11.getText());
-            modelo.setCelular2(formulario.txtcelular21.getText());
-            modelo.setEmail(formulario.txtemail1.getText());
-            modelo.setClase(formulario.txtclase1.getSelectedItem().toString());
-            modelo.setLlego(formulario.txtllego1.getSelectedItem().toString());
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            modelo.setFecha_llegada(sdf.format(formulario.txtfecha_llegada1.getDate()));
-            modelo.setRetiro(formulario.txtretiro1.getText());
-            modelo.setNotas(formulario.txtnotas1.getText());
-            modelo.setDv(formulario.txtdv1.getText());
-//            modelo.setCodigo(formulario.txtcodigo1.getText());
-            //condicionales de selecion  de categoria 
-            if (formulario.bequipos1.isSelected()) {
-                modelo.setCategoria("Equipos");
-            }
-            if (formulario.bredes1.isSelected()) {
-                modelo.setCategoria("Redes");
-            }
-            if (formulario.bsoftware1.isSelected()) {
-                modelo.setCategoria("Software");
-            }
-            if (formulario.botro1.isSelected()) {
-                modelo.setCategoria("Otro");
-            }
-            modelo.setIdclientes_potenciales(31);
-            System.out.println("c");
-            
-//            if (consultas.modificar(modelo)) {
-//                System.out.println("c");
-//            } else {
-//                JOptionPane.showMessageDialog(null, "error guardado el cliente");
-//            }
-            
-        }
-        
-        
-        //boton agregar servicio
-        Object[] dato = new Object[5];
-        if (e.getSource() == formulario.agregarservicio) {
-            dato[0] = formulario.txtservicio.getSelectedItem().toString();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            dato[1] = sdf.format(formulario.txtfecha_inicio.getDate());
-            model.addRow(dato);
-            formulario.tablaservicios.setModel(model);
-            formulario.txtfecha_inicio.setCalendar(null);
-        }
-        //boton agregar documento
-        Object[] tabladocumentos = new Object[5];
-        if (e.getSource() == formulario.agregardocumento) {
-            tabladocumentos[0] = formulario.txtdocumento.getText();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            tabladocumentos[1] = sdf.format(formulario.fecha_inicio_docum.getDate());
-            tabladocumentos[2] = sdf.format(formulario.fecha_vencimineto_docum.getDate());
-            model1.addRow(tabladocumentos);
-            formulario.tabladocumentos.setModel(model1);
-            formulario.fecha_inicio_docum.setCalendar(null);
-            formulario.fecha_vencimineto_docum.setCalendar(null);
-            formulario.txtdocumento.setText("");
-        }
-        //boton eliminar servicio
-        if (e.getSource() == formulario.eliminarservicio) {
-            int fila = formulario.tablaservicios.getSelectedRow();
-            if (fila >= 0) {
-                model.removeRow(fila);
-            } else {
-                JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
-            }
-        }
-        //boton eliminar documnento
-        if (e.getSource() == formulario.eliminardocumento) {
-            int fila = formulario.tabladocumentos.getSelectedRow();
-            if (fila >= 0) {
-                model1.removeRow(fila);
-            } else {
-                JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
-            }
-        }
-
-    }
-    // funcion para crear una carpeta 
-
-    private void crear_carpeta(String path) {
-
-        String nombre = formulario.txtcodigo.getText().toUpperCase();
-        if (nombre != null) {
-            File file = Crear_archivo(path, prefijo + nombre);
-            if (file.mkdir()) {
-                Consultas_Directorio cd = new Consultas_Directorio();
-                Object[] dato = new Object[1];
-                for (int i = 0; i < cd.llenar().size(); i++) {
-                    dato[0] = cd.llenar().get(i);
-                    File fil = Crear_archivo(path + File.separator + prefijo + nombre, cd.llenar().get(i));
-                    fil.mkdir();
-                }
-            }
-            abrirarchivo(directorio + File.separator + prefijo + nombre);
-        }
-    }
-
-    public void busqueda() {
-        Consultas_Directorio cd = new Consultas_Directorio();
-        Object[] dato = new Object[1];
-        for (int i = 0; i < cd.llenar().size(); i++) {
-            dato[0] = cd.llenar().get(i);
-
-        }
-
-    }
-
-// funcion para abrir un archivo desde la tabla 
-    public void abrirarchivo(String archivo) {
-        try {
-            File objetofile = new File(archivo);
-            Desktop.getDesktop().open(objetofile);
-            System.exit(0);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-// funcion para crear un archivo
-
-    public File Crear_archivo(String path, String nombre) {
-        File file = new File(path, nombre);
-        return file;
-    }
-//funcion para limpiar el formulario
-
-    public void limpiar() {
-        formulario.txtnit1.setText("");
-        formulario.txtnombre1.setText("");
-        formulario.txtcelular11.setText("");
-        formulario.txtcelular21.setText("");
-        formulario.txtdv1.setText("");
-        formulario.txtcodigo1.setText("");
-        formulario.txtemail1.setText("");
-        formulario.txtempresa1.setText("");
-        formulario.txtretiro1.setText("");
-        formulario.txtdocumento1.setText("");
-        formulario.txtnotas1.setText("");
-        formulario.txtfecha_llegada1.setCalendar(null);
-    }
-
-    public void limpiarservicios() {
-        if (formulario.tablaservicios.getRowCount() >= 0) {
-            int count = formulario.tablaservicios.getRowCount();
-            for (int i = 0; i < count; i++) {
-                model.removeRow(0);
-            }
-        }
-    }
-
-    public void limpiardocumentos() {
-        if (formulario.tabladocumentos.getRowCount() >= 0) {
-            int count = formulario.tabladocumentos.getRowCount();
-            for (int i = 0; i < count; i++) {
-                model1.removeRow(0);
-            }
         }
     }
 }

@@ -12,7 +12,15 @@ package modelo;
 public class Servicio {
     private int idservicio;
     private String servicio;
+    private String fecha;
 
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
     public int getIdservicio() {
         return idservicio;
     }

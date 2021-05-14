@@ -89,7 +89,6 @@ public class Configuraciones extends javax.swing.JDialog {
         this.setResizable(false);
 //        this.setSize(new Dimension(ancho,alto));
         labelc.setSize(new Dimension(ancho, alto));
-        System.out.println(labelc.getWidth());
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
 //        labelc.setIcon(fondo);

@@ -19,6 +19,7 @@ import controlador.ClaseController;
 import controlador.Cliente_PotencialController;
 import controlador.ConfiguracionesController;
 import controlador.DirectorioController;
+import controlador.EditarController;
 import controlador.LlegoController;
 import controlador.ServicioController;
 import controlador.UsuarioController;
@@ -38,7 +39,6 @@ import modelo.Documentos;
 import modelo.Llego;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
-
 
 /**
  *
@@ -71,12 +71,12 @@ public class Principal extends javax.swing.JFrame {
 
     Directorio mod1 = new Directorio();
     Consultas_Directorio modc1 = new Consultas_Directorio();
-    
+
     Formulario formulario = new Formulario(this, true);
     Editarcliente editarcliente = new Editarcliente(this, true);
 
     public void transparecia() {
-       
+
         abrirarchivos.setOpaque(false);
         abrirarchivos.setContentAreaFilled(false);
         abrirarchivos.setBorderPainted(false);
@@ -101,15 +101,12 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         transparecia();
-        
-     
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension tamanio = tk.getScreenSize();
         int ancho = (int) tamanio.getWidth();
         int alto = (int) tamanio.getHeight();
         this.setResizable(true);
         jLabel1.setPreferredSize(new Dimension(ancho, alto));
-
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm.jpg"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
         jLabel1.setIcon(fondo);
@@ -149,13 +146,17 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(MAXIMIZED_BOTH);
+        setMaximumSize(new java.awt.Dimension(1280, 1080));
 
+        jPanel1.setMaximumSize(new java.awt.Dimension(1280, 1080));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        subpanel1.setMaximumSize(new java.awt.Dimension(1280, 1080));
         subpanel1.setName("subpanel1"); // NOI18N
         subpanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelprincipal.setBackground(new java.awt.Color(255, 153, 153));
+        panelprincipal.setMaximumSize(new java.awt.Dimension(1280, 1080));
         panelprincipal.setName("panelpricipal"); // NOI18N
         panelprincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelprincipal.add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
@@ -214,7 +215,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.add(subpanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 1060, 610));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/rm1.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 72));
 
@@ -273,15 +274,20 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_registrarActionPerformed
 
     private void tabladatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabladatosMouseClicked
-        //        int selecionar = tabladatos.rowAtPoint(evt.getPoint());
-        //        abrirarchivo(String.valueOf(tabladatos.getValueAt(selecionar, 5)));
+//                int selecionar = tabladatos.rowAtPoint(evt.getPoint());
+
     }//GEN-LAST:event_tabladatosMouseClicked
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-        editarcliente.setVisible(true);
-        panelprincipal.setVisible(false);
-      
-
+        int selecionar = tabladatos.getSelectedRow();
+        if (selecionar != -1) {
+            modelo.setIdclientes_potenciales(Integer.parseInt(String.valueOf(tabladatos.getValueAt(selecionar, 0))));
+            EditarController editarcli = new EditarController(modelo, mods, shcp, documento,
+                    mconfiguracion, servicio, consulta, cshcp, cdocumentos, cconfiguraciones, conc, conl,
+                    editarcliente);
+            editarcli.iniciar();
+            editarcliente.setVisible(true);
+        }
     }//GEN-LAST:event_editarActionPerformed
 
     private void abrirarchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirarchivosActionPerformed
@@ -311,15 +317,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void CrearclienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearclienteMouseClicked
 
-       
         Cliente_PotencialController controlador = new Cliente_PotencialController(modelo, consulta,
                 formulario, servicio, mods, shcp, cshcp, documento, cdocumentos,
                 mconfiguracion, cconfiguraciones);
         controlador.iniciar();
         formulario.setVisible(true);
-        panelprincipal.setVisible(false);
-        
-        
+
 
     }//GEN-LAST:event_CrearclienteMouseClicked
 
