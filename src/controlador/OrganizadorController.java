@@ -13,6 +13,7 @@ import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
 import Consultas.Consultas_Servicio;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
+import Consultas.Consultas_usuario;
 import buscador.Dialogos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -20,6 +21,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.table.DefaultTableModel;
 import modelo.Clases;
 import modelo.Cliente_Potencial;
@@ -29,6 +33,7 @@ import modelo.Documentos;
 import modelo.Llego;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
+import modelo.Usuario;
 import vistas.Configuraciones;
 import vistas.Editarcliente;
 import vistas.Formulario;
@@ -67,6 +72,11 @@ public class OrganizadorController implements ActionListener {
 
     Directorio mod1 = new Directorio();
     Consultas_Directorio modc1 = new Consultas_Directorio();
+    
+    Usuario mod = new Usuario();
+    Consultas_usuario consultasusuario = new Consultas_usuario();
+    
+
 
     public OrganizadorController(Cliente_Potencial modelo, Consultas_Cliente_Potencial consulta, Principal principal) {
         this.modelo = modelo;
@@ -76,7 +86,7 @@ public class OrganizadorController implements ActionListener {
         this.principal.crearcliente.addActionListener(this);
         this.principal.editar.addActionListener(this);
         this.principal.configuraciones1.addActionListener(this);
-
+        
     }
 
     public void iniciar() {
@@ -94,6 +104,7 @@ public class OrganizadorController implements ActionListener {
         principal.tabladatos.getColumn("ruta").setWidth(0);
         principal.tabladatos.getColumn("ruta").setMinWidth(0);
         principal.tabladatos.getColumn("ruta").setMaxWidth(0);
+    
         keyevent();
 
     }
@@ -141,6 +152,11 @@ public class OrganizadorController implements ActionListener {
 
             LlegoController lc = new LlegoController(ml, conl, vc);
             lc.iniciar();
+            
+            //user
+      
+            UsuarioController uctrl = new UsuarioController(mod, consultasusuario, vc);
+            uctrl.iniciar();
             //directorio
 
             DirectorioController ctrc = new DirectorioController(modc1, mod1, vc);
@@ -150,6 +166,8 @@ public class OrganizadorController implements ActionListener {
             ccontroller.iniciar();
             vc.setVisible(true);
         }
+         
+        
 
     }
 

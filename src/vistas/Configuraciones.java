@@ -7,6 +7,7 @@ package vistas;
 
 import Consultas.Consultas_Servicio;
 import controlador.ServicioController;
+import controlador.UsuarioController;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
@@ -16,6 +17,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import modelo.Servicio;
+import modelo.Usuario;
 
 /**
  *
@@ -69,6 +71,7 @@ public class Configuraciones extends javax.swing.JDialog {
         panel2panel2.setOpaque(false);
         panel2panel3.setOpaque(false);
         pnprinci.setOpaque(false);
+        paneluser.setOpaque(false);
 
     }
 
@@ -82,6 +85,7 @@ public class Configuraciones extends javax.swing.JDialog {
         panel2panel2.setVisible(false);
         panel2panel3.setVisible(false);
         panelotros.setVisible(false);
+        paneluser.setVisible(false);
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension tamanio = tk.getScreenSize();
         int ancho = (int) tamanio.getWidth();
@@ -152,12 +156,20 @@ public class Configuraciones extends javax.swing.JDialog {
         tablaagregarservicios = new rojerusan.RSTableMetro();
         eliminartablaagregarservicio = new javax.swing.JButton();
         guardarservicios = new javax.swing.JButton();
+        paneluser = new javax.swing.JPanel();
+        guardaruser = new javax.swing.JButton();
+        txtnombre = new rojerusan.RSMetroTextFullPlaceHolder();
+        txtapellido = new rojerusan.RSMetroTextFullPlaceHolder();
+        txtdocumento = new rojerusan.RSMetroTextFullPlaceHolder();
+        rSPasswordTextPlaceHolder1 = new rojerusan.RSPasswordTextPlaceHolder();
+        txtrol = new rojerusan.RSComboMetro();
         labelc = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         carpetas = new javax.swing.JMenu();
         servicios = new javax.swing.JMenu();
         Otros = new javax.swing.JMenu();
+        crearusuario = new javax.swing.JMenu();
 
         jMenu3.setText("jMenu3");
 
@@ -447,6 +459,66 @@ public class Configuraciones extends javax.swing.JDialog {
 
         pnprinci.add(panel2panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 610));
 
+        paneluser.setBackground(new java.awt.Color(102, 255, 102));
+        paneluser.setName("paneluser"); // NOI18N
+
+        guardaruser.setText("Guardar");
+
+        txtnombre.setPlaceholder("Nombre");
+
+        txtapellido.setPlaceholder("Apellido");
+
+        txtdocumento.setPlaceholder("Documento");
+
+        rSPasswordTextPlaceHolder1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
+        rSPasswordTextPlaceHolder1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        rSPasswordTextPlaceHolder1.setPlaceholder("Contraseña");
+        rSPasswordTextPlaceHolder1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSPasswordTextPlaceHolder1ActionPerformed(evt);
+            }
+        });
+
+        txtrol.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        javax.swing.GroupLayout paneluserLayout = new javax.swing.GroupLayout(paneluser);
+        paneluser.setLayout(paneluserLayout);
+        paneluserLayout.setHorizontalGroup(
+            paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneluserLayout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtrol, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
+                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rSPasswordTextPlaceHolder1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(guardaruser))
+                .addContainerGap(273, Short.MAX_VALUE))
+        );
+        paneluserLayout.setVerticalGroup(
+            paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneluserLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rSPasswordTextPlaceHolder1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtrol, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(guardaruser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(397, 397, 397))
+        );
+
+        pnprinci.add(paneluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 610));
+
         labelc.setMaximumSize(new java.awt.Dimension(2070, 1024));
         labelc.setMinimumSize(new java.awt.Dimension(2070, 1024));
         labelc.setName("labelc"); // NOI18N
@@ -495,6 +567,20 @@ public class Configuraciones extends javax.swing.JDialog {
         });
         jMenuBar1.add(Otros);
 
+        crearusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser.png"))); // NOI18N
+        crearusuario.setText("Crear Usuario");
+        crearusuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crearusuarioMouseClicked(evt);
+            }
+        });
+        crearusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearusuarioActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(crearusuario);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -534,6 +620,7 @@ public class Configuraciones extends javax.swing.JDialog {
         panel2panel2.setVisible(false);
         panel2panel3.setVisible(true);
         panelotros.setVisible(false);
+        paneluser.setVisible(false);
     }//GEN-LAST:event_carpetasMouseClicked
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
@@ -541,6 +628,7 @@ public class Configuraciones extends javax.swing.JDialog {
         panel2panel2.setVisible(false);
         panel2panel1.setVisible(true);
         panelotros.setVisible(false);
+        paneluser.setVisible(false);
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void serviciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_serviciosMouseClicked
@@ -548,6 +636,7 @@ public class Configuraciones extends javax.swing.JDialog {
         panel2panel2.setVisible(true);
         panel2panel1.setVisible(false);
         panelotros.setVisible(false);
+        paneluser.setVisible(false);
     }//GEN-LAST:event_serviciosMouseClicked
 
     private void txtregistrarllegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtregistrarllegoActionPerformed
@@ -567,11 +656,30 @@ public class Configuraciones extends javax.swing.JDialog {
         panel2panel2.setVisible(false);
         panel2panel1.setVisible(false);
         panelotros.setVisible(true);
+        paneluser.setVisible(false);
     }//GEN-LAST:event_OtrosMouseClicked
 
     private void txtregistrarcarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtregistrarcarpetaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtregistrarcarpetaActionPerformed
+
+    private void crearusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearusuarioActionPerformed
+        
+    }//GEN-LAST:event_crearusuarioActionPerformed
+
+    private void crearusuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearusuarioMouseClicked
+       
+        
+        panel2panel3.setVisible(false);
+        panel2panel2.setVisible(false);
+        panel2panel1.setVisible(false);
+        panelotros.setVisible(false);
+        paneluser.setVisible(true);
+    }//GEN-LAST:event_crearusuarioMouseClicked
+
+    private void rSPasswordTextPlaceHolder1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSPasswordTextPlaceHolder1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSPasswordTextPlaceHolder1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -622,6 +730,7 @@ public class Configuraciones extends javax.swing.JDialog {
     public javax.swing.JButton agregarllego;
     private rojerusan.RSMaterialButtonRound buscar;
     private javax.swing.JMenu carpetas;
+    private javax.swing.JMenu crearusuario;
     public javax.swing.JButton eliminaragregarcarpeta;
     public javax.swing.JButton eliminaragregarclase;
     public javax.swing.JButton eliminaragregarllego;
@@ -635,6 +744,7 @@ public class Configuraciones extends javax.swing.JDialog {
     public rojerusan.RSMaterialButtonRound guardarconfiguracion;
     public javax.swing.JButton guardarllego;
     public javax.swing.JButton guardarservicios;
+    public javax.swing.JButton guardaruser;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
@@ -653,7 +763,9 @@ public class Configuraciones extends javax.swing.JDialog {
     private javax.swing.JPanel panel2panel2;
     private javax.swing.JPanel panel2panel3;
     private javax.swing.JPanel panelotros;
+    private javax.swing.JPanel paneluser;
     private javax.swing.JPanel pnprinci;
+    public rojerusan.RSPasswordTextPlaceHolder rSPasswordTextPlaceHolder1;
     public javax.swing.JButton registrarservicio;
     private javax.swing.JMenu servicios;
     public rojerusan.RSTableMetro tablaagregarcarpetas;
@@ -664,11 +776,15 @@ public class Configuraciones extends javax.swing.JDialog {
     public rojerusan.RSTableMetro tablaclase;
     public rojerusan.RSTableMetro tablallego;
     public rojerusan.RSTableMetro tablatotalservicios;
+    public rojerusan.RSMetroTextFullPlaceHolder txtapellido;
     public rojerusan.RSMetroTextFullPlaceHolder txtdirectorio;
+    public rojerusan.RSMetroTextFullPlaceHolder txtdocumento;
+    public rojerusan.RSMetroTextFullPlaceHolder txtnombre;
     public rojerusan.RSMetroTextFullPlaceHolder txtprefijo;
     public rojerusan.RSMetroTextFullPlaceHolder txtregistrarcarpeta;
     public rojerusan.RSMetroTextFullPlaceHolder txtregistrarclase;
     public rojerusan.RSMetroTextFullPlaceHolder txtregistrarllego;
     public rojerusan.RSMetroTextFullPlaceHolder txtregistroservicio;
+    public rojerusan.RSComboMetro txtrol;
     // End of variables declaration//GEN-END:variables
 }

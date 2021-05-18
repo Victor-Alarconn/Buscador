@@ -15,7 +15,15 @@ public class Usuario {
     private String nombre;
     private String apellido; 
     private String numero_documento;
+    private int rol;
 
+    public int getRol() {
+        return rol;
+    }
+
+    public void setRol(int rol) {
+        this.rol = rol;
+    }
     public String getNumero_documento() {
         return numero_documento;
     }

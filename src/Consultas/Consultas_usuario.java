@@ -11,6 +11,7 @@ import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import modelo.Rol;
 import modelo.Usuario;
 
 /**
@@ -111,6 +112,61 @@ public class Consultas_usuario extends Conexion {
                 listaPersona.add(user);
             }
             return listaPersona;
+        } catch (SQLException e) {
+            System.err.println(e);
+            //return null;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        return null;
+    }
+    
+     public boolean buscar(Rol rol) {
+       
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = " SELECT * FROM roles  WHERE rol=?";
+
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            rs = ps.executeQuery(sql);
+            while (rs.next()) {
+               
+                
+            }
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            //return null;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        return false;
+    }
+     
+    public ArrayList<String> llenar() {
+        ArrayList lista = new ArrayList();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = " SELECT * FROM roles";
+
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            rs = ps.executeQuery(sql);
+            while (rs.next()) {
+                lista.add(rs.getString("rol"));
+            }
+            return lista;
         } catch (SQLException e) {
             System.err.println(e);
             //return null;
