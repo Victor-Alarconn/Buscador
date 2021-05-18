@@ -218,7 +218,7 @@ public class Cliente_PotencialController implements ActionListener {
                 dato[1] = sdf.format(formulario.txtfecha_inicio.getDate());
                 model.addRow(dato);
                 formulario.tablaservicios.setModel(model);
-//                formulario.txtfecha_inicio.setCalendar(null);
+                formulario.txtfecha_inicio.setCalendar(null);
             } else {
                 JOptionPane.showMessageDialog(formulario, "Campo de fecha vacio");
             }
@@ -324,7 +324,7 @@ public class Cliente_PotencialController implements ActionListener {
         formulario.txtretiro.setText("");
         formulario.txtdocumento.setText("");
         formulario.txtnotas.setText("");
-//        formulario.txtfecha_llegada.setCalendar(null);
+        formulario.txtfecha_llegada.setCalendar(null);
         formulario.buttonGroup1.clearSelection();
     }
 

@@ -13,7 +13,7 @@ import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
 import Consultas.Consultas_Servicio;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
-import controlador.BusquedaController;
+import controlador.OrganizadorController;
 import controlador.ClaseController;
 import controlador.Cliente_PotencialController;
 import controlador.ConfiguracionesController;
@@ -34,6 +34,7 @@ import modelo.Llego;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import vistas.Configuraciones;
+import vistas.Editarcliente;
 import vistas.Formulario;
 import vistas.Principal;
 
@@ -51,7 +52,7 @@ public class Buscador {
         ////////cliente
         Cliente_Potencial mod = new Cliente_Potencial();
         Consultas_Cliente_Potencial modcp = new Consultas_Cliente_Potencial();
-        BusquedaController bctrl = new BusquedaController(mod, modcp, principal);
+        OrganizadorController bctrl = new OrganizadorController(mod, modcp, principal);
         bctrl.iniciar();
         principal.setExtendedState(MAXIMIZED_BOTH);
         principal.setVisible(true);

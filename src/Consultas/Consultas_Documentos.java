@@ -71,4 +71,26 @@ public class Consultas_Documentos extends Conexion {
 
     }
     
+    public boolean eliminar(Documentos documentos){
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = " DELETE FROM documentos  WHERE iddocumentos=? ";
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps.setInt(1, documentos.getIddocumentos());
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally{
+            try {
+                con.close();
+            } catch (SQLException e) {
+                 System.err.println(e);
+            }
+        }
+        
+    }
+    
 }

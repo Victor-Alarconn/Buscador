@@ -13,10 +13,8 @@ import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
 import Consultas.Consultas_Servicio;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
-import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +29,6 @@ import modelo.Documentos;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import vistas.Editarcliente;
-import vistas.Principal;
 
 /**
  *
@@ -95,10 +92,14 @@ public class EditarController implements ActionListener {
         model.addColumn("Fecha de inicio");
 
         formulario.tablaservicios1.setModel(model);
-        model1.addColumn("id");
-        model1.addColumn("Docu");
+        model1.addColumn("ID");
+        model1.addColumn("Documento");
         model1.addColumn("Fecha de inicial");
         model1.addColumn("Fecha de vencimiento");
+        formulario.tabladocumentos1.setModel(model1);
+        formulario.tabladocumentos1.getColumn("ID").setWidth(0);
+        formulario.tabladocumentos1.getColumn("ID").setMinWidth(0);
+        formulario.tabladocumentos1.getColumn("ID").setMaxWidth(0);
         inicializarcliente();
     }
 
@@ -139,7 +140,7 @@ public class EditarController implements ActionListener {
                     if (cons.buscar(mods)) {
                         shcp.setServicios_idservicio(mods.getIdservicio());
                         shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                        System.out.println(modelo.getIdclientes_potenciales());
+//                        System.out.println(modelo.getIdclientes_potenciales());
                         shcp.setFecha_de_inicio(formulario.tablaservicios1.getValueAt(i, 1).toString());
                         if (!cshcp.buscar(shcp)) {
                             if (!cshcp.registrarservicio(shcp)) {
@@ -152,23 +153,19 @@ public class EditarController implements ActionListener {
                 }
                 //guardando la tabla documnetos
                 for (int i = 0; i < formulario.tabladocumentos1.getRowCount(); i++) {
-                    System.out.println(formulario.tabladocumentos1.getValueAt(i, 0));
-//                    int doc = Integer.parseInt(formulario.tabladocumentos1.getValueAt(i, 0).toString());
-                    mdocumento.setDocumento(formulario.tabladocumentos1.getValueAt(i, 1).toString());
-                    mdocumento.setFecha_inicio(formulario.tabladocumentos1.getValueAt(i, 2).toString());
-                    mdocumento.setFecha_vencimiento(formulario.tabladocumentos1.getValueAt(i, 3).toString());
-                    mdocumento.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                  
-//                    if (cdocumentos.buscar(doc)) {
-//                        System.out.println("el documento existe");
-////                        if (!cdocumentos.registrar(mdocumento)) {
-////                            JOptionPane.showMessageDialog(null, "error guardado de documento");
-////                        }
-//                    } else {
-//                        System.out.println("el docuemento existe");
-//                    }
-
+//                    System.out.println(formulario.tabladocumentos1.getValueAt(i, 0));
+                    if (formulario.tabladocumentos1.getValueAt(i, 0) == null) {
+                        mdocumento.setDocumento(formulario.tabladocumentos1.getValueAt(i, 1).toString());
+                        mdocumento.setFecha_inicio(formulario.tabladocumentos1.getValueAt(i, 2).toString());
+                        mdocumento.setFecha_vencimiento(formulario.tabladocumentos1.getValueAt(i, 3).toString());
+                        mdocumento.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                        if (!cdocumentos.registrar(mdocumento)) {
+                            JOptionPane.showMessageDialog(null, "error guardado de documento");
+                        }
+                    }
                 }
+                JOptionPane.showMessageDialog(null, "Cliente modificado");
+                formulario.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "error guardado el cliente");
             }
@@ -221,11 +218,16 @@ public class EditarController implements ActionListener {
         //boton eliminar documnento
         if (e.getSource() == formulario.eliminardocumento1) {
             int fila = formulario.tabladocumentos1.getSelectedRow();
-            if (fila >= 0) {
-                model1.removeRow(fila);
-            } else {
-                JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
+            mdocumento.setIddocumentos(Integer.parseInt(formulario.tabladocumentos1.getValueAt(fila, 0).toString()));
+            System.out.println(mdocumento.getIddocumentos());
+            if (cdocumentos.eliminar(mdocumento)) {
+                if (fila >= 0) {
+                    model1.removeRow(fila);
+                } else {
+                    JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
+                }
             }
+
         }
 
     }

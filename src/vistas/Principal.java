@@ -46,40 +46,19 @@ import modelo.Servicios_has_Clientes_Potenciales;
  */
 public class Principal extends javax.swing.JFrame {
 
-    Servicio mods = new Servicio();
-    Consultas_Servicio servicio = new Consultas_Servicio();
-
-    Servicios_has_Clientes_Potenciales shcp = new Servicios_has_Clientes_Potenciales();
-    Consultas_Servicios_has_Clientes_Potenciales cshcp = new Consultas_Servicios_has_Clientes_Potenciales();
-
-    Configuracion mconfiguracion = new Configuracion();
-    Consultas_Configuraciones cconfiguraciones = new Consultas_Configuraciones();
-    Configuraciones vc = new Configuraciones(this, true);
-
-    Cliente_Potencial modelo = new Cliente_Potencial();
-
-    Documentos documento = new Documentos();
-    Consultas_Documentos cdocumentos = new Consultas_Documentos();
-
-    Consultas_Cliente_Potencial consulta = new Consultas_Cliente_Potencial();
-
-    Consultas_Clase conc = new Consultas_Clase();
-    Clases mc = new Clases();
-
-    Consultas_Llego conl = new Consultas_Llego();
-    Llego ml = new Llego();
-
-    Directorio mod1 = new Directorio();
-    Consultas_Directorio modc1 = new Consultas_Directorio();
-
-    Formulario formulario = new Formulario(this, true);
-    Editarcliente editarcliente = new Editarcliente(this, true);
-
     public void transparecia() {
 
         abrirarchivos.setOpaque(false);
         abrirarchivos.setContentAreaFilled(false);
         abrirarchivos.setBorderPainted(false);
+        
+        configuraciones1.setOpaque(false);
+        configuraciones1.setContentAreaFilled(false);
+        configuraciones1.setBorderPainted(false);
+        
+        crearcliente.setOpaque(false);
+        crearcliente.setContentAreaFilled(false);
+        crearcliente.setBorderPainted(false);
 
         editar.setOpaque(false);
         editar.setContentAreaFilled(false);
@@ -111,6 +90,7 @@ public class Principal extends javax.swing.JFrame {
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm.jpg"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
         jLabel1.setIcon(fondo);
+        
     }
 
     /**
@@ -135,11 +115,10 @@ public class Principal extends javax.swing.JFrame {
         editar = new javax.swing.JButton();
         abrirarchivos = new javax.swing.JButton();
         registrar = new javax.swing.JButton();
+        menu = new javax.swing.JPanel();
+        crearcliente = new javax.swing.JButton();
+        configuraciones1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        btnbuscar = new javax.swing.JMenu();
-        configuraciones1 = new javax.swing.JMenu();
-        Crearcliente = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
@@ -147,7 +126,6 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(MAXIMIZED_BOTH);
-        setMaximumSize(new java.awt.Dimension(1280, 1080));
 
         jPanel1.setMaximumSize(new java.awt.Dimension(1280, 1080));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -211,44 +189,46 @@ public class Principal extends javax.swing.JFrame {
         });
         panelprincipal.add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 40, -1, -1));
 
-        subpanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        subpanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 620));
 
-        jPanel1.add(subpanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, -1, -1));
+        jPanel1.add(subpanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, 620));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/rm1.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        menu.setBackground(new java.awt.Color(244, 241, 241));
+        menu.setName("menu"); // NOI18N
 
-        jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 72));
-
-        btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
-        btnbuscar.setText("Buscar");
-        btnbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnbuscarMouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(btnbuscar);
+        crearcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser.png"))); // NOI18N
+        crearcliente.setText("Crearcliente");
+        crearcliente.setBorder(null);
 
         configuraciones1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuraciones (2).png"))); // NOI18N
         configuraciones1.setText("Configuraciones");
-        configuraciones1.setPreferredSize(new java.awt.Dimension(170, 64));
-        configuraciones1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                configuraciones1MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(configuraciones1);
+        configuraciones1.setBorder(null);
 
-        Crearcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser.png"))); // NOI18N
-        Crearcliente.setText("Crear Cliente");
-        Crearcliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CrearclienteMouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(Crearcliente);
+        javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
+        menu.setLayout(menuLayout);
+        menuLayout.setHorizontalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuLayout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(configuraciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(crearcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(688, Short.MAX_VALUE))
+        );
+        menuLayout.setVerticalGroup(
+            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(crearcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(configuraciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
 
-        setJMenuBar(jMenuBar1);
+        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 90));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/rm1.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -280,56 +260,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_tabladatosMouseClicked
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-        int selecionar = tabladatos.getSelectedRow();
-        if (selecionar != -1) {
-            modelo.setIdclientes_potenciales(Integer.parseInt(String.valueOf(tabladatos.getValueAt(selecionar, 0))));
-            EditarController editarcli = new EditarController(modelo, mods, shcp, documento,
-                    mconfiguracion, servicio, consulta, cshcp, cdocumentos, cconfiguraciones, conc, conl,
-                    editarcliente);
-            editarcli.iniciar();
-            editarcliente.setVisible(true);
-        }
+        
     }//GEN-LAST:event_editarActionPerformed
 
     private void abrirarchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirarchivosActionPerformed
 
     }//GEN-LAST:event_abrirarchivosActionPerformed
-
-    private void configuraciones1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_configuraciones1MouseClicked
-
-        ServicioController ctrl = new ServicioController(mods, servicio, vc);
-        ctrl.iniciar();
-        //otros
-
-        ClaseController cctrl = new ClaseController(conc, mc, vc);
-        cctrl.iniciar();
-
-        LlegoController lc = new LlegoController(ml, conl, vc);
-        lc.iniciar();
-        //directorio
-
-        DirectorioController ctrc = new DirectorioController(modc1, mod1, vc);
-        ctrc.iniciar();
-
-        ConfiguracionesController ccontroller = new ConfiguracionesController(mconfiguracion, cconfiguraciones, vc);
-        ccontroller.iniciar();
-        vc.setVisible(true);
-    }//GEN-LAST:event_configuraciones1MouseClicked
-
-    private void CrearclienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearclienteMouseClicked
-
-        Cliente_PotencialController controlador = new Cliente_PotencialController(modelo, consulta,
-                formulario, servicio, mods, shcp, cshcp, documento, cdocumentos,
-                mconfiguracion, cconfiguraciones);
-        controlador.iniciar();
-        formulario.setVisible(true);
-
-
-    }//GEN-LAST:event_CrearclienteMouseClicked
-
-    private void btnbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscarMouseClicked
-        panelprincipal.setVisible(true);
-    }//GEN-LAST:event_btnbuscarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -368,19 +304,18 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu Crearcliente;
     public javax.swing.JButton abrirarchivos;
-    private javax.swing.JMenu btnbuscar;
     public javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JMenu configuraciones1;
+    public javax.swing.JButton configuraciones1;
+    public javax.swing.JButton crearcliente;
     public javax.swing.JButton editar;
     public javax.swing.JButton eliminarcliente;
     public javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel menu;
     private javax.swing.JPanel panelprincipal;
     private javax.swing.JButton registrar;
     private javax.swing.JPanel subpanel1;

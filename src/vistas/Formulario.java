@@ -6,7 +6,12 @@
 package vistas;
 
 import Consultas.Consultas_Servicio;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import modelo.Servicio;
 
 /**
@@ -53,6 +58,16 @@ public class Formulario extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         transparecia();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension tamanio = tk.getScreenSize();
+        int ancho = (int) tamanio.getWidth();
+        int alto = (int) tamanio.getHeight();
+//        this.setResizable(false);
+        jLabel1.setPreferredSize(new Dimension(ancho, alto));
+        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm.jpg"));
+        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        jLabel1.setIcon(fondo);
+        
         
     }
 
@@ -120,6 +135,7 @@ public class Formulario extends javax.swing.JDialog {
         bredes = new javax.swing.JRadioButton();
         bequipos = new javax.swing.JRadioButton();
         txtfecha_llegada = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -466,7 +482,8 @@ public class Formulario extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(bequipos)
                         .addGap(38, 38, 38)
-                        .addComponent(bredes)))
+                        .addComponent(bredes)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(71, 71, 71))
         );
         subpanel3Layout.setVerticalGroup(
@@ -533,7 +550,7 @@ public class Formulario extends javax.swing.JDialog {
                     .addComponent(bequipos)
                     .addComponent(bsoftware)
                     .addComponent(botro))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -546,15 +563,18 @@ public class Formulario extends javax.swing.JDialog {
                     .addContainerGap()
                     .addComponent(subpanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1167, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 601, Short.MAX_VALUE)
+            .addGap(0, 559, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(subpanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(subpanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE))
         );
 
         pack();
@@ -628,6 +648,7 @@ public class Formulario extends javax.swing.JDialog {
     public com.toedter.calendar.JDateChooser fecha_inicio_docum;
     public com.toedter.calendar.JDateChooser fecha_vencimineto_docum;
     public javax.swing.JButton guardarformulario;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
