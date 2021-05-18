@@ -105,7 +105,8 @@ public class Principal extends javax.swing.JFrame {
         Dimension tamanio = tk.getScreenSize();
         int ancho = (int) tamanio.getWidth();
         int alto = (int) tamanio.getHeight();
-        this.setResizable(true);
+        this.setSize(new Dimension(ancho, alto));
+//        this.setResizable(false);
         jLabel1.setPreferredSize(new Dimension(ancho, alto));
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm.jpg"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
@@ -210,12 +211,12 @@ public class Principal extends javax.swing.JFrame {
         });
         panelprincipal.add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 40, -1, -1));
 
-        subpanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 610));
+        subpanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel1.add(subpanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 1060, 610));
+        jPanel1.add(subpanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/rm1.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 72));
 
