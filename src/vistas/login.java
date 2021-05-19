@@ -38,44 +38,72 @@ Usuario user = new Usuario();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        nombreuser = new javax.swing.JTextField();
-        contrasena = new javax.swing.JTextField();
         validar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        nombreuser = new rojerusan.RSMetroTextFullPlaceHolder();
+        txtcontraseña = new rojerusan.RSPasswordTextPlaceHolder();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        validar.setText("validdar");
+        validar.setText("ingresar");
+        validar.setHideActionText(true);
         validar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 validarActionPerformed(evt);
             }
         });
 
+        nombreuser.setPlaceholder("Usuario");
+
+        txtcontraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192), 2));
+        txtcontraseña.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtcontraseña.setPlaceholder("Contraseña");
+        txtcontraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcontraseñaActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("jButton1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nombreuser)
-                    .addComponent(contrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(169, Short.MAX_VALUE)
-                .addComponent(validar)
-                .addGap(160, 160, 160))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                        .addGap(79, 79, 79)
+                        .addComponent(validar)
+                        .addGap(53, 53, 53))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nombreuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addComponent(nombreuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(contrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(validar)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(validar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1))
+                        .addGap(0, 37, Short.MAX_VALUE))))
         );
 
         pack();
@@ -85,12 +113,16 @@ Usuario user = new Usuario();
         user.setNombre(nombreuser.getText());
         user.setContrasena(contrasena.getText());
         if (conu.login(user)) {
-       
+            this.dispose();
         }else{
             JOptionPane.showMessageDialog(this, "no existe");
         }
         
     }//GEN-LAST:event_validarActionPerformed
+
+    private void txtcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcontraseñaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,8 +160,10 @@ Usuario user = new Usuario();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTextField contrasena;
-    public javax.swing.JTextField nombreuser;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    public rojerusan.RSMetroTextFullPlaceHolder nombreuser;
+    public rojerusan.RSPasswordTextPlaceHolder txtcontraseña;
     public javax.swing.JButton validar;
     // End of variables declaration//GEN-END:variables
 }

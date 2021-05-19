@@ -88,8 +88,8 @@ public class Principal extends javax.swing.JFrame {
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
         jLabel1.setIcon(fondo);
         this.modu=modu;
-//        modu.setIdusuario(modu.getIdusuario());
-        System.out.println(modu.getIdusuario());
+        
+        System.out.println(modu.getRol());
         
             System.out.println("esta vaina sirve");
         

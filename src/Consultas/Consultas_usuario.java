@@ -17,6 +17,7 @@ import modelo.Cliente_Potencial;
 import modelo.Rol;
 import modelo.Usuario;
 import vistas.Principal;
+import vistas.login;
 
 /**
  *
@@ -195,8 +196,11 @@ public class Consultas_usuario extends Conexion {
             ps.setString(2, user.getContrasena());
             rs = ps.executeQuery();
             if (rs.next()) {
+                
+                user.setRol(Integer.parseInt(rs.getString("roles_idroles")));
                 Principal principal = new Principal(user);
                 user.setIdusuario(rs.getInt(1));
+                
                 Cliente_Potencial mod = new Cliente_Potencial();
                 Consultas_Cliente_Potencial modcp = new Consultas_Cliente_Potencial();
                 OrganizadorController bctrl = new OrganizadorController(mod, modcp, principal);
@@ -204,10 +208,8 @@ public class Consultas_usuario extends Conexion {
 
                 principal.setExtendedState(MAXIMIZED_BOTH);
                 principal.setVisible(true);
-                user.setRol(Integer.parseInt(rs.getString("roles_idroles")));
                 return true;
             }
-
             return false;
         } catch (SQLException e) {
             System.err.println(e);
