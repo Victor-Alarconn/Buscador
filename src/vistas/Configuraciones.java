@@ -161,7 +161,7 @@ public class Configuraciones extends javax.swing.JDialog {
         txtnombre = new rojerusan.RSMetroTextFullPlaceHolder();
         txtapellido = new rojerusan.RSMetroTextFullPlaceHolder();
         txtdocumento = new rojerusan.RSMetroTextFullPlaceHolder();
-        rSPasswordTextPlaceHolder1 = new rojerusan.RSPasswordTextPlaceHolder();
+        txtcontraseña = new rojerusan.RSPasswordTextPlaceHolder();
         txtrol = new rojerusan.RSComboMetro();
         labelc = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -470,12 +470,12 @@ public class Configuraciones extends javax.swing.JDialog {
 
         txtdocumento.setPlaceholder("Documento");
 
-        rSPasswordTextPlaceHolder1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
-        rSPasswordTextPlaceHolder1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        rSPasswordTextPlaceHolder1.setPlaceholder("Contraseña");
-        rSPasswordTextPlaceHolder1.addActionListener(new java.awt.event.ActionListener() {
+        txtcontraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
+        txtcontraseña.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtcontraseña.setPlaceholder("Contraseña");
+        txtcontraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSPasswordTextPlaceHolder1ActionPerformed(evt);
+                txtcontraseñaActionPerformed(evt);
             }
         });
 
@@ -495,7 +495,7 @@ public class Configuraciones extends javax.swing.JDialog {
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rSPasswordTextPlaceHolder1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(guardaruser))
                 .addContainerGap(273, Short.MAX_VALUE))
         );
@@ -509,7 +509,7 @@ public class Configuraciones extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSPasswordTextPlaceHolder1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtrol, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
@@ -677,9 +677,9 @@ public class Configuraciones extends javax.swing.JDialog {
         paneluser.setVisible(true);
     }//GEN-LAST:event_crearusuarioMouseClicked
 
-    private void rSPasswordTextPlaceHolder1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSPasswordTextPlaceHolder1ActionPerformed
+    private void txtcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraseñaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rSPasswordTextPlaceHolder1ActionPerformed
+    }//GEN-LAST:event_txtcontraseñaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -765,7 +765,6 @@ public class Configuraciones extends javax.swing.JDialog {
     private javax.swing.JPanel panelotros;
     private javax.swing.JPanel paneluser;
     private javax.swing.JPanel pnprinci;
-    public rojerusan.RSPasswordTextPlaceHolder rSPasswordTextPlaceHolder1;
     public javax.swing.JButton registrarservicio;
     private javax.swing.JMenu servicios;
     public rojerusan.RSTableMetro tablaagregarcarpetas;
@@ -777,6 +776,7 @@ public class Configuraciones extends javax.swing.JDialog {
     public rojerusan.RSTableMetro tablallego;
     public rojerusan.RSTableMetro tablatotalservicios;
     public rojerusan.RSMetroTextFullPlaceHolder txtapellido;
+    public rojerusan.RSPasswordTextPlaceHolder txtcontraseña;
     public rojerusan.RSMetroTextFullPlaceHolder txtdirectorio;
     public rojerusan.RSMetroTextFullPlaceHolder txtdocumento;
     public rojerusan.RSMetroTextFullPlaceHolder txtnombre;

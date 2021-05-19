@@ -16,7 +16,16 @@ public class Usuario {
     private String apellido; 
     private String numero_documento;
     private int rol;
+    private String contrasena;
 
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+    
     public int getRol() {
         return rol;
     }

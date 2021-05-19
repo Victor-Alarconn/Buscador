@@ -5,15 +5,14 @@
  */
 package vistas;
 
+import Consultas.Consultas_usuario;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import modelo.Usuario;
 
 
 /**
@@ -22,9 +21,9 @@ import javax.swing.JMenuItem;
  */
 public class Principal extends javax.swing.JFrame {
     
-     
-  
-
+    Usuario modu;
+    Consultas_usuario cons;
+          
     public void transparecia() {
 
         abrirarchivos.setOpaque(false);
@@ -58,18 +57,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-        transparecia();
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension tamanio = tk.getScreenSize();
-        int ancho = (int) tamanio.getWidth();
-        int alto = (int) tamanio.getHeight();
-        this.setSize(new Dimension(ancho, alto));
-//        crearcliente.setVisible(false);
-//        this.setResizable(false);
-        jLabel1.setPreferredSize(new Dimension(ancho, alto));
-        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm.jpg"));
-        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
-        jLabel1.setIcon(fondo);
+       
         
         
         
@@ -84,6 +72,28 @@ public class Principal extends javax.swing.JFrame {
         
     }
 
+    public Principal(Usuario modu){
+        initComponents();
+         transparecia();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension tamanio = tk.getScreenSize();
+        int ancho = (int) tamanio.getWidth();
+        int alto = (int) tamanio.getHeight();
+        this.setSize(new Dimension(ancho, alto));
+        menu.setPreferredSize(new Dimension(ancho, 90));
+//        crearcliente.setVisible(false);
+//        this.setResizable(false);
+        jLabel1.setPreferredSize(new Dimension(ancho, alto));
+        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm.jpg"));
+        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        jLabel1.setIcon(fondo);
+        this.modu=modu;
+//        modu.setIdusuario(modu.getIdusuario());
+        System.out.println(modu.getIdusuario());
+        
+            System.out.println("esta vaina sirve");
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -203,13 +213,13 @@ public class Principal extends javax.swing.JFrame {
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
-                .addGap(182, 182, 182)
+                .addGap(158, 158, 158)
                 .addComponent(configuraciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(crearcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(617, Short.MAX_VALUE))
+                .addContainerGap(641, Short.MAX_VALUE))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +232,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 90));
+        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 90));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/rm1.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
