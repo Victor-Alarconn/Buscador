@@ -57,10 +57,6 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-       
-        
-        
-        
 //        mi1.addActionListener(this);
 //        menu1.add(mi1);
 //        mi2=new JMenuItem("Verde");
@@ -89,9 +85,14 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setIcon(fondo);
         this.modu=modu;
         
-        System.out.println(modu.getRol());
-        
-            System.out.println("esta vaina sirve");
+//        System.out.println(modu.getConfiguraciones());
+        if (modu.getRol()== 1 ) {
+    
+        }else{
+            if (modu.getRol()== 2) {
+                 configuraciones1.setVisible(false);
+            }
+        }
         
     }
     /**
@@ -115,11 +116,9 @@ public class Principal extends javax.swing.JFrame {
         eliminarcliente = new javax.swing.JButton();
         editar = new javax.swing.JButton();
         abrirarchivos = new javax.swing.JButton();
-        registrar = new javax.swing.JButton();
         menu = new javax.swing.JPanel();
         crearcliente = new javax.swing.JButton();
         configuraciones1 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -183,14 +182,6 @@ public class Principal extends javax.swing.JFrame {
         });
         panelprincipal.add(abrirarchivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 90, 80));
 
-        registrar.setText("Registrar");
-        registrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarActionPerformed(evt);
-            }
-        });
-        panelprincipal.add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 40, -1, -1));
-
         subpanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 620));
 
         jPanel1.add(subpanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, 620));
@@ -206,20 +197,16 @@ public class Principal extends javax.swing.JFrame {
         configuraciones1.setText("Configuraciones");
         configuraciones1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton1.setText("jButton1");
-
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuLayout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(configuraciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(198, 198, 198)
                 .addComponent(crearcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(641, Short.MAX_VALUE))
+                .addComponent(configuraciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(680, Short.MAX_VALUE))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,8 +214,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crearcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(configuraciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(configuraciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -251,15 +237,6 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-//        Usuario mod = new Usuario();
-//        
-//        Registro_Usuario resgistrar_usuario = new Registro_Usuario(this, true);
-//        UsuarioController ctrl = new UsuarioController(mod, modc, resgistrar_usuario);
-//        ctrl.iniciar();
-//        resgistrar_usuario.setVisible(true);
-    }//GEN-LAST:event_registrarActionPerformed
 
     private void tabladatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabladatosMouseClicked
 //                int selecionar = tabladatos.rowAtPoint(evt.getPoint());
@@ -317,7 +294,6 @@ public class Principal extends javax.swing.JFrame {
     public javax.swing.JButton crearcliente;
     public javax.swing.JButton editar;
     public javax.swing.JButton eliminarcliente;
-    private javax.swing.JButton jButton1;
     public javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -325,7 +301,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel panelprincipal;
-    private javax.swing.JButton registrar;
     private javax.swing.JPanel subpanel1;
     public rojerusan.RSTableMetro tabladatos;
     public rojerusan.RSMetroTextFullPlaceHolder txtbuscar;

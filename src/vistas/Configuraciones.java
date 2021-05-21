@@ -163,6 +163,15 @@ public class Configuraciones extends javax.swing.JDialog {
         txtdocumento = new rojerusan.RSMetroTextFullPlaceHolder();
         txtcontraseña = new rojerusan.RSPasswordTextPlaceHolder();
         txtrol = new rojerusan.RSComboMetro();
+        checkconfiguraciones = new javax.swing.JCheckBox();
+        checkdirectorio = new javax.swing.JCheckBox();
+        checkcrearcliente = new javax.swing.JCheckBox();
+        checkcarpetas = new javax.swing.JCheckBox();
+        checkservicios = new javax.swing.JCheckBox();
+        checkotros = new javax.swing.JCheckBox();
+        checkcrearusuario = new javax.swing.JCheckBox();
+        checkbuscar = new javax.swing.JCheckBox();
+        checkeditarcliente = new javax.swing.JCheckBox();
         labelc = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -480,6 +489,29 @@ public class Configuraciones extends javax.swing.JDialog {
         });
 
         txtrol.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtrol.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                txtrolItemStateChanged(evt);
+            }
+        });
+
+        checkconfiguraciones.setText("Configuraciones");
+
+        checkdirectorio.setText("Directorio");
+
+        checkcrearcliente.setText("Crear Cliente");
+
+        checkcarpetas.setText("Carpetas");
+
+        checkservicios.setText("Servicios");
+
+        checkotros.setText("Otros");
+
+        checkcrearusuario.setText("Crear usuario");
+
+        checkbuscar.setText("Buscar");
+
+        checkeditarcliente.setText("Editar Cliente");
 
         javax.swing.GroupLayout paneluserLayout = new javax.swing.GroupLayout(paneluser);
         paneluser.setLayout(paneluserLayout);
@@ -487,17 +519,32 @@ public class Configuraciones extends javax.swing.JDialog {
             paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneluserLayout.createSequentialGroup()
                 .addGap(230, 230, 230)
-                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtrol, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtrol, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(guardaruser))
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, paneluserLayout.createSequentialGroup()
+                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkconfiguraciones)
+                            .addComponent(checkcarpetas)
+                            .addComponent(checkcrearusuario))
+                        .addGap(18, 18, 18)
+                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkbuscar)
+                            .addComponent(checkservicios)
+                            .addComponent(checkdirectorio))
+                        .addGap(18, 18, 18)
+                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkeditarcliente)
+                            .addComponent(checkotros)
+                            .addComponent(checkcrearcliente)))
+                    .addComponent(txtcontraseña, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtapellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         paneluserLayout.setVerticalGroup(
             paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -512,9 +559,26 @@ public class Configuraciones extends javax.swing.JDialog {
                     .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtrol, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(guardaruser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(397, 397, 397))
+                    .addGroup(paneluserLayout.createSequentialGroup()
+                        .addComponent(txtrol, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                        .addGap(385, 385, 385))
+                    .addGroup(paneluserLayout.createSequentialGroup()
+                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(checkconfiguraciones)
+                            .addComponent(checkdirectorio)
+                            .addComponent(checkcrearcliente))
+                        .addGap(18, 18, 18)
+                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(checkcarpetas)
+                            .addComponent(checkservicios)
+                            .addComponent(checkotros))
+                        .addGap(18, 18, 18)
+                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(checkcrearusuario)
+                            .addComponent(checkbuscar)
+                            .addComponent(checkeditarcliente)
+                            .addComponent(guardaruser, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pnprinci.add(paneluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 610));
@@ -668,8 +732,7 @@ public class Configuraciones extends javax.swing.JDialog {
     }//GEN-LAST:event_crearusuarioActionPerformed
 
     private void crearusuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearusuarioMouseClicked
-       
-        
+
         panel2panel3.setVisible(false);
         panel2panel2.setVisible(false);
         panel2panel1.setVisible(false);
@@ -680,6 +743,10 @@ public class Configuraciones extends javax.swing.JDialog {
     private void txtcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraseñaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcontraseñaActionPerformed
+
+    private void txtrolItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_txtrolItemStateChanged
+   
+    }//GEN-LAST:event_txtrolItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -730,6 +797,15 @@ public class Configuraciones extends javax.swing.JDialog {
     public javax.swing.JButton agregarllego;
     private rojerusan.RSMaterialButtonRound buscar;
     private javax.swing.JMenu carpetas;
+    public javax.swing.JCheckBox checkbuscar;
+    public javax.swing.JCheckBox checkcarpetas;
+    public javax.swing.JCheckBox checkconfiguraciones;
+    public javax.swing.JCheckBox checkcrearcliente;
+    public javax.swing.JCheckBox checkcrearusuario;
+    public javax.swing.JCheckBox checkdirectorio;
+    public javax.swing.JCheckBox checkeditarcliente;
+    public javax.swing.JCheckBox checkotros;
+    public javax.swing.JCheckBox checkservicios;
     private javax.swing.JMenu crearusuario;
     public javax.swing.JButton eliminaragregarcarpeta;
     public javax.swing.JButton eliminaragregarclase;

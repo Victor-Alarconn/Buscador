@@ -143,7 +143,6 @@ public class Consultas_usuario extends Conexion {
                 roles.setIdroles(Integer.parseInt(rs.getString("idroles")));
                 return true;
             }
-
             return false;
         } catch (SQLException e) {
             System.err.println(e);
@@ -198,6 +197,7 @@ public class Consultas_usuario extends Conexion {
             if (rs.next()) {
                 
                 user.setRol(Integer.parseInt(rs.getString("roles_idroles")));
+//                user.setConfiguraciones(Integer.parseInt(rs.getString("configuraciones")));
                 Principal principal = new Principal(user);
                 user.setIdusuario(rs.getInt(1));
                 
@@ -222,5 +222,23 @@ public class Consultas_usuario extends Conexion {
             }
         }
 
+    }
+    
+    public String MD5(String md5){
+        try{
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            
+            byte[] array = md.digest(md5.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; array.length < 10; i++) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+            }
+            return sb.toString(); 
+        }catch(java.security.NoSuchAlgorithmException e){
+            
+        }
+        
+        return null;
+        
     }
 }
