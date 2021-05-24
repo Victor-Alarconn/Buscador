@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Directorio;
+import vistas.Carpetas;
 import vistas.Configuraciones;
 
 
@@ -22,12 +23,12 @@ public class DirectorioController implements ActionListener {
 
     private final Consultas_Directorio cdirectorio;
     private final Directorio mdirectorio;
-    private final Configuraciones vdirectorio;
+    private final Carpetas vdirectorio;
 
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
 
-    public DirectorioController(Consultas_Directorio cdirectorio, Directorio mdirectorio, Configuraciones vdirectorio) {
+    public DirectorioController(Consultas_Directorio cdirectorio, Directorio mdirectorio, Carpetas vdirectorio) {
         this.cdirectorio = cdirectorio;
         this.mdirectorio = mdirectorio;
         this.vdirectorio = vdirectorio;
@@ -38,8 +39,8 @@ public class DirectorioController implements ActionListener {
     }
 
     public void iniciar() {
-        vdirectorio.setTitle("Cliente Potencial");
-//        formulario.setLocationRelativeTo(null);
+        vdirectorio.setTitle("Carpetas");
+        vdirectorio.setLocationRelativeTo(null);
         model.addColumn("Agregar carpeta");
         model2.addColumn("Carpetas");
 

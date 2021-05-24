@@ -18,7 +18,6 @@ public class Usuario {
     private int rol;
     private String contrasena;
     private int configuraciones;
-    private int directorio;
     private int crearcliente;
     private int carpetas;
     private int servicios;
@@ -27,6 +26,14 @@ public class Usuario {
     private int buscar;
     private int editarcliente;
 
+    public int getEditarcliente() {
+        return editarcliente;
+    }
+
+    public void setEditarcliente(int editarcliente) {
+        this.editarcliente = editarcliente;
+    }
+    
     public int getConfiguraciones() {
         return configuraciones;
     }
@@ -35,13 +42,7 @@ public class Usuario {
         this.configuraciones = configuraciones;
     }
 
-    public int getDirectorio() {
-        return directorio;
-    }
-
-    public void setDirectorio(int directorio) {
-        this.directorio = directorio;
-    }
+   
 
     public int getCrearcliente() {
         return crearcliente;
@@ -90,19 +91,7 @@ public class Usuario {
     public void setBuscar(int buscar) {
         this.buscar = buscar;
     }
-
-    public int getEditarcliente() {
-        return editarcliente;
-    }
-
-    public void setEditarcliente(int editarcliente) {
-        this.editarcliente = editarcliente;
-    }
     
-    
-    
-    
-
     public String getContrasena() {
         return contrasena;
     }

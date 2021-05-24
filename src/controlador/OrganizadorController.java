@@ -34,10 +34,15 @@ import modelo.Llego;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import modelo.Usuario;
+import vistas.Busqueda;
+import vistas.Carpetas;
 import vistas.Configuraciones;
+import vistas.Crearusuario;
 import vistas.Editarcliente;
 import vistas.Formulario;
+import vistas.Otros;
 import vistas.Principal;
+import vistas.Servicios;
 
 /**
  *
@@ -48,6 +53,7 @@ public class OrganizadorController implements ActionListener {
     private final Cliente_Potencial modelo;
     private final Consultas_Cliente_Potencial consulta;
     private final Principal principal;
+
     DefaultTableModel model = new DefaultTableModel();
     Dialogos dialogo = new Dialogos();
 
@@ -72,50 +78,31 @@ public class OrganizadorController implements ActionListener {
 
     Directorio mod1 = new Directorio();
     Consultas_Directorio modc1 = new Consultas_Directorio();
-    
-    Usuario mod = new Usuario();
-    Consultas_usuario consultasusuario = new Consultas_usuario();
-    
 
+    Usuario mod = new Usuario();
+
+    Consultas_usuario consultasusuario = new Consultas_usuario();
 
     public OrganizadorController(Cliente_Potencial modelo, Consultas_Cliente_Potencial consulta, Principal principal) {
         this.modelo = modelo;
         this.consulta = consulta;
         this.principal = principal;
-        this.principal.abrirarchivos.addActionListener(this);
         this.principal.crearcliente.addActionListener(this);
-        this.principal.editar.addActionListener(this);
         this.principal.configuraciones1.addActionListener(this);
-        
+        this.principal.carpetas.addActionListener(this);
+        this.principal.servicios.addActionListener(this);
+        this.principal.crearusuario.addActionListener(this);
+        this.principal.otro.addActionListener(this);
     }
 
     public void iniciar() {
         principal.setTitle("Busqueda");
-        model.addColumn("ID");
-        model.addColumn("Nit");
-        model.addColumn("Nombre");
-        model.addColumn("Codigo");
-        model.addColumn("fecha");
-        model.addColumn("ruta");
-        principal.tabladatos.setModel(model);
-        principal.tabladatos.getColumn("ID").setWidth(0);
-        principal.tabladatos.getColumn("ID").setMinWidth(0);
-        principal.tabladatos.getColumn("ID").setMaxWidth(0);
-        principal.tabladatos.getColumn("ruta").setWidth(0);
-        principal.tabladatos.getColumn("ruta").setMinWidth(0);
-        principal.tabladatos.getColumn("ruta").setMaxWidth(0);
-    
-        keyevent();
-
+        BusquedaController bc = new BusquedaController(modelo, consulta, principal);
+        bc.iniciar();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == principal.abrirarchivos) {
-            int fila = principal.tabladatos.getSelectedRow();
-            abrirarchivo(String.valueOf(principal.tabladatos.getValueAt(fila, 5)));
-        }
-
         if (e.getSource() == principal.crearcliente) {
             Formulario formulario = new Formulario(principal, true);
             Cliente_PotencialController controlador = new Cliente_PotencialController(modelo, consulta,
@@ -126,67 +113,52 @@ public class OrganizadorController implements ActionListener {
             formulario.setVisible(true);
         }
 
-        if (e.getSource() == principal.editar) {
-            Editarcliente editarcliente = new Editarcliente(principal, true);
-            int selecionar = principal.tabladatos.getSelectedRow();
-            if (selecionar != -1) {
-                modelo.setIdclientes_potenciales(Integer.parseInt(String.valueOf(principal.tabladatos.getValueAt(selecionar, 0))));
-                EditarController editarcli = new EditarController(modelo, mods, shcp, documento,
-                        mconfiguracion, servicio, consulta, cshcp, cdocumentos, cconfiguraciones, conc, conl,
-                        editarcliente);
-                editarcli.iniciar();
-                editarcliente.setVisible(true);
-
-            }
-
-        }
         if (e.getSource() == principal.configuraciones1) {
-
             Configuraciones vc = new Configuraciones(principal, true);
-            ServicioController ctrl = new ServicioController(mods, servicio, vc);
-            ctrl.iniciar();
-            //otros
-
-            ClaseController cctrl = new ClaseController(conc, mc, vc);
-            cctrl.iniciar();
-
-            LlegoController lc = new LlegoController(ml, conl, vc);
-            lc.iniciar();
             
-            //user
-      
-            UsuarioController uctrl = new UsuarioController(mod, consultasusuario, vc);
-            uctrl.iniciar();
-            //directorio
-
-            DirectorioController ctrc = new DirectorioController(modc1, mod1, vc);
-            ctrc.iniciar();
-
             ConfiguracionesController ccontroller = new ConfiguracionesController(mconfiguracion, cconfiguraciones, vc);
             ccontroller.iniciar();
             vc.setVisible(true);
         }
-         
-        
 
-    }
-
-    public void keyevent() {
-        principal.txtbuscar.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                busqueda();
-            }
-        });
-    }
-
-    public void limpiartabla() {
-        if (principal.tabladatos.getRowCount() >= 0) {
-            int count = principal.tabladatos.getRowCount();
-            for (int i = 0; i < count; i++) {
-                model.removeRow(0);
-            }
+//        if (e.getSource() == principal.busqueda) {
+//            Busqueda busqueda = new Busqueda(principal, true);
+//            BusquedaController bc = new BusquedaController(modelo, consulta, busqueda);
+//            bc.iniciar();
+//            busqueda.setVisible(true);
+//        }
+        if (e.getSource() == principal.servicios) {
+            Servicios servic= new Servicios(principal, true);
+            ServicioController ctrl = new ServicioController(mods, servicio, servic);
+            ctrl.iniciar();
+            servic.setVisible(true);     
         }
+        if (e.getSource() == principal.otro) {
+            Otros otro = new Otros(principal, true);
+            ClaseController cctrl = new ClaseController(conc, mc, otro);
+            cctrl.iniciar();
+
+            LlegoController lc = new LlegoController(ml, conl, otro);
+            lc.iniciar();
+            otro.setVisible(true);
+            
+        }
+        
+        
+        if (e.getSource() == principal.crearusuario) {
+            Crearusuario crearuser = new Crearusuario(principal, true);
+            UsuarioController uctrl = new UsuarioController(mod, consultasusuario, crearuser);
+            uctrl.iniciar();
+            crearuser.setVisible(true);
+        }
+        
+        if (e.getSource() == principal.carpetas) {
+            Carpetas carpeta = new Carpetas(principal, true);
+            DirectorioController ctrc = new DirectorioController(modc1, mod1, carpeta);
+            ctrc.iniciar();
+            carpeta.setVisible(true);
+        }
+
     }
 
     public void abrirarchivo(String archivo) {
@@ -203,28 +175,6 @@ public class OrganizadorController implements ActionListener {
 //        pricipal.txtnombre.setText("");
 //        pricipal.txtapellido.setText("");
 //        pricipal.txtdocumento.setText("");
-    }
-
-    public void busqueda() {
-        if (principal.txtbuscar.getText().length() == 0) {
-            limpiartabla();
-            //dialogo.alerta();
-        }
-        if (principal.txtbuscar.getText().length() > 0) {
-            limpiartabla();
-            Object[] dato = new Object[6];
-            int cantidad = consulta.buscarcaracter(principal.txtbuscar.getText()).size();
-            for (int i = 0; i < cantidad; i++) {
-                dato[0] = consulta.buscarcaracter(principal.txtbuscar.getText()).get(i).getIdclientes_potenciales();
-                dato[1] = consulta.buscarcaracter(principal.txtbuscar.getText()).get(i).getNit();
-                dato[2] = consulta.buscarcaracter(principal.txtbuscar.getText()).get(i).getNombre();
-                dato[3] = consulta.buscarcaracter(principal.txtbuscar.getText()).get(i).getCodigo();
-                dato[4] = consulta.buscarcaracter(principal.txtbuscar.getText()).get(i).getFecha_llegada();
-                dato[5] = consulta.buscarcaracter(principal.txtbuscar.getText()).get(i).getRuta();
-                model.addRow(dato);
-                principal.tabladatos.setModel(model);
-            }
-        }
     }
 
 }

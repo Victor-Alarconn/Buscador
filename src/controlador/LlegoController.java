@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Llego;
 import vistas.Configuraciones;
+import vistas.Otros;
 import vistas.Principal;
 
 /**
@@ -22,12 +23,12 @@ public class LlegoController implements ActionListener{
 
     private final Llego ml;
     private final Consultas_Llego cl;
-    private final Configuraciones vl;
+    private final Otros vl;
 
     DefaultTableModel modell = new DefaultTableModel();
     DefaultTableModel modell2 = new DefaultTableModel();
 
-    public LlegoController(Llego ml, Consultas_Llego cl, Configuraciones vl) {
+    public LlegoController(Llego ml, Consultas_Llego cl, Otros vl) {
         this.ml = ml;
         this.cl = cl;
         this.vl = vl;
@@ -39,7 +40,7 @@ public class LlegoController implements ActionListener{
     }
     public void iniciar() {
         vl.setTitle("Otros");
-//        formulario.setLocationRelativeTo(null);
+        vl.setLocationRelativeTo(null);
         modell.addColumn("Agregar llego");
         modell2.addColumn("Llego");
         vl.tablaagregarllego.setModel(modell);

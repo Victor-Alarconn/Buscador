@@ -6,6 +6,7 @@
 package vistas;
 
 import Consultas.Consultas_Servicio;
+import Consultas.Consultas_usuario;
 import controlador.ServicioController;
 import controlador.UsuarioController;
 import java.awt.Dimension;
@@ -25,54 +26,11 @@ import modelo.Usuario;
  */
 public class Configuraciones extends javax.swing.JDialog {
 
+    Usuario modu;
+    Consultas_usuario cons;
+
     public void transparecia() {
-
-//        configuraciones.setOpaque(false);
-//        configuraciones.setContentAreaFilled(false);
-//        configuraciones.setBorderPainted(false);
-//
-//        formulario.setOpaque(false);
-//        formulario.setContentAreaFilled(false);
-//        formulario.setBorderPainted(false);
-        eliminartablaservico.setOpaque(false);
-        eliminartablaservico.setContentAreaFilled(false);
-        eliminartablaservico.setBorderPainted(false);
-
-        registrarservicio.setOpaque(false);
-        registrarservicio.setContentAreaFilled(false);
-        registrarservicio.setBorderPainted(false);
-
-        eliminartablaagregarservicio.setOpaque(false);
-        eliminartablaagregarservicio.setContentAreaFilled(false);
-        eliminartablaagregarservicio.setBorderPainted(false);
-
-        guardarservicios.setOpaque(false);
-        guardarservicios.setContentAreaFilled(false);
-        guardarservicios.setBorderPainted(false);
-
-        eliminarcarpeta.setOpaque(false);
-        eliminarcarpeta.setContentAreaFilled(false);
-        eliminarcarpeta.setBorderPainted(false);
-
-        agregarcarpeta.setOpaque(false);
-        agregarcarpeta.setContentAreaFilled(false);
-        agregarcarpeta.setBorderPainted(false);
-
-        eliminaragregarcarpeta.setOpaque(false);
-        eliminaragregarcarpeta.setContentAreaFilled(false);
-        eliminaragregarcarpeta.setBorderPainted(false);
-
-        guardarcarpeta.setOpaque(false);
-        guardarcarpeta.setContentAreaFilled(false);
-        guardarcarpeta.setBorderPainted(false);
-
         panel2panel1.setOpaque(false);
-        panelotros.setOpaque(false);
-        panel2panel2.setOpaque(false);
-        panel2panel3.setOpaque(false);
-        pnprinci.setOpaque(false);
-        paneluser.setOpaque(false);
-
     }
 
     /**
@@ -82,21 +40,13 @@ public class Configuraciones extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         transparecia();
-        panel2panel2.setVisible(false);
-        panel2panel3.setVisible(false);
-        panelotros.setVisible(false);
-        paneluser.setVisible(false);
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension tamanio = tk.getScreenSize();
-        int ancho = (int) tamanio.getWidth();
-        int alto = (int) tamanio.getHeight();
         this.setResizable(false);
 //        this.setSize(new Dimension(ancho,alto));
-        labelc.setSize(new Dimension(ancho, alto));
+         this.setResizable(false);
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
-        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        jLabel1.setIcon(fondo);
 //        labelc.setIcon(fondo);
-
     }
 
     /**
@@ -109,7 +59,6 @@ public class Configuraciones extends javax.swing.JDialog {
     private void initComponents() {
 
         jMenu3 = new javax.swing.JMenu();
-        pnprinci = new javax.swing.JPanel();
         panel2panel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -117,75 +66,11 @@ public class Configuraciones extends javax.swing.JDialog {
         txtdirectorio = new rojerusan.RSMetroTextFullPlaceHolder();
         buscar = new rojerusan.RSMaterialButtonRound();
         guardarconfiguracion = new rojerusan.RSMaterialButtonRound();
-        panelotros = new javax.swing.JPanel();
-        eliminarllego = new javax.swing.JButton();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        tablallego = new rojerusan.RSTableMetro();
-        txtregistrarllego = new rojerusan.RSMetroTextFullPlaceHolder();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        tablaagregarllego = new rojerusan.RSTableMetro();
-        agregarclase = new javax.swing.JButton();
-        eliminaragregarclase = new javax.swing.JButton();
-        guardarclase = new javax.swing.JButton();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        tablaclase = new rojerusan.RSTableMetro();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        tablaagregarclase = new rojerusan.RSTableMetro();
-        txtregistrarclase = new rojerusan.RSMetroTextFullPlaceHolder();
-        agregarllego = new javax.swing.JButton();
-        eliminaragregarllego = new javax.swing.JButton();
-        guardarllego = new javax.swing.JButton();
-        eliminarclase = new javax.swing.JButton();
-        panel2panel3 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tablacarpetas = new rojerusan.RSTableMetro();
-        txtregistrarcarpeta = new rojerusan.RSMetroTextFullPlaceHolder();
-        guardarcarpeta = new javax.swing.JButton();
-        agregarcarpeta = new javax.swing.JButton();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        tablaagregarcarpetas = new rojerusan.RSTableMetro();
-        eliminaragregarcarpeta = new javax.swing.JButton();
-        eliminarcarpeta = new javax.swing.JButton();
-        panel2panel2 = new javax.swing.JPanel();
-        registrarservicio = new javax.swing.JButton();
-        txtregistroservicio = new rojerusan.RSMetroTextFullPlaceHolder();
-        eliminartablaservico = new javax.swing.JButton();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        tablatotalservicios = new rojerusan.RSTableMetro();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        tablaagregarservicios = new rojerusan.RSTableMetro();
-        eliminartablaagregarservicio = new javax.swing.JButton();
-        guardarservicios = new javax.swing.JButton();
-        paneluser = new javax.swing.JPanel();
-        guardaruser = new javax.swing.JButton();
-        txtnombre = new rojerusan.RSMetroTextFullPlaceHolder();
-        txtapellido = new rojerusan.RSMetroTextFullPlaceHolder();
-        txtdocumento = new rojerusan.RSMetroTextFullPlaceHolder();
-        txtcontraseña = new rojerusan.RSPasswordTextPlaceHolder();
-        txtrol = new rojerusan.RSComboMetro();
-        checkconfiguraciones = new javax.swing.JCheckBox();
-        checkdirectorio = new javax.swing.JCheckBox();
-        checkcrearcliente = new javax.swing.JCheckBox();
-        checkcarpetas = new javax.swing.JCheckBox();
-        checkservicios = new javax.swing.JCheckBox();
-        checkotros = new javax.swing.JCheckBox();
-        checkcrearusuario = new javax.swing.JCheckBox();
-        checkbuscar = new javax.swing.JCheckBox();
-        checkeditarcliente = new javax.swing.JCheckBox();
-        labelc = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        carpetas = new javax.swing.JMenu();
-        servicios = new javax.swing.JMenu();
-        Otros = new javax.swing.JMenu();
-        crearusuario = new javax.swing.JMenu();
+        jLabel1 = new javax.swing.JLabel();
 
         jMenu3.setText("jMenu3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        pnprinci.setName("pnprinci"); // NOI18N
-        pnprinci.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panel2panel1.setName("panel2panel1"); // NOI18N
         panel2panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -222,442 +107,25 @@ public class Configuraciones extends javax.swing.JDialog {
         });
         panel2panel1.add(guardarconfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(579, 143, 230, 60));
 
-        pnprinci.add(panel2panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, -4, 820, 370));
-
-        panelotros.setBackground(new java.awt.Color(0, 102, 102));
-        panelotros.setName("panelotros"); // NOI18N
-        panelotros.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        eliminarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panelotros.add(eliminarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
-
-        tablallego.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        tablallego.setRowHeight(30);
-        jScrollPane10.setViewportView(tablallego);
-
-        panelotros.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 276, 260));
-
-        txtregistrarllego.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtregistrarllegoActionPerformed(evt);
-            }
-        });
-        panelotros.add(txtregistrarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 276, -1));
-
-        tablaagregarllego.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        tablaagregarllego.setRowHeight(30);
-        jScrollPane11.setViewportView(tablaagregarllego);
-
-        panelotros.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 276, 210));
-
-        agregarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        panelotros.add(agregarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 30, -1, 57));
-
-        eliminaragregarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panelotros.add(eliminaragregarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, 65, -1));
-
-        guardarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
-        panelotros.add(guardarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 230, 72, -1));
-
-        tablaclase.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        tablaclase.setRowHeight(30);
-        jScrollPane12.setViewportView(tablaclase);
-
-        panelotros.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 276, 260));
-
-        tablaagregarclase.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        tablaagregarclase.setRowHeight(30);
-        jScrollPane13.setViewportView(tablaagregarclase);
-
-        panelotros.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 276, 210));
-
-        txtregistrarclase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtregistrarclaseActionPerformed(evt);
-            }
-        });
-        panelotros.add(txtregistrarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 276, -1));
-
-        agregarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        panelotros.add(agregarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 320, -1, 57));
-
-        eliminaragregarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panelotros.add(eliminaragregarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 390, 65, -1));
-
-        guardarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
-        panelotros.add(guardarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 520, 72, -1));
-
-        eliminarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panelotros.add(eliminarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
-
-        pnprinci.add(panelotros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 610));
-
-        panel2panel3.setBackground(new java.awt.Color(204, 204, 255));
-        panel2panel3.setName("panel2panel3"); // NOI18N
-        panel2panel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tablacarpetas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        tablacarpetas.setRowHeight(30);
-        jScrollPane5.setViewportView(tablacarpetas);
-
-        panel2panel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 276, 420));
-
-        txtregistrarcarpeta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtregistrarcarpetaActionPerformed(evt);
-            }
-        });
-        panel2panel3.add(txtregistrarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 276, 57));
-
-        guardarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
-        panel2panel3.add(guardarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 490, 72, -1));
-
-        agregarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        panel2panel3.add(agregarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 130, -1, 57));
-
-        tablaagregarcarpetas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        tablaagregarcarpetas.setRowHeight(30);
-        jScrollPane7.setViewportView(tablaagregarcarpetas);
-
-        panel2panel3.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 276, 357));
-
-        eliminaragregarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panel2panel3.add(eliminaragregarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 190, 65, -1));
-
-        eliminarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panel2panel3.add(eliminarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, -1, -1));
-
-        pnprinci.add(panel2panel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 610));
-
-        panel2panel2.setBackground(new java.awt.Color(204, 204, 0));
-        panel2panel2.setName("panel2panel2"); // NOI18N
-        panel2panel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        registrarservicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        panel2panel2.add(registrarservicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 110, -1, 57));
-        panel2panel2.add(txtregistroservicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 280, 57));
-
-        eliminartablaservico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panel2panel2.add(eliminartablaservico, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, -1, -1));
-
-        tablatotalservicios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        tablatotalservicios.setRowHeight(30);
-        jScrollPane8.setViewportView(tablatotalservicios);
-
-        panel2panel2.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 276, 420));
-
-        tablaagregarservicios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        tablaagregarservicios.setRowHeight(30);
-        jScrollPane9.setViewportView(tablaagregarservicios);
-
-        panel2panel2.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 280, 357));
-
-        eliminartablaagregarservicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panel2panel2.add(eliminartablaagregarservicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 170, 65, -1));
-
-        guardarservicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
-        panel2panel2.add(guardarservicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 470, 72, -1));
-
-        pnprinci.add(panel2panel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 610));
-
-        paneluser.setBackground(new java.awt.Color(102, 255, 102));
-        paneluser.setName("paneluser"); // NOI18N
-
-        guardaruser.setText("Guardar");
-
-        txtnombre.setPlaceholder("Nombre");
-
-        txtapellido.setPlaceholder("Apellido");
-
-        txtdocumento.setPlaceholder("Documento");
-
-        txtcontraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
-        txtcontraseña.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtcontraseña.setPlaceholder("Contraseña");
-        txtcontraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcontraseñaActionPerformed(evt);
-            }
-        });
-
-        txtrol.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtrol.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                txtrolItemStateChanged(evt);
-            }
-        });
-
-        checkconfiguraciones.setText("Configuraciones");
-
-        checkdirectorio.setText("Directorio");
-
-        checkcrearcliente.setText("Crear Cliente");
-
-        checkcarpetas.setText("Carpetas");
-
-        checkservicios.setText("Servicios");
-
-        checkotros.setText("Otros");
-
-        checkcrearusuario.setText("Crear usuario");
-
-        checkbuscar.setText("Buscar");
-
-        checkeditarcliente.setText("Editar Cliente");
-
-        javax.swing.GroupLayout paneluserLayout = new javax.swing.GroupLayout(paneluser);
-        paneluser.setLayout(paneluserLayout);
-        paneluserLayout.setHorizontalGroup(
-            paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(paneluserLayout.createSequentialGroup()
-                .addGap(230, 230, 230)
-                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtrol, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(guardaruser))
-                .addGap(57, 57, 57)
-                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, paneluserLayout.createSequentialGroup()
-                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(checkconfiguraciones)
-                            .addComponent(checkcarpetas)
-                            .addComponent(checkcrearusuario))
-                        .addGap(18, 18, 18)
-                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(checkbuscar)
-                            .addComponent(checkservicios)
-                            .addComponent(checkdirectorio))
-                        .addGap(18, 18, 18)
-                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(checkeditarcliente)
-                            .addComponent(checkotros)
-                            .addComponent(checkcrearcliente)))
-                    .addComponent(txtcontraseña, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtapellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(224, Short.MAX_VALUE))
-        );
-        paneluserLayout.setVerticalGroup(
-            paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneluserLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(paneluserLayout.createSequentialGroup()
-                        .addComponent(txtrol, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                        .addGap(385, 385, 385))
-                    .addGroup(paneluserLayout.createSequentialGroup()
-                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkconfiguraciones)
-                            .addComponent(checkdirectorio)
-                            .addComponent(checkcrearcliente))
-                        .addGap(18, 18, 18)
-                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkcarpetas)
-                            .addComponent(checkservicios)
-                            .addComponent(checkotros))
-                        .addGap(18, 18, 18)
-                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkcrearusuario)
-                            .addComponent(checkbuscar)
-                            .addComponent(checkeditarcliente)
-                            .addComponent(guardaruser, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-
-        pnprinci.add(paneluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 610));
-
-        labelc.setMaximumSize(new java.awt.Dimension(2070, 1024));
-        labelc.setMinimumSize(new java.awt.Dimension(2070, 1024));
-        labelc.setName("labelc"); // NOI18N
-        pnprinci.add(labelc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 64));
-
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuraciones (2).png"))); // NOI18N
-        jMenu1.setText("Configuracion");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu1);
-
-        carpetas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/folders.png"))); // NOI18N
-        carpetas.setText("Carpetas ");
-        carpetas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                carpetasMouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(carpetas);
-
-        servicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/service.png"))); // NOI18N
-        servicios.setText("Servicios");
-        servicios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                serviciosMouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(servicios);
-
-        Otros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/otros.png"))); // NOI18N
-        Otros.setText("Otros");
-        Otros.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                OtrosMouseClicked(evt);
-            }
-        });
-        Otros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OtrosActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(Otros);
-
-        crearusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser.png"))); // NOI18N
-        crearusuario.setText("Crear Usuario");
-        crearusuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                crearusuarioMouseClicked(evt);
-            }
-        });
-        crearusuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crearusuarioActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(crearusuario);
-
-        setJMenuBar(jMenuBar1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnprinci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(50, Short.MAX_VALUE)
+                .addComponent(panel2panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnprinci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(panel2panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(141, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
         );
 
         pack();
@@ -678,75 +146,6 @@ public class Configuraciones extends javax.swing.JDialog {
     private void guardarconfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarconfiguracionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_guardarconfiguracionActionPerformed
-
-    private void carpetasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carpetasMouseClicked
-        panel2panel1.setVisible(false);
-        panel2panel2.setVisible(false);
-        panel2panel3.setVisible(true);
-        panelotros.setVisible(false);
-        paneluser.setVisible(false);
-    }//GEN-LAST:event_carpetasMouseClicked
-
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        panel2panel3.setVisible(false);
-        panel2panel2.setVisible(false);
-        panel2panel1.setVisible(true);
-        panelotros.setVisible(false);
-        paneluser.setVisible(false);
-    }//GEN-LAST:event_jMenu1MouseClicked
-
-    private void serviciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_serviciosMouseClicked
-        panel2panel3.setVisible(false);
-        panel2panel2.setVisible(true);
-        panel2panel1.setVisible(false);
-        panelotros.setVisible(false);
-        paneluser.setVisible(false);
-    }//GEN-LAST:event_serviciosMouseClicked
-
-    private void txtregistrarllegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtregistrarllegoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtregistrarllegoActionPerformed
-
-    private void txtregistrarclaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtregistrarclaseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtregistrarclaseActionPerformed
-
-    private void OtrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OtrosActionPerformed
-
-    }//GEN-LAST:event_OtrosActionPerformed
-
-    private void OtrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OtrosMouseClicked
-        panel2panel3.setVisible(false);
-        panel2panel2.setVisible(false);
-        panel2panel1.setVisible(false);
-        panelotros.setVisible(true);
-        paneluser.setVisible(false);
-    }//GEN-LAST:event_OtrosMouseClicked
-
-    private void txtregistrarcarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtregistrarcarpetaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtregistrarcarpetaActionPerformed
-
-    private void crearusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearusuarioActionPerformed
-        
-    }//GEN-LAST:event_crearusuarioActionPerformed
-
-    private void crearusuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearusuarioMouseClicked
-
-        panel2panel3.setVisible(false);
-        panel2panel2.setVisible(false);
-        panel2panel1.setVisible(false);
-        panelotros.setVisible(false);
-        paneluser.setVisible(true);
-    }//GEN-LAST:event_crearusuarioMouseClicked
-
-    private void txtcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcontraseñaActionPerformed
-
-    private void txtrolItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_txtrolItemStateChanged
-   
-    }//GEN-LAST:event_txtrolItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -791,76 +190,14 @@ public class Configuraciones extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu Otros;
-    public javax.swing.JButton agregarcarpeta;
-    public javax.swing.JButton agregarclase;
-    public javax.swing.JButton agregarllego;
     private rojerusan.RSMaterialButtonRound buscar;
-    private javax.swing.JMenu carpetas;
-    public javax.swing.JCheckBox checkbuscar;
-    public javax.swing.JCheckBox checkcarpetas;
-    public javax.swing.JCheckBox checkconfiguraciones;
-    public javax.swing.JCheckBox checkcrearcliente;
-    public javax.swing.JCheckBox checkcrearusuario;
-    public javax.swing.JCheckBox checkdirectorio;
-    public javax.swing.JCheckBox checkeditarcliente;
-    public javax.swing.JCheckBox checkotros;
-    public javax.swing.JCheckBox checkservicios;
-    private javax.swing.JMenu crearusuario;
-    public javax.swing.JButton eliminaragregarcarpeta;
-    public javax.swing.JButton eliminaragregarclase;
-    public javax.swing.JButton eliminaragregarllego;
-    public javax.swing.JButton eliminarcarpeta;
-    public javax.swing.JButton eliminarclase;
-    public javax.swing.JButton eliminarllego;
-    public javax.swing.JButton eliminartablaagregarservicio;
-    public javax.swing.JButton eliminartablaservico;
-    public javax.swing.JButton guardarcarpeta;
-    public javax.swing.JButton guardarclase;
     public rojerusan.RSMaterialButtonRound guardarconfiguracion;
-    public javax.swing.JButton guardarllego;
-    public javax.swing.JButton guardarservicios;
-    public javax.swing.JButton guardaruser;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane12;
-    private javax.swing.JScrollPane jScrollPane13;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JLabel labelc;
     private javax.swing.JPanel panel2panel1;
-    private javax.swing.JPanel panel2panel2;
-    private javax.swing.JPanel panel2panel3;
-    private javax.swing.JPanel panelotros;
-    private javax.swing.JPanel paneluser;
-    private javax.swing.JPanel pnprinci;
-    public javax.swing.JButton registrarservicio;
-    private javax.swing.JMenu servicios;
-    public rojerusan.RSTableMetro tablaagregarcarpetas;
-    public rojerusan.RSTableMetro tablaagregarclase;
-    public rojerusan.RSTableMetro tablaagregarllego;
-    public rojerusan.RSTableMetro tablaagregarservicios;
-    public rojerusan.RSTableMetro tablacarpetas;
-    public rojerusan.RSTableMetro tablaclase;
-    public rojerusan.RSTableMetro tablallego;
-    public rojerusan.RSTableMetro tablatotalservicios;
-    public rojerusan.RSMetroTextFullPlaceHolder txtapellido;
-    public rojerusan.RSPasswordTextPlaceHolder txtcontraseña;
     public rojerusan.RSMetroTextFullPlaceHolder txtdirectorio;
-    public rojerusan.RSMetroTextFullPlaceHolder txtdocumento;
-    public rojerusan.RSMetroTextFullPlaceHolder txtnombre;
     public rojerusan.RSMetroTextFullPlaceHolder txtprefijo;
-    public rojerusan.RSMetroTextFullPlaceHolder txtregistrarcarpeta;
-    public rojerusan.RSMetroTextFullPlaceHolder txtregistrarclase;
-    public rojerusan.RSMetroTextFullPlaceHolder txtregistrarllego;
-    public rojerusan.RSMetroTextFullPlaceHolder txtregistroservicio;
-    public rojerusan.RSComboMetro txtrol;
     // End of variables declaration//GEN-END:variables
 }

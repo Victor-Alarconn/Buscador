@@ -6,9 +6,14 @@
 package vistas;
 
 import Consultas.Consultas_usuario;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.Usuario;
 
@@ -27,10 +32,13 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
+      
         this.setLocationRelativeTo(null);
         keyevent();
-     
-
+        this.setResizable(false);
+        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
+        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jlabel1.getWidth(), jlabel1.getHeight(), Image.SCALE_DEFAULT));
+        jlabel1.setIcon(fondo);
     }
 
     public void keyevent() {
@@ -63,12 +71,41 @@ public class login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        nombreuser = new javax.swing.JTextField();
+        txtcontrasena = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
         validar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        nombreuser = new rojerusan.RSMetroTextFullPlaceHolder();
-        txtcontrasena = new rojerusan.RSPasswordTextPlaceHolder();
+        jlabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Usuario");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Contraseña");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+
+        nombreuser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        nombreuser.setForeground(new java.awt.Color(0, 112, 192));
+        nombreuser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192), 2));
+        jPanel1.add(nombreuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 250, 40));
+
+        txtcontrasena.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtcontrasena.setForeground(new java.awt.Color(0, 112, 192));
+        txtcontrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192), 2));
+        jPanel1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 250, 40));
+
+        jButton1.setText("Registrar");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
 
         validar.setText("ingresar");
         validar.setHideActionText(true);
@@ -77,49 +114,18 @@ public class login extends javax.swing.JFrame {
                 validarActionPerformed(evt);
             }
         });
-
-        nombreuser.setPlaceholder("Usuario");
-
-        txtcontrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192), 2));
-        txtcontrasena.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtcontrasena.setPlaceholder("Contraseña");
-        txtcontrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcontrasenaActionPerformed(evt);
-            }
-        });
+        jPanel1.add(validar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
+        jPanel1.add(jlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 270));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(63, 63, 63)
-                        .addComponent(validar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(nombreuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 42, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(nombreuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(txtcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(validar)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -128,10 +134,6 @@ public class login extends javax.swing.JFrame {
     private void validarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validarActionPerformed
          loginenter();
     }//GEN-LAST:event_validarActionPerformed
-
-    private void txtcontrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcontrasenaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,9 +171,13 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    public rojerusan.RSMetroTextFullPlaceHolder nombreuser;
-    public rojerusan.RSPasswordTextPlaceHolder txtcontrasena;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jlabel1;
+    public javax.swing.JTextField nombreuser;
+    public javax.swing.JPasswordField txtcontrasena;
     public javax.swing.JButton validar;
     // End of variables declaration//GEN-END:variables
 }

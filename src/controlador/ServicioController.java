@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Servicio;
 import vistas.Configuraciones;
 import vistas.Principal;
+import vistas.Servicios;
 
 /**
  *
@@ -22,12 +23,12 @@ public class ServicioController implements ActionListener {
 
     private final Servicio modelo;
     private final Consultas_Servicio consulta;
-    private final Configuraciones vservicios;
+    private final Servicios vservicios;
 
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
 
-    public ServicioController(Servicio modelo, Consultas_Servicio consulta, Configuraciones  vservicios) {
+    public ServicioController(Servicio modelo, Consultas_Servicio consulta, Servicios vservicios) {
         this.modelo = modelo;
         this.consulta = consulta;
         this.vservicios = vservicios;
@@ -39,6 +40,7 @@ public class ServicioController implements ActionListener {
 
     public void iniciar() {
         vservicios.setTitle(" Crear servicios");
+        vservicios.setLocationRelativeTo(null);
         model.addColumn("Servicios");
         model2.addColumn("Agregar Servicios");
         vservicios.tablatotalservicios.setModel(model);

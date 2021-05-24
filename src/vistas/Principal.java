@@ -14,40 +14,22 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import modelo.Usuario;
 
-
 /**
  *
  * @author Yonathan Carvajal
  */
 public class Principal extends javax.swing.JFrame {
-    
+
     Usuario modu;
     Consultas_usuario cons;
-          
+
     public void transparecia() {
-
-        abrirarchivos.setOpaque(false);
-        abrirarchivos.setContentAreaFilled(false);
-        abrirarchivos.setBorderPainted(false);
-        
-        configuraciones1.setOpaque(false);
-        configuraciones1.setContentAreaFilled(false);
+//        configuraciones1.setOpaque(false);
+//        configuraciones1.setContentAreaFilled(false);
 //        configuraciones1.setBorderPainted(false);
-        
         crearcliente.setOpaque(false);
-        crearcliente.setContentAreaFilled(false);
-//        crearcliente.setBorderPainted(false);
-
-        editar.setOpaque(false);
-        editar.setContentAreaFilled(false);
-        editar.setBorderPainted(false);
-
-        eliminarcliente.setOpaque(false);
-        eliminarcliente.setContentAreaFilled(false);
-        eliminarcliente.setBorderPainted(false);
-
-        subpanel1.setOpaque(false);
         panelprincipal.setOpaque(false);
+//        crearcliente.setContentAreaFilled(false);
 
     }
 //   DefaultTableModel model = new DefaultTableModel();
@@ -57,44 +39,47 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-//        mi1.addActionListener(this);
-//        menu1.add(mi1);
-//        mi2=new JMenuItem("Verde");
-//        mi2.addActionListener(this);
-//        menu1.add(mi2);
-//        mi3=new JMenuItem("Azul");
-//        mi3.addActionListener(this);
-//        menu1.add(mi3);
-        
     }
 
-    public Principal(Usuario modu){
+    public Principal(Usuario modu) {
         initComponents();
-         transparecia();
+        transparecia();
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension tamanio = tk.getScreenSize();
         int ancho = (int) tamanio.getWidth();
         int alto = (int) tamanio.getHeight();
         this.setSize(new Dimension(ancho, alto));
-        menu.setPreferredSize(new Dimension(ancho, 90));
-//        crearcliente.setVisible(false);
-//        this.setResizable(false);
-        jLabel1.setPreferredSize(new Dimension(ancho, alto));
+        jLabel1.setSize(new Dimension(ancho, alto));
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm.jpg"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
         jLabel1.setIcon(fondo);
-        this.modu=modu;
-        
+        this.modu = modu;
 //        System.out.println(modu.getConfiguraciones());
-        if (modu.getRol()== 1 ) {
-    
-        }else{
-            if (modu.getRol()== 2) {
-                 configuraciones1.setVisible(false);
+        if (modu.getRol() == 1) {
+        } else {
+            if (modu.getRol() == 2) {
+                if (modu.getConfiguraciones() == 0) {
+                    configuraciones1.setVisible(false);
+                }
+                if (modu.getCrearcliente() == 0) {
+                    crearcliente.setVisible(false);
+                }
+                if (modu.getCarpetas() == 0) {
+                    carpetas.setVisible(false);
+                }
+                if (modu.getServicios() == 0) {
+                    servicios.setVisible(false);
+                }
+                if (modu.getOtros() == 0) {
+                    otro.setVisible(false);
+                }
+                if (modu.getCrearusuarios() == 0) {
+                    crearusuario.setVisible(false);
+                }
             }
         }
-        
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,7 +93,12 @@ public class Principal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        subpanel1 = new javax.swing.JPanel();
+        crearcliente = new javax.swing.JButton();
+        configuraciones1 = new javax.swing.JButton();
+        servicios = new javax.swing.JButton();
+        crearusuario = new javax.swing.JButton();
+        carpetas = new javax.swing.JButton();
+        otro = new javax.swing.JButton();
         panelprincipal = new javax.swing.JPanel();
         txtbuscar = new rojerusan.RSMetroTextFullPlaceHolder();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -116,9 +106,6 @@ public class Principal extends javax.swing.JFrame {
         eliminarcliente = new javax.swing.JButton();
         editar = new javax.swing.JButton();
         abrirarchivos = new javax.swing.JButton();
-        menu = new javax.swing.JPanel();
-        crearcliente = new javax.swing.JButton();
-        configuraciones1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -131,9 +118,36 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setMaximumSize(new java.awt.Dimension(1280, 1080));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        subpanel1.setMaximumSize(new java.awt.Dimension(1280, 1080));
-        subpanel1.setName("subpanel1"); // NOI18N
-        subpanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        crearcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser.png"))); // NOI18N
+        crearcliente.setText("Crearcliente");
+        crearcliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(crearcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 170, 70));
+
+        configuraciones1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuraciones (2).png"))); // NOI18N
+        configuraciones1.setText("Configuraciones");
+        configuraciones1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        configuraciones1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configuraciones1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(configuraciones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 170, 70));
+
+        servicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/service.png"))); // NOI18N
+        servicios.setText("servicios");
+        jPanel1.add(servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 170, 70));
+
+        crearusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser.png"))); // NOI18N
+        crearusuario.setText("crear usuario");
+        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, 170, -1));
+
+        carpetas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/folders.png"))); // NOI18N
+        carpetas.setText("Carpetas");
+        jPanel1.add(carpetas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 660, 170, 70));
+
+        otro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/otros.png"))); // NOI18N
+        otro.setText("Otros");
+        jPanel1.add(otro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 170, 70));
 
         panelprincipal.setBackground(new java.awt.Color(255, 153, 153));
         panelprincipal.setMaximumSize(new java.awt.Dimension(1280, 1080));
@@ -180,47 +194,10 @@ public class Principal extends javax.swing.JFrame {
                 abrirarchivosActionPerformed(evt);
             }
         });
-        panelprincipal.add(abrirarchivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 90, 80));
+        panelprincipal.add(abrirarchivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 90, 70));
 
-        subpanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 620));
+        jPanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 1070, 620));
 
-        jPanel1.add(subpanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, 620));
-
-        menu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        menu.setName("menu"); // NOI18N
-
-        crearcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser.png"))); // NOI18N
-        crearcliente.setText("Crearcliente");
-        crearcliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        configuraciones1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuraciones (2).png"))); // NOI18N
-        configuraciones1.setText("Configuraciones");
-        configuraciones1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
-        menu.setLayout(menuLayout);
-        menuLayout.setHorizontalGroup(
-            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuLayout.createSequentialGroup()
-                .addGap(198, 198, 198)
-                .addComponent(crearcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(configuraciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(680, Short.MAX_VALUE))
-        );
-        menuLayout.setVerticalGroup(
-            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crearcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(configuraciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jPanel1.add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 90));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/rm1.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -238,13 +215,16 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void tabladatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabladatosMouseClicked
-//                int selecionar = tabladatos.rowAtPoint(evt.getPoint());
+    private void configuraciones1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuraciones1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_configuraciones1ActionPerformed
 
+    private void tabladatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabladatosMouseClicked
+        //                int selecionar = tabladatos.rowAtPoint(evt.getPoint());
     }//GEN-LAST:event_tabladatosMouseClicked
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-        
+
     }//GEN-LAST:event_editarActionPerformed
 
     private void abrirarchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirarchivosActionPerformed
@@ -290,8 +270,10 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton abrirarchivos;
     public javax.swing.ButtonGroup buttonGroup1;
+    public javax.swing.JButton carpetas;
     public javax.swing.JButton configuraciones1;
     public javax.swing.JButton crearcliente;
+    public javax.swing.JButton crearusuario;
     public javax.swing.JButton editar;
     public javax.swing.JButton eliminarcliente;
     public javax.swing.JLabel jLabel1;
@@ -299,9 +281,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel menu;
+    public javax.swing.JButton otro;
     private javax.swing.JPanel panelprincipal;
-    private javax.swing.JPanel subpanel1;
+    public javax.swing.JButton servicios;
     public rojerusan.RSTableMetro tabladatos;
     public rojerusan.RSMetroTextFullPlaceHolder txtbuscar;
     // End of variables declaration//GEN-END:variables

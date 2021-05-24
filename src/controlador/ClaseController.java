@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Clases;
 import vistas.Configuraciones;
+import vistas.Otros;
 
 
 /**
@@ -22,12 +23,12 @@ public class ClaseController implements ActionListener {
 
     private final Consultas_Clase cc;
     private final Clases mc;
-    private final Configuraciones  vc;
+    private final Otros vc;
 
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
 
-    public ClaseController(Consultas_Clase cc, Clases mc, Configuraciones vc) {
+    public ClaseController(Consultas_Clase cc, Clases mc, Otros vc) {
         this.cc = cc;
         this.mc = mc;
         this.vc = vc;

@@ -62,7 +62,7 @@ public class Formulario extends javax.swing.JDialog {
         Dimension tamanio = tk.getScreenSize();
         int ancho = (int) tamanio.getWidth();
         int alto = (int) tamanio.getHeight();
-//        this.setResizable(false);
+        this.setResizable(false);
         jLabel1.setPreferredSize(new Dimension(ancho, alto));
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm.jpg"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
