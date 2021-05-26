@@ -65,7 +65,7 @@ public class Editarcliente extends javax.swing.JDialog {
 //        this.setSize(new Dimension(ancho, alto));
 //        this.setResizable(false);
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
-        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
         jLabel1.setIcon(fondo);
     }
 

@@ -37,7 +37,7 @@ public class login extends javax.swing.JFrame {
         keyevent();
         this.setResizable(false);
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
-        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jlabel1.getWidth(), jlabel1.getHeight(), Image.SCALE_DEFAULT));
+        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
         jlabel1.setIcon(fondo);
     }
 
@@ -76,7 +76,6 @@ public class login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         nombreuser = new javax.swing.JTextField();
         txtcontrasena = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
         validar = new javax.swing.JButton();
         jlabel1 = new javax.swing.JLabel();
 
@@ -104,9 +103,6 @@ public class login extends javax.swing.JFrame {
         txtcontrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192), 2));
         jPanel1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 250, 40));
 
-        jButton1.setText("Registrar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
-
         validar.setText("ingresar");
         validar.setHideActionText(true);
         validar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,17 +111,17 @@ public class login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(validar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
-        jPanel1.add(jlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 270));
+        jPanel1.add(jlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
         );
 
         pack();
@@ -171,7 +167,6 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;

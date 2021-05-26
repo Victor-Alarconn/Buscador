@@ -31,6 +31,22 @@ public class Buscador {
      */
     public static void main(String[] args) {
         
+        Consultas_usuario cu = new Consultas_usuario();
+        Usuario u =  new Usuario();
+        u.setNombre("admin");
+        u.setContrasena("123");
+        u.setConfiguraciones(1);
+        u.setCrearcliente(1);
+        u.setCarpetas(1);
+        u.setServicios(1);
+        u.setOtros(1);
+        u.setCrearusuarios(1);
+        u.setBuscar(1);
+        u.setEditarcliente(1);
+        u.setRol(1);
+        if (!cu.logindefault(u)) {
+            cu.registrar(u);
+        }
         login login = new login();
         login.setVisible(true);
        

@@ -48,10 +48,12 @@ public class Principal extends javax.swing.JFrame {
         Dimension tamanio = tk.getScreenSize();
         int ancho = (int) tamanio.getWidth();
         int alto = (int) tamanio.getHeight();
+//        this.preferredSize(new Dimension(ancho, alto));
         this.setSize(new Dimension(ancho, alto));
+//        System.out.println(this);
         jLabel1.setSize(new Dimension(ancho, alto));
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm.jpg"));
-        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
         jLabel1.setIcon(fondo);
         this.modu = modu;
 //        System.out.println(modu.getConfiguraciones());
@@ -121,7 +123,7 @@ public class Principal extends javax.swing.JFrame {
         crearcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser.png"))); // NOI18N
         crearcliente.setText("Crearcliente");
         crearcliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(crearcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 170, 70));
+        jPanel1.add(crearcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 170, 70));
 
         configuraciones1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuraciones (2).png"))); // NOI18N
         configuraciones1.setText("Configuraciones");
@@ -131,23 +133,23 @@ public class Principal extends javax.swing.JFrame {
                 configuraciones1ActionPerformed(evt);
             }
         });
-        jPanel1.add(configuraciones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 170, 70));
+        jPanel1.add(configuraciones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 170, 70));
 
         servicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/service.png"))); // NOI18N
-        servicios.setText("servicios");
-        jPanel1.add(servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 170, 70));
+        servicios.setText("Servicios");
+        jPanel1.add(servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 170, 70));
 
         crearusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser.png"))); // NOI18N
-        crearusuario.setText("crear usuario");
-        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, 170, -1));
+        crearusuario.setText("Usuarios");
+        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 170, -1));
 
         carpetas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/folders.png"))); // NOI18N
         carpetas.setText("Carpetas");
-        jPanel1.add(carpetas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 660, 170, 70));
+        jPanel1.add(carpetas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 170, 70));
 
         otro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/otros.png"))); // NOI18N
         otro.setText("Otros");
-        jPanel1.add(otro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 170, 70));
+        jPanel1.add(otro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 170, 70));
 
         panelprincipal.setBackground(new java.awt.Color(255, 153, 153));
         panelprincipal.setMaximumSize(new java.awt.Dimension(1280, 1080));
@@ -196,8 +198,7 @@ public class Principal extends javax.swing.JFrame {
         });
         panelprincipal.add(abrirarchivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 90, 70));
 
-        jPanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 1070, 620));
-
+        jPanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 1070, 620));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,7 +209,9 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 871, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         pack();
@@ -276,7 +279,7 @@ public class Principal extends javax.swing.JFrame {
     public javax.swing.JButton crearusuario;
     public javax.swing.JButton editar;
     public javax.swing.JButton eliminarcliente;
-    public javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;

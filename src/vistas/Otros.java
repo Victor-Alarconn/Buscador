@@ -28,7 +28,7 @@ public class Otros extends javax.swing.JDialog {
         initComponents();
         this.setResizable(false);
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
-        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
         jLabel1.setIcon(fondo);
         transparecia();
     }

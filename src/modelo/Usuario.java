@@ -16,6 +16,7 @@ public class Usuario {
     private String apellido; 
     private String numero_documento;
     private int rol;
+    private  String sobrerol;
     private String contrasena;
     private int configuraciones;
     private int crearcliente;
@@ -25,6 +26,34 @@ public class Usuario {
     private int crearusuarios;
     private int buscar;
     private int editarcliente;
+    private int estado; 
+    private String sobreestado;
+
+    public String getSobreestado() {
+        return sobreestado;
+    }
+
+    public void setSobreestado(String sobreestado) {
+        this.sobreestado = sobreestado;
+    }
+
+    public String getSobrerol() {
+        return sobrerol;
+    }
+
+    public void setSobrerol(String sobrerol) {
+        this.sobrerol = sobrerol;
+    }
+    
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+    
 
     public int getEditarcliente() {
         return editarcliente;

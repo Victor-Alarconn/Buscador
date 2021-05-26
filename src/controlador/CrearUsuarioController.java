@@ -19,14 +19,14 @@ import vistas.Crearusuario;
  *
  * @author Yonathan Carvajal
  */
-public class UsuarioController implements ActionListener {
+public class CrearUsuarioController implements ActionListener {
 
     private final Usuario modelo;
     private final Consultas_usuario consulta;
     private final Crearusuario vista;
     Rol rol = new Rol();
 
-    public UsuarioController(Usuario modelo, Consultas_usuario consulta, Crearusuario vista) {
+    public CrearUsuarioController(Usuario modelo, Consultas_usuario consulta, Crearusuario vista) {
         this.modelo = modelo;
         this.consulta = consulta;
         this.vista = vista;
@@ -56,6 +56,7 @@ public class UsuarioController implements ActionListener {
                 modelo.setApellido(vista.txtapellido.getText());
                 modelo.setNumero_documento(vista.txtdocumento.getText());
                 modelo.setContrasena(vista.txtcontraseña.getText());
+                
                 if (vista.checkconfiguraciones.isSelected()) {
                     modelo.setConfiguraciones(1);
                 }

@@ -43,6 +43,7 @@ import vistas.Formulario;
 import vistas.Otros;
 import vistas.Principal;
 import vistas.Servicios;
+import vistas.Usuarios;
 
 /**
  *
@@ -146,10 +147,11 @@ public class OrganizadorController implements ActionListener {
         
         
         if (e.getSource() == principal.crearusuario) {
-            Crearusuario crearuser = new Crearusuario(principal, true);
-            UsuarioController uctrl = new UsuarioController(mod, consultasusuario, crearuser);
-            uctrl.iniciar();
-            crearuser.setVisible(true);
+
+               Usuarios usu = new Usuarios(principal,true);
+               UsuariosController uc = new UsuariosController(mod, consultasusuario, usu);
+               uc.iniciar();
+               usu.setVisible(true);
         }
         
         if (e.getSource() == principal.carpetas) {

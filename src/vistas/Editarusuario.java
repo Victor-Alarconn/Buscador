@@ -11,25 +11,21 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Yonathan Carvajal
+ * @author yonathan
  */
-public class Crearusuario extends javax.swing.JDialog {
+public class Editarusuario extends javax.swing.JDialog {
 
-    public void transparecia() {
-        paneluser.setOpaque(false);
-    }
-    
     /**
-     * Creates new form Crearcliente
+     * Creates new form Ediatarusuario
      */
-    public Crearusuario(java.awt.Frame parent, boolean modal) {
+    public Editarusuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+       paneluser.setOpaque(false);
         this.setResizable(false);
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
         jLabel1.setIcon(fondo);
-        transparecia();
     }
 
     /**
@@ -56,6 +52,7 @@ public class Crearusuario extends javax.swing.JDialog {
         checkcrearusuario = new javax.swing.JCheckBox();
         checkbuscar = new javax.swing.JCheckBox();
         checkeditarcliente = new javax.swing.JCheckBox();
+        checkdesactivar = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -109,18 +106,23 @@ public class Crearusuario extends javax.swing.JDialog {
 
         checkeditarcliente.setText("Editar Cliente");
 
+        checkdesactivar.setText("Desactivar");
+
         javax.swing.GroupLayout paneluserLayout = new javax.swing.GroupLayout(paneluser);
         paneluser.setLayout(paneluserLayout);
         paneluserLayout.setHorizontalGroup(
             paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneluserLayout.createSequentialGroup()
-                .addGap(253, 253, 253)
+                .addGap(185, 185, 185)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtrol, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(guardaruser))
+                    .addGroup(paneluserLayout.createSequentialGroup()
+                        .addComponent(guardaruser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(checkdesactivar)))
                 .addGap(57, 57, 57)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, paneluserLayout.createSequentialGroup()
@@ -141,7 +143,12 @@ public class Crearusuario extends javax.swing.JDialog {
                             .addComponent(checkotros)))
                     .addComponent(txtcontraseña, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtapellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
+            .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneluserLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         paneluserLayout.setVerticalGroup(
             paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,8 +165,10 @@ public class Crearusuario extends javax.swing.JDialog {
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneluserLayout.createSequentialGroup()
                         .addComponent(txtrol, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(guardaruser))
+                        .addGap(15, 15, 15)
+                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(guardaruser)
+                            .addComponent(checkdesactivar)))
                     .addGroup(paneluserLayout.createSequentialGroup()
                         .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(checkconfiguraciones)
@@ -174,42 +183,39 @@ public class Crearusuario extends javax.swing.JDialog {
                         .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(checkcrearusuario)
                             .addComponent(checkotros))))
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
+            .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneluserLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 960, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(paneluser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE))
+            .addComponent(paneluser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(paneluser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE))
+            .addComponent(paneluser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void checkotrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkotrosActionPerformed
+    private void txtcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraseñaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_checkotrosActionPerformed
+    }//GEN-LAST:event_txtcontraseñaActionPerformed
 
     private void txtrolItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_txtrolItemStateChanged
 
     }//GEN-LAST:event_txtrolItemStateChanged
 
-    private void txtcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraseñaActionPerformed
+    private void checkotrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkotrosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtcontraseñaActionPerformed
+    }//GEN-LAST:event_checkotrosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,13 +234,13 @@ public class Crearusuario extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Crearusuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editarusuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Crearusuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editarusuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Crearusuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editarusuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Crearusuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Editarusuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -242,7 +248,7 @@ public class Crearusuario extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Crearusuario dialog = new Crearusuario(new javax.swing.JFrame(), true);
+                Editarusuario dialog = new Editarusuario(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -260,6 +266,7 @@ public class Crearusuario extends javax.swing.JDialog {
     public javax.swing.JCheckBox checkconfiguraciones;
     public javax.swing.JCheckBox checkcrearcliente;
     public javax.swing.JCheckBox checkcrearusuario;
+    public javax.swing.JCheckBox checkdesactivar;
     public javax.swing.JCheckBox checkeditarcliente;
     public javax.swing.JCheckBox checkotros;
     public javax.swing.JCheckBox checkservicios;

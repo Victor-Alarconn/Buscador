@@ -86,7 +86,7 @@ public class EditarController implements ActionListener {
 
     public void iniciar() {
         busqueda();
-        formulario.setTitle("Ediatr Cliente Potencial");
+        formulario.setTitle("Ediatar Cliente Potencial");
         formulario.setLocationRelativeTo(null);
         model.addColumn("Servicio/Producto");
         model.addColumn("Fecha de inicio");

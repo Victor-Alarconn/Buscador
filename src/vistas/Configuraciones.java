@@ -8,7 +8,7 @@ package vistas;
 import Consultas.Consultas_Servicio;
 import Consultas.Consultas_usuario;
 import controlador.ServicioController;
-import controlador.UsuarioController;
+import controlador.CrearUsuarioController;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
@@ -31,6 +31,8 @@ public class Configuraciones extends javax.swing.JDialog {
 
     public void transparecia() {
         panel2panel1.setOpaque(false);
+        usuariodefecto.setOpaque(false);
+        
     }
 
     /**
@@ -40,11 +42,10 @@ public class Configuraciones extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         transparecia();
-        this.setResizable(false);
 //        this.setSize(new Dimension(ancho,alto));
          this.setResizable(false);
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
-        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
         jLabel1.setIcon(fondo);
 //        labelc.setIcon(fondo);
     }
@@ -66,6 +67,7 @@ public class Configuraciones extends javax.swing.JDialog {
         txtdirectorio = new rojerusan.RSMetroTextFullPlaceHolder();
         buscar = new rojerusan.RSMaterialButtonRound();
         guardarconfiguracion = new rojerusan.RSMaterialButtonRound();
+        usuariodefecto = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu3.setText("jMenu3");
@@ -107,25 +109,23 @@ public class Configuraciones extends javax.swing.JDialog {
         });
         panel2panel1.add(guardarconfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(579, 143, 230, 60));
 
+        usuariodefecto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        usuariodefecto.setForeground(new java.awt.Color(253, 2, 16));
+        usuariodefecto.setText("Desactivar el usuario por defecto");
+        panel2panel1.add(usuariodefecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
+
+        jLabel1.setBackground(new java.awt.Color(102, 102, 255));
+        panel2panel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
-                .addComponent(panel2panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE))
+            .addComponent(panel2panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(panel2panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))
+            .addComponent(panel2panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
         );
 
         pack();
@@ -199,5 +199,6 @@ public class Configuraciones extends javax.swing.JDialog {
     private javax.swing.JPanel panel2panel1;
     public rojerusan.RSMetroTextFullPlaceHolder txtdirectorio;
     public rojerusan.RSMetroTextFullPlaceHolder txtprefijo;
+    public javax.swing.JCheckBox usuariodefecto;
     // End of variables declaration//GEN-END:variables
 }
