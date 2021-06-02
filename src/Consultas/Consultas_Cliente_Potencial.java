@@ -21,13 +21,14 @@ import modelo.Servicios_has_Clientes_Potenciales;
  * @author Yonathan Carvajal
  */
 public class Consultas_Cliente_Potencial extends Conexion {
+    
     public boolean registrar(Cliente_Potencial cliente){
         PreparedStatement ps = null;
         Connection con = getConexion();
        
         String sql = "INSERT INTO clientes_potenciales (nit,nombre,empresa,"
-                + "celular1,celular2,email,fecha_llegada,clase,retiro,notas,codigo,llego,categoria,ruta,dv) VALUES(?,?,"
-                + "?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "celular1,celular2,email,fecha_llegada,clase,retiro,notas,codigo,llego,categoria,ruta,dv,usuarios_idusuario) VALUES(?,?,"
+                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, cliente.getNit());
@@ -45,6 +46,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
             ps.setString(13, cliente.getCategoria());
             ps.setString(14, cliente.getRuta());
             ps.setString(15, cliente.getDv());
+            ps.setInt(16, cliente.getUsuarios_idusuario());
             ps.execute();
             return true;
         } catch (SQLException e) {

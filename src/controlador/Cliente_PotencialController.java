@@ -16,6 +16,8 @@ import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ import modelo.Servicios_has_Clientes_Potenciales;
 import vistas.Formulario;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import modelo.Usuario;
 
 /**
  *
@@ -44,6 +47,7 @@ public class Cliente_PotencialController implements ActionListener {
     private final Servicios_has_Clientes_Potenciales shcp;
     private final Documentos mdocumento;
     private final Configuracion mconfiguracion;
+    private final Usuario user;
 
     //consultas
     private final Consultas_Servicio cons;
@@ -61,7 +65,7 @@ public class Cliente_PotencialController implements ActionListener {
     public Cliente_PotencialController(Cliente_Potencial modelo, Consultas_Cliente_Potencial consultas,
             Formulario formulario, Consultas_Servicio cons, Servicio mods, Servicios_has_Clientes_Potenciales shcp,
             Consultas_Servicios_has_Clientes_Potenciales cshcp, Documentos documento, Consultas_Documentos cdocumentos,
-            Configuracion mconfiguracion, Consultas_Configuraciones cconfiguraciones) {
+            Configuracion mconfiguracion, Consultas_Configuraciones cconfiguraciones, Usuario user) {
         this.modelo = modelo;
         this.consultas = consultas;
         this.formulario = formulario;
@@ -73,6 +77,7 @@ public class Cliente_PotencialController implements ActionListener {
         this.cdocumentos = cdocumentos;
         this.mconfiguracion = mconfiguracion;
         this.cconfiguraciones = cconfiguraciones;
+        this.user = user;
 
         this.formulario.guardarformulario.addActionListener(this);
         this.formulario.agregarservicio.addActionListener(this);
@@ -83,6 +88,8 @@ public class Cliente_PotencialController implements ActionListener {
 
     public void iniciar() {
         busqueda();
+        keyevent();
+        formulario.mensajenit.setVisible(false);
         formulario.setTitle("Cliente Potencial");
         formulario.setLocationRelativeTo(null);
         model.addColumn("Servicio/Producto");
@@ -167,7 +174,7 @@ public class Cliente_PotencialController implements ActionListener {
                                         modelo.setEmail(formulario.txtemail.getText());
                                         System.out.println("El email ingresado es válido.");
                                     } else {
-                                       JOptionPane.showMessageDialog(formulario, "El email es Invalido");
+                                        JOptionPane.showMessageDialog(formulario, "El email es Invalido");
                                     }
 
                                     modelo.setClase(formulario.txtclase.getSelectedItem().toString());
@@ -202,7 +209,8 @@ public class Cliente_PotencialController implements ActionListener {
                                                     if (formulario.botro.isSelected()) {
                                                         modelo.setCategoria("Otro");
                                                     }
-                                                    //guardando el cliente 
+                                                    modelo.setUsuarios_idusuario(user.getIdusuario());
+//                                                    //guardando el cliente 
                                                     if (consultas.registrar(modelo)) {
                                                         modelo.setNit(formulario.txtnit.getText());
                                                         if (consultas.buscarr(modelo)) {
@@ -217,7 +225,7 @@ public class Cliente_PotencialController implements ActionListener {
                                                                         JOptionPane.showMessageDialog(null, "error guardado de servicios");
                                                                     }
                                                                 } else {
-                                                                    JOptionPane.showMessageDialog(null, "error guardado");
+                                                                    JOptionPane.showMessageDialog(null, "error guardando consulta servicio");
                                                                 }
                                                             }
                                                             //guardando la tabla documnetos
@@ -398,6 +406,24 @@ public class Cliente_PotencialController implements ActionListener {
             for (int i = 0; i < count; i++) {
                 model1.removeRow(0);
             }
+        }
+    }
+
+    public void keyevent() {
+        formulario.txtnit.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                consultanit();
+            }
+        });
+    }
+
+    public void consultanit() {
+        modelo.setNit(formulario.txtnit.getText());
+        if (consultas.buscarr(modelo)) {
+          formulario.mensajenit.setVisible(true);
+        }else{
+          formulario.mensajenit.setVisible(false);
         }
     }
 }

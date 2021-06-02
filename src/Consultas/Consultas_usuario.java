@@ -276,13 +276,14 @@ public class Consultas_usuario extends Conexion {
                 user.setCrearusuarios(Integer.parseInt(rs.getString("crearusuarios")));
                 user.setBuscar(Integer.parseInt(rs.getString("buscar")));
                 user.setEditarcliente(Integer.parseInt(rs.getString("editarcliente")));
+                user.setIdusuario(Integer.parseInt(rs.getString("idusuario")));
 //                user.setConfiguraciones(Integer.parseInt(rs.getString("configuraciones")));
                 Principal principal = new Principal(user);
 //                user.setIdusuario(rs.getInt(1));
 
                 Cliente_Potencial mod = new Cliente_Potencial();
                 Consultas_Cliente_Potencial modcp = new Consultas_Cliente_Potencial();
-                OrganizadorController bctrl = new OrganizadorController(mod, modcp, principal);
+                OrganizadorController bctrl = new OrganizadorController(mod, modcp, principal,user);
                 bctrl.iniciar();
 
                 principal.setExtendedState(MAXIMIZED_BOTH);

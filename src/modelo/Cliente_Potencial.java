@@ -26,7 +26,17 @@ public class Cliente_Potencial {
     private String categoria;
     private String ruta;
     private String dv;
+    private int usuarios_idusuario;
 
+    public int getUsuarios_idusuario() {
+        return usuarios_idusuario;
+    }
+
+    public void setUsuarios_idusuario(int usuarios_idusuario) {
+        this.usuarios_idusuario = usuarios_idusuario;
+    }
+    
+ 
     public String getDv() {
         return dv;
     }

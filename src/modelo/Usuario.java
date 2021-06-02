@@ -28,6 +28,7 @@ public class Usuario {
     private int editarcliente;
     private int estado; 
     private String sobreestado;
+    
 
     public String getSobreestado() {
         return sobreestado;

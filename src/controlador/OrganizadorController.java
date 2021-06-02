@@ -54,6 +54,7 @@ public class OrganizadorController implements ActionListener {
     private final Cliente_Potencial modelo;
     private final Consultas_Cliente_Potencial consulta;
     private final Principal principal;
+    private final Usuario mod;
 
     DefaultTableModel model = new DefaultTableModel();
     Dialogos dialogo = new Dialogos();
@@ -80,14 +81,15 @@ public class OrganizadorController implements ActionListener {
     Directorio mod1 = new Directorio();
     Consultas_Directorio modc1 = new Consultas_Directorio();
 
-    Usuario mod = new Usuario();
+//    Usuario mod = new Usuario();
 
     Consultas_usuario consultasusuario = new Consultas_usuario();
 
-    public OrganizadorController(Cliente_Potencial modelo, Consultas_Cliente_Potencial consulta, Principal principal) {
+    public OrganizadorController(Cliente_Potencial modelo, Consultas_Cliente_Potencial consulta, Principal principal, Usuario mod) {
         this.modelo = modelo;
         this.consulta = consulta;
         this.principal = principal;
+        this.mod = mod;
         this.principal.crearcliente.addActionListener(this);
         this.principal.configuraciones1.addActionListener(this);
         this.principal.carpetas.addActionListener(this);
@@ -108,7 +110,7 @@ public class OrganizadorController implements ActionListener {
             Formulario formulario = new Formulario(principal, true);
             Cliente_PotencialController controlador = new Cliente_PotencialController(modelo, consulta,
                     formulario, servicio, mods, shcp, cshcp, documento, cdocumentos,
-                    mconfiguracion, cconfiguraciones);
+                    mconfiguracion, cconfiguraciones, mod);
             controlador.iniciar();
 
             formulario.setVisible(true);
