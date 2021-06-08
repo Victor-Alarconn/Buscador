@@ -44,9 +44,9 @@ public class Configuraciones extends javax.swing.JDialog {
         transparecia();
 //        this.setSize(new Dimension(ancho,alto));
          this.setResizable(false);
-        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
-        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
-        jLabel1.setIcon(fondo);
+//        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
+//        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
+//        jLabel1.setIcon(fondo);
 //        labelc.setIcon(fondo);
     }
 
@@ -78,12 +78,10 @@ public class Configuraciones extends javax.swing.JDialog {
         panel2panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Directorio");
         panel2panel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 83, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Prefijo");
         panel2panel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 163, -1, -1));
 
@@ -110,7 +108,6 @@ public class Configuraciones extends javax.swing.JDialog {
         panel2panel1.add(guardarconfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(579, 143, 230, 60));
 
         usuariodefecto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        usuariodefecto.setForeground(new java.awt.Color(253, 2, 16));
         usuariodefecto.setText("Desactivar el usuario por defecto");
         panel2panel1.add(usuariodefecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
 

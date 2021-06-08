@@ -54,27 +54,41 @@ public class EditarUsuarioController implements ActionListener {
                 if (rol.getIdroles() == 2) {
                     if (vista.checkconfiguraciones.isSelected()) {
                         modelo.setConfiguraciones(1);
+                    }else{
+                         modelo.setConfiguraciones(0);
                     }
                     if (vista.checkcrearcliente.isSelected()) {
                         modelo.setCrearcliente(1);
+                    }else{
+                        modelo.setCrearcliente(0);
                     }
                     if (vista.checkcarpetas.isSelected()) {
                         modelo.setCarpetas(1);
+                    }else{
+                        modelo.setCarpetas(0);
                     }
                     if (vista.checkservicios.isSelected()) {
                         modelo.setServicios(1);
+                    }else{
+                        modelo.setServicios(0);
                     }
                     if (vista.checkotros.isSelected()) {
                         modelo.setOtros(1);
                     }
                     if (vista.checkcrearusuario.isSelected()) {
                         modelo.setCrearusuarios(1);
+                    }else{
+                       modelo.setCrearusuarios(0); 
                     }
                     if (vista.checkbuscar.isSelected()) {
                         modelo.setBuscar(1);
+                    }else{
+                        modelo.setBuscar(0);
                     }
                     if (vista.checkeditarcliente.isSelected()) {
                         modelo.setEditarcliente(1);
+                    }else{
+                        modelo.setEditarcliente(0);
                     }
                 }
                 if (!vista.checkdesactivar.isSelected()) {
@@ -143,7 +157,7 @@ public class EditarUsuarioController implements ActionListener {
                 vista.checkeditarcliente.setSelected(true);
             }
             if (modelo.getCrearusuarios() == 1) {
-                vista.checkconfiguraciones.setSelected(true);
+                vista.checkcrearusuario.setSelected(true);
             }
             if (modelo.getOtros() == 1) {
                 vista.checkotros.setSelected(true);

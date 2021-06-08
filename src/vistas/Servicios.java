@@ -42,9 +42,9 @@ public class Servicios extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setResizable(false);
-        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
-        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
-        jLabel1.setIcon(fondo);
+//        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
+//        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
+//        jLabel1.setIcon(fondo);
         transparecia();
     }
 

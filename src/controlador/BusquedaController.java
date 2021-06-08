@@ -171,14 +171,14 @@ public class BusquedaController implements ActionListener {
         if (principal.txtbuscar.getText().length() > 0) {
             limpiartabla();
             Object[] dato = new Object[6];
-            int cantidad = consulta.buscarcaracter(principal.txtbuscar.getText()).size();
+            int cantidad = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).size();
             for (int i = 0; i < cantidad; i++) {
-                dato[0] = consulta.buscarcaracter(principal.txtbuscar.getText()).get(i).getIdclientes_potenciales();
-                dato[1] = consulta.buscarcaracter(principal.txtbuscar.getText()).get(i).getNit();
-                dato[2] = consulta.buscarcaracter(principal.txtbuscar.getText()).get(i).getNombre();
-                dato[3] = consulta.buscarcaracter(principal.txtbuscar.getText()).get(i).getCodigo();
-                dato[4] = consulta.buscarcaracter(principal.txtbuscar.getText()).get(i).getFecha_llegada();
-                dato[5] = consulta.buscarcaracter(principal.txtbuscar.getText()).get(i).getRuta();
+                dato[0] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getIdclientes_potenciales();
+                dato[1] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getNit();
+                dato[2] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getNombre();
+                dato[3] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getCodigo();
+                dato[4] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getFecha_llegada();
+                dato[5] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getRuta();
                 model.addRow(dato);
                 principal.tabladatos.setModel(model);
             }

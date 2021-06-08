@@ -6,15 +6,13 @@
 package vistas;
 
 import Consultas.Consultas_usuario;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 import modelo.Usuario;
 
 /**
@@ -32,13 +30,15 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
-      
+
         this.setLocationRelativeTo(null);
         keyevent();
         this.setResizable(false);
-        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
-        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
-        jlabel1.setIcon(fondo);
+        txtcontrasena.setBorder(new RoundedBorder(5));
+        nombreuser.setBorder(new RoundedBorder(5));
+//        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
+//        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
+//        jlabel1.setIcon(fondo);
     }
 
     public void keyevent() {
@@ -46,7 +46,15 @@ public class login extends javax.swing.JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                     loginenter();
+                    loginenter();
+                }
+            }
+        });
+        this.nombreuser.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    loginenter();
                 }
             }
         });
@@ -84,12 +92,10 @@ public class login extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Usuario");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Contraseña");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
 
@@ -128,7 +134,7 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void validarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validarActionPerformed
-         loginenter();
+        loginenter();
     }//GEN-LAST:event_validarActionPerformed
 
     /**
@@ -175,4 +181,28 @@ public class login extends javax.swing.JFrame {
     public javax.swing.JPasswordField txtcontrasena;
     public javax.swing.JButton validar;
     // End of variables declaration//GEN-END:variables
+}
+class RoundedBorder implements Border {
+
+    private int radius;
+
+
+    RoundedBorder(int radius) {
+        this.radius = radius;
+    }
+
+
+    public Insets getBorderInsets(Component c) {
+        return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+    }
+
+
+    public boolean isBorderOpaque() {
+        return true;
+    }
+
+
+    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+    }
 }

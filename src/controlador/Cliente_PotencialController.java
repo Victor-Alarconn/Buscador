@@ -96,8 +96,8 @@ public class Cliente_PotencialController implements ActionListener {
         model.addColumn("Fecha de inicio");
         formulario.tablaservicios.setModel(model);
         model1.addColumn("Documento");
-        model1.addColumn("Fecha de inicial");
-        model1.addColumn("Fecha de vencimiento");
+        model1.addColumn("Fecha inicio");
+        model1.addColumn("Fecha vvence");
         formulario.tabladocumentos.setModel(model1);
 
         formulario.txtservicio.removeAllItems();

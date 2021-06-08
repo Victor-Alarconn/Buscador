@@ -48,13 +48,14 @@ public class Principal extends javax.swing.JFrame {
         Dimension tamanio = tk.getScreenSize();
         int ancho = (int) tamanio.getWidth();
         int alto = (int) tamanio.getHeight();
-//        this.preferredSize(new Dimension(ancho, alto));
+//      
         this.setSize(new Dimension(ancho, alto));
-//        System.out.println(this);
-        jLabel1.setSize(new Dimension(ancho, alto));
+        System.out.println();
+        
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm.jpg"));
-        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
+        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), alto, Image.SCALE_DEFAULT));
         jLabel1.setIcon(fondo);
+        
         this.modu = modu;
 //        System.out.println(modu.getConfiguraciones());
         if (modu.getRol() == 1) {
@@ -105,9 +106,9 @@ public class Principal extends javax.swing.JFrame {
         txtbuscar = new rojerusan.RSMetroTextFullPlaceHolder();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabladatos = new rojerusan.RSTableMetro();
-        eliminarcliente = new javax.swing.JButton();
         editar = new javax.swing.JButton();
         abrirarchivos = new javax.swing.JButton();
+        filtro = new rojerusan.RSComboMetro();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -178,9 +179,6 @@ public class Principal extends javax.swing.JFrame {
 
         panelprincipal.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 1000, 460));
 
-        eliminarcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminaruser.png"))); // NOI18N
-        panelprincipal.add(eliminarcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 20, 90, -1));
-
         editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png"))); // NOI18N
         editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,7 +196,11 @@ public class Principal extends javax.swing.JFrame {
         });
         panelprincipal.add(abrirarchivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 90, 70));
 
-        jPanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, 1070, 620));
+        filtro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nit\t", "nombre", "codigo" }));
+        filtro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        panelprincipal.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 220, 40));
+
+        jPanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, 830));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,8 +212,8 @@ public class Principal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 871, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -278,7 +280,7 @@ public class Principal extends javax.swing.JFrame {
     public javax.swing.JButton crearcliente;
     public javax.swing.JButton crearusuario;
     public javax.swing.JButton editar;
-    public javax.swing.JButton eliminarcliente;
+    public rojerusan.RSComboMetro filtro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

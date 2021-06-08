@@ -215,12 +215,12 @@ public class Consultas_Cliente_Potencial extends Conexion {
     }
     
     //consulta para buscar si el nit del cliente contie un parametro
-    public ArrayList<Cliente_Potencial> buscarcaracter(String parametro) {
+    public ArrayList<Cliente_Potencial> buscarcaracter(String parametro, String filtro) {
         ArrayList listaPersona = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = " SELECT * FROM clientes_potenciales  WHERE nit LIKE'%" + parametro + "%'";
+        String sql = " SELECT * FROM clientes_potenciales  WHERE " +filtro+" LIKE'%" + parametro + "%'";
 
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);

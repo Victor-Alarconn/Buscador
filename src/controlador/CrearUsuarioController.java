@@ -56,33 +56,49 @@ public class CrearUsuarioController implements ActionListener {
                 modelo.setApellido(vista.txtapellido.getText());
                 modelo.setNumero_documento(vista.txtdocumento.getText());
                 modelo.setContrasena(vista.txtcontraseña.getText());
-                
-                if (vista.checkconfiguraciones.isSelected()) {
-                    modelo.setConfiguraciones(1);
-                }
-                if (vista.checkcrearcliente.isSelected()) {
-                    modelo.setCrearcliente(1);
-                }
-                if (vista.checkcarpetas.isSelected()) {
-                    modelo.setCarpetas(1);
-                }
-                if (vista.checkservicios.isSelected()) {
-                    modelo.setServicios(1);
-                }
-                if (vista.checkotros.isSelected()) {
-                    modelo.setOtros(1);
-                }
-                if (vista.checkcrearusuario.isSelected()) {
-                    modelo.setCrearusuarios(1);
-                }
-                if (vista.checkbuscar.isSelected()) {
-                    modelo.setBuscar(1);
-                }
-                if (vista.checkeditarcliente.isSelected()) {
-                    modelo.setEditarcliente(1);
+                if (vista.txtrol.getSelectedItem().toString().equals("user")) {
+                    if (vista.checkconfiguraciones.isSelected()) {
+                        modelo.setConfiguraciones(1);
+                    }else{
+                         modelo.setConfiguraciones(0);
+                    }
+                    if (vista.checkcrearcliente.isSelected()) {
+                        modelo.setCrearcliente(1);
+                    }else{
+                        modelo.setCrearcliente(0);
+                    }
+                    if (vista.checkcarpetas.isSelected()) {
+                        modelo.setCarpetas(1);
+                    }else{
+                        modelo.setCarpetas(0);
+                    }
+                    if (vista.checkservicios.isSelected()) {
+                        modelo.setServicios(1);
+                    }else{
+                        modelo.setServicios(0);
+                    }
+                    if (vista.checkotros.isSelected()) {
+                        modelo.setOtros(1);
+                    }
+                    if (vista.checkcrearusuario.isSelected()) {
+                        modelo.setCrearusuarios(1);
+                    }else{
+                       modelo.setCrearusuarios(0); 
+                    }
+                    if (vista.checkbuscar.isSelected()) {
+                        modelo.setBuscar(1);
+                    }else{
+                        modelo.setBuscar(0);
+                    }
+                    if (vista.checkeditarcliente.isSelected()) {
+                        modelo.setEditarcliente(1);
+                    }else{
+                        modelo.setEditarcliente(0);
+                    }
                 }
                 if (consulta.registrar(modelo)) {
                     JOptionPane.showMessageDialog(null, "registro guardado");
+                    vista.dispose();
                     this.limpiar();
                 } else {
                     JOptionPane.showMessageDialog(null, "error guardado");

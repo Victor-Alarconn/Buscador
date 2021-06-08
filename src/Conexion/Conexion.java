@@ -15,6 +15,8 @@ import java.util.logging.Logger;
  *
  * @author Yonathan Carvajal
  */
+
+//Organizad0R contraseña de turis
 public class Conexion {
     private final String base = "buscador";
     private final String user = "root";
