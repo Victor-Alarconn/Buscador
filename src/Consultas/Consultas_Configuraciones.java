@@ -17,7 +17,8 @@ import modelo.Configuracion;
  * @author Yonathan Carvajal
  */
 public class Consultas_Configuraciones extends Conexion {
-
+    
+    //consulta para registrar 
     public boolean registrar(Configuracion configuraciones) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -46,7 +47,7 @@ public class Consultas_Configuraciones extends Conexion {
         }
 
     }
-
+    //consulta para cargar las configuraciones en la vista
     public boolean cargar(Configuracion configuraciones) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -73,8 +74,7 @@ public class Consultas_Configuraciones extends Conexion {
             }
         }
     }
-    
-
+    //consulta para modificar las configuraciones
     public boolean modificar(Configuracion configuraciones) {
         PreparedStatement ps = null;
         Connection con = getConexion();

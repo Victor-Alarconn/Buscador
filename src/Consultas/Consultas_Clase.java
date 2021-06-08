@@ -18,7 +18,7 @@ import modelo.Clases;
  * @author yonathan
  */
 public class Consultas_Clase  extends Conexion {
-    
+    //consulta para registrar
     public boolean registrar(Clases clases) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -41,7 +41,8 @@ public class Consultas_Clase  extends Conexion {
         }
 
     }
-
+    
+    //consulta para eliminar
     public boolean eliminar(Clases clases) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -64,6 +65,7 @@ public class Consultas_Clase  extends Conexion {
 
     }
 
+    //consulta para llenar los los combobox
     public ArrayList<String> llenar() {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;

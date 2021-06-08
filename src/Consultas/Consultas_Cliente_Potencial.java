@@ -21,7 +21,7 @@ import modelo.Servicios_has_Clientes_Potenciales;
  * @author Yonathan Carvajal
  */
 public class Consultas_Cliente_Potencial extends Conexion {
-    
+    //consulta para registrar 
     public boolean registrar(Cliente_Potencial cliente){
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -62,6 +62,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
         
     }
     
+    //consulta para modificar
     public boolean modificar(Cliente_Potencial cliente){
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -100,6 +101,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
         
     }
     
+    //consulta para eliminar
     public boolean eliminar(Cliente_Potencial cliente){
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -121,7 +123,8 @@ public class Consultas_Cliente_Potencial extends Conexion {
         }
         
     }
-     
+    
+    //consulta para buscar cliente 
     public boolean buscar(Cliente_Potencial cliente){
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -166,6 +169,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
         
     }
     
+    //consulta para buscar por el nit del cliente
     public boolean buscarr(Cliente_Potencial cliente){
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -210,6 +214,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
         
     }
     
+    //consulta para buscar si el nit del cliente contie un parametro
     public ArrayList<Cliente_Potencial> buscarcaracter(String parametro) {
         ArrayList listaPersona = new ArrayList();
         PreparedStatement ps = null;
@@ -244,6 +249,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
         return null;
     }
     
+    //consulta para llenar la tabla de servicios del formulario editar 
     public ArrayList<Servicio> llenar(Cliente_Potencial cliente) {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
@@ -278,7 +284,8 @@ public class Consultas_Cliente_Potencial extends Conexion {
         return null;
     }
     
-     public ArrayList<Documentos> clientedocumentos(Cliente_Potencial cliente) {
+    //consulta para llenar la tabla documentos en el formulario editar
+    public ArrayList<Documentos> clientedocumentos(Cliente_Potencial cliente) {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;

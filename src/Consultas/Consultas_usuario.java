@@ -25,7 +25,8 @@ import vistas.login;
  * @author Yonathan Carvajal
  */
 public class Consultas_usuario extends Conexion {
-
+    
+    //consulta para registrar 
     public boolean registrar(Usuario user) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -61,7 +62,8 @@ public class Consultas_usuario extends Conexion {
         }
 
     }
-
+    
+    //consulta para modificar 
     public boolean modificar(Usuario user) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -85,6 +87,7 @@ public class Consultas_usuario extends Conexion {
 
     }
 
+    //consulta para eliminar
     public boolean eliminar(Usuario user) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -106,7 +109,8 @@ public class Consultas_usuario extends Conexion {
         }
 
     }
-
+    
+    //consulta para buscar por filtrp y parametro en la tabla de usuarios
     public ArrayList<Usuario> buscarcaracter(String parametro, String filtro) {
         ArrayList listaPersona = new ArrayList();
         PreparedStatement ps = null;
@@ -146,7 +150,8 @@ public class Consultas_usuario extends Conexion {
         }
         return null;
     }
-
+    
+    //consult para buscar el rol por nombre 
     public boolean buscar(Rol roles) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -173,7 +178,8 @@ public class Consultas_usuario extends Conexion {
         }
 
     }
-
+    
+    //consulta para buscar el rol por id
     public boolean buscarrol(Rol roles) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -200,7 +206,8 @@ public class Consultas_usuario extends Conexion {
         }
 
     }
-
+    
+    //consulta para traer la informacion del usuario por default
     public boolean buscarusueriodefault(Usuario user) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -227,7 +234,8 @@ public class Consultas_usuario extends Conexion {
         }
 
     }
-
+    
+    //consulta para traer todos los roles
     public ArrayList<String> llenar() {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
@@ -254,7 +262,8 @@ public class Consultas_usuario extends Conexion {
         }
         return null;
     }
-
+    
+    //consulta para acceder por login 
     public boolean login(Usuario user) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -304,6 +313,7 @@ public class Consultas_usuario extends Conexion {
 
     }
 
+    //consulta para verificar si el usuario por defaul existe
     public boolean logindefault(Usuario user) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -329,7 +339,8 @@ public class Consultas_usuario extends Conexion {
         }
 
     }
-
+     
+    //funcion para encriptar un string 
     public String MD5(String md5) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
@@ -345,7 +356,8 @@ public class Consultas_usuario extends Conexion {
         }
         return null;
     }
-
+    
+    //consulta para trer la informacion de un usuario
     public boolean buscarusuario(Usuario user) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -388,7 +400,8 @@ public class Consultas_usuario extends Conexion {
         }
 
     }
-
+    
+    //consulta para modificar un usuario
     public boolean modificarusuario(Usuario user) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -427,6 +440,8 @@ public class Consultas_usuario extends Conexion {
             }
         }
     }
+    
+    //consulta para modificar la contraseña
     public boolean modificarcontrasena(Usuario user){
         PreparedStatement ps = null;
         Connection con = getConexion();

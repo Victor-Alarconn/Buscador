@@ -44,7 +44,9 @@ public class Buscador {
         u.setBuscar(1);
         u.setEditarcliente(1);
         u.setRol(1);
+        //condicional para saber si existe el usuario por defaelt
         if (!cu.logindefault(u)) {
+            // si el usuario no existe crea uno nuevo
             cu.registrar(u);
         }
         login login = new login();

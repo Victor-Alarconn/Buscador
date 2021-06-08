@@ -18,7 +18,8 @@ import modelo.Servicio;
  * @author Yonathan Carvajal
  */
 public class Consultas_Servicio extends Conexion {
-
+    
+    //consulta para registrar
     public boolean registrar(Servicio servicio) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -41,7 +42,8 @@ public class Consultas_Servicio extends Conexion {
         }
 
     }
-
+    
+    //consulta para modificar
     public boolean modificar(Servicio servicio) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -63,7 +65,8 @@ public class Consultas_Servicio extends Conexion {
         }
 
     }
-
+    
+    //consultas eliminar
     public boolean eliminar(Servicio servicio) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -85,7 +88,8 @@ public class Consultas_Servicio extends Conexion {
         }
 
     }
-
+    
+    //consulta para saber si un servicio contiene un letra
     public ArrayList<Servicio> buscarcaracter(String parametro) {
         ArrayList listaPersona = new ArrayList();
         PreparedStatement ps = null;
@@ -115,7 +119,8 @@ public class Consultas_Servicio extends Conexion {
         }
         return null;
     }
-
+    
+    //consulta para buscar servicios
     public boolean buscar(Servicio servicio) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -146,6 +151,7 @@ public class Consultas_Servicio extends Conexion {
 
     }
 
+    //consulta para llenar la tabla de servicios y combobox
     public ArrayList<String> llenar() {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;

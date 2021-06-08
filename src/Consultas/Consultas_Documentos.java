@@ -18,6 +18,7 @@ import modelo.Documentos;
  */
 public class Consultas_Documentos extends Conexion {
     
+    //consulta para registrar
     public boolean registrar(Documentos documentos) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -45,6 +46,7 @@ public class Consultas_Documentos extends Conexion {
 
     }
     
+    //consulta para buscar documentos
     public boolean buscar(int documentos) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -71,6 +73,7 @@ public class Consultas_Documentos extends Conexion {
 
     }
     
+    //consulta para eliminar
     public boolean eliminar(Documentos documentos){
         PreparedStatement ps = null;
         Connection con = getConexion();

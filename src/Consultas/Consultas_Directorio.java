@@ -19,6 +19,7 @@ import modelo.Directorio;
  */
 public class Consultas_Directorio extends Conexion {
 
+    //consulta para registrar
     public boolean registrar(Directorio directorio) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -42,6 +43,7 @@ public class Consultas_Directorio extends Conexion {
 
     }
     
+    //consulta para cargar los directorios en la vista
     public ArrayList<String> llenar() {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
@@ -69,6 +71,7 @@ public class Consultas_Directorio extends Conexion {
         return null;
     }
     
+    //consulta para eliminar directorios
     public boolean eliminar(Directorio directorio) {
         PreparedStatement ps = null;
         Connection con = getConexion();
