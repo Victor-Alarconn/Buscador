@@ -77,10 +77,7 @@ public class Principal extends javax.swing.JFrame {
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/fondo2.png"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), alto, Image.SCALE_DEFAULT));
         jLabel1.setIcon(fondo);
-        
-        ImageIcon logorm = new ImageIcon(getClass().getResource("/img/logo.png"));
-        Icon fondo2 = new ImageIcon(logorm.getImage().getScaledInstance(logo.getWidth(), logo.getHeight(), Image.SCALE_DEFAULT));
-        logo.setIcon(fondo2);
+       
         
         this.modu = modu;
 //        System.out.println(modu.getConfiguraciones());
@@ -135,7 +132,6 @@ public class Principal extends javax.swing.JFrame {
         editar = new javax.swing.JButton();
         abrirarchivos = new javax.swing.JButton();
         filtro = new rojerusan.RSComboMetro();
-        logo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -258,9 +254,6 @@ public class Principal extends javax.swing.JFrame {
         filtro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         panelprincipal.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 220, 40));
 
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
-        panelprincipal.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, 370, 100));
-
         jPanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, 830));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -347,7 +340,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel logo;
     public javax.swing.JButton otro;
     private javax.swing.JPanel panelprincipal;
     public javax.swing.JButton servicios;

@@ -15,6 +15,7 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Graphics;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import modelo.Cliente_Potencial;
@@ -36,7 +37,7 @@ public class Buscador {
     static Consultas_roles cr = new Consultas_roles();
 
     public static void main(String[] args) {
-        
+
         Consultas_usuario cu = new Consultas_usuario();
         Buscador b = new Buscador();
 
@@ -62,7 +63,7 @@ public class Buscador {
                 rol.setRol("user");
                 rol.setIdroles(2);
                 b.agregarrol(rol);
-            }
+            } 
         }
 
         //condicional para saber si existe el usuario por defaelt

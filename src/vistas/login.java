@@ -123,8 +123,6 @@ public class login extends javax.swing.JFrame {
         });
         jPanel1.add(validar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
         jPanel1.add(jlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo rm soft.png"))); // NOI18N
         jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 240, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

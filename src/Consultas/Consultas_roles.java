@@ -11,6 +11,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import modelo.Rol;
 
 /**
@@ -48,6 +49,9 @@ public class Consultas_roles extends Conexion {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
+        if(con == null){
+            JOptionPane.showMessageDialog(null, "error DB");
+        }
         String sql = " SELECT * FROM roles WHERE rol=?";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
