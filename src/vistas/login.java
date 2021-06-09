@@ -9,11 +9,14 @@ import Consultas.Consultas_usuario;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.awt.Shape;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.geom.RoundRectangle2D;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import modelo.Usuario;
+
 
 /**
  *
@@ -29,9 +32,11 @@ public class login extends javax.swing.JFrame {
      * Creates new form login
      */
     public login() {
+//          this.setUndecorated(true);
+        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 30, 30);
+        AWTUtilities.setWindowShape(this, forma);
         initComponents();
-
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);        
         keyevent();
         this.setResizable(false);
         txtcontrasena.setBorder(new RoundedBorder(5));
