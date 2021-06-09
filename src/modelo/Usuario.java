@@ -24,7 +24,6 @@ public class Usuario {
     private int servicios;
     private int otros;
     private int crearusuarios;
-    private int buscar;
     private int editarcliente;
     private int estado; 
     private String sobreestado;
@@ -112,14 +111,6 @@ public class Usuario {
 
     public void setCrearusuarios(int crearusuarios) {
         this.crearusuarios = crearusuarios;
-    }
-
-    public int getBuscar() {
-        return buscar;
-    }
-
-    public void setBuscar(int buscar) {
-        this.buscar = buscar;
     }
     
     public String getContrasena() {

@@ -62,8 +62,6 @@ public class Configuraciones extends javax.swing.JDialog {
         jMenu3 = new javax.swing.JMenu();
         panel2panel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtprefijo = new rojerusan.RSMetroTextFullPlaceHolder();
         txtdirectorio = new rojerusan.RSMetroTextFullPlaceHolder();
         buscar = new rojerusan.RSMaterialButtonRound();
         guardarconfiguracion = new rojerusan.RSMaterialButtonRound();
@@ -81,16 +79,13 @@ public class Configuraciones extends javax.swing.JDialog {
         jLabel5.setText("Directorio");
         panel2panel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 83, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Prefijo");
-        panel2panel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 163, -1, -1));
-
-        txtprefijo.setPlaceholder("Escribe un prefijo");
-        panel2panel1.add(txtprefijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 153, 370, -1));
-
+        txtdirectorio.setForeground(new java.awt.Color(0, 0, 0));
+        txtdirectorio.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtdirectorio.setPhColor(new java.awt.Color(210, 43, 7));
         txtdirectorio.setPlaceholder("Directorio");
         panel2panel1.add(txtdirectorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 73, 370, -1));
 
+        buscar.setBackground(new java.awt.Color(102, 102, 102));
         buscar.setText("buscar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +94,7 @@ public class Configuraciones extends javax.swing.JDialog {
         });
         panel2panel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(579, 63, 230, 60));
 
+        guardarconfiguracion.setBackground(new java.awt.Color(102, 102, 102));
         guardarconfiguracion.setText("Guardar");
         guardarconfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +105,7 @@ public class Configuraciones extends javax.swing.JDialog {
 
         usuariodefecto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         usuariodefecto.setText("Desactivar el usuario por defecto");
-        panel2panel1.add(usuariodefecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
+        panel2panel1.add(usuariodefecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, -1, -1));
 
         jLabel1.setBackground(new java.awt.Color(102, 102, 255));
         panel2panel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -190,12 +186,10 @@ public class Configuraciones extends javax.swing.JDialog {
     private rojerusan.RSMaterialButtonRound buscar;
     public rojerusan.RSMaterialButtonRound guardarconfiguracion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel panel2panel1;
     public rojerusan.RSMetroTextFullPlaceHolder txtdirectorio;
-    public rojerusan.RSMetroTextFullPlaceHolder txtprefijo;
     public javax.swing.JCheckBox usuariodefecto;
     // End of variables declaration//GEN-END:variables
 }

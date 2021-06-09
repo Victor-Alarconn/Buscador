@@ -96,11 +96,18 @@ public class Carpetas extends javax.swing.JDialog {
                 "Title 1"
             }
         ));
+        tablacarpetas.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
+        tablacarpetas.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
+        tablacarpetas.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
+        tablacarpetas.setColorSelBackgound(new java.awt.Color(216, 74, 44));
         tablacarpetas.setRowHeight(30);
         jScrollPane5.setViewportView(tablacarpetas);
 
         panel2panel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 276, 420));
 
+        txtregistrarcarpeta.setForeground(new java.awt.Color(0, 0, 0));
+        txtregistrarcarpeta.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtregistrarcarpeta.setPhColor(new java.awt.Color(216, 74, 44));
         txtregistrarcarpeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtregistrarcarpetaActionPerformed(evt);
@@ -109,10 +116,12 @@ public class Carpetas extends javax.swing.JDialog {
         panel2panel3.add(txtregistrarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 276, 57));
 
         guardarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
+        guardarcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
         panel2panel3.add(guardarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 410, 72, -1));
 
         agregarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        panel2panel3.add(agregarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, -1, 57));
+        agregarcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
+        panel2panel3.add(agregarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 65, 57));
 
         tablaagregarcarpetas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,16 +140,22 @@ public class Carpetas extends javax.swing.JDialog {
                 "Title 1"
             }
         ));
+        tablaagregarcarpetas.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
+        tablaagregarcarpetas.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
+        tablaagregarcarpetas.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
+        tablaagregarcarpetas.setColorSelBackgound(new java.awt.Color(216, 74, 44));
         tablaagregarcarpetas.setRowHeight(30);
         jScrollPane7.setViewportView(tablaagregarcarpetas);
 
         panel2panel3.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 276, 357));
 
         eliminaragregarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        eliminaragregarcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
         panel2panel3.add(eliminaragregarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 65, -1));
 
         eliminarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panel2panel3.add(eliminarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
+        eliminarcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
+        panel2panel3.add(eliminarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 65, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

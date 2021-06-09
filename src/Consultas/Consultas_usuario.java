@@ -31,7 +31,7 @@ public class Consultas_usuario extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "INSERT INTO usuarios (nombre,apellido, numero_documento,contrasena,roles_idroles,configuraciones,crearcliente,carpetas,servicios,otros,crearusuarios,buscar,editarcliente) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO usuarios (nombre,apellido, numero_documento,contrasena,roles_idroles,configuraciones,crearcliente,carpetas,servicios,otros,crearusuarios,editarcliente) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, user.getNombre());
@@ -45,8 +45,7 @@ public class Consultas_usuario extends Conexion {
             ps.setInt(9, user.getServicios());
             ps.setInt(10, user.getOtros());
             ps.setInt(11, user.getCrearusuarios());
-            ps.setInt(12, user.getBuscar());
-            ps.setInt(13, user.getEditarcliente());
+            ps.setInt(12, user.getEditarcliente());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -283,7 +282,6 @@ public class Consultas_usuario extends Conexion {
                 user.setServicios(Integer.parseInt(rs.getString("servicios")));
                 user.setOtros(Integer.parseInt(rs.getString("otros")));
                 user.setCrearusuarios(Integer.parseInt(rs.getString("crearusuarios")));
-                user.setBuscar(Integer.parseInt(rs.getString("buscar")));
                 user.setEditarcliente(Integer.parseInt(rs.getString("editarcliente")));
                 user.setIdusuario(Integer.parseInt(rs.getString("idusuario")));
 //                user.setConfiguraciones(Integer.parseInt(rs.getString("configuraciones")));
@@ -379,7 +377,6 @@ public class Consultas_usuario extends Conexion {
                 user.setServicios(Integer.parseInt(rs.getString("servicios")));
                 user.setOtros(Integer.parseInt(rs.getString("otros")));
                 user.setCrearusuarios(Integer.parseInt(rs.getString("crearusuarios")));
-                user.setBuscar(Integer.parseInt(rs.getString("buscar")));
                 user.setEditarcliente(Integer.parseInt(rs.getString("editarcliente")));
                 user.setEstado(Integer.parseInt(rs.getString("estado")));
                 rol.setIdroles(Integer.parseInt(rs.getString("roles_idroles")));
@@ -407,7 +404,7 @@ public class Consultas_usuario extends Conexion {
         Connection con = getConexion();
         String sql = "UPDATE  usuarios SET  nombre=?, apellido=?, numero_documento=?,"
                 + " roles_idroles=?, configuraciones=?, crearcliente=?, carpetas=?, servicios=?, otros=?,"
-                + "crearusuarios=?, buscar=?, editarcliente=?, estado=? WHERE idusuario=? ";
+                + "crearusuarios=?, editarcliente=?, estado=? WHERE idusuario=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, user.getNombre());
@@ -420,10 +417,9 @@ public class Consultas_usuario extends Conexion {
             ps.setInt(8, user.getServicios());
             ps.setInt(9, user.getOtros());
             ps.setInt(10, user.getCrearusuarios());
-            ps.setInt(11, user.getBuscar());
-            ps.setInt(12, user.getEditarcliente());
-            ps.setInt(13, user.getEstado());
-            ps.setInt(14, user.getIdusuario());
+            ps.setInt(11, user.getEditarcliente());
+            ps.setInt(12, user.getEstado());
+            ps.setInt(13, user.getIdusuario());
             ps.execute();
             if (!user.getContrasena().equals("")) {
                 this.modificarcontrasena(user);

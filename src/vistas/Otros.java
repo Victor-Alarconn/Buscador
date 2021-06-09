@@ -15,11 +15,35 @@ import javax.swing.ImageIcon;
  */
 public class Otros extends javax.swing.JDialog {
 
-    
-     public void transparecia() {
+    public void transparecia() {
         panelotros.setOpaque(false);
+
+        eliminaragregarclase.setOpaque(false);
+        eliminaragregarclase.setContentAreaFilled(false);
+
+        eliminarllego.setOpaque(false);
+        eliminarllego.setContentAreaFilled(false);
+
+        agregarclase.setOpaque(false);
+        agregarclase.setContentAreaFilled(false);
+
+        eliminarclase.setOpaque(false);
+        eliminarclase.setContentAreaFilled(false);
+
+        guardarclase.setOpaque(false);
+        guardarclase.setContentAreaFilled(false);
+
+        agregarllego.setOpaque(false);
+        agregarllego.setContentAreaFilled(false);
+
+        eliminaragregarllego.setOpaque(false);
+        eliminaragregarllego.setContentAreaFilled(false);
+
+        guardarllego.setOpaque(false);
+        guardarllego.setContentAreaFilled(false);
+
     }
-    
+
     /**
      * Creates new form Otros
      */
@@ -70,7 +94,8 @@ public class Otros extends javax.swing.JDialog {
         panelotros.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         eliminarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panelotros.add(eliminarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
+        eliminarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
+        panelotros.add(eliminarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 65, -1));
 
         tablallego.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,11 +109,18 @@ public class Otros extends javax.swing.JDialog {
                 "Title 1"
             }
         ));
+        tablallego.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
+        tablallego.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
+        tablallego.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
+        tablallego.setColorSelBackgound(new java.awt.Color(216, 74, 44));
         tablallego.setRowHeight(30);
         jScrollPane10.setViewportView(tablallego);
 
         panelotros.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 276, 260));
 
+        txtregistrarllego.setForeground(new java.awt.Color(0, 0, 0));
+        txtregistrarllego.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtregistrarllego.setPhColor(new java.awt.Color(216, 74, 44));
         txtregistrarllego.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtregistrarllegoActionPerformed(evt);
@@ -108,19 +140,26 @@ public class Otros extends javax.swing.JDialog {
                 "Title 1"
             }
         ));
+        tablaagregarllego.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
+        tablaagregarllego.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
+        tablaagregarllego.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
+        tablaagregarllego.setColorSelBackgound(new java.awt.Color(216, 74, 44));
         tablaagregarllego.setRowHeight(30);
         jScrollPane11.setViewportView(tablaagregarllego);
 
         panelotros.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 276, 210));
 
         agregarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        panelotros.add(agregarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 30, -1, 57));
+        agregarclase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
+        panelotros.add(agregarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 30, 70, 57));
 
         eliminaragregarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panelotros.add(eliminaragregarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, 65, -1));
+        eliminaragregarclase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
+        panelotros.add(eliminaragregarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, 70, -1));
 
         guardarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
-        panelotros.add(guardarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 230, 72, -1));
+        guardarclase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
+        panelotros.add(guardarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 230, 70, -1));
 
         tablaclase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,6 +173,10 @@ public class Otros extends javax.swing.JDialog {
                 "Title 1"
             }
         ));
+        tablaclase.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
+        tablaclase.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
+        tablaclase.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
+        tablaclase.setColorSelBackgound(new java.awt.Color(216, 74, 44));
         tablaclase.setRowHeight(30);
         jScrollPane12.setViewportView(tablaclase);
 
@@ -151,11 +194,18 @@ public class Otros extends javax.swing.JDialog {
                 "Title 1"
             }
         ));
+        tablaagregarclase.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
+        tablaagregarclase.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
+        tablaagregarclase.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
+        tablaagregarclase.setColorSelBackgound(new java.awt.Color(216, 74, 44));
         tablaagregarclase.setRowHeight(30);
         jScrollPane13.setViewportView(tablaagregarclase);
 
         panelotros.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 276, 210));
 
+        txtregistrarclase.setForeground(new java.awt.Color(0, 0, 0));
+        txtregistrarclase.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtregistrarclase.setPhColor(new java.awt.Color(216, 74, 44));
         txtregistrarclase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtregistrarclaseActionPerformed(evt);
@@ -164,18 +214,20 @@ public class Otros extends javax.swing.JDialog {
         panelotros.add(txtregistrarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 276, -1));
 
         agregarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        panelotros.add(agregarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 320, -1, 57));
+        agregarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
+        panelotros.add(agregarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 320, 70, 57));
 
         eliminaragregarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panelotros.add(eliminaragregarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 390, 65, -1));
+        eliminaragregarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
+        panelotros.add(eliminaragregarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 390, 70, -1));
 
         guardarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
+        guardarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
         panelotros.add(guardarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 520, 72, -1));
 
         eliminarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panelotros.add(eliminarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
-
-        jLabel1.setText("jLabel1");
+        eliminarclase.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        panelotros.add(eliminarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 65, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

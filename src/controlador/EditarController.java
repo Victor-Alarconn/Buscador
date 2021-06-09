@@ -279,7 +279,6 @@ public class EditarController implements ActionListener {
         formulario.tabladocumentos1.setModel(model1);
         if (cconfiguraciones.cargar(mconfiguracion)) {
             directorio = mconfiguracion.getDirectorio();
-            prefijo = mconfiguracion.getPrefijo();
         }
 
         formulario.txtservicio1.removeAllItems();

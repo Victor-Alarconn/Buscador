@@ -46,7 +46,6 @@ public class ConfiguracionesController implements ActionListener {
         if (e.getSource() == vconfiguraciones.guardarconfiguracion) {
             mconfiguraciones.setIdconfiguracion(1);
             mconfiguraciones.setDirectorio(vconfiguraciones.txtdirectorio.getText());
-            mconfiguraciones.setPrefijo(vconfiguraciones.txtprefijo.getText().toUpperCase());
             if (cconfiguraciones.modificar(mconfiguraciones)) {
                 JOptionPane.showMessageDialog(vconfiguraciones, "registro guardado");
                 if (!vconfiguraciones.usuariodefecto.isSelected()) {
@@ -69,7 +68,6 @@ public class ConfiguracionesController implements ActionListener {
     public void config() {
         if (cconfiguraciones.cargar(mconfiguraciones)) {
             vconfiguraciones.txtdirectorio.setText(mconfiguraciones.getDirectorio());
-            vconfiguraciones.txtprefijo.setText(mconfiguraciones.getPrefijo());
         } else {
             mconfiguraciones.setIdconfiguracion(1);
             mconfiguraciones.setDirectorio("c:\\");

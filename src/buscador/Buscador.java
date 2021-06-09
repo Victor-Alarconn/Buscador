@@ -5,7 +5,6 @@
  */
 package buscador;
 
-import Conexion.prueba;
 import Consultas.Consultas_Cliente_Potencial;
 import Consultas.Consultas_roles;
 import Consultas.Consultas_usuario;
@@ -39,7 +38,6 @@ public class Buscador {
     public static void main(String[] args) {
         
         Consultas_usuario cu = new Consultas_usuario();
-        prueba pu = new prueba();
         Buscador b = new Buscador();
 
         Rol rol = new Rol();
@@ -53,7 +51,6 @@ public class Buscador {
         u.setServicios(1);
         u.setOtros(1);
         u.setCrearusuarios(1);
-        u.setBuscar(1);
         u.setEditarcliente(1);
         u.setRol(1);
 

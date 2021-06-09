@@ -27,23 +27,23 @@ public class Editarcliente extends javax.swing.JDialog {
         
         guardarformulario1.setOpaque(false);
         guardarformulario1.setContentAreaFilled(false);
-        guardarformulario1.setBorderPainted(false);
+//        guardarformulario1.setBorderPainted(false);
 
         agregardocumento1.setOpaque(false);
         agregardocumento1.setContentAreaFilled(false);
-        agregardocumento1.setBorderPainted(false);
+//        agregardocumento1.setBorderPainted(false);
 
         eliminardocumento1.setOpaque(false);
         eliminardocumento1.setContentAreaFilled(false);
-        eliminardocumento1.setBorderPainted(false);
+//        eliminardocumento1.setBorderPainted(false);
 
         agregarservicio1.setOpaque(false);
         agregarservicio1.setContentAreaFilled(false);
-        agregarservicio1.setBorderPainted(false);
+//        agregarservicio1.setBorderPainted(false);
 
         eliminarservicio1.setOpaque(false);
         eliminarservicio1.setContentAreaFilled(false);
-        eliminarservicio1.setBorderPainted(false);
+//        eliminarservicio1.setBorderPainted(false);
 
         
         paneleditar.setOpaque(false);
@@ -132,21 +132,35 @@ public class Editarcliente extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1167, 653));
 
         paneleditar.setBackground(new java.awt.Color(255, 204, 255));
         paneleditar.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         paneleditar.setForeground(new java.awt.Color(255, 255, 255));
         paneleditar.setName("paneleditar"); // NOI18N
 
+        txtnit1.setForeground(new java.awt.Color(0, 0, 0));
+        txtnit1.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtnit1.setPhColor(new java.awt.Color(216, 74, 44));
         txtnit1.setPlaceholder("NIT/CC");
 
+        txtnombre1.setForeground(new java.awt.Color(0, 0, 0));
+        txtnombre1.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtnombre1.setPhColor(new java.awt.Color(216, 74, 44));
         txtnombre1.setPlaceholder("Nombre");
 
+        txtllego1.setColorArrow(new java.awt.Color(0, 0, 0));
+        txtllego1.setColorBorde(new java.awt.Color(102, 102, 102));
+        txtllego1.setColorFondo(new java.awt.Color(102, 102, 102));
         txtllego1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        txtcelular11.setForeground(new java.awt.Color(0, 0, 0));
+        txtcelular11.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtcelular11.setPhColor(new java.awt.Color(216, 74, 44));
         txtcelular11.setPlaceholder("Celular1");
 
+        txtretiro1.setForeground(new java.awt.Color(0, 0, 0));
+        txtretiro1.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtretiro1.setPhColor(new java.awt.Color(216, 74, 44));
         txtretiro1.setPlaceholder("Retiro");
         txtretiro1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,16 +170,16 @@ public class Editarcliente extends javax.swing.JDialog {
 
         txtnotas1.setColumns(20);
         txtnotas1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtnotas1.setForeground(new java.awt.Color(0, 112, 192));
         txtnotas1.setLineWrap(true);
         txtnotas1.setRows(5);
-        txtnotas1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
+        txtnotas1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtnotas1.setCaretColor(new java.awt.Color(0, 112, 192));
         jScrollPane14.setViewportView(txtnotas1);
 
         subpanel6.setName("subpanel4"); // NOI18N
 
         agregarservicio1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
+        agregarservicio1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
         agregarservicio1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarservicio1ActionPerformed(evt);
@@ -173,7 +187,11 @@ public class Editarcliente extends javax.swing.JDialog {
         });
 
         eliminarservicio1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        eliminarservicio1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
 
+        txtservicio1.setColorArrow(new java.awt.Color(0, 0, 0));
+        txtservicio1.setColorBorde(new java.awt.Color(102, 102, 102));
+        txtservicio1.setColorFondo(new java.awt.Color(102, 102, 102));
         txtservicio1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         tablaservicios1.setModel(new javax.swing.table.DefaultTableModel(
@@ -187,6 +205,10 @@ public class Editarcliente extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaservicios1.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
+        tablaservicios1.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
+        tablaservicios1.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
+        tablaservicios1.setColorSelBackgound(new java.awt.Color(216, 74, 44));
         jScrollPane3.setViewportView(tablaservicios1);
 
         tabladocumentos1.setModel(new javax.swing.table.DefaultTableModel(
@@ -200,35 +222,42 @@ public class Editarcliente extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3"
             }
         ));
+        tabladocumentos1.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
+        tabladocumentos1.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
+        tabladocumentos1.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
+        tabladocumentos1.setColorSelBackgound(new java.awt.Color(216, 74, 44));
         jScrollPane15.setViewportView(tabladocumentos1);
 
         agregardocumento1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
+        agregardocumento1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
 
         eliminardocumento1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        eliminardocumento1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
 
+        txtdocumento1.setForeground(new java.awt.Color(0, 0, 0));
+        txtdocumento1.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtdocumento1.setPhColor(new java.awt.Color(216, 74, 44));
         txtdocumento1.setPlaceholder("Documnento");
 
-        fecha_inicio_docum1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
+        fecha_inicio_docum1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         fecha_inicio_docum1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        fecha_vencimineto_docum1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
+        fecha_vencimineto_docum1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         fecha_vencimineto_docum1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jLabel35.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
         jLabel35.setText("DOCUMENTO");
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
         jLabel36.setText("FECHA DE VENCIMINETO");
 
-        txtfecha_inicio1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
+        txtfecha_inicio1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtfecha_inicio1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         guardarformulario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
+        guardarformulario1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
 
         jLabel37.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(255, 255, 255));
         jLabel37.setText("FECHA INICIAL");
 
         javax.swing.GroupLayout subpanel6Layout = new javax.swing.GroupLayout(subpanel6);
@@ -238,46 +267,41 @@ public class Editarcliente extends javax.swing.JDialog {
             .addGroup(subpanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, subpanel6Layout.createSequentialGroup()
-                        .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, subpanel6Layout.createSequentialGroup()
-                                .addComponent(txtservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtfecha_inicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(subpanel6Layout.createSequentialGroup()
-                                .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(subpanel6Layout.createSequentialGroup()
-                                        .addComponent(txtdocumento1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(fecha_inicio_docum1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                    .addGroup(subpanel6Layout.createSequentialGroup()
-                                        .addGap(15, 15, 15)
-                                        .addComponent(jLabel35)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel37)
-                                        .addGap(48, 48, 48)))
-                                .addComponent(jLabel36)))
-                        .addGap(18, 18, 18)
-                        .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(agregarservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(eliminarservicio1))
-                            .addComponent(guardarformulario1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 9, Short.MAX_VALUE))
+                    .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, subpanel6Layout.createSequentialGroup()
+                            .addComponent(txtservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtfecha_inicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(subpanel6Layout.createSequentialGroup()
+                            .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(subpanel6Layout.createSequentialGroup()
+                                    .addComponent(txtdocumento1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(fecha_inicio_docum1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                .addGroup(subpanel6Layout.createSequentialGroup()
+                                    .addGap(15, 15, 15)
+                                    .addComponent(jLabel35)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel37)
+                                    .addGap(48, 48, 48)))
+                            .addComponent(jLabel36)))
+                    .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(fecha_vencimineto_docum1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(agregarservicio1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(guardarformulario1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(eliminarservicio1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(subpanel6Layout.createSequentialGroup()
-                        .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(fecha_vencimineto_docum1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
-                        .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(subpanel6Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(eliminardocumento1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(agregardocumento1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                        .addGap(3, 3, 3)
+                        .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(agregardocumento1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(eliminardocumento1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         subpanel6Layout.setVerticalGroup(
             subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,16 +311,10 @@ public class Editarcliente extends javax.swing.JDialog {
                         .addComponent(txtservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
                     .addGroup(subpanel6Layout.createSequentialGroup()
-                        .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtfecha_inicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(guardarformulario1))
+                        .addGap(13, 13, 13)
+                        .addComponent(txtfecha_inicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(17, 17, 17)))
-                .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(subpanel6Layout.createSequentialGroup()
-                        .addComponent(agregarservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(eliminarservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
@@ -308,97 +326,105 @@ public class Editarcliente extends javax.swing.JDialog {
                     .addComponent(fecha_vencimineto_docum1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fecha_inicio_docum1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(subpanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(subpanel6Layout.createSequentialGroup()
-                        .addComponent(agregardocumento1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(eliminardocumento1))
-                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(subpanel6Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addComponent(guardarformulario1)
+                .addGap(17, 17, 17)
+                .addComponent(agregarservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(eliminarservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113)
+                .addComponent(agregardocumento1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(eliminardocumento1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        txtdv1.setForeground(new java.awt.Color(0, 0, 0));
+        txtdv1.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtdv1.setPhColor(new java.awt.Color(216, 74, 44));
         txtdv1.setPlaceholder("DV");
 
+        txtcelular21.setForeground(new java.awt.Color(0, 0, 0));
+        txtcelular21.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtcelular21.setPhColor(new java.awt.Color(216, 74, 44));
         txtcelular21.setPlaceholder("Celular2");
 
+        txtcodigo1.setForeground(new java.awt.Color(0, 0, 0));
+        txtcodigo1.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtcodigo1.setPhColor(new java.awt.Color(216, 74, 44));
         txtcodigo1.setPlaceholder("Codigo");
 
+        txtemail1.setForeground(new java.awt.Color(0, 0, 0));
+        txtemail1.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtemail1.setPhColor(new java.awt.Color(216, 74, 44));
         txtemail1.setPlaceholder("Email");
 
+        txtclase1.setColorArrow(new java.awt.Color(0, 0, 0));
+        txtclase1.setColorBorde(new java.awt.Color(102, 102, 102));
+        txtclase1.setColorFondo(new java.awt.Color(102, 102, 102));
         txtclase1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        txtempresa1.setForeground(new java.awt.Color(0, 0, 0));
+        txtempresa1.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtempresa1.setPhColor(new java.awt.Color(216, 74, 44));
         txtempresa1.setPlaceholder("Empresa");
 
         jLabel38.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
         jLabel38.setText("NIT/CC");
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
         jLabel39.setText("NOMBRE");
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
         jLabel40.setText("CELULAR");
 
         jLabel41.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(255, 255, 255));
         jLabel41.setText("LLEGO");
 
         jLabel42.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel42.setForeground(new java.awt.Color(255, 255, 255));
         jLabel42.setText("RETIRO");
 
         jLabel43.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel43.setForeground(new java.awt.Color(255, 255, 255));
         jLabel43.setText("FECHA");
 
         jLabel44.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel44.setForeground(new java.awt.Color(255, 255, 255));
         jLabel44.setText("NOTAS");
 
         jLabel45.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel45.setForeground(new java.awt.Color(255, 255, 255));
         jLabel45.setText("DV");
 
         jLabel46.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel46.setForeground(new java.awt.Color(255, 255, 255));
         jLabel46.setText("CODIGO");
 
         jLabel47.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel47.setForeground(new java.awt.Color(255, 255, 255));
         jLabel47.setText("CELULAR");
 
         jLabel48.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel48.setForeground(new java.awt.Color(255, 255, 255));
         jLabel48.setText("EMAIL");
 
         jLabel49.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel49.setForeground(new java.awt.Color(255, 255, 255));
         jLabel49.setText("CLASE");
 
         jLabel50.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel50.setForeground(new java.awt.Color(255, 255, 255));
         jLabel50.setText("EMPRESA");
 
         buttonGroup1.add(botro1);
         botro1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        botro1.setForeground(new java.awt.Color(255, 255, 255));
         botro1.setText("otro");
 
         buttonGroup1.add(bsoftware1);
         bsoftware1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bsoftware1.setForeground(new java.awt.Color(255, 255, 255));
         bsoftware1.setText("Software");
 
         buttonGroup1.add(bredes1);
         bredes1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bredes1.setForeground(new java.awt.Color(255, 255, 255));
         bredes1.setText("Redes");
 
         buttonGroup1.add(bequipos1);
         bequipos1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bequipos1.setForeground(new java.awt.Color(255, 255, 255));
         bequipos1.setText("Equipos");
         bequipos1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -484,7 +510,7 @@ public class Editarcliente extends javax.swing.JDialog {
         paneleditarLayout.setVerticalGroup(
             paneleditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneleditarLayout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
+                .addContainerGap(51, Short.MAX_VALUE)
                 .addGroup(paneleditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(paneleditarLayout.createSequentialGroup()
                         .addGroup(paneleditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -565,9 +591,11 @@ public class Editarcliente extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(paneleditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(paneleditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE))
         );
 
         pack();

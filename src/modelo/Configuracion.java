@@ -12,7 +12,7 @@ package modelo;
 public class Configuracion {
     private int idconfiguracion;
     private String directorio;
-    private String prefijo;
+
 
     public int getIdconfiguracion() {
         return idconfiguracion;
@@ -28,14 +28,6 @@ public class Configuracion {
 
     public void setDirectorio(String directorio) {
         this.directorio = directorio;
-    }
-
-    public String getPrefijo() {
-        return prefijo;
-    }
-
-    public void setPrefijo(String prefijo) {
-        this.prefijo = prefijo;
     }
     
 }

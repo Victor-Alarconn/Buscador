@@ -85,11 +85,6 @@ public class CrearUsuarioController implements ActionListener {
                     }else{
                        modelo.setCrearusuarios(0); 
                     }
-                    if (vista.checkbuscar.isSelected()) {
-                        modelo.setBuscar(1);
-                    }else{
-                        modelo.setBuscar(0);
-                    }
                     if (vista.checkeditarcliente.isSelected()) {
                         modelo.setEditarcliente(1);
                     }else{
@@ -114,7 +109,6 @@ public class CrearUsuarioController implements ActionListener {
                 vista.checkservicios.setVisible(false);
                 vista.checkotros.setVisible(false);
                 vista.checkcrearusuario.setVisible(false);
-                vista.checkbuscar.setVisible(false);
                 vista.checkeditarcliente.setVisible(false);
             } else {
                 if (vista.txtrol.getSelectedItem().toString().equals("user")) {
@@ -124,7 +118,6 @@ public class CrearUsuarioController implements ActionListener {
                     vista.checkservicios.setVisible(true);
                     vista.checkotros.setVisible(true);
                     vista.checkcrearusuario.setVisible(true);
-                    vista.checkbuscar.setVisible(true);
                     vista.checkeditarcliente.setVisible(true);
                 }
             }
@@ -144,7 +137,6 @@ public class CrearUsuarioController implements ActionListener {
         vista.checkservicios.setSelected(false);
         vista.checkotros.setSelected(false);
         vista.checkcrearusuario.setSelected(false);
-        vista.checkbuscar.setSelected(false);
         vista.checkeditarcliente.setSelected(false);
     }
 }

@@ -67,6 +67,9 @@ public class Busqueda extends javax.swing.JDialog {
         panelprincipal.setMaximumSize(new java.awt.Dimension(1280, 1080));
         panelprincipal.setName("panelpricipal"); // NOI18N
         panelprincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtbuscar.setBorderColor(new java.awt.Color(216, 74, 44));
+        txtbuscar.setPhColor(new java.awt.Color(216, 74, 44));
         panelprincipal.add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
 
         tabladatos.setModel(new javax.swing.table.DefaultTableModel(
@@ -80,6 +83,7 @@ public class Busqueda extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabladatos.setColorBackgoundHead(new java.awt.Color(216, 74, 44));
         tabladatos.setRowHeight(30);
         tabladatos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

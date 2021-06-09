@@ -15,13 +15,20 @@ import javax.swing.ImageIcon;
  */
 public class Editarusuario extends javax.swing.JDialog {
 
+    public void transparecia() {
+        paneluser.setOpaque(false);
+        
+        guardaruser.setOpaque(false);
+        guardaruser.setContentAreaFilled(false);
+    }
+    
     /**
      * Creates new form Ediatarusuario
      */
     public Editarusuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-       paneluser.setOpaque(false);
+        transparecia();
         this.setResizable(false);
 //        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
 //        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
@@ -50,7 +57,6 @@ public class Editarusuario extends javax.swing.JDialog {
         checkservicios = new javax.swing.JCheckBox();
         checkotros = new javax.swing.JCheckBox();
         checkcrearusuario = new javax.swing.JCheckBox();
-        checkbuscar = new javax.swing.JCheckBox();
         checkeditarcliente = new javax.swing.JCheckBox();
         checkdesactivar = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -60,14 +66,25 @@ public class Editarusuario extends javax.swing.JDialog {
         paneluser.setBackground(new java.awt.Color(102, 255, 102));
         paneluser.setName("paneluser"); // NOI18N
 
+        txtnombre.setForeground(new java.awt.Color(0, 0, 0));
+        txtnombre.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtnombre.setPhColor(new java.awt.Color(216, 74, 44));
         txtnombre.setPlaceholder("Nombre");
 
+        txtapellido.setForeground(new java.awt.Color(0, 0, 0));
+        txtapellido.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtapellido.setPhColor(new java.awt.Color(216, 74, 44));
         txtapellido.setPlaceholder("Apellido");
 
+        txtdocumento.setForeground(new java.awt.Color(0, 0, 0));
+        txtdocumento.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtdocumento.setPhColor(new java.awt.Color(216, 74, 44));
         txtdocumento.setPlaceholder("Documento");
 
-        txtcontraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192), 2));
+        txtcontraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102), 2));
+        txtcontraseña.setForeground(new java.awt.Color(0, 0, 0));
         txtcontraseña.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtcontraseña.setPhColor(new java.awt.Color(216, 74, 44));
         txtcontraseña.setPlaceholder("Contraseña");
         txtcontraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +92,9 @@ public class Editarusuario extends javax.swing.JDialog {
             }
         });
 
+        txtrol.setColorArrow(new java.awt.Color(0, 0, 0));
+        txtrol.setColorBorde(new java.awt.Color(102, 102, 102));
+        txtrol.setColorFondo(new java.awt.Color(102, 102, 102));
         txtrol.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtrol.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -82,17 +102,24 @@ public class Editarusuario extends javax.swing.JDialog {
             }
         });
 
+        guardaruser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         guardaruser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         guardaruser.setText("Guardar");
+        guardaruser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
 
+        checkconfiguraciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkconfiguraciones.setText("Configuraciones");
 
+        checkcrearcliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkcrearcliente.setText("Crear Cliente");
 
+        checkcarpetas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkcarpetas.setText("Carpetas");
 
+        checkservicios.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkservicios.setText("Servicios");
 
+        checkotros.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkotros.setText("Otros");
         checkotros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,12 +127,13 @@ public class Editarusuario extends javax.swing.JDialog {
             }
         });
 
+        checkcrearusuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkcrearusuario.setText("Crear usuario");
 
-        checkbuscar.setText("Buscar");
-
+        checkeditarcliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkeditarcliente.setText("Editar Cliente");
 
+        checkdesactivar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkdesactivar.setText("Desactivar");
 
         javax.swing.GroupLayout paneluserLayout = new javax.swing.GroupLayout(paneluser);
@@ -120,8 +148,8 @@ public class Editarusuario extends javax.swing.JDialog {
                         .addComponent(txtrol, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(paneluserLayout.createSequentialGroup()
-                        .addComponent(guardaruser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(guardaruser, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(checkdesactivar)))
                 .addGap(57, 57, 57)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -133,9 +161,7 @@ public class Editarusuario extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(paneluserLayout.createSequentialGroup()
-                                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkbuscar)
-                                    .addComponent(checkservicios))
+                                .addComponent(checkservicios)
                                 .addGap(22, 22, 22)
                                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(checkcrearcliente)
@@ -143,7 +169,7 @@ public class Editarusuario extends javax.swing.JDialog {
                             .addComponent(checkotros)))
                     .addComponent(txtcontraseña, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtapellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
             .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(paneluserLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -178,11 +204,9 @@ public class Editarusuario extends javax.swing.JDialog {
                         .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(checkcarpetas)
                             .addComponent(checkeditarcliente)
-                            .addComponent(checkbuscar))
+                            .addComponent(checkotros))
                         .addGap(18, 18, 18)
-                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkcrearusuario)
-                            .addComponent(checkotros))))
+                        .addComponent(checkcrearusuario)))
                 .addContainerGap(102, Short.MAX_VALUE))
             .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(paneluserLayout.createSequentialGroup()
@@ -261,7 +285,6 @@ public class Editarusuario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JCheckBox checkbuscar;
     public javax.swing.JCheckBox checkcarpetas;
     public javax.swing.JCheckBox checkconfiguraciones;
     public javax.swing.JCheckBox checkcrearcliente;

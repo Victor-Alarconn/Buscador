@@ -56,8 +56,8 @@
                           <Component id="txtnombre" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="guardaruser" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="guardaruser" min="-2" pref="117" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="checkdesactivar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -72,10 +72,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="checkbuscar" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="checkservicios" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="checkservicios" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="checkcrearcliente" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -88,7 +85,7 @@
                       <Component id="txtcontraseña" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
                       <Component id="txtapellido" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="138" max="32767" attributes="0"/>
+                  <EmptySpace pref="58" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -132,13 +129,10 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="checkcarpetas" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="checkeditarcliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="checkbuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="checkcrearusuario" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="checkotros" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="checkcrearusuario" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="102" max="32767" attributes="0"/>
@@ -156,6 +150,15 @@
       <SubComponents>
         <Component class="rojerusan.RSMetroTextFullPlaceHolder" name="txtnombre">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="phColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="2c" green="4a" red="d8" type="rgb"/>
+            </Property>
             <Property name="placeholder" type="java.lang.String" value="Nombre"/>
           </Properties>
           <AuxValues>
@@ -164,6 +167,15 @@
         </Component>
         <Component class="rojerusan.RSMetroTextFullPlaceHolder" name="txtapellido">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="phColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="2c" green="4a" red="d8" type="rgb"/>
+            </Property>
             <Property name="placeholder" type="java.lang.String" value="Apellido"/>
           </Properties>
           <AuxValues>
@@ -172,6 +184,15 @@
         </Component>
         <Component class="rojerusan.RSMetroTextFullPlaceHolder" name="txtdocumento">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="borderColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="phColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="2c" green="4a" red="d8" type="rgb"/>
+            </Property>
             <Property name="placeholder" type="java.lang.String" value="Documento"/>
           </Properties>
           <AuxValues>
@@ -183,12 +204,18 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder thickness="2">
-                  <Color PropertyName="color" blue="c0" green="70" red="0" type="rgb"/>
+                  <Color PropertyName="color" blue="66" green="66" red="66" type="rgb"/>
                 </LineBorder>
               </Border>
             </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
+            </Property>
+            <Property name="phColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="2c" green="4a" red="d8" type="rgb"/>
             </Property>
             <Property name="placeholder" type="java.lang.String" value="Contrase&#xf1;a"/>
           </Properties>
@@ -201,6 +228,15 @@
         </Component>
         <Component class="rojerusan.RSComboMetro" name="txtrol">
           <Properties>
+            <Property name="colorArrow" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="colorBorde" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="colorFondo" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="66" red="66" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
@@ -214,10 +250,20 @@
         </Component>
         <Component class="javax.swing.JButton" name="guardaruser">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/img/save.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Guardar"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder roundedCorners="true" thickness="2">
+                  <Color PropertyName="color" blue="2c" green="4a" red="d8" type="rgb"/>
+                </LineBorder>
+              </Border>
+            </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -225,6 +271,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkconfiguraciones">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Configuraciones"/>
           </Properties>
           <AuxValues>
@@ -233,6 +282,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkcrearcliente">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Crear Cliente"/>
           </Properties>
           <AuxValues>
@@ -241,6 +293,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkcarpetas">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Carpetas"/>
           </Properties>
           <AuxValues>
@@ -249,6 +304,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkservicios">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Servicios"/>
           </Properties>
           <AuxValues>
@@ -257,6 +315,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkotros">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Otros"/>
           </Properties>
           <Events>
@@ -268,15 +329,10 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkcrearusuario">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Crear usuario"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="checkbuscar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -284,6 +340,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkeditarcliente">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Editar Cliente"/>
           </Properties>
           <AuxValues>
@@ -292,6 +351,9 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="checkdesactivar">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="14" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Desactivar"/>
           </Properties>
           <AuxValues>

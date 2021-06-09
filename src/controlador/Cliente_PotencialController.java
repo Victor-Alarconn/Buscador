@@ -58,7 +58,6 @@ public class Cliente_PotencialController implements ActionListener {
 
     private final Formulario formulario;
     private String directorio = null;
-    private String prefijo = null;
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model1 = new DefaultTableModel();
 
@@ -140,7 +139,6 @@ public class Cliente_PotencialController implements ActionListener {
         if (e.getSource() == formulario.guardarformulario) {
             if (cconfiguraciones.cargar(mconfiguracion)) {
                 directorio = mconfiguracion.getDirectorio();
-                prefijo = mconfiguracion.getPrefijo();
             }
             if (formulario.txtnit.getText().equals("")) {
                 JOptionPane.showMessageDialog(formulario, "El campo de nit esta vacio");
@@ -195,7 +193,7 @@ public class Cliente_PotencialController implements ActionListener {
                                                     JOptionPane.showMessageDialog(formulario, "El campo dv esta vacio");
                                                 } else {
                                                     modelo.setDv(formulario.txtdv.getText());
-                                                    modelo.setRuta(directorio + File.separator + prefijo + formulario.txtcodigo.getText().toUpperCase());
+                                                    modelo.setRuta(directorio + File.separator + formulario.txtcodigo.getText().toUpperCase());
                                                     //condicionales de selecion  de categoria 
                                                     if (formulario.bequipos.isSelected()) {
                                                         modelo.setCategoria("Equipos");
@@ -333,17 +331,17 @@ public class Cliente_PotencialController implements ActionListener {
         if (nombre == null) {
 
         } else {
-            File file = Crear_archivo(path, prefijo + nombre);
+            File file = Crear_archivo(path, nombre);
             if (file.mkdir()) {
                 Object[] dato = new Object[1];
                 for (int i = 0; i < cd.llenar().size(); i++) {
                     dato[0] = cd.llenar().get(i);
 
-                    File fil = Crear_archivo(path + File.separator + prefijo + nombre, cd.llenar().get(i));
+                    File fil = Crear_archivo(path + File.separator + nombre, cd.llenar().get(i));
                     fil.mkdir();
                 }
             }
-            abrirarchivo(directorio + File.separator + prefijo + nombre);
+            abrirarchivo(directorio + File.separator + nombre);
         }
     }
 

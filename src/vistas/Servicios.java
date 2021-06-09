@@ -18,19 +18,19 @@ public class Servicios extends javax.swing.JDialog {
     public void transparecia() {
         eliminartablaservico.setOpaque(false);
         eliminartablaservico.setContentAreaFilled(false);
-        eliminartablaservico.setBorderPainted(false);
+//        eliminartablaservico.setBorderPainted(false);
 
         registrarservicio.setOpaque(false);
         registrarservicio.setContentAreaFilled(false);
-        registrarservicio.setBorderPainted(false);
+//        registrarservicio.setBorderPainted(false);
 
         eliminartablaagregarservicio.setOpaque(false);
         eliminartablaagregarservicio.setContentAreaFilled(false);
-        eliminartablaagregarservicio.setBorderPainted(false);
+//        eliminartablaagregarservicio.setBorderPainted(false);
 
         guardarservicios.setOpaque(false);
         guardarservicios.setContentAreaFilled(false);
-        guardarservicios.setBorderPainted(false);
+//        guardarservicios.setBorderPainted(false);
 
         panel2panel2.setOpaque(false);
     }
@@ -76,11 +76,17 @@ public class Servicios extends javax.swing.JDialog {
         panel2panel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         registrarservicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        panel2panel2.add(registrarservicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, -1, 57));
+        registrarservicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        panel2panel2.add(registrarservicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 70, 57));
+
+        txtregistroservicio.setForeground(new java.awt.Color(0, 0, 0));
+        txtregistroservicio.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtregistroservicio.setPhColor(new java.awt.Color(216, 74, 44));
         panel2panel2.add(txtregistroservicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 280, 57));
 
         eliminartablaservico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panel2panel2.add(eliminartablaservico, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
+        eliminartablaservico.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        panel2panel2.add(eliminartablaservico, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 70, 57));
 
         tablatotalservicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -99,6 +105,11 @@ public class Servicios extends javax.swing.JDialog {
                 "Title 1"
             }
         ));
+        tablatotalservicios.setCellSelectionEnabled(true);
+        tablatotalservicios.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
+        tablatotalservicios.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
+        tablatotalservicios.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
+        tablatotalservicios.setColorSelBackgound(new java.awt.Color(216, 74, 44));
         tablatotalservicios.setRowHeight(30);
         jScrollPane8.setViewportView(tablatotalservicios);
 
@@ -121,16 +132,23 @@ public class Servicios extends javax.swing.JDialog {
                 "Title 1"
             }
         ));
+        tablaagregarservicios.setCellSelectionEnabled(true);
+        tablaagregarservicios.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
+        tablaagregarservicios.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
+        tablaagregarservicios.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
+        tablaagregarservicios.setColorSelBackgound(new java.awt.Color(216, 74, 44));
         tablaagregarservicios.setRowHeight(30);
         jScrollPane9.setViewportView(tablaagregarservicios);
 
         panel2panel2.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 280, 357));
 
         eliminartablaagregarservicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        panel2panel2.add(eliminartablaagregarservicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 65, -1));
+        eliminartablaagregarservicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        panel2panel2.add(eliminartablaagregarservicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 70, -1));
 
         guardarservicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
-        panel2panel2.add(guardarservicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, 72, -1));
+        guardarservicios.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        panel2panel2.add(guardarservicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 380, 70, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,7 +157,7 @@ public class Servicios extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(panel2panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

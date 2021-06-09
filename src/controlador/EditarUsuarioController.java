@@ -80,11 +80,6 @@ public class EditarUsuarioController implements ActionListener {
                     }else{
                        modelo.setCrearusuarios(0); 
                     }
-                    if (vista.checkbuscar.isSelected()) {
-                        modelo.setBuscar(1);
-                    }else{
-                        modelo.setBuscar(0);
-                    }
                     if (vista.checkeditarcliente.isSelected()) {
                         modelo.setEditarcliente(1);
                     }else{
@@ -114,7 +109,6 @@ public class EditarUsuarioController implements ActionListener {
                 vista.checkservicios.setVisible(false);
                 vista.checkotros.setVisible(false);
                 vista.checkcrearusuario.setVisible(false);
-                vista.checkbuscar.setVisible(false);
                 vista.checkeditarcliente.setVisible(false);
             } else {
                 if (vista.txtrol.getSelectedItem().toString().equals("user")) {
@@ -124,7 +118,6 @@ public class EditarUsuarioController implements ActionListener {
                     vista.checkservicios.setVisible(true);
                     vista.checkotros.setVisible(true);
                     vista.checkcrearusuario.setVisible(true);
-                    vista.checkbuscar.setVisible(true);
                     vista.checkeditarcliente.setVisible(true);
                 }
             }
@@ -149,9 +142,6 @@ public class EditarUsuarioController implements ActionListener {
             }
             if (modelo.getCarpetas() == 1) {
                 vista.checkcarpetas.setSelected(true);
-            }
-            if (modelo.getBuscar() == 1) {
-                vista.checkbuscar.setSelected(true);
             }
             if (modelo.getEditarcliente() == 1) {
                 vista.checkeditarcliente.setSelected(true);

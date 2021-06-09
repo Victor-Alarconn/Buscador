@@ -26,13 +26,12 @@ public class Consultas_Configuraciones extends Conexion {
        
         
         
-        String sql = "INSERT INTO configuracion (idconfiguracion,directorio,prefijo) VALUES(?,?,?) ";
+        String sql = "INSERT INTO configuracion (idconfiguracion,directorio) VALUES(?,?) ";
         
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setInt(1, configuraciones.getIdconfiguracion());
             ps.setString(2, configuraciones.getDirectorio());
-            ps.setString(3, configuraciones.getPrefijo());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -59,7 +58,6 @@ public class Consultas_Configuraciones extends Conexion {
             
             if (rs.next()) {
                 configuraciones.setDirectorio(rs.getString("directorio"));
-                configuraciones.setPrefijo(rs.getString("prefijo"));
                 return true;
             }
             return false;
@@ -78,12 +76,11 @@ public class Consultas_Configuraciones extends Conexion {
     public boolean modificar(Configuracion configuraciones) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE  configuracion SET directorio=?, prefijo=? WHERE idconfiguracion=? ";
+        String sql = "UPDATE  configuracion SET directorio=? WHERE idconfiguracion=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, configuraciones.getDirectorio());
-            ps.setString(2, configuraciones.getPrefijo());
-            ps.setInt(3, configuraciones.getIdconfiguracion());
+            ps.setInt(2, configuraciones.getIdconfiguracion());
             ps.execute();
             return true;
         } catch (SQLException e) {

@@ -15,12 +15,24 @@ import javax.swing.ImageIcon;
  */
 public class Usuarios extends javax.swing.JDialog {
 
+    public void transparencia() {
+        crearusuario.setOpaque(false);
+        crearusuario.setContentAreaFilled(false);
+
+        ediataruser.setOpaque(false);
+        ediataruser.setContentAreaFilled(false);
+
+        eliminaruser.setOpaque(false);
+        eliminaruser.setContentAreaFilled(false);
+    }
+
     /**
      * Creates new form Usuarios
      */
     public Usuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        transparencia();
         this.setResizable(false);
 //        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
 //        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
@@ -61,28 +73,37 @@ public class Usuarios extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablauser.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
+        tablauser.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
+        tablauser.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
+        tablauser.setColorSelBackgound(new java.awt.Color(216, 74, 44));
         jScrollPane2.setViewportView(tablauser);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 770, 190));
 
         ediataruser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editaruser32.png"))); // NOI18N
         ediataruser.setText("editar");
-        jPanel1.add(ediataruser, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 110, 40));
+        ediataruser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        jPanel1.add(ediataruser, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 100, 40));
 
         eliminaruser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminaruser32.png"))); // NOI18N
         eliminaruser.setText("eliminar");
-        jPanel1.add(eliminaruser, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, -1, 40));
+        eliminaruser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        jPanel1.add(eliminaruser, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 100, 40));
 
         txtbuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtbuscar.setForeground(new java.awt.Color(0, 112, 192));
-        txtbuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(32, 131, 255), 2));
+        txtbuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102), 2));
         jPanel1.add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 190, 40));
 
         crearusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser32.png"))); // NOI18N
         crearusuario.setText("crear");
-        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, -1, 40));
+        crearusuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 90, 40));
 
         filtro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nombre", "apellido", "numero_documento" }));
+        filtro.setColorArrow(new java.awt.Color(0, 0, 0));
+        filtro.setColorBorde(new java.awt.Color(102, 102, 102));
+        filtro.setColorFondo(new java.awt.Color(102, 102, 102));
         filtro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel1.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 220, 40));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

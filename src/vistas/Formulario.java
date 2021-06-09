@@ -13,6 +13,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -36,31 +37,29 @@ public class Formulario extends javax.swing.JDialog {
 
         guardarformulario.setOpaque(false);
         guardarformulario.setContentAreaFilled(false);
-        guardarformulario.setBorderPainted(false);
+//        guardarformulario.setBorderPainted(false);
 
         agregardocumento.setOpaque(false);
         agregardocumento.setContentAreaFilled(false);
-        agregardocumento.setBorderPainted(false);
+//        agregardocumento.setBorderPainted(false);
 
         eliminardocumento.setOpaque(false);
         eliminardocumento.setContentAreaFilled(false);
-        eliminardocumento.setBorderPainted(false);
+//        eliminardocumento.setBorderPainted(false);
 
         agregarservicio.setOpaque(false);
         agregarservicio.setContentAreaFilled(false);
-        agregarservicio.setBorderPainted(false);
+//        agregarservicio.setBorderPainted(false);
 
         eliminarservicio.setOpaque(false);
         eliminarservicio.setContentAreaFilled(false);
-        eliminarservicio.setBorderPainted(false);
+//        eliminarservicio.setBorderPainted(false);
 
         subpanel4.setOpaque(false);
         subpanel3.setOpaque(false);
 
     }
-    public void redondear(){
-         txtnit.setBorder(new RoundedBorder(5));
-    }
+   
 
     /**
      * Creates new form Form
@@ -74,8 +73,6 @@ public class Formulario extends javax.swing.JDialog {
         int ancho = (int) tamanio.getWidth();
         int alto = (int) tamanio.getHeight();
         this.setResizable(false);
-        this.redondear();
-        
         jLabel1.setPreferredSize(new Dimension(ancho, alto));
 //        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm.jpg"));
 //        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
@@ -184,14 +181,29 @@ public class Formulario extends javax.swing.JDialog {
         subpanel3.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         subpanel3.setName("subpanel3"); // NOI18N
 
+        txtnit.setForeground(new java.awt.Color(0, 0, 0));
+        txtnit.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtnit.setPhColor(new java.awt.Color(216, 74, 44));
         txtnit.setPlaceholder("NIT/CC");
 
+        txtnombre.setForeground(new java.awt.Color(0, 0, 0));
+        txtnombre.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtnombre.setPhColor(new java.awt.Color(216, 74, 44));
         txtnombre.setPlaceholder("Nombre");
 
+        txtllego.setColorArrow(new java.awt.Color(51, 51, 51));
+        txtllego.setColorBorde(new java.awt.Color(102, 102, 102));
+        txtllego.setColorFondo(new java.awt.Color(102, 102, 102));
         txtllego.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        txtcelular1.setForeground(new java.awt.Color(0, 0, 0));
+        txtcelular1.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtcelular1.setPhColor(new java.awt.Color(216, 74, 44));
         txtcelular1.setPlaceholder("Celular1");
 
+        txtretiro.setForeground(new java.awt.Color(0, 0, 0));
+        txtretiro.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtretiro.setPhColor(new java.awt.Color(216, 74, 44));
         txtretiro.setPlaceholder("Retiro");
         txtretiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,13 +216,14 @@ public class Formulario extends javax.swing.JDialog {
         txtnotas.setForeground(new java.awt.Color(0, 112, 192));
         txtnotas.setLineWrap(true);
         txtnotas.setRows(5);
-        txtnotas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
+        txtnotas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtnotas.setCaretColor(new java.awt.Color(0, 112, 192));
         jScrollPane6.setViewportView(txtnotas);
 
         subpanel4.setName("subpanel4"); // NOI18N
 
         agregarservicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
+        agregarservicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
         agregarservicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarservicioActionPerformed(evt);
@@ -218,7 +231,11 @@ public class Formulario extends javax.swing.JDialog {
         });
 
         eliminarservicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        eliminarservicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
 
+        txtservicio.setColorArrow(new java.awt.Color(0, 0, 0));
+        txtservicio.setColorBorde(new java.awt.Color(102, 102, 102));
+        txtservicio.setColorFondo(new java.awt.Color(102, 102, 102));
         txtservicio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         tablaservicios.setModel(new javax.swing.table.DefaultTableModel(
@@ -232,6 +249,7 @@ public class Formulario extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaservicios.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
         jScrollPane1.setViewportView(tablaservicios);
 
         tabladocumentos.setModel(new javax.swing.table.DefaultTableModel(
@@ -245,18 +263,24 @@ public class Formulario extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3"
             }
         ));
+        tabladocumentos.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
         jScrollPane4.setViewportView(tabladocumentos);
 
         agregardocumento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
+        agregardocumento.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
 
         eliminardocumento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        eliminardocumento.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
 
-        txtdocumento.setPlaceholder("Documento");
+        txtdocumento.setForeground(new java.awt.Color(0, 0, 0));
+        txtdocumento.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtdocumento.setPhColor(new java.awt.Color(216, 74, 44));
+        txtdocumento.setPlaceholder("Documento/Otro");
 
-        fecha_inicio_docum.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
+        fecha_inicio_docum.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         fecha_inicio_docum.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        fecha_vencimineto_docum.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
+        fecha_vencimineto_docum.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         fecha_vencimineto_docum.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -265,10 +289,11 @@ public class Formulario extends javax.swing.JDialog {
         jLabel33.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel33.setText("FECHA DE VENCIMIENTO");
 
-        txtfecha_inicio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
+        txtfecha_inicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtfecha_inicio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         guardarformulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
+        guardarformulario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel34.setText("FECHA INICIAL");
@@ -284,31 +309,26 @@ public class Formulario extends javax.swing.JDialog {
         subpanel4Layout.setHorizontalGroup(
             subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(subpanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(subpanel4Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(subpanel4Layout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(eliminardocumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(agregardocumento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(subpanel4Layout.createSequentialGroup()
-                                .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(subpanel4Layout.createSequentialGroup()
-                                        .addComponent(txtservicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txtfecha_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addComponent(txtservicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(txtfecha_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(eliminarservicio, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                            .addComponent(agregarservicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(guardarformulario, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(subpanel4Layout.createSequentialGroup()
+                        .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, subpanel4Layout.createSequentialGroup()
                                 .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(guardarformulario, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(agregarservicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(eliminarservicio, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(subpanel4Layout.createSequentialGroup()
-                                .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addGroup(subpanel4Layout.createSequentialGroup()
                                         .addGap(14, 14, 14)
                                         .addComponent(jLabel32)))
@@ -318,14 +338,20 @@ public class Formulario extends javax.swing.JDialog {
                                     .addComponent(jLabel34))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel33)
-                                    .addComponent(fecha_vencimineto_docum, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(subpanel4Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jLabel2)
-                        .addGap(153, 153, 153)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel33, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(fecha_vencimineto_docum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(agregardocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eliminardocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
+            .addGroup(subpanel4Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jLabel2)
+                .addGap(153, 153, 153)
+                .addComponent(jLabel3)
+                .addGap(29, 29, 29))
         );
         subpanel4Layout.setVerticalGroup(
             subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,26 +359,23 @@ public class Formulario extends javax.swing.JDialog {
                 .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(subpanel4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addComponent(jLabel2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, subpanel4Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtservicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtfecha_inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(guardarformulario, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(guardarformulario, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(subpanel4Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
                         .addComponent(agregarservicio, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(eliminarservicio, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(subpanel4Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(eliminarservicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(subpanel4Layout.createSequentialGroup()
@@ -362,29 +385,46 @@ public class Formulario extends javax.swing.JDialog {
                         .addGap(17, 17, 17)
                         .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fecha_inicio_docum, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fecha_vencimineto_docum, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fecha_vencimineto_docum, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21)
-                        .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(subpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(subpanel4Layout.createSequentialGroup()
                                 .addComponent(agregardocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(eliminardocumento))
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel34))
                 .addContainerGap())
         );
 
+        txtdv.setForeground(new java.awt.Color(0, 0, 0));
+        txtdv.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtdv.setPhColor(new java.awt.Color(216, 74, 44));
         txtdv.setPlaceholder("DV");
 
+        txtcelular2.setForeground(new java.awt.Color(0, 0, 0));
+        txtcelular2.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtcelular2.setPhColor(new java.awt.Color(216, 74, 44));
         txtcelular2.setPlaceholder("Celular2");
 
+        txtcodigo.setForeground(new java.awt.Color(0, 0, 0));
+        txtcodigo.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtcodigo.setPhColor(new java.awt.Color(216, 74, 44));
         txtcodigo.setPlaceholder("Codigo");
 
+        txtemail.setForeground(new java.awt.Color(0, 0, 0));
+        txtemail.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtemail.setPhColor(new java.awt.Color(216, 74, 44));
         txtemail.setPlaceholder("Email");
 
+        txtclase.setColorArrow(new java.awt.Color(0, 0, 0));
+        txtclase.setColorBorde(new java.awt.Color(102, 102, 102));
         txtclase.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        txtempresa.setForeground(new java.awt.Color(0, 0, 0));
+        txtempresa.setBorderColor(new java.awt.Color(102, 102, 102));
+        txtempresa.setPhColor(new java.awt.Color(216, 74, 44));
         txtempresa.setPlaceholder("Empresa");
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -449,7 +489,6 @@ public class Formulario extends javax.swing.JDialog {
 
         txtfecha_llegada.setBackground(new java.awt.Color(255, 51, 51));
         txtfecha_llegada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192)));
-        txtfecha_llegada.setForeground(new java.awt.Color(255, 51, 51));
         txtfecha_llegada.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         txtfecha_llegada.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
@@ -460,7 +499,7 @@ public class Formulario extends javax.swing.JDialog {
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 203, Short.MAX_VALUE)
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -528,9 +567,9 @@ public class Formulario extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(249, 249, 249)))
-                        .addGap(33, 33, 33)
-                        .addComponent(subpanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(131, 131, 131))
+                        .addGap(18, 18, 18)
+                        .addComponent(subpanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))
                     .addGroup(subpanel3Layout.createSequentialGroup()
                         .addComponent(botro)
                         .addGap(53, 53, 53)
@@ -549,7 +588,7 @@ public class Formulario extends javax.swing.JDialog {
                     .addGroup(subpanel3Layout.createSequentialGroup()
                         .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(subpanel3Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 17, Short.MAX_VALUE)
                                 .addComponent(mensajenit))
                             .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(8, 8, 8)
@@ -606,16 +645,16 @@ public class Formulario extends javax.swing.JDialog {
                         .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel25)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
-                        .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bredes)
-                            .addComponent(bequipos)
-                            .addComponent(bsoftware)
-                            .addComponent(botro))
-                        .addGap(50, 50, 50))
+                        .addGap(29, 29, 29))
                     .addGroup(subpanel3Layout.createSequentialGroup()
-                        .addComponent(subpanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(92, 92, 92))))
+                        .addComponent(subpanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bredes)
+                    .addComponent(bequipos)
+                    .addComponent(bsoftware)
+                    .addComponent(botro))
+                .addGap(50, 50, 50))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -636,7 +675,7 @@ public class Formulario extends javax.swing.JDialog {
                 .addComponent(subpanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE))
         );
 
         pack();

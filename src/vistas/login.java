@@ -8,11 +8,14 @@ package vistas;
 import Consultas.Consultas_usuario;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Shape;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import modelo.Usuario;
@@ -33,17 +36,15 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
 //          this.setUndecorated(true);
-        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 30, 30);
-        AWTUtilities.setWindowShape(this, forma);
         initComponents();
         this.setLocationRelativeTo(null);        
         keyevent();
         this.setResizable(false);
         txtcontrasena.setBorder(new RoundedBorder(5));
         nombreuser.setBorder(new RoundedBorder(5));
-//        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
-//        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
-//        jlabel1.setIcon(fondo);
+        ImageIcon rm = new ImageIcon(getClass().getResource("/img/logo.png"));
+        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(logo.getWidth(), logo.getHeight(), Image.SCALE_DEFAULT));
+        logo.setIcon(fondo);
     }
 
     public void keyevent() {
@@ -91,6 +92,7 @@ public class login extends javax.swing.JFrame {
         txtcontrasena = new javax.swing.JPasswordField();
         validar = new javax.swing.JButton();
         jlabel1 = new javax.swing.JLabel();
+        logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -105,13 +107,11 @@ public class login extends javax.swing.JFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
 
         nombreuser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        nombreuser.setForeground(new java.awt.Color(0, 112, 192));
-        nombreuser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192), 2));
+        nombreuser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 2, true));
         jPanel1.add(nombreuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 250, 40));
 
         txtcontrasena.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtcontrasena.setForeground(new java.awt.Color(0, 112, 192));
-        txtcontrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 112, 192), 2));
+        txtcontrasena.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 2, true));
         jPanel1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 250, 40));
 
         validar.setText("ingresar");
@@ -123,6 +123,9 @@ public class login extends javax.swing.JFrame {
         });
         jPanel1.add(validar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
         jPanel1.add(jlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo rm soft.png"))); // NOI18N
+        jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 240, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,6 +185,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel jlabel1;
+    private javax.swing.JLabel logo;
     public javax.swing.JTextField nombreuser;
     public javax.swing.JPasswordField txtcontrasena;
     public javax.swing.JButton validar;
