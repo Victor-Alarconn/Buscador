@@ -18,10 +18,16 @@ import java.util.logging.Logger;
 
 //Organizad0R contraseña de turis
 public class Conexion {
-    private final String base = "buscador";
-    private final String user = "root";
-    private final String passsword = "";
-    private final String url = "jdbc:mysql://localhost:3306/" + base;
+//    private final String base = "buscador";
+//    private final String user = "root";
+//    private final String passsword = "";
+//    private final String url = "jdbc:mysql://localhost:3306/" + base;
+//    private Connection con = null;
+    
+    private final String base = "u523374635_organizador";
+    private final String user = "u523374635_organizador";
+    private final String passsword = "Organizad0R";
+    private final String url = "jdbc:mysql://31.170.167.102/" + base;
     private Connection con = null;
     
     public Connection getConexion(){
