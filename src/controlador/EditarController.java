@@ -120,6 +120,7 @@ public class EditarController implements ActionListener {
             modelo.setRetiro(formulario.txtretiro1.getText());
             modelo.setNotas(formulario.txtnotas1.getText());
             modelo.setDv(formulario.txtdv1.getText());
+            modelo.setFecha_arriendo(sdf.format(formulario.txtfecha_arriendo1.getDate()));
 //            modelo.setCodigo(formulario.txtcodigo1.getText());
             //condicionales de selecion  de categoria 
             if (formulario.bequipos1.isSelected()) {
@@ -328,6 +329,8 @@ public class EditarController implements ActionListener {
                 Date fechaDate = null;
                 fechaDate = sdf.parse(modelo.getFecha_llegada());
                 formulario.txtfecha_llegada1.setDate(fechaDate);
+                fechaDate = sdf.parse(modelo.getFecha_arriendo());
+                formulario.txtfecha_arriendo1.setDate(fechaDate);
 
                 formulario.txtretiro1.setText(modelo.getRetiro());
                 formulario.txtnotas1.setText(modelo.getNotas());
@@ -337,6 +340,8 @@ public class EditarController implements ActionListener {
                 formulario.txtemail1.setText(modelo.getEmail());
                 formulario.txtclase1.addItem(modelo.getClase());
                 formulario.txtempresa1.setText(modelo.getEmpresa());
+                formulario.txtcontacto1.setText(modelo.getContacto());
+                
                 if (modelo.getCategoria().equals("Equipos")) {
                     formulario.bequipos1.setSelected(true);
                 } else {

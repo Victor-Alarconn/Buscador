@@ -74,6 +74,7 @@ public class Principal extends javax.swing.JFrame {
         int alto = (int) tamanio.getHeight();
         this.setSize(new Dimension(ancho, alto));
         
+        
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/fondo2.png"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), alto, Image.SCALE_DEFAULT));
         jLabel1.setIcon(fondo);
@@ -178,6 +179,11 @@ public class Principal extends javax.swing.JFrame {
         crearusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/useradd.png"))); // NOI18N
         crearusuario.setText("Usuarios");
         crearusuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        crearusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearusuarioActionPerformed(evt);
+            }
+        });
         jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 170, -1));
 
         carpetas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -229,23 +235,29 @@ public class Principal extends javax.swing.JFrame {
 
         panelprincipal.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 1000, 460));
 
+        editar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        editar.setForeground(new java.awt.Color(255, 255, 255));
         editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png"))); // NOI18N
+        editar.setText("Editar");
         editar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
         editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editarActionPerformed(evt);
             }
         });
-        panelprincipal.add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, 90, 70));
+        panelprincipal.add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 30, 140, 70));
 
+        abrirarchivos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        abrirarchivos.setForeground(new java.awt.Color(255, 255, 255));
         abrirarchivos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/open.png"))); // NOI18N
+        abrirarchivos.setText("Archivos");
         abrirarchivos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
         abrirarchivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 abrirarchivosActionPerformed(evt);
             }
         });
-        panelprincipal.add(abrirarchivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, 90, 70));
+        panelprincipal.add(abrirarchivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, 170, 70));
 
         filtro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nit\t", "nombre", "codigo" }));
         filtro.setColorArrow(new java.awt.Color(0, 0, 0));
@@ -289,6 +301,10 @@ public class Principal extends javax.swing.JFrame {
     private void abrirarchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirarchivosActionPerformed
 
     }//GEN-LAST:event_abrirarchivosActionPerformed
+
+    private void crearusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearusuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_crearusuarioActionPerformed
 
     /**
      * @param args the command line arguments

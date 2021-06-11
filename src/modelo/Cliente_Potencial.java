@@ -27,7 +27,26 @@ public class Cliente_Potencial {
     private String ruta;
     private String dv;
     private int usuarios_idusuario;
+    private String fecha_arriendo;
+    private String contacto;
 
+    public String getContacto() {
+        return contacto;
+    }
+
+    public void setContacto(String contacto) {
+        this.contacto = contacto;
+    }
+    
+
+    public String getFecha_arriendo() {
+        return fecha_arriendo;
+    }
+
+    public void setFecha_arriendo(String fecha_arriendo) {
+        this.fecha_arriendo = fecha_arriendo;
+    }
+    
     public int getUsuarios_idusuario() {
         return usuarios_idusuario;
     }

@@ -34,7 +34,6 @@ import modelo.Llego;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import modelo.Usuario;
-import vistas.Busqueda;
 import vistas.Carpetas;
 import vistas.Configuraciones;
 import vistas.Crearusuario;

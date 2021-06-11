@@ -36,7 +36,9 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
 //          this.setUndecorated(true);
+        
         initComponents();
+        this.setIconImage (new ImageIcon("add.png").getImage());
         this.setLocationRelativeTo(null);        
         keyevent();
         this.setResizable(false);

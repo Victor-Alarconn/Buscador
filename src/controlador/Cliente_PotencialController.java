@@ -170,25 +170,17 @@ public class Cliente_PotencialController implements ActionListener {
                                     Matcher mather = pattern.matcher(formulario.txtemail.getText());
                                     if (mather.find() == true) {
                                         modelo.setEmail(formulario.txtemail.getText());
-                                        System.out.println("El email ingresado es válido.");
-                                    } else {
-                                        JOptionPane.showMessageDialog(formulario, "El email es Invalido");
-                                    }
-
-                                    modelo.setClase(formulario.txtclase.getSelectedItem().toString());
-                                    modelo.setLlego(formulario.txtllego.getSelectedItem().toString());
-                                    if (formulario.txtfecha_llegada.getDate() != null) {
-                                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                                        modelo.setFecha_llegada(sdf.format(formulario.txtfecha_llegada.getDate()));
-                                        if (formulario.txtretiro.getText().equals("")) {
-                                            JOptionPane.showMessageDialog(formulario, "El campo retiro esta vacio");
-                                        } else {
+                                        modelo.setClase(formulario.txtclase.getSelectedItem().toString());
+                                        modelo.setLlego(formulario.txtllego.getSelectedItem().toString());
+                                        if (formulario.txtfecha_llegada.getDate() != null) {
+                                            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                                            modelo.setFecha_llegada(sdf.format(formulario.txtfecha_llegada.getDate()));
                                             modelo.setRetiro(formulario.txtretiro.getText());
                                             if (formulario.txtcodigo.getText().equals("")) {
                                                 JOptionPane.showMessageDialog(formulario, "El campo codigo esta vacio");
                                             } else {
                                                 modelo.setNotas(formulario.txtnotas.getText());
-                                                modelo.setCodigo(formulario.txtcodigo.getText());
+                                                modelo.setCodigo(formulario.txtcodigo.getText().toUpperCase());
                                                 if (formulario.txtdv.getText().equals("")) {
                                                     JOptionPane.showMessageDialog(formulario, "El campo dv esta vacio");
                                                 } else {
@@ -207,6 +199,12 @@ public class Cliente_PotencialController implements ActionListener {
                                                     if (formulario.botro.isSelected()) {
                                                         modelo.setCategoria("Otro");
                                                     }
+                                                    if (formulario.txtfecha_arriendo.getDate() != null) {
+                                                        modelo.setFecha_arriendo(sdf.format(formulario.txtfecha_arriendo.getDate()));
+                                                    } else {
+                                                        JOptionPane.showMessageDialog(formulario, "El campo fecha arriendo esta vacio");
+                                                    }
+                                                    modelo.setContacto(formulario.txtcontacto.getText());
                                                     modelo.setUsuarios_idusuario(user.getIdusuario());
 //                                                    //guardando el cliente 
                                                     if (consultas.registrar(modelo)) {
@@ -238,6 +236,7 @@ public class Cliente_PotencialController implements ActionListener {
                                                             }
                                                             JOptionPane.showMessageDialog(null, "registro guardado");
                                                             crear_carpeta(directorio);
+                                                            formulario.dispose();
                                                             this.limpiar();
                                                             this.limpiardocumentos();
                                                             this.limpiarservicios();
@@ -253,9 +252,11 @@ public class Cliente_PotencialController implements ActionListener {
 
                                             }
 
+                                        } else {
+                                            JOptionPane.showMessageDialog(formulario, "El campo fecha esta vacio");
                                         }
                                     } else {
-                                        JOptionPane.showMessageDialog(formulario, "El campo fecha esta vacio");
+                                        JOptionPane.showMessageDialog(formulario, "El email es Invalido");
                                     }
 
                                 }
@@ -327,7 +328,7 @@ public class Cliente_PotencialController implements ActionListener {
 
     private void crear_carpeta(String path) {
         Consultas_Directorio cd = new Consultas_Directorio();
-        String nombre = formulario.txtcodigo.getText().toUpperCase();
+        String nombre = formulario.txtcodigo.getText().toUpperCase()+"_"+formulario.txtnombre.getText().toUpperCase();
         if (nombre == null) {
 
         } else {
@@ -360,7 +361,7 @@ public class Cliente_PotencialController implements ActionListener {
         try {
             File objetofile = new File(archivo);
             Desktop.getDesktop().open(objetofile);
-            System.exit(0);
+//            System.exit(0);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -419,9 +420,9 @@ public class Cliente_PotencialController implements ActionListener {
     public void consultanit() {
         modelo.setNit(formulario.txtnit.getText());
         if (consultas.buscarr(modelo)) {
-          formulario.mensajenit.setVisible(true);
-        }else{
-          formulario.mensajenit.setVisible(false);
+            formulario.mensajenit.setVisible(true);
+        } else {
+            formulario.mensajenit.setVisible(false);
         }
     }
 }
