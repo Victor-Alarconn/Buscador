@@ -8,6 +8,7 @@ package controlador;
 import Consultas.Consultas_SubCarpetas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Directorio;
@@ -104,10 +105,12 @@ public class SubCarpetasController implements ActionListener {
     }
 
     public void llenartabla() {
+        ArrayList<String> subcarpeta;
         Object[] dato = new Object[1];
         msubcarpetas.setDirectorios_iddirectorios(mdirectotio.getIddirectorios());
-        for (int i = 0; i < csubcarpetas.llenar(msubcarpetas).size(); i++) {
-            dato[0] = csubcarpetas.llenar(msubcarpetas).get(i);
+        subcarpeta = csubcarpetas.llenar(msubcarpetas);
+        for (int i = 0; i < subcarpeta.size(); i++) {
+            dato[0] = subcarpeta.get(i);
             model2.addRow(dato);
             vsubcarpetas.tablasubcarpetas.setModel(model2);
         }

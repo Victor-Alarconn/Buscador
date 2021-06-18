@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente_Potencial;
 import modelo.Configuracion;
+import modelo.Directorio;
 import modelo.Documentos;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
@@ -58,6 +59,9 @@ public class EditarController implements ActionListener {
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model1 = new DefaultTableModel();
 
+    ArrayList<Servicio> lista;
+    ArrayList<Servicio> servicio;
+
     public EditarController(Cliente_Potencial modelo, Servicio mods,
             Servicios_has_Clientes_Potenciales shcp, Documentos mdocumento, Configuracion mconfiguracion,
             Consultas_Servicio cons, Consultas_Cliente_Potencial consultas,
@@ -90,7 +94,6 @@ public class EditarController implements ActionListener {
         formulario.setLocationRelativeTo(null);
         model.addColumn("Servicio/Producto");
         model.addColumn("Fecha de inicio");
-
         formulario.tablaservicios1.setModel(model);
         model1.addColumn("ID");
         model1.addColumn("Documento");
@@ -137,19 +140,18 @@ public class EditarController implements ActionListener {
             }
             if (consultas.modificar(modelo)) {
                 for (int i = 0; i < formulario.tablaservicios1.getRowCount(); i++) {
-                    mods.setServicio(formulario.tablaservicios1.getValueAt(i, 0).toString());
-                    if (cons.buscar(mods)) {
-                        shcp.setServicios_idservicio(mods.getIdservicio());
-                        shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-//                        System.out.println(modelo.getIdclientes_potenciales());
-                        shcp.setFecha_de_inicio(formulario.tablaservicios1.getValueAt(i, 1).toString());
-                        if (!cshcp.buscar(shcp)) {
+                    
+                    for (int j = 0; j < lista.size(); j++) {
+                        if (lista.get(j).getServicio().equals(formulario.tablaservicios1.getValueAt(i, 0).toString())) {
+                            shcp.setServicios_idservicio(lista.get(j).getIdservicio());
+                            shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                            shcp.setFecha_de_inicio(formulario.tablaservicios1.getValueAt(i, 1).toString());
+                            if (!cshcp.buscar(shcp)) {
                             if (!cshcp.registrarservicio(shcp)) {
                                 JOptionPane.showMessageDialog(null, "error guardado de servicios");
                             }
+                            }
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "error guardado");
                     }
                 }
                 //guardando la tabla documnetos
@@ -234,10 +236,12 @@ public class EditarController implements ActionListener {
     }
 
     public void busqueda() {
+        ArrayList<Directorio> directorio;
         Consultas_Directorio cd = new Consultas_Directorio();
+        directorio = cd.llenar();
         Object[] dato = new Object[1];
-        for (int i = 0; i < cd.llenar().size(); i++) {
-            dato[0] = cd.llenar().get(i);
+        for (int i = 0; i < directorio.size(); i++) {
+            dato[0] = directorio.get(i);
         }
 
     }
@@ -284,11 +288,10 @@ public class EditarController implements ActionListener {
 
         formulario.txtservicio1.removeAllItems();
 
-        ArrayList<String> lista = new ArrayList<String>();
         Consultas_Servicio modc = new Consultas_Servicio();
         lista = modc.llenar();
         for (int i = 0; i < lista.size(); i++) {
-            formulario.txtservicio1.addItem(lista.get(i));
+            formulario.txtservicio1.addItem(lista.get(i).getServicio());
         }
 
         formulario.txtclase1.removeAllItems();
@@ -298,26 +301,28 @@ public class EditarController implements ActionListener {
         formulario.txtllego1.removeAllItems();
         ArrayList<String> lista3 = new ArrayList<String>();
         //llena la tabla de servicios 
-        int con = consultas.llenar(modelo).size();
+        
+        servicio = consultas.llenar(modelo);
         Object[] datos = new Object[2];
-        for (int i = 0; i < con; i++) {
-            datos[0] = consultas.llenar(modelo).get(i).getServicio();
-            datos[1] = consultas.llenar(modelo).get(i).getFecha();
+        for (int i = 0; i < servicio.size(); i++) {
+            datos[0] = servicio.get(i).getServicio();
+            datos[1] = servicio.get(i).getFecha();
             model.addRow(datos);
             formulario.tablaservicios1.setModel(model);
         }
 
-        int cantidad = consultas.clientedocumentos(modelo).size();
+        ArrayList<Documentos> documentos;
+        documentos = consultas.clientedocumentos(modelo);
         Object[] datos5 = new Object[4];
-        for (int i = 0; i < cantidad; i++) {
-            datos5[0] = consultas.clientedocumentos(modelo).get(i).getIddocumentos();
-            datos5[1] = consultas.clientedocumentos(modelo).get(i).getDocumento();
-            datos5[2] = consultas.clientedocumentos(modelo).get(i).getFecha_inicio();
-            datos5[3] = consultas.clientedocumentos(modelo).get(i).getFecha_vencimiento();
+        for (int i = 0; i < documentos.size(); i++) {
+            datos5[0] = documentos.get(i).getIddocumentos();
+            datos5[1] = documentos.get(i).getDocumento();
+            datos5[2] = documentos.get(i).getFecha_inicio();
+            datos5[3] = documentos.get(i).getFecha_vencimiento();
             model1.addRow(datos5);
             formulario.tabladocumentos1.setModel(model1);
         }
-
+//
         if (consultas.buscar(modelo)) {
             try {
                 formulario.txtnit1.setText(modelo.getNit());
@@ -341,7 +346,7 @@ public class EditarController implements ActionListener {
                 formulario.txtclase1.addItem(modelo.getClase());
                 formulario.txtempresa1.setText(modelo.getEmpresa());
                 formulario.txtcontacto1.setText(modelo.getContacto());
-                
+
                 if (modelo.getCategoria().equals("Equipos")) {
                     formulario.bequipos1.setSelected(true);
                 } else {

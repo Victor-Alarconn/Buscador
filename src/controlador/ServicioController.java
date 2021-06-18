@@ -8,6 +8,7 @@ package controlador;
 import Consultas.Consultas_Servicio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Servicio;
@@ -96,9 +97,11 @@ public class ServicioController implements ActionListener {
     }
 
     public void busqueda() {
+        ArrayList<Servicio> servicio;
         Object[] dato = new Object[1];
-        for (int i = 0; i < consulta.llenar().size(); i++) {
-            dato[0] = consulta.llenar().get(i);
+        servicio =consulta.llenar();
+        for (int i = 0; i < servicio.size(); i++) {
+            dato[0] = servicio.get(i).getServicio();
             model.addRow(dato);
             vservicios.tablatotalservicios.setModel(model);
         }

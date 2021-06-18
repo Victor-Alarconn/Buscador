@@ -64,6 +64,8 @@ public class Cliente_PotencialController implements ActionListener {
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model1 = new DefaultTableModel();
 
+    ArrayList<Servicio> lista;
+
     public Cliente_PotencialController(Cliente_Potencial modelo, Consultas_Cliente_Potencial consultas,
             Formulario formulario, Consultas_Servicio cons, Servicio mods, Servicios_has_Clientes_Potenciales shcp,
             Consultas_Servicios_has_Clientes_Potenciales cshcp, Documentos documento, Consultas_Documentos cdocumentos,
@@ -103,18 +105,14 @@ public class Cliente_PotencialController implements ActionListener {
         formulario.tabladocumentos.setModel(model1);
 
         formulario.txtservicio.removeAllItems();
-
-        ArrayList<String> lista = new ArrayList<String>();
-        Consultas_Servicio modc = new Consultas_Servicio();
-        lista = modc.llenar();
+        lista = cons.llenar();
         for (int i = 0; i < lista.size(); i++) {
-            formulario.txtservicio.addItem(lista.get(i));
+            formulario.txtservicio.addItem(lista.get(i).getServicio());
         }
 
         formulario.txtclase.removeAllItems();
-        ArrayList<String> lista2 = new ArrayList<String>();
         Consultas_Clase mod = new Consultas_Clase();
-        lista2 = mod.llenar();
+        ArrayList<String> lista2 = mod.llenar();
         for (int i = 0; i < lista2.size(); i++) {
             formulario.txtclase.addItem(lista2.get(i));
         }
@@ -125,13 +123,6 @@ public class Cliente_PotencialController implements ActionListener {
         lista3 = modelo.llenar();
         for (int i = 0; i < lista3.size(); i++) {
             formulario.txtllego.addItem(lista3.get(i));
-        }
-
-        formulario.txtservicio.removeAllItems();
-        ArrayList<String> lista1 = new ArrayList<String>();
-        lista1 = cons.llenar();
-        for (int i = 0; i < lista1.size(); i++) {
-            formulario.txtservicio.addItem(lista1.get(i));
         }
 
     }
@@ -215,17 +206,16 @@ public class Cliente_PotencialController implements ActionListener {
                                                         modelo.setNit(formulario.txtnit.getText());
                                                         if (consultas.buscarr(modelo)) {
                                                             // guardando la tabla servicios
-                                                            for (int i = 0; i < formulario.tablaservicios.getRowCount(); i++) {
-                                                                mods.setServicio(formulario.tablaservicios.getValueAt(i, 0).toString());
-                                                                if (cons.buscar(mods)) {
-                                                                    shcp.setServicios_idservicio(mods.getIdservicio());
-                                                                    shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                                                                    shcp.setFecha_de_inicio(formulario.tablaservicios.getValueAt(i, 1).toString());
-                                                                    if (!cshcp.registrarservicio(shcp)) {
-                                                                        JOptionPane.showMessageDialog(null, "error guardado de servicios");
+                                                            for (int i = 0; i < formulario.tablaservicios.getRowCount(); i++){
+                                                                for (int j = 0; j < lista.size(); j++) {
+                                                                    if (lista.get(j).getServicio().equals(formulario.tablaservicios.getValueAt(i, 0).toString())) {
+                                                                        shcp.setServicios_idservicio(lista.get(j).getIdservicio());
+                                                                        shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                                                                        shcp.setFecha_de_inicio(formulario.tablaservicios.getValueAt(i, 1).toString());
+                                                                        if (!cshcp.registrarservicio(shcp)) {
+                                                                            JOptionPane.showMessageDialog(null, "error guardado de servicios");
+                                                                        }
                                                                     }
-                                                                } else {
-                                                                    JOptionPane.showMessageDialog(null, "error guardando consulta servicio");
                                                                 }
                                                             }
                                                             //guardando la tabla documnetos
@@ -310,13 +300,13 @@ public class Cliente_PotencialController implements ActionListener {
         }
         //boton eliminar servicio
         if (e.getSource() == formulario.eliminarservicio) {
-//            int fila = formulario.tablaservicios.getSelectedRow();
-//            if (fila >= 0) {
-//                model.removeRow(fila);
-//            } else {
-//                JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
-//            }
-               crear_carpeta("c");
+            int fila = formulario.tablaservicios.getSelectedRow();
+            if (fila >= 0) {
+                model.removeRow(fila);
+            } else {
+                JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
+            }
+
         }
         //boton eliminar documnento
         if (e.getSource() == formulario.eliminardocumento) {
@@ -334,24 +324,23 @@ public class Cliente_PotencialController implements ActionListener {
     private void crear_carpeta(String path) {
         Consultas_Directorio cd = new Consultas_Directorio();
         Consultas_SubCarpetas csubcarpeta = new Consultas_SubCarpetas();
-        ArrayList<Subcarpeta> subcarpeta ;
-        ArrayList<Directorio> directorios ;
-        
-//        int cantidad = csubcarpeta.allsubcategorias().size();
-//        int numerodecarpetas = cd.llenar().size();
-        subcarpeta=csubcarpeta.allsubcategorias();
-        directorios=cd.llenar();
+        ArrayList<Subcarpeta> subcarpeta;
+        ArrayList<Directorio> directorios;
+        subcarpeta = csubcarpeta.allsubcategorias();
+        directorios = cd.llenar();
 
         String nombre = formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase();
         if (nombre == null) {
 
         } else {
             File file = Crear_archivo(path, nombre);
+            Object[] idsubcategorias = new Object[subcarpeta.size()];
             Object[] subcategorias = new Object[subcarpeta.size()];
             Object[] carpetas = new Object[directorios.size()];
             Object[] idcarpetas = new Object[directorios.size()];
             for (int i = 0; i < subcarpeta.size(); i++) {
-                subcategorias[i] = subcarpeta.get(i).getDirectorios_iddirectorios();
+                idsubcategorias[i] = subcarpeta.get(i).getDirectorios_iddirectorios();
+                subcategorias[i] = subcarpeta.get(i).getSubcarpeta();
             }
             for (int i = 0; i < directorios.size(); i++) {
                 carpetas[i] = cd.llenar().get(i).getCarpeta();
@@ -362,8 +351,9 @@ public class Cliente_PotencialController implements ActionListener {
                     File fil = Crear_archivo(path + File.separator + nombre, carpetas[i].toString());
                     fil.mkdir();
                     for (int j = 0; j < subcategorias.length; j++) {
-                        if (subcategorias[j].equals(idcarpetas[i])) {
-                            System.out.println(subcategorias[j].toString());
+                        if (idsubcategorias[j].equals(idcarpetas[i])) {
+                            File subfile = Crear_archivo(fil.toString(), subcategorias[j].toString());
+                            subfile.mkdir();
                         }
                     }
 
@@ -374,13 +364,13 @@ public class Cliente_PotencialController implements ActionListener {
     }
 
     public void busqueda() {
+        ArrayList<Directorio> directorios;
         Consultas_Directorio cd = new Consultas_Directorio();
+        directorios = cd.llenar();
         Object[] dato = new Object[1];
-        for (int i = 0; i < cd.llenar().size(); i++) {
-            dato[0] = cd.llenar().get(i);
-
+        for (int i = 0; i < directorios.size(); i++) {
+            dato[0] = directorios.get(i);
         }
-
     }
 
 // funcion para abrir un archivo desde la tabla 

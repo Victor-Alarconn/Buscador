@@ -152,7 +152,7 @@ public class Consultas_Servicio extends Conexion {
     }
 
     //consulta para llenar la tabla de servicios y combobox
-    public ArrayList<String> llenar() {
+    public ArrayList<Servicio> llenar() {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -163,7 +163,10 @@ public class Consultas_Servicio extends Conexion {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery(sql);
             while (rs.next()) {
-                lista.add(rs.getString("servicio"));
+                Servicio servicio = new Servicio();
+                servicio.setServicio(rs.getString("servicio"));
+                servicio.setIdservicio(rs.getInt("idservicio"));
+                lista.add(servicio);
             }
             return lista;
         } catch (SQLException e) {

@@ -8,6 +8,7 @@ package controlador;
 import Consultas.Consultas_Clase;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Clases;
@@ -100,9 +101,11 @@ public class ClaseController implements ActionListener {
     }
 
     public void busqueda() {
+        ArrayList<String> clases;
         Object[] dato = new Object[1];
-        for (int i = 0; i < cc.llenar().size(); i++) {
-            dato[0] = cc.llenar().get(i);
+        clases = cc.llenar();
+        for (int i = 0; i < clases.size(); i++) {
+            dato[0] = clases.get(i);
             model2.addRow(dato);
             vc.tablaclase.setModel(model2);
         }

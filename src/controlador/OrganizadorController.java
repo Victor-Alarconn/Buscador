@@ -111,7 +111,6 @@ public class OrganizadorController implements ActionListener {
                     formulario, servicio, mods, shcp, cshcp, documento, cdocumentos,
                     mconfiguracion, cconfiguraciones, mod);
             controlador.iniciar();
-
             formulario.setVisible(true);
         }
 

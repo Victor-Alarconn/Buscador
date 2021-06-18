@@ -9,6 +9,7 @@ import Consultas.Consultas_Directorio;
 import Consultas.Consultas_SubCarpetas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Directorio;
@@ -115,14 +116,15 @@ public class DirectorioController implements ActionListener {
     }
 
     public void busqueda() {
+        ArrayList<Directorio> directorio;
         Object[] dato = new Object[2];
-        for (int i = 0; i < cdirectorio.llenar().size(); i++) {
-            dato[0] = cdirectorio.llenar().get(i).getCarpeta();
-            dato[1] = cdirectorio.llenar().get(i).getIddirectorios();
+        directorio = cdirectorio.llenar();
+        for (int i = 0; i < directorio.size(); i++) {
+            dato[0] = directorio.get(i).getCarpeta();
+            dato[1] = directorio.get(i).getIddirectorios();
             model2.addRow(dato);
             vdirectorio.tablacarpetas.setModel(model2);
         }
-
     }
 
     public void limpiaragregarcarpeta() {

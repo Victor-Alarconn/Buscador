@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import modelo.Usuario;
 import vistas.Crearusuario;
@@ -108,15 +109,17 @@ public class UsuariosController implements ActionListener  {
         }
         if (usuarios.txtbuscar.getText().length() > 0) {
             limpiartabla();
+            ArrayList<Usuario> usuario;
             Object[] dato = new Object[6];
-            int cantidad = consulta.buscarcaracter(usuarios.txtbuscar.getText(),usuarios.filtro.getSelectedItem().toString()).size();
-            for (int i = 0; i < cantidad; i++) {
-                dato[0] = consulta.buscarcaracter(usuarios.txtbuscar.getText(),usuarios.filtro.getSelectedItem().toString()).get(i).getIdusuario();
-                dato[1] = consulta.buscarcaracter(usuarios.txtbuscar.getText(),usuarios.filtro.getSelectedItem().toString()).get(i).getNombre();
-                dato[2] = consulta.buscarcaracter(usuarios.txtbuscar.getText(),usuarios.filtro.getSelectedItem().toString()).get(i).getApellido();
-                dato[3] = consulta.buscarcaracter(usuarios.txtbuscar.getText(),usuarios.filtro.getSelectedItem().toString()).get(i).getNumero_documento();
-                dato[4] = consulta.buscarcaracter(usuarios.txtbuscar.getText(),usuarios.filtro.getSelectedItem().toString()).get(i).getSobrerol();
-                dato[5] = consulta.buscarcaracter(usuarios.txtbuscar.getText(),usuarios.filtro.getSelectedItem().toString()).get(i).getSobreestado();
+            usuario = consulta.buscarcaracter(usuarios.txtbuscar.getText(),usuarios.filtro.getSelectedItem().toString());
+            
+            for (int i = 0; i < usuario.size(); i++) {
+                dato[0] = usuario.get(i).getIdusuario();
+                dato[1] = usuario.get(i).getNombre();
+                dato[2] = usuario.get(i).getApellido();
+                dato[3] = usuario.get(i).getNumero_documento();
+                dato[4] = usuario.get(i).getSobrerol();
+                dato[5] = usuario.get(i).getSobreestado();
                 model.addRow(dato);
                 usuarios.tablauser.setModel(model);
             }

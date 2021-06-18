@@ -8,6 +8,7 @@ package controlador;
 import Consultas.Consultas_Llego;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Llego;
@@ -98,9 +99,11 @@ public class LlegoController implements ActionListener{
     }
     
     public void busqueda() {
+        ArrayList<String> llego;
+        llego=cl.llenar();
         Object[] dato = new Object[1];
-        for (int i = 0; i < cl.llenar().size(); i++) {
-            dato[0] = cl.llenar().get(i);
+        for (int i = 0; i < llego.size(); i++) {
+            dato[0] = llego.get(i);
             modell2.addRow(dato);
             vl.tablallego.setModel(modell2);
         }

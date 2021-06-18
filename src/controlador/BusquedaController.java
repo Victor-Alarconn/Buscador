@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import modelo.Clases;
 import modelo.Cliente_Potencial;
@@ -41,10 +42,11 @@ import vistas.Principal;
  * @author Yonathan Carvajal
  */
 public class BusquedaController implements ActionListener {
+
     private final Cliente_Potencial modelo;
     private final Consultas_Cliente_Potencial consulta;
     private final Principal principal;
-    
+
     DefaultTableModel model = new DefaultTableModel();
     Dialogos dialogo = new Dialogos();
 
@@ -69,21 +71,20 @@ public class BusquedaController implements ActionListener {
 
     Directorio mod1 = new Directorio();
     Consultas_Directorio modc1 = new Consultas_Directorio();
-    
+
     Usuario mod = new Usuario();
-     
+
     Consultas_usuario consultasusuario = new Consultas_usuario();
 
     public BusquedaController(Cliente_Potencial modelo, Consultas_Cliente_Potencial consulta, Principal principal) {
         this.modelo = modelo;
         this.consulta = consulta;
         this.principal = principal;
-        
-         this.principal.editar.addActionListener(this);
-         this.principal.abrirarchivos.addActionListener(this);
+
+        this.principal.editar.addActionListener(this);
+        this.principal.abrirarchivos.addActionListener(this);
     }
 
-    
     public void iniciar() {
         principal.setTitle("Busqueda");
         principal.setLocationRelativeTo(null);
@@ -111,7 +112,6 @@ public class BusquedaController implements ActionListener {
         principal.tabladatos.getColumn("Dv").setWidth(40);
         principal.tabladatos.getColumn("Dv").setMinWidth(40);
         principal.tabladatos.getColumn("Dv").setMaxWidth(40);
-    
         keyevent();
 
     }
@@ -133,7 +133,6 @@ public class BusquedaController implements ActionListener {
                         editarcliente);
                 editarcli.iniciar();
                 editarcliente.setVisible(true);
-
             }
 
         }
@@ -180,27 +179,26 @@ public class BusquedaController implements ActionListener {
         }
         if (principal.txtbuscar.getText().length() > 0) {
             limpiartabla();
+            ArrayList<Cliente_Potencial> lista;
+            lista = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString());
+            int cantidad = lista.size();
             Object[] dato = new Object[11];
-            int cantidad = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).size();
             for (int i = 0; i < cantidad; i++) {
-                dato[0] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getIdclientes_potenciales();
-                dato[1] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getRuta();
-                
-                dato[2] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getNit();
-                dato[3] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getDv();
-                dato[4] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getCelular1();
-                dato[5] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getEmail();
-                dato[6] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getContacto();
-                dato[7] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getNombre();
-                dato[8] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getCodigo();
-                dato[9] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getFecha_llegada();
-                dato[10] = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString()).get(i).getFecha_arriendo();
-         
+                dato[0] = lista.get(i).getIdclientes_potenciales();
+                dato[1] = lista.get(i).getRuta();
+                dato[2] = lista.get(i).getNit();
+                dato[3] = lista.get(i).getDv();
+                dato[4] = lista.get(i).getCelular1();
+                dato[5] = lista.get(i).getEmail();
+                dato[6] = lista.get(i).getContacto();
+                dato[7] = lista.get(i).getNombre();
+                dato[8] = lista.get(i).getCodigo();
+                dato[9] = lista.get(i).getFecha_llegada();
+                dato[10] = lista.get(i).getFecha_arriendo();
                 model.addRow(dato);
                 principal.tabladatos.setModel(model);
             }
         }
     }
-    
-    
+
 }
