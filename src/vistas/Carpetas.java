@@ -20,19 +20,22 @@ public class Carpetas extends javax.swing.JDialog {
     public void transparecia() {
         eliminarcarpeta.setOpaque(false);
         eliminarcarpeta.setContentAreaFilled(false);
-        eliminarcarpeta.setBorderPainted(false);
+//        eliminarcarpeta.setBorderPainted(false);
 
         agregarcarpeta.setOpaque(false);
         agregarcarpeta.setContentAreaFilled(false);
-        agregarcarpeta.setBorderPainted(false);
+//        agregarcarpeta.setBorderPainted(false);
 
         eliminaragregarcarpeta.setOpaque(false);
         eliminaragregarcarpeta.setContentAreaFilled(false);
-        eliminaragregarcarpeta.setBorderPainted(false);
+//        eliminaragregarcarpeta.setBorderPainted(false);
 
         guardarcarpeta.setOpaque(false);
         guardarcarpeta.setContentAreaFilled(false);
-        guardarcarpeta.setBorderPainted(false);
+        
+        agregarsubcarpeta.setOpaque(false);
+        agregarsubcarpeta.setContentAreaFilled(false);
+//        guardarcarpeta.setBorderPainted(false);
 
        
         panel2panel3.setOpaque(false);
@@ -71,6 +74,7 @@ public class Carpetas extends javax.swing.JDialog {
         tablaagregarcarpetas = new rojerusan.RSTableMetro();
         eliminaragregarcarpeta = new javax.swing.JButton();
         eliminarcarpeta = new javax.swing.JButton();
+        agregarsubcarpeta = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -103,7 +107,7 @@ public class Carpetas extends javax.swing.JDialog {
         tablacarpetas.setRowHeight(30);
         jScrollPane5.setViewportView(tablacarpetas);
 
-        panel2panel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 276, 420));
+        panel2panel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 276, 420));
 
         txtregistrarcarpeta.setForeground(new java.awt.Color(0, 0, 0));
         txtregistrarcarpeta.setBorderColor(new java.awt.Color(102, 102, 102));
@@ -113,15 +117,15 @@ public class Carpetas extends javax.swing.JDialog {
                 txtregistrarcarpetaActionPerformed(evt);
             }
         });
-        panel2panel3.add(txtregistrarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 276, 57));
+        panel2panel3.add(txtregistrarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 276, 57));
 
         guardarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         guardarcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
-        panel2panel3.add(guardarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 410, 72, -1));
+        panel2panel3.add(guardarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 440, 72, -1));
 
         agregarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
         agregarcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
-        panel2panel3.add(agregarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 65, 57));
+        panel2panel3.add(agregarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, 65, 57));
 
         tablaagregarcarpetas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,15 +151,19 @@ public class Carpetas extends javax.swing.JDialog {
         tablaagregarcarpetas.setRowHeight(30);
         jScrollPane7.setViewportView(tablaagregarcarpetas);
 
-        panel2panel3.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 276, 357));
+        panel2panel3.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 276, 357));
 
         eliminaragregarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
         eliminaragregarcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
-        panel2panel3.add(eliminaragregarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, 65, -1));
+        panel2panel3.add(eliminaragregarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, 65, -1));
 
         eliminarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
         eliminarcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
-        panel2panel3.add(eliminarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 65, -1));
+        panel2panel3.add(eliminarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 65, -1));
+
+        agregarsubcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/subcarpetas.png"))); // NOI18N
+        agregarsubcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
+        panel2panel3.add(agregarsubcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 65, 57));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,9 +179,9 @@ public class Carpetas extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(panel2panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(panel2panel3, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
         );
@@ -229,6 +237,7 @@ public class Carpetas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton agregarcarpeta;
+    public javax.swing.JButton agregarsubcarpeta;
     public javax.swing.JButton eliminaragregarcarpeta;
     public javax.swing.JButton eliminarcarpeta;
     public javax.swing.JButton guardarcarpeta;

@@ -44,7 +44,7 @@ public class Consultas_Directorio extends Conexion {
     }
     
     //consulta para cargar los directorios en la vista
-    public ArrayList<String> llenar() {
+    public ArrayList<Directorio> llenar() {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -55,7 +55,10 @@ public class Consultas_Directorio extends Conexion {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery(sql);
             while (rs.next()) {
-                lista.add(rs.getString("carpeta"));
+                Directorio mdirectorio = new Directorio();
+                mdirectorio.setCarpeta(rs.getString("carpeta"));
+                mdirectorio.setIddirectorios(rs.getInt("iddirectorios"));
+                lista.add(mdirectorio);
             }
             return lista;
         } catch (SQLException e) {

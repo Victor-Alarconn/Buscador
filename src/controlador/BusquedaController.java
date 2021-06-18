@@ -120,7 +120,7 @@ public class BusquedaController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == principal.abrirarchivos) {
             int fila = principal.tabladatos.getSelectedRow();
-            abrirarchivo(String.valueOf(principal.tabladatos.getValueAt(fila, 5)));
+            abrirarchivo(String.valueOf(principal.tabladatos.getValueAt(fila, 1)));
         }
 
         if (e.getSource() == principal.editar) {

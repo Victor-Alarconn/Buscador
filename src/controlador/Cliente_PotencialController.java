@@ -13,6 +13,7 @@ import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
 import Consultas.Consultas_Servicio;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
+import Consultas.Consultas_SubCarpetas;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,6 +34,8 @@ import modelo.Servicios_has_Clientes_Potenciales;
 import vistas.Formulario;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import modelo.Directorio;
+import modelo.Subcarpeta;
 import modelo.Usuario;
 
 /**
@@ -185,7 +188,8 @@ public class Cliente_PotencialController implements ActionListener {
                                                     JOptionPane.showMessageDialog(formulario, "El campo dv esta vacio");
                                                 } else {
                                                     modelo.setDv(formulario.txtdv.getText());
-                                                    modelo.setRuta(directorio + File.separator + formulario.txtcodigo.getText().toUpperCase());
+                                                    modelo.setRuta(directorio + File.separator + formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase());
+
                                                     //condicionales de selecion  de categoria 
                                                     if (formulario.bequipos.isSelected()) {
                                                         modelo.setCategoria("Equipos");
@@ -306,12 +310,13 @@ public class Cliente_PotencialController implements ActionListener {
         }
         //boton eliminar servicio
         if (e.getSource() == formulario.eliminarservicio) {
-            int fila = formulario.tablaservicios.getSelectedRow();
-            if (fila >= 0) {
-                model.removeRow(fila);
-            } else {
-                JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
-            }
+//            int fila = formulario.tablaservicios.getSelectedRow();
+//            if (fila >= 0) {
+//                model.removeRow(fila);
+//            } else {
+//                JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
+//            }
+               crear_carpeta("c");
         }
         //boton eliminar documnento
         if (e.getSource() == formulario.eliminardocumento) {
@@ -328,18 +333,40 @@ public class Cliente_PotencialController implements ActionListener {
 
     private void crear_carpeta(String path) {
         Consultas_Directorio cd = new Consultas_Directorio();
-        String nombre = formulario.txtcodigo.getText().toUpperCase()+"_"+formulario.txtnombre.getText().toUpperCase();
+        Consultas_SubCarpetas csubcarpeta = new Consultas_SubCarpetas();
+        ArrayList<Subcarpeta> subcarpeta ;
+        ArrayList<Directorio> directorios ;
+        
+//        int cantidad = csubcarpeta.allsubcategorias().size();
+//        int numerodecarpetas = cd.llenar().size();
+        subcarpeta=csubcarpeta.allsubcategorias();
+        directorios=cd.llenar();
+
+        String nombre = formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase();
         if (nombre == null) {
 
         } else {
             File file = Crear_archivo(path, nombre);
+            Object[] subcategorias = new Object[subcarpeta.size()];
+            Object[] carpetas = new Object[directorios.size()];
+            Object[] idcarpetas = new Object[directorios.size()];
+            for (int i = 0; i < subcarpeta.size(); i++) {
+                subcategorias[i] = subcarpeta.get(i).getDirectorios_iddirectorios();
+            }
+            for (int i = 0; i < directorios.size(); i++) {
+                carpetas[i] = cd.llenar().get(i).getCarpeta();
+                idcarpetas[i] = cd.llenar().get(i).getIddirectorios();
+            }
             if (file.mkdir()) {
-                Object[] dato = new Object[1];
-                for (int i = 0; i < cd.llenar().size(); i++) {
-                    dato[0] = cd.llenar().get(i);
-
-                    File fil = Crear_archivo(path + File.separator + nombre, cd.llenar().get(i));
+                for (int i = 0; i < directorios.size(); i++) {
+                    File fil = Crear_archivo(path + File.separator + nombre, carpetas[i].toString());
                     fil.mkdir();
+                    for (int j = 0; j < subcategorias.length; j++) {
+                        if (subcategorias[j].equals(idcarpetas[i])) {
+                            System.out.println(subcategorias[j].toString());
+                        }
+                    }
+
                 }
             }
             abrirarchivo(directorio + File.separator + nombre);

@@ -6,14 +6,16 @@
 package controlador;
 
 import Consultas.Consultas_Directorio;
+import Consultas.Consultas_SubCarpetas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Directorio;
+import modelo.Subcarpeta;
 import vistas.Carpetas;
 import vistas.Configuraciones;
-
+import vistas.SubCarpetas;
 
 /**
  *
@@ -28,6 +30,9 @@ public class DirectorioController implements ActionListener {
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
 
+    Subcarpeta msubcarpeta = new Subcarpeta();
+    Consultas_SubCarpetas csubcarpeta = new Consultas_SubCarpetas();
+
     public DirectorioController(Consultas_Directorio cdirectorio, Directorio mdirectorio, Carpetas vdirectorio) {
         this.cdirectorio = cdirectorio;
         this.mdirectorio = mdirectorio;
@@ -36,6 +41,7 @@ public class DirectorioController implements ActionListener {
         this.vdirectorio.eliminaragregarcarpeta.addActionListener(this);
         this.vdirectorio.eliminarcarpeta.addActionListener(this);
         this.vdirectorio.guardarcarpeta.addActionListener(this);
+        this.vdirectorio.agregarsubcarpeta.addActionListener(this);
     }
 
     public void iniciar() {
@@ -43,12 +49,14 @@ public class DirectorioController implements ActionListener {
         vdirectorio.setLocationRelativeTo(null);
         model.addColumn("Agregar carpeta");
         model2.addColumn("Carpetas");
-
+        model2.addColumn("id");
         vdirectorio.tablaagregarcarpetas.setModel(model);
         vdirectorio.tablacarpetas.setModel(model2);
+        vdirectorio.tablacarpetas.getColumn("id").setWidth(0);
+        vdirectorio.tablacarpetas.getColumn("id").setMinWidth(0);
+        vdirectorio.tablacarpetas.getColumn("id").setMaxWidth(0);
         busqueda();
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == vdirectorio.guardarcarpeta) {
@@ -63,7 +71,7 @@ public class DirectorioController implements ActionListener {
             busqueda();
         }
 
-        Object[] dato = new Object[5];
+        Object[] dato = new Object[1];
         if (e.getSource() == vdirectorio.agregarcarpeta) {
             if (vdirectorio.txtregistrarcarpeta.getText().length() != 0) {
                 dato[0] = vdirectorio.txtregistrarcarpeta.getText();
@@ -91,12 +99,26 @@ public class DirectorioController implements ActionListener {
             }
 
         }
+        //boton para agregar subcarpeta 
+        if (e.getSource() == vdirectorio.agregarsubcarpeta) {
+            SubCarpetas vsubcarpetas = new SubCarpetas(null, true);
+            int fila = vdirectorio.tablacarpetas.getSelectedRow();
+            if (fila >= 0) {
+                mdirectorio.setCarpeta(String.valueOf(vdirectorio.tablacarpetas.getValueAt(fila, 0)));
+                mdirectorio.setIddirectorios(Integer.parseInt(String.valueOf(vdirectorio.tablacarpetas.getValueAt(fila, 1))));
+                SubCarpetasController ctrsubcarpeta = new SubCarpetasController(msubcarpeta, csubcarpeta, vsubcarpetas, mdirectorio);
+                ctrsubcarpeta.iniciar();
+                vsubcarpetas.setVisible(true);
+            }
+        }
+
     }
 
     public void busqueda() {
-        Object[] dato = new Object[1];
+        Object[] dato = new Object[2];
         for (int i = 0; i < cdirectorio.llenar().size(); i++) {
-            dato[0] = cdirectorio.llenar().get(i);
+            dato[0] = cdirectorio.llenar().get(i).getCarpeta();
+            dato[1] = cdirectorio.llenar().get(i).getIddirectorios();
             model2.addRow(dato);
             vdirectorio.tablacarpetas.setModel(model2);
         }
