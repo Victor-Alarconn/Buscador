@@ -17,21 +17,18 @@ import modelo.Configuracion;
  * @author Yonathan Carvajal
  */
 public class Consultas_Configuraciones extends Conexion {
-    
+
     //consulta para registrar 
     public boolean registrar(Configuracion configuraciones) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-       
-        
-        
-        String sql = "INSERT INTO configuracion (idconfiguracion,directorio) VALUES(?,?) ";
-        
+        String sql = "INSERT INTO configuracion (idconfiguracion,directorio,usuarios_idusuario) VALUES(?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setInt(1, configuraciones.getIdconfiguracion());
             ps.setString(2, configuraciones.getDirectorio());
+            ps.setInt(3, configuraciones.getUsuarios_idusuario());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -44,8 +41,8 @@ public class Consultas_Configuraciones extends Conexion {
                 System.err.println(e);
             }
         }
-
     }
+
     //consulta para cargar las configuraciones en la vista
     public boolean cargar(Configuracion configuraciones) {
         PreparedStatement ps = null;
@@ -55,7 +52,7 @@ public class Consultas_Configuraciones extends Conexion {
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 configuraciones.setDirectorio(rs.getString("directorio"));
                 return true;
@@ -72,6 +69,7 @@ public class Consultas_Configuraciones extends Conexion {
             }
         }
     }
+
     //consulta para modificar las configuraciones
     public boolean modificar(Configuracion configuraciones) {
         PreparedStatement ps = null;

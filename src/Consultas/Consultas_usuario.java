@@ -13,7 +13,7 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import modelo.Cliente_Potencial;
+import modelo.Cliente;
 import modelo.Rol;
 import modelo.Usuario;
 import vistas.Configuraciones;
@@ -288,8 +288,8 @@ public class Consultas_usuario extends Conexion {
                 Principal principal = new Principal(user);
 //                user.setIdusuario(rs.getInt(1));
 
-                Cliente_Potencial mod = new Cliente_Potencial();
-                Consultas_Cliente_Potencial modcp = new Consultas_Cliente_Potencial();
+                Cliente mod = new Cliente();
+                Consultas_Cliente modcp = new Consultas_Cliente();
                 OrganizadorController bctrl = new OrganizadorController(mod, modcp, principal,user);
                 bctrl.iniciar();
 

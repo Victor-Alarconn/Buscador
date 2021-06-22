@@ -133,6 +133,7 @@ public class Editarcliente extends javax.swing.JDialog {
         jLabel22 = new javax.swing.JLabel();
         txtcontacto1 = new rojerusan.RSMetroTextFullPlaceHolder();
         jLabel41 = new javax.swing.JLabel();
+        clientepotencial = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -463,6 +464,9 @@ public class Editarcliente extends javax.swing.JDialog {
         jLabel41.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel41.setText("Contacto");
 
+        clientepotencial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        clientepotencial.setText("Cliente potencial");
+
         javax.swing.GroupLayout paneleditarLayout = new javax.swing.GroupLayout(paneleditar);
         paneleditar.setLayout(paneleditarLayout);
         paneleditarLayout.setHorizontalGroup(
@@ -509,10 +513,6 @@ public class Editarcliente extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtcodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneleditarLayout.createSequentialGroup()
-                                .addComponent(jLabel45)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtdv1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneleditarLayout.createSequentialGroup()
                                 .addComponent(jLabel47)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtcelular21, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -537,7 +537,13 @@ public class Editarcliente extends javax.swing.JDialog {
                                     .addComponent(bequipos1)
                                     .addGap(38, 38, 38)
                                     .addComponent(bredes1))
-                                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneleditarLayout.createSequentialGroup()
+                                .addComponent(jLabel45)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(paneleditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(clientepotencial)
+                                    .addComponent(txtdv1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(subpanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -546,7 +552,9 @@ public class Editarcliente extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneleditarLayout.createSequentialGroup()
                 .addGroup(paneleditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(paneleditarLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addGap(10, 10, 10)
+                        .addComponent(clientepotencial)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(paneleditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(paneleditarLayout.createSequentialGroup()
                                 .addGroup(paneleditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -619,8 +627,10 @@ public class Editarcliente extends javax.swing.JDialog {
                     .addComponent(bequipos1)
                     .addComponent(bsoftware1)
                     .addComponent(botro1))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -704,6 +714,7 @@ public class Editarcliente extends javax.swing.JDialog {
     public javax.swing.JRadioButton bredes1;
     public javax.swing.JRadioButton bsoftware1;
     public javax.swing.ButtonGroup buttonGroup1;
+    public javax.swing.JCheckBox clientepotencial;
     public javax.swing.JButton eliminardocumento1;
     public javax.swing.JButton eliminarservicio1;
     public com.toedter.calendar.JDateChooser fecha_inicio_docum1;

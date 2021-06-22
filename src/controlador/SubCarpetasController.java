@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Directorio;
 import modelo.Subcarpeta;
+import modelo.Usuario;
 import vistas.SubCarpetas;
 
 /**
@@ -25,15 +26,18 @@ public class SubCarpetasController implements ActionListener {
     private final Consultas_SubCarpetas csubcarpetas;
     private final SubCarpetas vsubcarpetas;
     private final Directorio mdirectotio;
+    private final Usuario user;
 
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
 
-    public SubCarpetasController(Subcarpeta msubcarpetas, Consultas_SubCarpetas csubcarpetas, SubCarpetas vsubcarpetas, Directorio mdirectotio) {
+    public SubCarpetasController(Subcarpeta msubcarpetas, Consultas_SubCarpetas csubcarpetas,
+            SubCarpetas vsubcarpetas, Directorio mdirectotio, Usuario user) {
         this.msubcarpetas = msubcarpetas;
         this.csubcarpetas = csubcarpetas;
         this.vsubcarpetas = vsubcarpetas;
         this.mdirectotio = mdirectotio;
+        this.user = user;
         this.vsubcarpetas.agregarsubcarpeta.addActionListener(this);
         this.vsubcarpetas.eliminaragregarsubcarpeta.addActionListener(this);
         this.vsubcarpetas.eliminarsubcarpeta.addActionListener(this);
@@ -48,7 +52,6 @@ public class SubCarpetasController implements ActionListener {
         vsubcarpetas.tablaagregarsubcarpetas.setModel(model);
         vsubcarpetas.tablasubcarpetas.setModel(model2);
         vsubcarpetas.labeltiitulo.setText(mdirectotio.getCarpeta());
-        
         llenartabla();
     }
 
@@ -62,7 +65,6 @@ public class SubCarpetasController implements ActionListener {
                 model.addRow(dato);
                 vsubcarpetas.tablaagregarsubcarpetas.setModel(model);
                 vsubcarpetas.txtregistrarsubcarpeta.setText("");
-
             }
         }
 
@@ -81,6 +83,7 @@ public class SubCarpetasController implements ActionListener {
             for (int i = 0; i < vsubcarpetas.tablaagregarsubcarpetas.getRowCount(); i++) {
                 msubcarpetas.setSubcarpeta(vsubcarpetas.tablaagregarsubcarpetas.getValueAt(i, 0).toString());
                 msubcarpetas.setDirectorios_iddirectorios(mdirectotio.getIddirectorios());
+                msubcarpetas.setUsuario_idusurio(user.getIdusuario());
                 if (!csubcarpetas.registrar(msubcarpetas)) {
                     JOptionPane.showMessageDialog(null, "error guardado de la subcarpeta");
                 } else {

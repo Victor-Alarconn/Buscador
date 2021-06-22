@@ -6,7 +6,6 @@
 package Consultas;
 
 import Conexion.Conexion;
-import Conexion.conect;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;

@@ -6,7 +6,7 @@
 package controlador;
 
 import Consultas.Consultas_Clase;
-import Consultas.Consultas_Cliente_Potencial;
+import Consultas.Consultas_Cliente;
 import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Documentos;
@@ -24,7 +24,7 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import modelo.Clases;
-import modelo.Cliente_Potencial;
+import modelo.Cliente;
 import modelo.Configuracion;
 import modelo.Directorio;
 import modelo.Documentos;
@@ -43,8 +43,8 @@ import vistas.Principal;
  */
 public class BusquedaController implements ActionListener {
 
-    private final Cliente_Potencial modelo;
-    private final Consultas_Cliente_Potencial consulta;
+    private final Cliente modelo;
+    private final Consultas_Cliente consulta;
     private final Principal principal;
 
     DefaultTableModel model = new DefaultTableModel();
@@ -76,7 +76,7 @@ public class BusquedaController implements ActionListener {
 
     Consultas_usuario consultasusuario = new Consultas_usuario();
 
-    public BusquedaController(Cliente_Potencial modelo, Consultas_Cliente_Potencial consulta, Principal principal) {
+    public BusquedaController(Cliente modelo, Consultas_Cliente consulta, Principal principal) {
         this.modelo = modelo;
         this.consulta = consulta;
         this.principal = principal;
@@ -128,7 +128,7 @@ public class BusquedaController implements ActionListener {
             int selecionar = principal.tabladatos.getSelectedRow();
             if (selecionar != -1) {
                 modelo.setIdclientes_potenciales(Integer.parseInt(String.valueOf(principal.tabladatos.getValueAt(selecionar, 0))));
-                EditarController editarcli = new EditarController(modelo, mods, shcp, documento,
+                EditarClienteController editarcli = new EditarClienteController(modelo, mods, shcp, documento,
                         mconfiguracion, servicio, consulta, cshcp, cdocumentos, cconfiguraciones, conc, conl,
                         editarcliente);
                 editarcli.iniciar();
@@ -179,8 +179,20 @@ public class BusquedaController implements ActionListener {
         }
         if (principal.txtbuscar.getText().length() > 0) {
             limpiartabla();
-            ArrayList<Cliente_Potencial> lista;
-            lista = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString());
+            ArrayList<Cliente> lista;
+//            String filtrocliente = null;
+//            if (principal.filtrocliente.getSelectedItem().toString().equals("cliente_potencial")) {
+//                filtrocliente = "1";
+//            }else{
+//                if (principal.filtrocliente.getSelectedItem().toString().equals("cliente")) {
+//                    filtrocliente = "0";
+//                }else{
+//                    if (principal.filtrocliente.getSelectedItem().toString().equals("todo")) {
+//                        
+//                    }
+//                }
+//            }
+            lista = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString(),principal.filtrocliente.getSelectedItem().toString());
             int cantidad = lista.size();
             Object[] dato = new Object[11];
             for (int i = 0; i < cantidad; i++) {

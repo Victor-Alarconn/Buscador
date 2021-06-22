@@ -6,7 +6,7 @@
 package controlador;
 
 import Consultas.Consultas_Clase;
-import Consultas.Consultas_Cliente_Potencial;
+import Consultas.Consultas_Cliente;
 import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Documentos;
@@ -26,7 +26,7 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.Cliente_Potencial;
+import modelo.Cliente;
 import modelo.Configuracion;
 import modelo.Documentos;
 import modelo.Servicio;
@@ -42,10 +42,10 @@ import modelo.Usuario;
  *
  * @author Yonathan Carvajal
  */
-public class Cliente_PotencialController implements ActionListener {
+public class ClientelController implements ActionListener {
 
     //modelo
-    private final Cliente_Potencial modelo;
+    private final Cliente modelo;
     private final Servicio mods;
     private final Servicios_has_Clientes_Potenciales shcp;
     private final Documentos mdocumento;
@@ -54,7 +54,7 @@ public class Cliente_PotencialController implements ActionListener {
 
     //consultas
     private final Consultas_Servicio cons;
-    private final Consultas_Cliente_Potencial consultas;
+    private final Consultas_Cliente consultas;
     private final Consultas_Servicios_has_Clientes_Potenciales cshcp;
     private final Consultas_Documentos cdocumentos;
     private final Consultas_Configuraciones cconfiguraciones;
@@ -66,7 +66,7 @@ public class Cliente_PotencialController implements ActionListener {
 
     ArrayList<Servicio> lista;
 
-    public Cliente_PotencialController(Cliente_Potencial modelo, Consultas_Cliente_Potencial consultas,
+    public ClientelController(Cliente modelo, Consultas_Cliente consultas,
             Formulario formulario, Consultas_Servicio cons, Servicio mods, Servicios_has_Clientes_Potenciales shcp,
             Consultas_Servicios_has_Clientes_Potenciales cshcp, Documentos documento, Consultas_Documentos cdocumentos,
             Configuracion mconfiguracion, Consultas_Configuraciones cconfiguraciones, Usuario user) {
@@ -180,8 +180,11 @@ public class Cliente_PotencialController implements ActionListener {
                                                 } else {
                                                     modelo.setDv(formulario.txtdv.getText());
                                                     modelo.setRuta(directorio + File.separator + formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase());
-
-                                                    //condicionales de selecion  de categoria 
+                                                    if (formulario.clientepotecial.isSelected()) {
+                                                        modelo.setCliente_potencial(1);
+                                                    }else{
+                                                        modelo.setCliente_potencial(0);
+                                                    }                                                                                                      //condicionales de selecion  de categoria 
                                                     if (formulario.bequipos.isSelected()) {
                                                         modelo.setCategoria("Equipos");
                                                     }

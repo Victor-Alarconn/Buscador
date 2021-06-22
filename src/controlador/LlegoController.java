@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Llego;
+import modelo.Usuario;
 import vistas.Configuraciones;
 import vistas.Otros;
 import vistas.Principal;
@@ -25,15 +26,16 @@ public class LlegoController implements ActionListener{
     private final Llego ml;
     private final Consultas_Llego cl;
     private final Otros vl;
+    private final Usuario user;
 
     DefaultTableModel modell = new DefaultTableModel();
     DefaultTableModel modell2 = new DefaultTableModel();
 
-    public LlegoController(Llego ml, Consultas_Llego cl, Otros vl) {
+    public LlegoController(Llego ml, Consultas_Llego cl, Otros vl, Usuario user) {
         this.ml = ml;
         this.cl = cl;
         this.vl = vl;
-        
+        this.user = user;
         this.vl.agregarllego.addActionListener(this);
         this.vl.eliminaragregarllego.addActionListener(this);
         this.vl.eliminarllego.addActionListener(this);
@@ -54,6 +56,7 @@ public class LlegoController implements ActionListener{
          if (e.getSource() == vl.guardarllego) {
             for (int i = 0; i < vl.tablaagregarllego.getRowCount(); i++) {
                 ml.setLlego(vl.tablaagregarllego.getValueAt(i, 0).toString());
+                ml.setUsuarios_idusuarios(user.getIdusuario());
                 if (!cl.registrar(ml)) {
                     JOptionPane.showMessageDialog(null, "error guardando la clase");
                 }

@@ -12,7 +12,16 @@ package modelo;
 public class Directorio {
     private int iddirectorios;
     private String carpeta;
+    private int usuarios_idusuarios;
 
+    public int getUsuarios_idusuarios() {
+        return usuarios_idusuarios;
+    }
+
+    public void setUsuarios_idusuarios(int usuarios_idusuarios) {
+        this.usuarios_idusuarios = usuarios_idusuarios;
+    }
+    
     public int getIddirectorios() {
         return iddirectorios;
     }

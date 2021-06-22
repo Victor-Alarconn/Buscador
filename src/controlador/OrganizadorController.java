@@ -6,7 +6,7 @@
 package controlador;
 
 import Consultas.Consultas_Clase;
-import Consultas.Consultas_Cliente_Potencial;
+import Consultas.Consultas_Cliente;
 import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Documentos;
@@ -26,7 +26,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.table.DefaultTableModel;
 import modelo.Clases;
-import modelo.Cliente_Potencial;
+import modelo.Cliente;
 import modelo.Configuracion;
 import modelo.Directorio;
 import modelo.Documentos;
@@ -50,8 +50,8 @@ import vistas.Usuarios;
  */
 public class OrganizadorController implements ActionListener {
 
-    private final Cliente_Potencial modelo;
-    private final Consultas_Cliente_Potencial consulta;
+    private final Cliente modelo;
+    private final Consultas_Cliente consulta;
     private final Principal principal;
     private final Usuario mod;
 
@@ -84,7 +84,7 @@ public class OrganizadorController implements ActionListener {
 
     Consultas_usuario consultasusuario = new Consultas_usuario();
 
-    public OrganizadorController(Cliente_Potencial modelo, Consultas_Cliente_Potencial consulta, Principal principal, Usuario mod) {
+    public OrganizadorController(Cliente modelo, Consultas_Cliente consulta, Principal principal, Usuario mod) {
         this.modelo = modelo;
         this.consulta = consulta;
         this.principal = principal;
@@ -107,7 +107,7 @@ public class OrganizadorController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == principal.crearcliente) {
             Formulario formulario = new Formulario(principal, true);
-            Cliente_PotencialController controlador = new Cliente_PotencialController(modelo, consulta,
+            ClientelController controlador = new ClientelController(modelo, consulta,
                     formulario, servicio, mods, shcp, cshcp, documento, cdocumentos,
                     mconfiguracion, cconfiguraciones, mod);
             controlador.iniciar();
@@ -116,8 +116,7 @@ public class OrganizadorController implements ActionListener {
 
         if (e.getSource() == principal.configuraciones1) {
             Configuraciones vc = new Configuraciones(principal, true);
-            
-            ConfiguracionesController ccontroller = new ConfiguracionesController(mconfiguracion, cconfiguraciones, vc);
+            ConfiguracionesController ccontroller = new ConfiguracionesController(mconfiguracion, cconfiguraciones, vc, mod);
             ccontroller.iniciar();
             vc.setVisible(true);
         }
@@ -130,16 +129,16 @@ public class OrganizadorController implements ActionListener {
 //        }
         if (e.getSource() == principal.servicios) {
             Servicios servic= new Servicios(principal, true);
-            ServicioController ctrl = new ServicioController(mods, servicio, servic);
+            ServicioController ctrl = new ServicioController(mods, servicio, servic, mod);
             ctrl.iniciar();
             servic.setVisible(true);     
         }
         if (e.getSource() == principal.otro) {
             Otros otro = new Otros(principal, true);
-            ClaseController cctrl = new ClaseController(conc, mc, otro);
+            ClaseController cctrl = new ClaseController(conc, mc, otro, mod);
             cctrl.iniciar();
 
-            LlegoController lc = new LlegoController(ml, conl, otro);
+            LlegoController lc = new LlegoController(ml, conl, otro, mod);
             lc.iniciar();
             otro.setVisible(true);
             
@@ -156,7 +155,7 @@ public class OrganizadorController implements ActionListener {
         
         if (e.getSource() == principal.carpetas) {
             Carpetas carpeta = new Carpetas(principal, true);
-            DirectorioController ctrc = new DirectorioController(modc1, mod1, carpeta);
+            DirectorioController ctrc = new DirectorioController(modc1, mod1, carpeta, mod);
             ctrc.iniciar();
             carpeta.setVisible(true);
         }

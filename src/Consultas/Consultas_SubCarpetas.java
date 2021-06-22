@@ -24,11 +24,12 @@ public class Consultas_SubCarpetas extends Conexion{
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "INSERT INTO subcarpetas (subcarpeta, directorios_iddirectorios) VALUES(?,?)";
+        String sql = "INSERT INTO subcarpetas (subcarpeta, directorios_iddirectorios, usuarios_idusuario) VALUES(?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, subcarpeta.getSubcarpeta());
             ps.setInt(2, subcarpeta.getDirectorios_iddirectorios());
+            ps.setInt(3, subcarpeta.getUsuario_idusurio());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -73,7 +74,7 @@ public class Consultas_SubCarpetas extends Conexion{
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = "SELECT * FROM organizador.subcarpetas WHERE directorios_iddirectorios=?";
+        String sql = "SELECT * FROM subcarpetas WHERE directorios_iddirectorios=?";
 
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
@@ -102,7 +103,7 @@ public class Consultas_SubCarpetas extends Conexion{
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = "SELECT * FROM organizador.subcarpetas";
+        String sql = "SELECT * FROM subcarpetas";
 
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);

@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Directorio;
 import modelo.Subcarpeta;
+import modelo.Usuario;
 import vistas.Carpetas;
 import vistas.Configuraciones;
 import vistas.SubCarpetas;
@@ -27,6 +28,7 @@ public class DirectorioController implements ActionListener {
     private final Consultas_Directorio cdirectorio;
     private final Directorio mdirectorio;
     private final Carpetas vdirectorio;
+    private Usuario user;
 
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
@@ -34,10 +36,12 @@ public class DirectorioController implements ActionListener {
     Subcarpeta msubcarpeta = new Subcarpeta();
     Consultas_SubCarpetas csubcarpeta = new Consultas_SubCarpetas();
 
-    public DirectorioController(Consultas_Directorio cdirectorio, Directorio mdirectorio, Carpetas vdirectorio) {
+    public DirectorioController(Consultas_Directorio cdirectorio, 
+            Directorio mdirectorio, Carpetas vdirectorio, Usuario user) {
         this.cdirectorio = cdirectorio;
         this.mdirectorio = mdirectorio;
         this.vdirectorio = vdirectorio;
+        this.user = user;
         this.vdirectorio.agregarcarpeta.addActionListener(this);
         this.vdirectorio.eliminaragregarcarpeta.addActionListener(this);
         this.vdirectorio.eliminarcarpeta.addActionListener(this);
@@ -63,6 +67,7 @@ public class DirectorioController implements ActionListener {
         if (e.getSource() == vdirectorio.guardarcarpeta) {
             for (int i = 0; i < vdirectorio.tablaagregarcarpetas.getRowCount(); i++) {
                 mdirectorio.setCarpeta(vdirectorio.tablaagregarcarpetas.getValueAt(i, 0).toString());
+                mdirectorio.setUsuarios_idusuarios(user.getIdusuario());
                 if (!cdirectorio.registrar(mdirectorio)) {
                     JOptionPane.showMessageDialog(null, "error guardado de documento");
                 }
@@ -107,7 +112,7 @@ public class DirectorioController implements ActionListener {
             if (fila >= 0) {
                 mdirectorio.setCarpeta(String.valueOf(vdirectorio.tablacarpetas.getValueAt(fila, 0)));
                 mdirectorio.setIddirectorios(Integer.parseInt(String.valueOf(vdirectorio.tablacarpetas.getValueAt(fila, 1))));
-                SubCarpetasController ctrsubcarpeta = new SubCarpetasController(msubcarpeta, csubcarpeta, vsubcarpetas, mdirectorio);
+                SubCarpetasController ctrsubcarpeta = new SubCarpetasController(msubcarpeta, csubcarpeta, vsubcarpetas, mdirectorio, user);
                 ctrsubcarpeta.iniciar();
                 vsubcarpetas.setVisible(true);
             }

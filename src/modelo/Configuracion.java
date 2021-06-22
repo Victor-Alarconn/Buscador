@@ -12,8 +12,16 @@ package modelo;
 public class Configuracion {
     private int idconfiguracion;
     private String directorio;
+    private int usuarios_idusuario;
 
+    public int getUsuarios_idusuario() {
+        return usuarios_idusuario;
+    }
 
+    public void setUsuarios_idusuario(int usuarios_idusuario) {
+        this.usuarios_idusuario = usuarios_idusuario;
+    }
+    
     public int getIdconfiguracion() {
         return idconfiguracion;
     }

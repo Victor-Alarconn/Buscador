@@ -12,6 +12,15 @@ package modelo;
 public class Clases {
     private int idclases;
     private String clase;
+    private int usuarios_idusuarios;
+
+    public int getUsuarios_idusuarios() {
+        return usuarios_idusuarios;
+    }
+
+    public void setUsuarios_idusuarios(int usuarios_idusuarios) {
+        this.usuarios_idusuarios = usuarios_idusuarios;
+    }
 
     public int getIdclases() {
         return idclases;

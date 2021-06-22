@@ -24,14 +24,18 @@ public class ConfiguracionesController implements ActionListener {
     private final Configuracion mconfiguraciones;
     private final Consultas_Configuraciones cconfiguraciones;
     private final Configuraciones vconfiguraciones;
+    private final Usuario user;
 
     Consultas_usuario cu = new Consultas_usuario();
     Usuario u = new Usuario();
 
-    public ConfiguracionesController(Configuracion mconfiguraciones, Consultas_Configuraciones cconfiguraciones, Configuraciones vconfiguraciones) {
+    public ConfiguracionesController(Configuracion mconfiguraciones, 
+            Consultas_Configuraciones cconfiguraciones, 
+            Configuraciones vconfiguraciones, Usuario user) {
         this.mconfiguraciones = mconfiguraciones;
         this.cconfiguraciones = cconfiguraciones;
         this.vconfiguraciones = vconfiguraciones;
+        this.user = user;
         this.vconfiguraciones.guardarconfiguracion.addActionListener(this);
     }
 
@@ -46,6 +50,8 @@ public class ConfiguracionesController implements ActionListener {
         if (e.getSource() == vconfiguraciones.guardarconfiguracion) {
             mconfiguraciones.setIdconfiguracion(1);
             mconfiguraciones.setDirectorio(vconfiguraciones.txtdirectorio.getText());
+            System.out.println(user.getIdusuario());
+            mconfiguraciones.setUsuarios_idusuario(1);
             if (cconfiguraciones.modificar(mconfiguraciones)) {
                 JOptionPane.showMessageDialog(vconfiguraciones, "registro guardado");
                 if (!vconfiguraciones.usuariodefecto.isSelected()) {

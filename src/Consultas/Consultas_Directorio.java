@@ -24,10 +24,11 @@ public class Consultas_Directorio extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "INSERT INTO directorios (carpeta) VALUES(?)";
+        String sql = "INSERT INTO directorios (carpeta, usuarios_idusuario) VALUES(?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, directorio.getCarpeta());
+            ps.setInt(2, directorio.getUsuarios_idusuarios());
             ps.execute();
             return true;
         } catch (SQLException e) {

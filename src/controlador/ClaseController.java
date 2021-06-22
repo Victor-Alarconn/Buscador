@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Clases;
+import modelo.Usuario;
 import vistas.Configuraciones;
 import vistas.Otros;
 
@@ -25,14 +26,16 @@ public class ClaseController implements ActionListener {
     private final Consultas_Clase cc;
     private final Clases mc;
     private final Otros vc;
+    private final Usuario user;
 
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
 
-    public ClaseController(Consultas_Clase cc, Clases mc, Otros vc) {
+    public ClaseController(Consultas_Clase cc, Clases mc, Otros vc, Usuario user) {
         this.cc = cc;
         this.mc = mc;
         this.vc = vc;
+        this.user = user;
         this.vc.guardarclase.addActionListener(this);
         this.vc.agregarclase.addActionListener(this);
         this.vc.eliminarclase.addActionListener(this);
@@ -55,6 +58,7 @@ public class ClaseController implements ActionListener {
         if (e.getSource() == vc.guardarclase) {
             for (int i = 0; i < vc.tablaagregarclase.getRowCount(); i++) {
                 mc.setClase(vc.tablaagregarclase.getValueAt(i, 0).toString());
+                mc.setUsuarios_idusuarios(user.getIdusuario());
                 if (!cc.registrar(mc)) {
                     JOptionPane.showMessageDialog(null, "error guardando la clase");
                 }

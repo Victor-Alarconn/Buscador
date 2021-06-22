@@ -6,7 +6,7 @@
 package controlador;
 
 import Consultas.Consultas_Clase;
-import Consultas.Consultas_Cliente_Potencial;
+import Consultas.Consultas_Cliente;
 import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Documentos;
@@ -23,7 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.Cliente_Potencial;
+import modelo.Cliente;
 import modelo.Configuracion;
 import modelo.Directorio;
 import modelo.Documentos;
@@ -35,10 +35,10 @@ import vistas.Editarcliente;
  *
  * @author yonathan
  */
-public class EditarController implements ActionListener {
+public class EditarClienteController implements ActionListener {
 
     //modelo
-    private final Cliente_Potencial modelo;
+    private final Cliente modelo;
     private final Servicio mods;
     private final Servicios_has_Clientes_Potenciales shcp;
     private final Documentos mdocumento;
@@ -46,7 +46,7 @@ public class EditarController implements ActionListener {
 
     //consultas
     private final Consultas_Servicio cons;
-    private final Consultas_Cliente_Potencial consultas;
+    private final Consultas_Cliente consultas;
     private final Consultas_Servicios_has_Clientes_Potenciales cshcp;
     private final Consultas_Documentos cdocumentos;
     private final Consultas_Configuraciones cconfiguraciones;
@@ -62,9 +62,9 @@ public class EditarController implements ActionListener {
     ArrayList<Servicio> lista;
     ArrayList<Servicio> servicio;
 
-    public EditarController(Cliente_Potencial modelo, Servicio mods,
+    public EditarClienteController(Cliente modelo, Servicio mods,
             Servicios_has_Clientes_Potenciales shcp, Documentos mdocumento, Configuracion mconfiguracion,
-            Consultas_Servicio cons, Consultas_Cliente_Potencial consultas,
+            Consultas_Servicio cons, Consultas_Cliente consultas,
             Consultas_Servicios_has_Clientes_Potenciales cshcp, Consultas_Documentos cdocumentos,
             Consultas_Configuraciones cconfiguraciones, Consultas_Clase cc, Consultas_Llego cl,
             Editarcliente formulario) {
@@ -346,7 +346,11 @@ public class EditarController implements ActionListener {
                 formulario.txtclase1.addItem(modelo.getClase());
                 formulario.txtempresa1.setText(modelo.getEmpresa());
                 formulario.txtcontacto1.setText(modelo.getContacto());
-
+                if (modelo.getCliente_potencial()== 1) {
+                    formulario.clientepotencial.setSelected(true);
+                }else{
+                    formulario.clientepotencial.setSelected(false);
+                }
                 if (modelo.getCategoria().equals("Equipos")) {
                     formulario.bequipos1.setSelected(true);
                 } else {
@@ -366,7 +370,7 @@ public class EditarController implements ActionListener {
                     }
                 }
             } catch (ParseException ex) {
-                Logger.getLogger(EditarController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EditarClienteController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         lista2 = cc.llenar();

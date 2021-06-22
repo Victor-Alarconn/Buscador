@@ -24,10 +24,11 @@ public class Consultas_Llego extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "INSERT INTO llego (llego) VALUES(?)";
+        String sql = "INSERT INTO llego (llego,usuarios_idusuario) VALUES(?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, llego.getLlego());
+            ps.setInt(2, llego.getUsuarios_idusuarios());
             ps.execute();
             return true;
         } catch (SQLException e) {

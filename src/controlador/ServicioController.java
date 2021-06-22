@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Servicio;
+import modelo.Usuario;
 import vistas.Configuraciones;
 import vistas.Principal;
 import vistas.Servicios;
@@ -25,14 +26,16 @@ public class ServicioController implements ActionListener {
     private final Servicio modelo;
     private final Consultas_Servicio consulta;
     private final Servicios vservicios;
+    private final Usuario user;
 
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
 
-    public ServicioController(Servicio modelo, Consultas_Servicio consulta, Servicios vservicios) {
+    public ServicioController(Servicio modelo, Consultas_Servicio consulta, Servicios vservicios, Usuario user) {
         this.modelo = modelo;
         this.consulta = consulta;
         this.vservicios = vservicios;
+        this.user = user;
         this.vservicios.registrarservicio.addActionListener(this);
         this.vservicios.eliminartablaagregarservicio.addActionListener(this);
         this.vservicios.eliminartablaservico.addActionListener(this);
@@ -54,6 +57,7 @@ public class ServicioController implements ActionListener {
         if (e.getSource() == vservicios.guardarservicios) {
             for (int i = 0; i < vservicios.tablaagregarservicios.getRowCount(); i++) {
                 modelo.setServicio(vservicios.tablaagregarservicios.getValueAt(i, 0).toString());
+                modelo.setUsuarios_idusuarios(user.getIdusuario());
                 if (!consulta.registrar(modelo)) {
                     JOptionPane.showMessageDialog(null, "error guardado de documento");
                 }

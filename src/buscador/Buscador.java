@@ -5,7 +5,7 @@
  */
 package buscador;
 
-import Consultas.Consultas_Cliente_Potencial;
+import Consultas.Consultas_Cliente;
 import Consultas.Consultas_roles;
 import Consultas.Consultas_usuario;
 
@@ -18,7 +18,7 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import modelo.Cliente_Potencial;
+import modelo.Cliente;
 import modelo.Rol;
 import modelo.Usuario;
 

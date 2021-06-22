@@ -11,7 +11,7 @@ import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import modelo.Cliente_Potencial;
+import modelo.Cliente;
 import modelo.Documentos;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
@@ -20,16 +20,18 @@ import modelo.Servicios_has_Clientes_Potenciales;
  *
  * @author Yonathan Carvajal
  */
-public class Consultas_Cliente_Potencial extends Conexion {
+public class Consultas_Cliente extends Conexion {
 
     //consulta para registrar 
-    public boolean registrar(Cliente_Potencial cliente) {
+    public boolean registrar(Cliente cliente) {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
         String sql = "INSERT INTO clientes_potenciales (nit,nombre,empresa,"
-                + "celular1,celular2,email,fecha_llegada,clase,retiro,notas,codigo,llego,categoria,ruta,dv,usuarios_idusuario,fecha_arriendo,contacto) VALUES(?,?,"
-                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "celular1,celular2,email,fecha_llegada,clase,"
+                + "retiro,notas,codigo,llego,categoria,ruta,dv,"
+                + "usuarios_idusuario,fecha_arriendo,contacto,cliente_potencial) VALUES(?,?,"
+                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, cliente.getNit());
@@ -50,6 +52,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
             ps.setInt(16, cliente.getUsuarios_idusuario());
             ps.setString(17, cliente.getFecha_arriendo());
             ps.setString(18, cliente.getContacto());
+            ps.setInt(19, cliente.getCliente_potencial());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -66,7 +69,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
     }
 
     //consulta para modificar
-    public boolean modificar(Cliente_Potencial cliente) {
+    public boolean modificar(Cliente cliente) {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = "UPDATE  clientes_potenciales SET nit=?, nombre=?, empresa=?,"
@@ -108,7 +111,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
     }
 
     //consulta para eliminar
-    public boolean eliminar(Cliente_Potencial cliente) {
+    public boolean eliminar(Cliente cliente) {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = " DELETE FROM clientes_potenciales  WHERE idclientes_potenciales=? ";
@@ -131,7 +134,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
     }
 
     //consulta para buscar cliente 
-    public boolean buscar(Cliente_Potencial cliente) {
+    public boolean buscar(Cliente cliente) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
@@ -160,6 +163,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
                 cliente.setDv(rs.getString("dv"));
                 cliente.setFecha_arriendo(rs.getString("fecha_arriendo"));
                 cliente.setContacto(rs.getString("contacto"));
+                cliente.setCliente_potencial(rs.getInt("cliente_potencial"));
                 return true;
             }
 
@@ -178,7 +182,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
     }
 
     //consulta para buscar por el nit del cliente
-    public boolean buscarr(Cliente_Potencial cliente) {
+    public boolean buscarr(Cliente cliente) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
@@ -223,18 +227,23 @@ public class Consultas_Cliente_Potencial extends Conexion {
     }
 
     //consulta para buscar si el nit del cliente contie un parametro
-    public ArrayList<Cliente_Potencial> buscarcaracter(String parametro, String filtro) {
+    public ArrayList<Cliente> buscarcaracter(String parametro, String filtro, String filtrocliente) {
         ArrayList listaPersona = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = " SELECT * FROM clientes_potenciales  WHERE " + filtro + " LIKE'%" + parametro + "%'";
-
+        String sql = null;
+        if (filtrocliente.equals("todo")) {
+            sql = " SELECT * FROM clientes_potenciales  WHERE " + filtro + " LIKE'%" + parametro + "%'";
+        } else {
+            sql = " SELECT * FROM clientes_potenciales  WHERE " + filtro + " LIKE'%" + parametro + "%' AND cliente_potencial=" + filtrocliente + " ";
+        }
+        System.out.println(sql);
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery(sql);
             while (rs.next()) {
-                Cliente_Potencial cliente = new Cliente_Potencial();
+                Cliente cliente = new Cliente();
                 cliente.setIdclientes_potenciales(Integer.parseInt(rs.getString(1)));
                 cliente.setNit(rs.getString(2));
                 cliente.setNombre(rs.getString(3));
@@ -263,7 +272,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
     }
 
     //consulta para llenar la tabla de servicios del formulario editar 
-    public ArrayList<Servicio> llenar(Cliente_Potencial cliente) {
+    public ArrayList<Servicio> llenar(Cliente cliente) {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -298,7 +307,7 @@ public class Consultas_Cliente_Potencial extends Conexion {
     }
 
     //consulta para llenar la tabla documentos en el formulario editar
-    public ArrayList<Documentos> clientedocumentos(Cliente_Potencial cliente) {
+    public ArrayList<Documentos> clientedocumentos(Cliente cliente) {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;

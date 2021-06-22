@@ -74,6 +74,8 @@ public class EditarUsuarioController implements ActionListener {
                     }
                     if (vista.checkotros.isSelected()) {
                         modelo.setOtros(1);
+                    }else{
+                        modelo.setOtros(0);
                     }
                     if (vista.checkcrearusuario.isSelected()) {
                         modelo.setCrearusuarios(1);

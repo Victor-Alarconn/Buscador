@@ -14,7 +14,16 @@ public class Subcarpeta {
     private int idsubcarpetas;
     private String subcarpeta;
     private int directorios_iddirectorios;
+    private int usuario_idusurio;
 
+    public int getUsuario_idusurio() {
+        return usuario_idusurio;
+    }
+
+    public void setUsuario_idusurio(int usuario_idusurio) {
+        this.usuario_idusurio = usuario_idusurio;
+    } 
+    
     public int getIdsubcarpetas() {
         return idsubcarpetas;
     }

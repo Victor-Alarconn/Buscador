@@ -133,6 +133,7 @@ public class Principal extends javax.swing.JFrame {
         editar = new javax.swing.JButton();
         abrirarchivos = new javax.swing.JButton();
         filtro = new rojerusan.RSComboMetro();
+        filtrocliente = new rojerusan.RSComboMetro();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -264,7 +265,14 @@ public class Principal extends javax.swing.JFrame {
         filtro.setColorBorde(new java.awt.Color(102, 102, 102));
         filtro.setColorFondo(new java.awt.Color(102, 102, 102));
         filtro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        panelprincipal.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 220, 40));
+        panelprincipal.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 140, 40));
+
+        filtrocliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "todo", "cliente_potencial", "cliente" }));
+        filtrocliente.setColorArrow(new java.awt.Color(0, 0, 0));
+        filtrocliente.setColorBorde(new java.awt.Color(102, 102, 102));
+        filtrocliente.setColorFondo(new java.awt.Color(102, 102, 102));
+        filtrocliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        panelprincipal.add(filtrocliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 190, 40));
 
         jPanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, 830));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -351,6 +359,7 @@ public class Principal extends javax.swing.JFrame {
     public javax.swing.JButton crearusuario;
     public javax.swing.JButton editar;
     public rojerusan.RSComboMetro filtro;
+    public rojerusan.RSComboMetro filtrocliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

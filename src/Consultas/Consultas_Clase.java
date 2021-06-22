@@ -23,10 +23,11 @@ public class Consultas_Clase  extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "INSERT INTO clases (clase) VALUES(?)";
+        String sql = "INSERT INTO clases (clase,usuarios_idusuario) VALUES(?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, clases.getClase());
+            ps.setInt(2, clases.getUsuarios_idusuarios());
             ps.execute();
             return true;
         } catch (SQLException e) {

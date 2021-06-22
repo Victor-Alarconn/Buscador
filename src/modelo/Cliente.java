@@ -9,7 +9,7 @@ package modelo;
  *
  * @author Yonathan Carvajal
  */
-public class Cliente_Potencial {
+public class Cliente {
     private int idclientes_potenciales;
     private String nit;
     private String nombre;
@@ -29,7 +29,16 @@ public class Cliente_Potencial {
     private int usuarios_idusuario;
     private String fecha_arriendo;
     private String contacto;
+    private int cliente_potencial;
 
+    public int getCliente_potencial() {
+        return cliente_potencial;
+    }
+
+    public void setCliente_potencial(int cliente_potencial) {
+        this.cliente_potencial = cliente_potencial;
+    }
+    
     public String getContacto() {
         return contacto;
     }
