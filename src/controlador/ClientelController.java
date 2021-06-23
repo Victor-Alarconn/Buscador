@@ -304,6 +304,7 @@ public class ClientelController implements ActionListener {
         }
 
     }
+
     // funcion para crear una carpeta 
     private void crear_carpeta(String path) {
         Consultas_Directorio cd = new Consultas_Directorio();
@@ -330,27 +331,18 @@ public class ClientelController implements ActionListener {
                 carpetas[i] = cd.llenar().get(i).getCarpeta();
                 idcarpetas[i] = cd.llenar().get(i).getIddirectorios();
             }
-            if (file.mkdir()) {
-                for (int i = 0; i < directorios.size(); i++) {
-                    File fil = Crear_archivo(path + File.separator + nombre, carpetas[i].toString());
-                    if (fil.mkdir()) {
-                        System.out.println(fil);
-                        for (int j = 0; j < subcategorias.length; j++) {
-                            if (idsubcategorias[j].equals(idcarpetas[i])) {
-                                File subfile = Crear_archivo(fil.toString(), subcategorias[j].toString());
-                                System.out.println(subfile);
-                                if (!subfile.mkdir()) {
-                                    JOptionPane.showMessageDialog(formulario, "error creando la subcarpeta");
-                                }
-                            }
-                        }
-                    }else{
-                        JOptionPane.showMessageDialog(formulario, "error creando la carpetainterna");
+            file.mkdir();
+            for (int i = 0; i < directorios.size(); i++) {
+                File fil = Crear_archivo(path+File.separator+nombre, carpetas[i].toString());
+                System.out.println("carpeta "+fil);
+                fil.mkdir();
+                for (int j = 0; j < subcategorias.length; j++) {
+                    if (idsubcategorias[j].equals(idcarpetas[i])) {
+                        File subfile = Crear_archivo(fil.toString(), subcategorias[j].toString());
+                        System.out.println("sub "+subfile);
+                        subfile.mkdir();
                     }
-
                 }
-            } else {
-                JOptionPane.showMessageDialog(formulario, "error creando la carpeta");
             }
             abrirarchivo(directorio + File.separator + nombre);
         }
