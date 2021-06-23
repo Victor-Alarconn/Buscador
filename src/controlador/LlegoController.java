@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelo.Llego;
 import modelo.Usuario;
@@ -49,6 +51,11 @@ public class LlegoController implements ActionListener{
         vl.tablaagregarllego.setModel(modell);
         vl.tablallego.setModel(modell2);
         busqueda();
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+        vl.tablallego.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
+        vl.tablaagregarllego.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
+        vl.tablallego.setFont(new java.awt.Font("Tahoma", 0, 20));
     }
 
     @Override

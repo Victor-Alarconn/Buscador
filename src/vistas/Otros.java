@@ -5,9 +5,12 @@
  */
 package vistas;
 
+
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -67,24 +70,26 @@ public class Otros extends javax.swing.JDialog {
     private void initComponents() {
 
         panelotros = new javax.swing.JPanel();
-        eliminarllego = new javax.swing.JButton();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        tablallego = new rojerusan.RSTableMetro();
-        txtregistrarllego = new rojerusan.RSMetroTextFullPlaceHolder();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        tablaagregarllego = new rojerusan.RSTableMetro();
         agregarclase = new javax.swing.JButton();
         eliminaragregarclase = new javax.swing.JButton();
         guardarclase = new javax.swing.JButton();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        tablaclase = new rojerusan.RSTableMetro();
-        jScrollPane13 = new javax.swing.JScrollPane();
-        tablaagregarclase = new rojerusan.RSTableMetro();
-        txtregistrarclase = new rojerusan.RSMetroTextFullPlaceHolder();
         agregarllego = new javax.swing.JButton();
         eliminaragregarllego = new javax.swing.JButton();
         guardarllego = new javax.swing.JButton();
         eliminarclase = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaagregarclase = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaclase = new javax.swing.JTable();
+        txtregistrarclase = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablallego = new javax.swing.JTable();
+        txtregistrarllego = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tablaagregarllego = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        eliminarllego = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -93,100 +98,61 @@ public class Otros extends javax.swing.JDialog {
         panelotros.setName("panelotros"); // NOI18N
         panelotros.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        eliminarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        eliminarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(eliminarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 65, -1));
-
-        tablallego.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        tablallego.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
-        tablallego.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
-        tablallego.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
-        tablallego.setColorSelBackgound(new java.awt.Color(216, 74, 44));
-        tablallego.setRowHeight(30);
-        jScrollPane10.setViewportView(tablallego);
-
-        panelotros.add(jScrollPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 276, 260));
-
-        txtregistrarllego.setForeground(new java.awt.Color(0, 0, 0));
-        txtregistrarllego.setBorderColor(new java.awt.Color(102, 102, 102));
-        txtregistrarllego.setPhColor(new java.awt.Color(216, 74, 44));
-        txtregistrarllego.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtregistrarllegoActionPerformed(evt);
-            }
-        });
-        panelotros.add(txtregistrarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 276, -1));
-
-        tablaagregarllego.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        tablaagregarllego.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
-        tablaagregarllego.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
-        tablaagregarllego.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
-        tablaagregarllego.setColorSelBackgound(new java.awt.Color(216, 74, 44));
-        tablaagregarllego.setRowHeight(30);
-        jScrollPane11.setViewportView(tablaagregarllego);
-
-        panelotros.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 276, 210));
-
         agregarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
+        agregarclase.setText("Agregar");
         agregarclase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(agregarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 30, 70, 57));
+        panelotros.add(agregarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 110, 57));
 
         eliminaragregarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        eliminaragregarclase.setText("Eliminar");
         eliminaragregarclase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(eliminaragregarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, 70, -1));
+        panelotros.add(eliminaragregarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 110, -1));
 
         guardarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
+        guardarclase.setText("Guardar");
         guardarclase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(guardarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 230, 70, -1));
+        panelotros.add(guardarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 110, -1));
 
-        tablaclase.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        tablaclase.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
-        tablaclase.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
-        tablaclase.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
-        tablaclase.setColorSelBackgound(new java.awt.Color(216, 74, 44));
-        tablaclase.setRowHeight(30);
-        jScrollPane12.setViewportView(tablaclase);
+        agregarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
+        agregarllego.setText("Agregar");
+        agregarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
+        panelotros.add(agregarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 270, 110, 57));
 
-        panelotros.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 276, 260));
+        eliminaragregarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        eliminaragregarllego.setText("Eliminar");
+        eliminaragregarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
+        panelotros.add(eliminaragregarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, 110, -1));
+
+        guardarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
+        guardarllego.setText("Guardar");
+        guardarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
+        panelotros.add(guardarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, 110, -1));
+
+        eliminarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        eliminarclase.setText("Eliminar");
+        eliminarclase.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        panelotros.add(eliminarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, -1));
 
         tablaagregarclase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
                 {null},
+                {null}
+            },
+            new String [] {
+                "Title 1"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaagregarclase);
+
+        panelotros.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 170, 180));
+
+        tablaclase.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tablaclase.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
                 {null},
                 {null}
             },
@@ -194,72 +160,105 @@ public class Otros extends javax.swing.JDialog {
                 "Title 1"
             }
         ));
-        tablaagregarclase.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
-        tablaagregarclase.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
-        tablaagregarclase.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
-        tablaagregarclase.setColorSelBackgound(new java.awt.Color(216, 74, 44));
-        tablaagregarclase.setRowHeight(30);
-        jScrollPane13.setViewportView(tablaagregarclase);
+        jScrollPane2.setViewportView(tablaclase);
 
-        panelotros.add(jScrollPane13, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 276, 210));
+        panelotros.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 170, 210));
+        panelotros.add(txtregistrarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 170, -1));
 
-        txtregistrarclase.setForeground(new java.awt.Color(0, 0, 0));
-        txtregistrarclase.setBorderColor(new java.awt.Color(102, 102, 102));
-        txtregistrarclase.setPhColor(new java.awt.Color(216, 74, 44));
-        txtregistrarclase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtregistrarclaseActionPerformed(evt);
+        tablallego.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Title 1"
             }
-        });
-        panelotros.add(txtregistrarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 276, -1));
+        ));
+        jScrollPane3.setViewportView(tablallego);
 
-        agregarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        agregarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(agregarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 320, 70, 57));
+        panelotros.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 170, 210));
+        panelotros.add(txtregistrarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, 170, -1));
 
-        eliminaragregarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        eliminaragregarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(eliminaragregarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 390, 70, -1));
+        tablaagregarllego.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Title 1"
+            }
+        ));
+        jScrollPane4.setViewportView(tablaagregarllego);
 
-        guardarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
-        guardarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(guardarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 520, 72, -1));
+        panelotros.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, 170, 180));
 
-        eliminarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        eliminarclase.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        panelotros.add(eliminarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 65, -1));
+        jPanel1.setBackground(new java.awt.Color(159, 213, 209));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 658, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 228, Short.MAX_VALUE)
+        );
+
+        panelotros.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 660, 230));
+
+        jPanel2.setBackground(new java.awt.Color(159, 213, 209));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        eliminarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        eliminarllego.setText("Eliminar");
+        eliminarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(eliminarllego, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(548, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(eliminarllego)
+                .addContainerGap(164, Short.MAX_VALUE))
+        );
+
+        panelotros.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 660, 230));
+
+        jLabel1.setBackground(new java.awt.Color(255, 51, 51));
+        panelotros.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -20, 708, 522));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelotros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelotros, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addComponent(panelotros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtregistrarllegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtregistrarllegoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtregistrarllegoActionPerformed
-
-    private void txtregistrarclaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtregistrarclaseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtregistrarclaseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,16 +312,18 @@ public class Otros extends javax.swing.JDialog {
     public javax.swing.JButton guardarclase;
     public javax.swing.JButton guardarllego;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane12;
-    private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPanel panelotros;
-    public rojerusan.RSTableMetro tablaagregarclase;
-    public rojerusan.RSTableMetro tablaagregarllego;
-    public rojerusan.RSTableMetro tablaclase;
-    public rojerusan.RSTableMetro tablallego;
-    public rojerusan.RSMetroTextFullPlaceHolder txtregistrarclase;
-    public rojerusan.RSMetroTextFullPlaceHolder txtregistrarllego;
+    public javax.swing.JTable tablaagregarclase;
+    public javax.swing.JTable tablaagregarllego;
+    public javax.swing.JTable tablaclase;
+    public javax.swing.JTable tablallego;
+    public javax.swing.JTextField txtregistrarclase;
+    public javax.swing.JTextField txtregistrarllego;
     // End of variables declaration//GEN-END:variables
 }

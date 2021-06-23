@@ -10,12 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelo.Clases;
 import modelo.Usuario;
 import vistas.Configuraciones;
 import vistas.Otros;
-
 
 /**
  *
@@ -51,6 +52,10 @@ public class ClaseController implements ActionListener {
         vc.tablaagregarclase.setModel(model);
         vc.tablaclase.setModel(model2);
         busqueda();
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+        vc.tablaclase.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
+        vc.tablaagregarclase.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
     }
 
     @Override
@@ -126,7 +131,7 @@ public class ClaseController implements ActionListener {
     }
 
     public void limpiartablaclase() {
-        if (vc.tablaclase.getRowCount() >= 0) {
+        if (vc.tablaagregarclase.getRowCount() >= 0) {
             int count = vc.tablaclase.getRowCount();
             for (int i = 0; i < count; i++) {
                 model2.removeRow(0);

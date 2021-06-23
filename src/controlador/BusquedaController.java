@@ -32,6 +32,7 @@ import modelo.Llego;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import modelo.Usuario;
+import vistas.Busqueda;
 import vistas.Configuraciones;
 import vistas.Editarcliente;
 import vistas.Formulario;
@@ -45,7 +46,7 @@ public class BusquedaController implements ActionListener {
 
     private final Cliente modelo;
     private final Consultas_Cliente consulta;
-    private final Principal principal;
+    private final Busqueda busqueda;
 
     DefaultTableModel model = new DefaultTableModel();
     Dialogos dialogo = new Dialogos();
@@ -76,18 +77,18 @@ public class BusquedaController implements ActionListener {
 
     Consultas_usuario consultasusuario = new Consultas_usuario();
 
-    public BusquedaController(Cliente modelo, Consultas_Cliente consulta, Principal principal) {
+    public BusquedaController(Cliente modelo, Consultas_Cliente consulta, Busqueda busqueda) {
         this.modelo = modelo;
         this.consulta = consulta;
-        this.principal = principal;
+        this.busqueda = busqueda;
 
-        this.principal.editar.addActionListener(this);
-        this.principal.abrirarchivos.addActionListener(this);
+        this.busqueda.editar.addActionListener(this);
+        this.busqueda.abrirarchivos.addActionListener(this);
     }
 
     public void iniciar() {
-        principal.setTitle("Busqueda");
-        principal.setLocationRelativeTo(null);
+        busqueda.setTitle("Busqueda");
+        busqueda.setLocationRelativeTo(null);
         model.addColumn("ID");
         model.addColumn("ruta");
         model.addColumn("Nit");
@@ -99,35 +100,35 @@ public class BusquedaController implements ActionListener {
         model.addColumn("Codigo");
         model.addColumn("Fecha Inicio");
         model.addColumn("Fecha Arriendo");
-        principal.tabladatos.setModel(model);
-        principal.tabladatos.getColumn("ID").setWidth(0);
-        principal.tabladatos.getColumn("ID").setMinWidth(0);
-        principal.tabladatos.getColumn("ID").setMaxWidth(0);
-        principal.tabladatos.getColumn("ruta").setWidth(0);
-        principal.tabladatos.getColumn("ruta").setMinWidth(0);
-        principal.tabladatos.getColumn("ruta").setMaxWidth(0);
-        principal.tabladatos.getColumn("Codigo").setWidth(63);
-        principal.tabladatos.getColumn("Codigo").setMinWidth(63);
-        principal.tabladatos.getColumn("Codigo").setMaxWidth(63);
-        principal.tabladatos.getColumn("Dv").setWidth(40);
-        principal.tabladatos.getColumn("Dv").setMinWidth(40);
-        principal.tabladatos.getColumn("Dv").setMaxWidth(40);
+        busqueda.tabladatos.setModel(model);
+        busqueda.tabladatos.getColumn("ID").setWidth(0);
+        busqueda.tabladatos.getColumn("ID").setMinWidth(0);
+        busqueda.tabladatos.getColumn("ID").setMaxWidth(0);
+        busqueda.tabladatos.getColumn("ruta").setWidth(0);
+        busqueda.tabladatos.getColumn("ruta").setMinWidth(0);
+        busqueda.tabladatos.getColumn("ruta").setMaxWidth(0);
+        busqueda.tabladatos.getColumn("Codigo").setWidth(63);
+        busqueda.tabladatos.getColumn("Codigo").setMinWidth(63);
+        busqueda.tabladatos.getColumn("Codigo").setMaxWidth(63);
+        busqueda.tabladatos.getColumn("Dv").setWidth(40);
+        busqueda.tabladatos.getColumn("Dv").setMinWidth(40);
+        busqueda.tabladatos.getColumn("Dv").setMaxWidth(40);
         keyevent();
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == principal.abrirarchivos) {
-            int fila = principal.tabladatos.getSelectedRow();
-            abrirarchivo(String.valueOf(principal.tabladatos.getValueAt(fila, 1)));
+        if (e.getSource() == busqueda.abrirarchivos) {
+            int fila = busqueda.tabladatos.getSelectedRow();
+            abrirarchivo(String.valueOf(busqueda.tabladatos.getValueAt(fila, 1)));
         }
 
-        if (e.getSource() == principal.editar) {
+        if (e.getSource() == busqueda.editar) {
             Editarcliente editarcliente = new Editarcliente(null, true);
-            int selecionar = principal.tabladatos.getSelectedRow();
+            int selecionar = busqueda.tabladatos.getSelectedRow();
             if (selecionar != -1) {
-                modelo.setIdclientes_potenciales(Integer.parseInt(String.valueOf(principal.tabladatos.getValueAt(selecionar, 0))));
+                modelo.setIdclientes_potenciales(Integer.parseInt(String.valueOf(busqueda.tabladatos.getValueAt(selecionar, 0))));
                 EditarClienteController editarcli = new EditarClienteController(modelo, mods, shcp, documento,
                         mconfiguracion, servicio, consulta, cshcp, cdocumentos, cconfiguraciones, conc, conl,
                         editarcliente);
@@ -139,7 +140,7 @@ public class BusquedaController implements ActionListener {
     }
 
     public void keyevent() {
-        principal.txtbuscar.addKeyListener(new KeyAdapter() {
+        busqueda.txtbuscar.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 busqueda();
@@ -148,8 +149,8 @@ public class BusquedaController implements ActionListener {
     }
 
     public void limpiartabla() {
-        if (principal.tabladatos.getRowCount() >= 0) {
-            int count = principal.tabladatos.getRowCount();
+        if (busqueda.tabladatos.getRowCount() >= 0) {
+            int count = busqueda.tabladatos.getRowCount();
             for (int i = 0; i < count; i++) {
                 model.removeRow(0);
             }
@@ -173,11 +174,11 @@ public class BusquedaController implements ActionListener {
     }
 
     public void busqueda() {
-        if (principal.txtbuscar.getText().length() == 0) {
+        if (busqueda.txtbuscar.getText().length() == 0) {
             limpiartabla();
             //dialogo.alerta();
         }
-        if (principal.txtbuscar.getText().length() > 0) {
+        if (busqueda.txtbuscar.getText().length() > 0) {
             limpiartabla();
             ArrayList<Cliente> lista;
 //            String filtrocliente = null;
@@ -192,7 +193,7 @@ public class BusquedaController implements ActionListener {
 //                    }
 //                }
 //            }
-            lista = consulta.buscarcaracter(principal.txtbuscar.getText(), principal.filtro.getSelectedItem().toString(),principal.filtrocliente.getSelectedItem().toString());
+            lista = consulta.buscarcaracter(busqueda.txtbuscar.getText(), busqueda.filtro.getSelectedItem().toString(),busqueda.filtrocliente.getSelectedItem().toString());
             int cantidad = lista.size();
             Object[] dato = new Object[11];
             for (int i = 0; i < cantidad; i++) {
@@ -208,7 +209,7 @@ public class BusquedaController implements ActionListener {
                 dato[9] = lista.get(i).getFecha_llegada();
                 dato[10] = lista.get(i).getFecha_arriendo();
                 model.addRow(dato);
-                principal.tabladatos.setModel(model);
+                busqueda.tabladatos.setModel(model);
             }
         }
     }

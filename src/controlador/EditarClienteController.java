@@ -362,21 +362,23 @@ public class EditarClienteController implements ActionListener {
                 } else {
                     formulario.clientepotencial.setSelected(false);
                 }
-                if (modelo.getCategoria().equals("Equipos")) {
-                    formulario.bequipos1.setSelected(true);
-                } else {
-                    if (modelo.getCategoria().equals("Redes")) {
-                        formulario.bredes1.setSelected(true);
+                if (modelo.getCategoria() != null) {
+                    if (modelo.getCategoria().equals("Equipos")) {
+                        formulario.bequipos1.setSelected(true);
                     } else {
-                        if (modelo.getCategoria().equals("Software")) {
-                            formulario.bsoftware1.setSelected(true);
+                        if (modelo.getCategoria().equals("Redes")) {
+                            formulario.bredes1.setSelected(true);
                         } else {
-                            if (modelo.getCategoria().equals("Otro")) {
-                                formulario.botro1.setSelected(true);
+                            if (modelo.getCategoria().equals("Software")) {
+                                formulario.bsoftware1.setSelected(true);
                             } else {
+                                if (modelo.getCategoria().equals("Otro")) {
+                                    formulario.botro1.setSelected(true);
+                                } else {
+
+                                }
 
                             }
-
                         }
                     }
                 }
@@ -392,7 +394,6 @@ public class EditarClienteController implements ActionListener {
         for (int i = 0; i < lista3.size(); i++) {
             formulario.txtllego1.addItem(lista3.get(i));
         }
-
         lista4 = mmodalidad.llenar();
         for (int i = 0; i < lista4.size(); i++) {
             formulario.txtmodalidad1.addItem(lista4.get(i));

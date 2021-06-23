@@ -42,18 +42,14 @@ public class Principal extends javax.swing.JFrame {
         crearusuario.setOpaque(false);
         crearusuario.setContentAreaFilled(false);
         
+        busqueda.setOpaque(false);
+        busqueda.setContentAreaFilled(false);
+        
+        modalidad.setOpaque(false);
+        modalidad.setContentAreaFilled(false);
+        
         carpetas.setOpaque(false);
         carpetas.setContentAreaFilled(false);
-        
-        abrirarchivos.setOpaque(false);
-        abrirarchivos.setContentAreaFilled(false);
-        
-        editar.setOpaque(false);
-        editar.setContentAreaFilled(false);
-
-//        crearcliente.setOpaque(false);
-        panelprincipal.setOpaque(false);
-//        crearcliente.setContentAreaFilled(false);
 
     }
 //   DefaultTableModel model = new DefaultTableModel();
@@ -126,14 +122,8 @@ public class Principal extends javax.swing.JFrame {
         crearusuario = new javax.swing.JButton();
         carpetas = new javax.swing.JButton();
         otro = new javax.swing.JButton();
-        panelprincipal = new javax.swing.JPanel();
-        txtbuscar = new rojerusan.RSMetroTextFullPlaceHolder();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabladatos = new rojerusan.RSTableMetro();
-        editar = new javax.swing.JButton();
-        abrirarchivos = new javax.swing.JButton();
-        filtro = new rojerusan.RSComboMetro();
-        filtrocliente = new rojerusan.RSComboMetro();
+        busqueda = new javax.swing.JButton();
+        modalidad = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -154,7 +144,7 @@ public class Principal extends javax.swing.JFrame {
         crearcliente.setText("Crearcliente");
         crearcliente.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         crearcliente.setOpaque(false);
-        jPanel1.add(crearcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 170, 70));
+        jPanel1.add(crearcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 170, 70));
 
         configuraciones1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         configuraciones1.setForeground(new java.awt.Color(255, 255, 255));
@@ -201,80 +191,21 @@ public class Principal extends javax.swing.JFrame {
         otro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         jPanel1.add(otro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 170, 70));
 
-        panelprincipal.setBackground(new java.awt.Color(255, 153, 153));
-        panelprincipal.setMaximumSize(new java.awt.Dimension(1280, 1080));
-        panelprincipal.setName("panelpricipal"); // NOI18N
-        panelprincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        busqueda.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        busqueda.setForeground(new java.awt.Color(255, 255, 255));
+        busqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/service.png"))); // NOI18N
+        busqueda.setText("Buscar");
+        busqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        busqueda.setOpaque(false);
+        jPanel1.add(busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 170, 70));
 
-        txtbuscar.setForeground(new java.awt.Color(0, 0, 0));
-        txtbuscar.setBorderColor(new java.awt.Color(102, 102, 102));
-        txtbuscar.setPhColor(new java.awt.Color(210, 43, 7));
-        panelprincipal.add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
-
-        tabladatos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tabladatos.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
-        tabladatos.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
-        tabladatos.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
-        tabladatos.setColorSelBackgound(new java.awt.Color(216, 74, 44));
-        tabladatos.setRowHeight(30);
-        tabladatos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabladatosMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tabladatos);
-
-        panelprincipal.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 1000, 460));
-
-        editar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        editar.setForeground(new java.awt.Color(255, 255, 255));
-        editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png"))); // NOI18N
-        editar.setText("Editar");
-        editar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        editar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarActionPerformed(evt);
-            }
-        });
-        panelprincipal.add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 30, 140, 70));
-
-        abrirarchivos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        abrirarchivos.setForeground(new java.awt.Color(255, 255, 255));
-        abrirarchivos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/open.png"))); // NOI18N
-        abrirarchivos.setText("Archivos");
-        abrirarchivos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        abrirarchivos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                abrirarchivosActionPerformed(evt);
-            }
-        });
-        panelprincipal.add(abrirarchivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, 170, 70));
-
-        filtro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nit\t", "nombre", "codigo" }));
-        filtro.setColorArrow(new java.awt.Color(0, 0, 0));
-        filtro.setColorBorde(new java.awt.Color(102, 102, 102));
-        filtro.setColorFondo(new java.awt.Color(102, 102, 102));
-        filtro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        panelprincipal.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 140, 40));
-
-        filtrocliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "todo", "cliente_potencial", "cliente" }));
-        filtrocliente.setColorArrow(new java.awt.Color(0, 0, 0));
-        filtrocliente.setColorBorde(new java.awt.Color(102, 102, 102));
-        filtrocliente.setColorFondo(new java.awt.Color(102, 102, 102));
-        filtrocliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        panelprincipal.add(filtrocliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 190, 40));
-
-        jPanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, 830));
+        modalidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        modalidad.setForeground(new java.awt.Color(255, 255, 255));
+        modalidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/service.png"))); // NOI18N
+        modalidad.setText("Modalidad");
+        modalidad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        modalidad.setOpaque(false);
+        jPanel1.add(modalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 170, 70));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -297,18 +228,6 @@ public class Principal extends javax.swing.JFrame {
     private void configuraciones1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuraciones1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_configuraciones1ActionPerformed
-
-    private void tabladatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabladatosMouseClicked
-        //                int selecionar = tabladatos.rowAtPoint(evt.getPoint());
-    }//GEN-LAST:event_tabladatosMouseClicked
-
-    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-
-    }//GEN-LAST:event_editarActionPerformed
-
-    private void abrirarchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirarchivosActionPerformed
-
-    }//GEN-LAST:event_abrirarchivosActionPerformed
 
     private void crearusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearusuarioActionPerformed
         // TODO add your handling code here:
@@ -351,24 +270,18 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton abrirarchivos;
+    public javax.swing.JButton busqueda;
     public javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JButton carpetas;
     public javax.swing.JButton configuraciones1;
     public javax.swing.JButton crearcliente;
     public javax.swing.JButton crearusuario;
-    public javax.swing.JButton editar;
-    public rojerusan.RSComboMetro filtro;
-    public rojerusan.RSComboMetro filtrocliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JButton modalidad;
     public javax.swing.JButton otro;
-    private javax.swing.JPanel panelprincipal;
     public javax.swing.JButton servicios;
-    public rojerusan.RSTableMetro tabladatos;
-    public rojerusan.RSMetroTextFullPlaceHolder txtbuscar;
     // End of variables declaration//GEN-END:variables
 }

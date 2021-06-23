@@ -159,9 +159,16 @@ public class ClientelController implements ActionListener {
                 modelo.setEmail(formulario.txtemail.getText());
                 modelo.setClase(formulario.txtclase.getSelectedItem().toString());
                 modelo.setLlego(formulario.txtllego.getSelectedItem().toString());
-                modelo.setVlrprincipal(Integer.parseInt(formulario.txtvlrprincipal.getText()));
-                modelo.setNumequipos(Integer.parseInt(formulario.txtnumequipos.getText()));
-                modelo.setVlrterminal(Integer.parseInt(formulario.txtvlrterminal.getText()));
+                if (!formulario.txtvlrprincipal.getText().equals("")) {
+                    modelo.setVlrprincipal(Integer.parseInt(formulario.txtvlrprincipal.getText()));
+                }
+
+                if (!formulario.txtvlrterminal.getText().equals("")) {
+                    modelo.setVlrterminal(Integer.parseInt(formulario.txtvlrterminal.getText()));
+                }
+                if (!formulario.txtnumequipos.getText().equals("")) {
+                    modelo.setNumequipos(Integer.parseInt(formulario.txtnumequipos.getText()));
+                }
                 if (formulario.txtfecha_llegada.getDate() != null) {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                     modelo.setFecha_llegada(sdf.format(formulario.txtfecha_llegada.getDate()));
@@ -193,7 +200,6 @@ public class ClientelController implements ActionListener {
                         if (formulario.txtfecha_arriendo.getDate() != null) {
                             modelo.setFecha_arriendo(sdf.format(formulario.txtfecha_arriendo.getDate()));
                         }
-
                         modelo.setContacto(formulario.txtcontacto.getText());
                         modelo.setUsuarios_idusuario(user.getIdusuario());
                         //guardando el cliente 
@@ -208,7 +214,7 @@ public class ClientelController implements ActionListener {
                                             shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
                                             shcp.setFecha_de_inicio(formulario.tablaservicios.getValueAt(i, 1).toString());
                                             if (!cshcp.registrarservicio(shcp)) {
-                                                JOptionPane.showMessageDialog(null, "error guardado de servicios");
+                                                JOptionPane.showMessageDialog(null, "error guardando de servicios");
                                             }
                                         }
                                     }
@@ -220,7 +226,7 @@ public class ClientelController implements ActionListener {
                                     mdocumento.setFecha_vencimiento(formulario.tabladocumentos.getValueAt(i, 2).toString());
                                     mdocumento.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
                                     if (!cdocumentos.registrar(mdocumento)) {
-                                        JOptionPane.showMessageDialog(null, "error guardado de documento");
+                                        JOptionPane.showMessageDialog(null, "error guardando de documentos");
                                     }
                                 }
                                 JOptionPane.showMessageDialog(null, "registro guardado");
@@ -299,7 +305,6 @@ public class ClientelController implements ActionListener {
 
     }
     // funcion para crear una carpeta 
-
     private void crear_carpeta(String path) {
         Consultas_Directorio cd = new Consultas_Directorio();
         Consultas_SubCarpetas csubcarpeta = new Consultas_SubCarpetas();
@@ -328,15 +333,24 @@ public class ClientelController implements ActionListener {
             if (file.mkdir()) {
                 for (int i = 0; i < directorios.size(); i++) {
                     File fil = Crear_archivo(path + File.separator + nombre, carpetas[i].toString());
-                    fil.mkdir();
-                    for (int j = 0; j < subcategorias.length; j++) {
-                        if (idsubcategorias[j].equals(idcarpetas[i])) {
-                            File subfile = Crear_archivo(fil.toString(), subcategorias[j].toString());
-                            subfile.mkdir();
+                    if (fil.mkdir()) {
+                        System.out.println(fil);
+                        for (int j = 0; j < subcategorias.length; j++) {
+                            if (idsubcategorias[j].equals(idcarpetas[i])) {
+                                File subfile = Crear_archivo(fil.toString(), subcategorias[j].toString());
+                                System.out.println(subfile);
+                                if (!subfile.mkdir()) {
+                                    JOptionPane.showMessageDialog(formulario, "error creando la subcarpeta");
+                                }
+                            }
                         }
+                    }else{
+                        JOptionPane.showMessageDialog(formulario, "error creando la carpetainterna");
                     }
 
                 }
+            } else {
+                JOptionPane.showMessageDialog(formulario, "error creando la carpeta");
             }
             abrirarchivo(directorio + File.separator + nombre);
         }

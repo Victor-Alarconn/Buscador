@@ -11,6 +11,7 @@ import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
+import Consultas.Consultas_Modalidad;
 import Consultas.Consultas_Servicio;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import Consultas.Consultas_usuario;
@@ -31,9 +32,11 @@ import modelo.Configuracion;
 import modelo.Directorio;
 import modelo.Documentos;
 import modelo.Llego;
+import modelo.Modalidad;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import modelo.Usuario;
+import vistas.Busqueda;
 import vistas.Carpetas;
 import vistas.Configuraciones;
 import vistas.Crearusuario;
@@ -43,6 +46,7 @@ import vistas.Otros;
 import vistas.Principal;
 import vistas.Servicios;
 import vistas.Usuarios;
+import vistas.VModalidad;
 
 /**
  *
@@ -79,6 +83,9 @@ public class OrganizadorController implements ActionListener {
 
     Directorio mod1 = new Directorio();
     Consultas_Directorio modc1 = new Consultas_Directorio();
+    
+    Modalidad mm = new Modalidad();
+    Consultas_Modalidad mcm = new Consultas_Modalidad();
 
 //    Usuario mod = new Usuario();
 
@@ -95,12 +102,14 @@ public class OrganizadorController implements ActionListener {
         this.principal.servicios.addActionListener(this);
         this.principal.crearusuario.addActionListener(this);
         this.principal.otro.addActionListener(this);
+        this.principal.busqueda.addActionListener(this);
+        this.principal.modalidad.addActionListener(this);
+                
     }
 
     public void iniciar() {
-        principal.setTitle("Busqueda");
-        BusquedaController bc = new BusquedaController(modelo, consulta, principal);
-        bc.iniciar();
+        principal.setTitle("Organizador");
+        
     }
 
     @Override
@@ -121,12 +130,12 @@ public class OrganizadorController implements ActionListener {
             vc.setVisible(true);
         }
 
-//        if (e.getSource() == principal.busqueda) {
-//            Busqueda busqueda = new Busqueda(principal, true);
-//            BusquedaController bc = new BusquedaController(modelo, consulta, busqueda);
-//            bc.iniciar();
-//            busqueda.setVisible(true);
-//        }
+        if (e.getSource() == principal.busqueda) {
+            Busqueda busqueda = new Busqueda(principal, true);
+            BusquedaController bc = new BusquedaController(modelo, consulta, busqueda);
+            bc.iniciar();
+            busqueda.setVisible(true);
+        }
         if (e.getSource() == principal.servicios) {
             Servicios servic= new Servicios(principal, true);
             ServicioController ctrl = new ServicioController(mods, servicio, servic, mod);
@@ -143,7 +152,15 @@ public class OrganizadorController implements ActionListener {
             otro.setVisible(true);
             
         }
-        
+        //boton agregar modalidad 
+        if (e.getSource() == principal.modalidad) {
+
+               VModalidad vm = new VModalidad(principal, true);
+               
+               Modalidadcontroller mc = new Modalidadcontroller(mm, mcm, vm, mod);
+               mc.iniciar();
+               vm.setVisible(true);
+        }
         
         if (e.getSource() == principal.crearusuario) {
 

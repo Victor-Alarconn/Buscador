@@ -86,13 +86,13 @@ public class SubCarpetasController implements ActionListener {
                 msubcarpetas.setUsuario_idusurio(user.getIdusuario());
                 if (!csubcarpetas.registrar(msubcarpetas)) {
                     JOptionPane.showMessageDialog(null, "error guardado de la subcarpeta");
-                } else {
-                    limpiaragregarsubcarpeta();
-                    limpiartablasubcarpeta();
-                    llenartabla();
                 }
 
             }
+            limpiaragregarsubcarpeta();
+            limpiartablasubcarpeta();
+            llenartabla();
+
         }
 
         //metodo para elminar las subcarpetas de la base de datos 
