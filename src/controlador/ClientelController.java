@@ -11,6 +11,7 @@ import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
+import Consultas.Consultas_Modalidad;
 import Consultas.Consultas_Servicio;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import Consultas.Consultas_SubCarpetas;
@@ -117,6 +118,14 @@ public class ClientelController implements ActionListener {
             formulario.txtclase.addItem(lista2.get(i));
         }
 
+        formulario.txtmodalidad.removeAllItems();
+        Consultas_Modalidad mmodalidad = new Consultas_Modalidad();
+        ArrayList<String> lista4 = new ArrayList<String>();
+        lista4 = mmodalidad.llenar();
+        for (int i = 0; i < lista4.size(); i++) {
+            formulario.txtmodalidad.addItem(lista4.get(i));
+        }
+
         formulario.txtllego.removeAllItems();
         ArrayList<String> lista3 = new ArrayList<String>();
         Consultas_Llego modelo = new Consultas_Llego();
@@ -134,139 +143,106 @@ public class ClientelController implements ActionListener {
             if (cconfiguraciones.cargar(mconfiguracion)) {
                 directorio = mconfiguracion.getDirectorio();
             }
-            if (formulario.txtnit.getText().equals("")) {
-                JOptionPane.showMessageDialog(formulario, "El campo de nit esta vacio");
+            modelo.setNit(formulario.txtnit.getText());
+            modelo.setEmpresa(formulario.txtempresa.getText());
+            if (formulario.txtnombre.getText().equals("")) {
+                JOptionPane.showMessageDialog(formulario, "El campo nombre esta vacio");
             } else {
-                modelo.setNit(formulario.txtnit.getText());
-                if (formulario.txtnombre.getText().equals("")) {
-                    JOptionPane.showMessageDialog(formulario, "El campo de nombre esta vacio");
-                } else {
-                    modelo.setNombre(formulario.txtnombre.getText());
-                    if (formulario.txtempresa.getText().equals("")) {
-                        JOptionPane.showMessageDialog(formulario, "El campo de empresa esta vacio");
+                modelo.setNombre(formulario.txtnombre.getText());
+                modelo.setCelular1(formulario.txtcelular1.getText());
+                modelo.setCelular2(formulario.txtcelular2.getText());
+//            Pattern pattern = Pattern
+//                    .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+//                            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+//
+//            Matcher mather = pattern.matcher(formulario.txtemail.getText());
+                modelo.setEmail(formulario.txtemail.getText());
+                modelo.setClase(formulario.txtclase.getSelectedItem().toString());
+                modelo.setLlego(formulario.txtllego.getSelectedItem().toString());
+                modelo.setVlrprincipal(Integer.parseInt(formulario.txtvlrprincipal.getText()));
+                modelo.setNumequipos(Integer.parseInt(formulario.txtnumequipos.getText()));
+                modelo.setVlrterminal(Integer.parseInt(formulario.txtvlrterminal.getText()));
+                if (formulario.txtfecha_llegada.getDate() != null) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    modelo.setFecha_llegada(sdf.format(formulario.txtfecha_llegada.getDate()));
+                    modelo.setModalidad(formulario.txtmodalidad.getSelectedItem().toString());
+                    if (formulario.txtcodigo.getText().equals("")) {
+                        JOptionPane.showMessageDialog(formulario, "El campo codigo esta vacio");
                     } else {
-                        modelo.setEmpresa(formulario.txtempresa.getText());
-                        if (formulario.txtcelular1.getText().equals("")) {
-                            JOptionPane.showMessageDialog(formulario, "El campo celular1 esta vacio");
+                        modelo.setNotas(formulario.txtnotas.getText());
+                        modelo.setCodigo(formulario.txtcodigo.getText().toUpperCase());
+                        modelo.setDv(formulario.txtdv.getText());
+                        modelo.setRuta(directorio + File.separator + formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase());
+                        if (formulario.clientepotecial.isSelected()) {
+                            modelo.setCliente_potencial(1);
                         } else {
-                            modelo.setCelular1(formulario.txtcelular1.getText());
-                            if (formulario.txtcelular2.getText().equals("")) {
-                                JOptionPane.showMessageDialog(formulario, "El campo celular2 esta vacio");
-                            } else {
-                                modelo.setCelular2(formulario.txtcelular2.getText());
-                                if (formulario.txtemail.getText().equals("")) {
-                                    JOptionPane.showMessageDialog(formulario, "El campo email esta vacio");
-                                } else {
-                                    Pattern pattern = Pattern
-                                            .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                                                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-
-                                    Matcher mather = pattern.matcher(formulario.txtemail.getText());
-                                    if (mather.find() == true) {
-                                        modelo.setEmail(formulario.txtemail.getText());
-                                        modelo.setClase(formulario.txtclase.getSelectedItem().toString());
-                                        modelo.setLlego(formulario.txtllego.getSelectedItem().toString());
-                                        if (formulario.txtfecha_llegada.getDate() != null) {
-                                            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                                            modelo.setFecha_llegada(sdf.format(formulario.txtfecha_llegada.getDate()));
-                                            modelo.setRetiro(formulario.txtretiro.getText());
-                                            if (formulario.txtcodigo.getText().equals("")) {
-                                                JOptionPane.showMessageDialog(formulario, "El campo codigo esta vacio");
-                                            } else {
-                                                modelo.setNotas(formulario.txtnotas.getText());
-                                                modelo.setCodigo(formulario.txtcodigo.getText().toUpperCase());
-                                                if (formulario.txtdv.getText().equals("")) {
-                                                    JOptionPane.showMessageDialog(formulario, "El campo dv esta vacio");
-                                                } else {
-                                                    modelo.setDv(formulario.txtdv.getText());
-                                                    modelo.setRuta(directorio + File.separator + formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase());
-                                                    if (formulario.clientepotecial.isSelected()) {
-                                                        modelo.setCliente_potencial(1);
-                                                    }else{
-                                                        modelo.setCliente_potencial(0);
-                                                    }                                                                                                      //condicionales de selecion  de categoria 
-                                                    if (formulario.bequipos.isSelected()) {
-                                                        modelo.setCategoria("Equipos");
-                                                    }
-                                                    if (formulario.bredes.isSelected()) {
-                                                        modelo.setCategoria("Redes");
-                                                    }
-                                                    if (formulario.bsoftware.isSelected()) {
-                                                        modelo.setCategoria("Software");
-                                                    }
-                                                    if (formulario.botro.isSelected()) {
-                                                        modelo.setCategoria("Otro");
-                                                    }
-                                                    if (formulario.txtfecha_arriendo.getDate() != null) {
-                                                        modelo.setFecha_arriendo(sdf.format(formulario.txtfecha_arriendo.getDate()));
-                                                    } else {
-                                                        JOptionPane.showMessageDialog(formulario, "El campo fecha arriendo esta vacio");
-                                                    }
-                                                    modelo.setContacto(formulario.txtcontacto.getText());
-                                                    modelo.setUsuarios_idusuario(user.getIdusuario());
-//                                                    //guardando el cliente 
-                                                    if (consultas.registrar(modelo)) {
-                                                        modelo.setNit(formulario.txtnit.getText());
-                                                        if (consultas.buscarr(modelo)) {
-                                                            // guardando la tabla servicios
-                                                            for (int i = 0; i < formulario.tablaservicios.getRowCount(); i++){
-                                                                for (int j = 0; j < lista.size(); j++) {
-                                                                    if (lista.get(j).getServicio().equals(formulario.tablaservicios.getValueAt(i, 0).toString())) {
-                                                                        shcp.setServicios_idservicio(lista.get(j).getIdservicio());
-                                                                        shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                                                                        shcp.setFecha_de_inicio(formulario.tablaservicios.getValueAt(i, 1).toString());
-                                                                        if (!cshcp.registrarservicio(shcp)) {
-                                                                            JOptionPane.showMessageDialog(null, "error guardado de servicios");
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                            //guardando la tabla documnetos
-                                                            for (int i = 0; i < formulario.tabladocumentos.getRowCount(); i++) {
-                                                                mdocumento.setDocumento(formulario.tabladocumentos.getValueAt(i, 0).toString());
-                                                                mdocumento.setFecha_inicio(formulario.tabladocumentos.getValueAt(i, 1).toString());
-                                                                mdocumento.setFecha_vencimiento(formulario.tabladocumentos.getValueAt(i, 2).toString());
-                                                                mdocumento.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                                                                if (!cdocumentos.registrar(mdocumento)) {
-                                                                    JOptionPane.showMessageDialog(null, "error guardado de documento");
-                                                                }
-                                                            }
-                                                            JOptionPane.showMessageDialog(null, "registro guardado");
-                                                            crear_carpeta(directorio);
-                                                            formulario.dispose();
-                                                            this.limpiar();
-                                                            this.limpiardocumentos();
-                                                            this.limpiarservicios();
-
-                                                        } else {
-                                                            JOptionPane.showMessageDialog(null, "error de registro cliente");
-                                                        }
-                                                    } else {
-                                                        JOptionPane.showMessageDialog(null, "error guardado el cliente");
-                                                    }
-                                                    //cortar
-                                                }
-
-                                            }
-
-                                        } else {
-                                            JOptionPane.showMessageDialog(formulario, "El campo fecha esta vacio");
-                                        }
-                                    } else {
-                                        JOptionPane.showMessageDialog(formulario, "El email es Invalido");
-                                    }
-
-                                }
-
-                            }
-
+                            modelo.setCliente_potencial(0);
+                        }
+                        if (formulario.bequipos.isSelected()) {
+                            modelo.setCategoria("Equipos");
+                        }
+                        if (formulario.bredes.isSelected()) {
+                            modelo.setCategoria("Redes");
+                        }
+                        if (formulario.bsoftware.isSelected()) {
+                            modelo.setCategoria("Software");
+                        }
+                        if (formulario.botro.isSelected()) {
+                            modelo.setCategoria("Otro");
+                        }
+                        if (formulario.txtfecha_arriendo.getDate() != null) {
+                            modelo.setFecha_arriendo(sdf.format(formulario.txtfecha_arriendo.getDate()));
                         }
 
+                        modelo.setContacto(formulario.txtcontacto.getText());
+                        modelo.setUsuarios_idusuario(user.getIdusuario());
+                        //guardando el cliente 
+                        if (consultas.registrar(modelo)) {
+                            modelo.setNit(formulario.txtnit.getText());
+                            if (consultas.buscarr(modelo)) {
+                                // guardando la tabla servicios
+                                for (int i = 0; i < formulario.tablaservicios.getRowCount(); i++) {
+                                    for (int j = 0; j < lista.size(); j++) {
+                                        if (lista.get(j).getServicio().equals(formulario.tablaservicios.getValueAt(i, 0).toString())) {
+                                            shcp.setServicios_idservicio(lista.get(j).getIdservicio());
+                                            shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                                            shcp.setFecha_de_inicio(formulario.tablaservicios.getValueAt(i, 1).toString());
+                                            if (!cshcp.registrarservicio(shcp)) {
+                                                JOptionPane.showMessageDialog(null, "error guardado de servicios");
+                                            }
+                                        }
+                                    }
+                                }
+                                //guardando la tabla documnetos
+                                for (int i = 0; i < formulario.tabladocumentos.getRowCount(); i++) {
+                                    mdocumento.setDocumento(formulario.tabladocumentos.getValueAt(i, 0).toString());
+                                    mdocumento.setFecha_inicio(formulario.tabladocumentos.getValueAt(i, 1).toString());
+                                    mdocumento.setFecha_vencimiento(formulario.tabladocumentos.getValueAt(i, 2).toString());
+                                    mdocumento.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                                    if (!cdocumentos.registrar(mdocumento)) {
+                                        JOptionPane.showMessageDialog(null, "error guardado de documento");
+                                    }
+                                }
+                                JOptionPane.showMessageDialog(null, "registro guardado");
+                                crear_carpeta(directorio);
+                                formulario.dispose();
+                                this.limpiar();
+                                this.limpiardocumentos();
+                                this.limpiarservicios();
+
+                            } else {
+                                JOptionPane.showMessageDialog(null, "error de registro cliente");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "error guardado el cliente");
+                        }
+                        //cortar
                     }
-
+                } else {
+                    JOptionPane.showMessageDialog(formulario, "El campo fecha esta vacio");
                 }
-
             }
+
         }
         //boton agregar servicio
         Object[] dato = new Object[5];
@@ -403,7 +379,6 @@ public class ClientelController implements ActionListener {
         formulario.txtcodigo.setText("");
         formulario.txtemail.setText("");
         formulario.txtempresa.setText("");
-        formulario.txtretiro.setText("");
         formulario.txtdocumento.setText("");
         formulario.txtnotas.setText("");
         formulario.txtfecha_llegada.setCalendar(null);

@@ -19,7 +19,7 @@ public class Cliente {
     private String email;
     private String fecha_llegada;
     private String clase;
-    private String retiro;
+    private String modalidad;
     private String notas;
     private String codigo;
     private String llego;
@@ -30,7 +30,43 @@ public class Cliente {
     private String fecha_arriendo;
     private String contacto;
     private int cliente_potencial;
+    private int vlrprincipal;
+    private int numequipos;
+    private int vlrterminal;
 
+    public int getVlrprincipal() {
+        return vlrprincipal;
+    }
+
+    public void setVlrprincipal(int vlrprincipal) {
+        this.vlrprincipal = vlrprincipal;
+    }
+
+    public int getNumequipos() {
+        return numequipos;
+    }
+
+    public void setNumequipos(int numequipos) {
+        this.numequipos = numequipos;
+    }
+
+    public int getVlrterminal() {
+        return vlrterminal;
+    }
+
+    public void setVlrterminal(int vlrterminal) {
+        this.vlrterminal = vlrterminal;
+    }
+    
+
+    public String getModalidad() {
+        return modalidad;
+    }
+
+    public void setModalidad(String modalidad) {
+        this.modalidad = modalidad;
+    }
+    
     public int getCliente_potencial() {
         return cliente_potencial;
     }
@@ -176,14 +212,6 @@ public class Cliente {
 
     public void setClase(String clase) {
         this.clase = clase;
-    }
-
-    public String getRetiro() {
-        return retiro;
-    }
-
-    public void setRetiro(String retiro) {
-        this.retiro = retiro;
     }
 
     public String getNotas() {

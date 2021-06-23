@@ -29,9 +29,10 @@ public class Consultas_Cliente extends Conexion {
 
         String sql = "INSERT INTO clientes_potenciales (nit,nombre,empresa,"
                 + "celular1,celular2,email,fecha_llegada,clase,"
-                + "retiro,notas,codigo,llego,categoria,ruta,dv,"
-                + "usuarios_idusuario,fecha_arriendo,contacto,cliente_potencial) VALUES(?,?,"
-                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "modalidad,notas,codigo,llego,categoria,ruta,dv,"
+                + "usuarios_idusuario,fecha_arriendo,contacto,"
+                + "cliente_potencial,vlrprincipal,numequipos,vlrterminal) VALUES(?,?,?,"
+                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, cliente.getNit());
@@ -42,7 +43,7 @@ public class Consultas_Cliente extends Conexion {
             ps.setString(6, cliente.getEmail());
             ps.setString(7, cliente.getFecha_llegada());
             ps.setString(8, cliente.getClase());
-            ps.setString(9, cliente.getRetiro());
+            ps.setString(9, cliente.getModalidad());
             ps.setString(10, cliente.getNotas());
             ps.setString(11, cliente.getCodigo());
             ps.setString(12, cliente.getLlego());
@@ -53,6 +54,9 @@ public class Consultas_Cliente extends Conexion {
             ps.setString(17, cliente.getFecha_arriendo());
             ps.setString(18, cliente.getContacto());
             ps.setInt(19, cliente.getCliente_potencial());
+            ps.setInt(20, cliente.getVlrprincipal());
+            ps.setInt(21, cliente.getNumequipos());
+            ps.setInt(22, cliente.getVlrterminal());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -73,8 +77,8 @@ public class Consultas_Cliente extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = "UPDATE  clientes_potenciales SET nit=?, nombre=?, empresa=?,"
-                + " celular1=?, celular2=?, email=?, fecha_llegada=?, clase=?, retiro=?, notas=?, codigo=?, llego=?, categoria=?,dv=?,"
-                + " fecha_arriendo=?, contacto=?"
+                + " celular1=?, celular2=?, email=?, fecha_llegada=?, clase=?, modalidad=?, notas=?, codigo=?, llego=?, categoria=?,dv=?,"
+                + " fecha_arriendo=?, contacto=?, vlrprincipal=?, numequipos=?,vlrterminal=?"
                 + " WHERE idclientes_potenciales=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
@@ -86,7 +90,7 @@ public class Consultas_Cliente extends Conexion {
             ps.setString(6, cliente.getEmail());
             ps.setString(7, cliente.getFecha_llegada());
             ps.setString(8, cliente.getClase());
-            ps.setString(9, cliente.getRetiro());
+            ps.setString(9, cliente.getModalidad());
             ps.setString(10, cliente.getNotas());
             ps.setString(11, cliente.getCodigo());
             ps.setString(12, cliente.getLlego());
@@ -94,7 +98,10 @@ public class Consultas_Cliente extends Conexion {
             ps.setString(14, cliente.getDv());
             ps.setString(15, cliente.getFecha_arriendo());
             ps.setString(16, cliente.getContacto());
-            ps.setInt(17, cliente.getIdclientes_potenciales());
+            ps.setInt(17, cliente.getVlrprincipal());
+            ps.setInt(18, cliente.getNumequipos());
+            ps.setInt(19, cliente.getVlrterminal());
+            ps.setInt(20, cliente.getIdclientes_potenciales());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -154,7 +161,7 @@ public class Consultas_Cliente extends Conexion {
                 cliente.setEmail(rs.getString("email"));
                 cliente.setFecha_llegada(rs.getString("fecha_llegada"));
                 cliente.setClase(rs.getString("clase"));
-                cliente.setRetiro(rs.getString("retiro"));
+                cliente.setModalidad(rs.getString("modalidad"));
                 cliente.setNotas(rs.getString("notas"));
                 cliente.setCodigo(rs.getString("codigo"));
                 cliente.setLlego(rs.getString("llego"));
@@ -164,6 +171,9 @@ public class Consultas_Cliente extends Conexion {
                 cliente.setFecha_arriendo(rs.getString("fecha_arriendo"));
                 cliente.setContacto(rs.getString("contacto"));
                 cliente.setCliente_potencial(rs.getInt("cliente_potencial"));
+                cliente.setVlrprincipal(rs.getInt("vlrprincipal"));
+                cliente.setNumequipos(rs.getInt("numequipos"));
+                cliente.setVlrterminal(rs.getInt("vlrterminal"));
                 return true;
             }
 
@@ -202,7 +212,7 @@ public class Consultas_Cliente extends Conexion {
                 cliente.setEmail(rs.getString("email"));
                 cliente.setFecha_llegada(rs.getString("fecha_llegada"));
                 cliente.setClase(rs.getString("clase"));
-                cliente.setRetiro(rs.getString("retiro"));
+                cliente.setModalidad(rs.getString("modalidad"));
                 cliente.setNotas(rs.getString("notas"));
                 cliente.setCodigo(rs.getString("codigo"));
                 cliente.setLlego(rs.getString("llego"));
@@ -238,18 +248,17 @@ public class Consultas_Cliente extends Conexion {
         } else {
             sql = " SELECT * FROM clientes_potenciales  WHERE " + filtro + " LIKE'%" + parametro + "%' AND cliente_potencial=" + filtrocliente + " ";
         }
-        System.out.println(sql);
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery(sql);
             while (rs.next()) {
                 Cliente cliente = new Cliente();
                 cliente.setIdclientes_potenciales(Integer.parseInt(rs.getString(1)));
-                cliente.setNit(rs.getString(2));
-                cliente.setNombre(rs.getString(3));
-                cliente.setCodigo(rs.getString(12));
-                cliente.setFecha_llegada(rs.getString(8));
-                cliente.setRuta(rs.getString(15));
+                cliente.setNit(rs.getString("nit"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setCodigo(rs.getString("codigo"));
+                cliente.setFecha_llegada(rs.getString("fecha_llegada"));
+                cliente.setRuta(rs.getString("ruta"));
                 cliente.setFecha_arriendo(rs.getString("fecha_arriendo"));
                 cliente.setDv(rs.getString("dv"));
                 cliente.setCelular1(rs.getString("celular1"));

@@ -14,7 +14,7 @@ import Consultas.Consultas_Llego;
 import Consultas.Consultas_Servicio;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import Consultas.Consultas_usuario;
-import buscador.Dialogos;
+import Organizador.Dialogos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

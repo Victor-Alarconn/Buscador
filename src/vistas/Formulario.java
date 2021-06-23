@@ -99,7 +99,6 @@ public class Formulario extends javax.swing.JDialog {
         txtnombre = new rojerusan.RSMetroTextFullPlaceHolder();
         txtllego = new rojerusan.RSComboMetro();
         txtcelular1 = new rojerusan.RSMetroTextFullPlaceHolder();
-        txtretiro = new rojerusan.RSMetroTextFullPlaceHolder();
         jScrollPane6 = new javax.swing.JScrollPane();
         txtnotas = new javax.swing.JTextArea();
         subpanel4 = new javax.swing.JPanel();
@@ -153,6 +152,13 @@ public class Formulario extends javax.swing.JDialog {
         txtcontacto = new rojerusan.RSMetroTextFullPlaceHolder();
         jLabel35 = new javax.swing.JLabel();
         clientepotecial = new javax.swing.JCheckBox();
+        txtmodalidad = new rojerusan.RSComboMetro();
+        jLabel5 = new javax.swing.JLabel();
+        txtvlrprincipal = new javax.swing.JTextField();
+        txtnumequipos = new javax.swing.JTextField();
+        txtvlrterminal = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -205,16 +211,6 @@ public class Formulario extends javax.swing.JDialog {
         txtcelular1.setBorderColor(new java.awt.Color(102, 102, 102));
         txtcelular1.setPhColor(new java.awt.Color(216, 74, 44));
         txtcelular1.setPlaceholder("Celular1");
-
-        txtretiro.setForeground(new java.awt.Color(0, 0, 0));
-        txtretiro.setBorderColor(new java.awt.Color(102, 102, 102));
-        txtretiro.setPhColor(new java.awt.Color(216, 74, 44));
-        txtretiro.setPlaceholder("Retiro");
-        txtretiro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtretiroActionPerformed(evt);
-            }
-        });
 
         txtnotas.setColumns(20);
         txtnotas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -442,7 +438,7 @@ public class Formulario extends javax.swing.JDialog {
         jLabel22.setText("<html><p>COMO</p><p>LLEGO</p></html>\n");
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel23.setText("RETIRO");
+        jLabel23.setText("MODALIDAD");
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -503,7 +499,7 @@ public class Formulario extends javax.swing.JDialog {
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 24, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -532,6 +528,16 @@ public class Formulario extends javax.swing.JDialog {
 
         clientepotecial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         clientepotecial.setText("Cliente potencial");
+
+        txtmodalidad.setColorArrow(new java.awt.Color(0, 0, 0));
+        txtmodalidad.setColorBorde(new java.awt.Color(102, 102, 102));
+        txtmodalidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        jLabel5.setText("valor principal");
+
+        jLabel6.setText("#equipos");
+
+        jLabel7.setText("vlr terminal");
 
         javax.swing.GroupLayout subpanel3Layout = new javax.swing.GroupLayout(subpanel3);
         subpanel3.setLayout(subpanel3Layout);
@@ -563,12 +569,12 @@ public class Formulario extends javax.swing.JDialog {
                             .addGroup(subpanel3Layout.createSequentialGroup()
                                 .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtcontacto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                    .addComponent(txtretiro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                     .addComponent(txtllego, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                     .addComponent(txtcelular1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                     .addComponent(txtnombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                     .addComponent(txtnit, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                    .addComponent(txtfecha_llegada, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                                    .addComponent(txtfecha_llegada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtmodalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(39, 39, 39)
                                 .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, subpanel3Layout.createSequentialGroup()
@@ -604,12 +610,26 @@ public class Formulario extends javax.swing.JDialog {
                                             .addComponent(txtdv, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(jScrollPane6)
                             .addGroup(subpanel3Layout.createSequentialGroup()
-                                .addComponent(mensajenit, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                                .addComponent(mensajenit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(320, 320, 320)))
                         .addGap(22, 22, 22)
-                        .addComponent(subpanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(subpanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(subpanel3Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtvlrprincipal)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtnumequipos, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(txtvlrterminal, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap())
                     .addGroup(subpanel3Layout.createSequentialGroup()
                         .addComponent(botro)
@@ -628,7 +648,17 @@ public class Formulario extends javax.swing.JDialog {
                 .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(subpanel3Layout.createSequentialGroup()
                         .addComponent(subpanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(89, 89, 89))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtvlrprincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtnumequipos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtvlrterminal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(38, 38, 38))
                     .addGroup(subpanel3Layout.createSequentialGroup()
                         .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -679,10 +709,10 @@ public class Formulario extends javax.swing.JDialog {
                                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(69, 69, 69)
                                 .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtretiro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtempresa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel31)
-                                    .addComponent(jLabel23))))
+                                    .addComponent(jLabel23)
+                                    .addComponent(txtmodalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(subpanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtfecha_arriendo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -712,7 +742,7 @@ public class Formulario extends javax.swing.JDialog {
                 .addComponent(subpanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1180, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1186, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -726,10 +756,6 @@ public class Formulario extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtretiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtretiroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtretiroActionPerformed
 
     private void agregarservicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarservicioActionPerformed
         // TODO add your handling code here:
@@ -817,6 +843,9 @@ public class Formulario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -843,11 +872,14 @@ public class Formulario extends javax.swing.JDialog {
     public com.toedter.calendar.JDateChooser txtfecha_inicio;
     public com.toedter.calendar.JDateChooser txtfecha_llegada;
     public rojerusan.RSComboMetro txtllego;
+    public rojerusan.RSComboMetro txtmodalidad;
     public rojerusan.RSMetroTextFullPlaceHolder txtnit;
     public rojerusan.RSMetroTextFullPlaceHolder txtnombre;
     public javax.swing.JTextArea txtnotas;
-    public rojerusan.RSMetroTextFullPlaceHolder txtretiro;
+    public javax.swing.JTextField txtnumequipos;
     public rojerusan.RSComboMetro txtservicio;
+    public javax.swing.JTextField txtvlrprincipal;
+    public javax.swing.JTextField txtvlrterminal;
     // End of variables declaration//GEN-END:variables
 }
 
