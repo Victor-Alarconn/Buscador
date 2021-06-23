@@ -193,7 +193,7 @@ public class Principal extends javax.swing.JFrame {
 
         busqueda.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         busqueda.setForeground(new java.awt.Color(255, 255, 255));
-        busqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/service.png"))); // NOI18N
+        busqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search_1.png"))); // NOI18N
         busqueda.setText("Buscar");
         busqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         busqueda.setOpaque(false);
@@ -201,7 +201,7 @@ public class Principal extends javax.swing.JFrame {
 
         modalidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         modalidad.setForeground(new java.awt.Color(255, 255, 255));
-        modalidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/service.png"))); // NOI18N
+        modalidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trespuntos.png"))); // NOI18N
         modalidad.setText("Modalidad");
         modalidad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         modalidad.setOpaque(false);
