@@ -75,6 +75,8 @@ public class Carpetas extends javax.swing.JDialog {
         eliminaragregarcarpeta = new javax.swing.JButton();
         eliminarcarpeta = new javax.swing.JButton();
         agregarsubcarpeta = new javax.swing.JButton();
+        tr = new javax.swing.JScrollPane();
+        arbol = new javax.swing.JTree();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -165,6 +167,8 @@ public class Carpetas extends javax.swing.JDialog {
         agregarsubcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
         panel2panel3.add(agregarsubcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 65, 57));
 
+        tr.setViewportView(arbol);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,15 +176,19 @@ public class Carpetas extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(panel2panel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tr, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1083, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panel2panel3, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel2panel3, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                    .addComponent(tr))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
@@ -238,6 +246,7 @@ public class Carpetas extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton agregarcarpeta;
     public javax.swing.JButton agregarsubcarpeta;
+    public javax.swing.JTree arbol;
     public javax.swing.JButton eliminaragregarcarpeta;
     public javax.swing.JButton eliminarcarpeta;
     public javax.swing.JButton guardarcarpeta;
@@ -247,6 +256,7 @@ public class Carpetas extends javax.swing.JDialog {
     private javax.swing.JPanel panel2panel3;
     public rojerusan.RSTableMetro tablaagregarcarpetas;
     public rojerusan.RSTableMetro tablacarpetas;
+    public javax.swing.JScrollPane tr;
     public rojerusan.RSMetroTextFullPlaceHolder txtregistrarcarpeta;
     // End of variables declaration//GEN-END:variables
 }

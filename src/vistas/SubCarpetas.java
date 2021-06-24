@@ -5,14 +5,17 @@
  */
 package vistas;
 
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
+
 /**
  *
  * @author yonathan
  */
 public class SubCarpetas extends javax.swing.JDialog {
 
-    
-    
     public void transparecia() {
         eliminarsubcarpeta.setOpaque(false);
         eliminarsubcarpeta.setContentAreaFilled(false);
@@ -31,11 +34,9 @@ public class SubCarpetas extends javax.swing.JDialog {
 //      guardarcarpeta.setBorderPainted(false);
 
         panel2panel3.setOpaque(false);
-       
 
     }
-    
-    
+
     /**
      * Creates new form SubCarpetas
      */
@@ -44,6 +45,7 @@ public class SubCarpetas extends javax.swing.JDialog {
         initComponents();
         transparecia();
         
+
     }
 
     /**
@@ -163,11 +165,11 @@ public class SubCarpetas extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(panel2panel3, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel2panel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel2panel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
         );
 
         pack();

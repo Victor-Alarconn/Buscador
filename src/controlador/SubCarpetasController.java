@@ -10,7 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTree;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 import modelo.Directorio;
 import modelo.Subcarpeta;
 import modelo.Usuario;
@@ -30,6 +34,7 @@ public class SubCarpetasController implements ActionListener {
 
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
+    
 
     public SubCarpetasController(Subcarpeta msubcarpetas, Consultas_SubCarpetas csubcarpetas,
             SubCarpetas vsubcarpetas, Directorio mdirectotio, Usuario user) {
@@ -89,10 +94,10 @@ public class SubCarpetasController implements ActionListener {
                 }
 
             }
+            
             limpiaragregarsubcarpeta();
             limpiartablasubcarpeta();
             llenartabla();
-
         }
 
         //metodo para elminar las subcarpetas de la base de datos 
@@ -117,6 +122,7 @@ public class SubCarpetasController implements ActionListener {
             model2.addRow(dato);
             vsubcarpetas.tablasubcarpetas.setModel(model2);
         }
+       
     }
 
     public void limpiaragregarsubcarpeta() {

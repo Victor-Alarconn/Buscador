@@ -5,24 +5,10 @@
  */
 package Organizador;
 
-import Consultas.Consultas_Cliente;
 import Consultas.Consultas_roles;
 import Consultas.Consultas_usuario;
-
-import controlador.OrganizadorController;
-
-import static java.awt.Frame.MAXIMIZED_BOTH;
-import java.awt.Graphics;
-import java.awt.Shape;
-import java.awt.geom.RoundRectangle2D;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
-import modelo.Cliente;
 import modelo.Rol;
 import modelo.Usuario;
-
-import vistas.Principal;
 import vistas.login;
 
 /**
@@ -40,6 +26,7 @@ public class Buscador {
 
         Consultas_usuario cu = new Consultas_usuario();
         Buscador b = new Buscador();
+   
 
         Rol rol = new Rol();
 
@@ -82,5 +69,7 @@ public class Buscador {
         }
         return false;
     }
+    
+    
 
 }

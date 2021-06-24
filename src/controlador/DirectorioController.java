@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import modelo.Directorio;
 import modelo.Subcarpeta;
 import modelo.Usuario;
@@ -36,7 +38,10 @@ public class DirectorioController implements ActionListener {
     Subcarpeta msubcarpeta = new Subcarpeta();
     Consultas_SubCarpetas csubcarpeta = new Consultas_SubCarpetas();
 
-    public DirectorioController(Consultas_Directorio cdirectorio, 
+    DefaultMutableTreeNode raiz;
+    DefaultTreeModel modelo;
+
+    public DirectorioController(Consultas_Directorio cdirectorio,
             Directorio mdirectorio, Carpetas vdirectorio, Usuario user) {
         this.cdirectorio = cdirectorio;
         this.mdirectorio = mdirectorio;
@@ -62,6 +67,7 @@ public class DirectorioController implements ActionListener {
         vdirectorio.tablacarpetas.getColumn("id").setMaxWidth(0);
         busqueda();
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == vdirectorio.guardarcarpeta) {
@@ -123,13 +129,30 @@ public class DirectorioController implements ActionListener {
     public void busqueda() {
         ArrayList<Directorio> directorio;
         Object[] dato = new Object[2];
+        //sub carpeta
+        ArrayList<String> subcarpeta;
+        Object[] datos = new Object[1];
+
         directorio = cdirectorio.llenar();
+        raiz = new DefaultMutableTreeNode("Raiz");
         for (int i = 0; i < directorio.size(); i++) {
+            //subcarpeta
+            msubcarpeta.setDirectorios_iddirectorios(directorio.get(i).getIddirectorios());
+            subcarpeta = csubcarpeta.llenar(msubcarpeta);
+            for (int j = 0; j < subcarpeta.size(); j++) {
+                DefaultMutableTreeNode p = new DefaultMutableTreeNode(subcarpeta.get(j));
+                DefaultMutableTreeNode r = new DefaultMutableTreeNode(directorio.get(i).getCarpeta());
+                r.add(p);
+                raiz.add(r);
+            }
             dato[0] = directorio.get(i).getCarpeta();
             dato[1] = directorio.get(i).getIddirectorios();
             model2.addRow(dato);
             vdirectorio.tablacarpetas.setModel(model2);
         }
+        modelo = new DefaultTreeModel(raiz);
+        vdirectorio.arbol.setModel(modelo);
+
     }
 
     public void limpiaragregarcarpeta() {
