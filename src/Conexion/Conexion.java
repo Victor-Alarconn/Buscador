@@ -24,7 +24,7 @@ public class Conexion {
 //    private final String url = "jdbc:mysql://localhost:3306/" + base;
 //    private Connection con = null;
     
-    private final String base = "organizador";
+    private final String base = "organizadorprueba";
     private final String user = "Facturar";
     private final String passsword = "Facturar123";
     private final String url = "jdbc:mysql://192.168.1.129/" + base;

@@ -121,6 +121,7 @@ public class ClientelController implements ActionListener {
         formulario.txtmodalidad.removeAllItems();
         Consultas_Modalidad mmodalidad = new Consultas_Modalidad();
         ArrayList<String> lista4 = new ArrayList<String>();
+
         lista4 = mmodalidad.llenar();
         for (int i = 0; i < lista4.size(); i++) {
             formulario.txtmodalidad.addItem(lista4.get(i));
@@ -316,7 +317,6 @@ public class ClientelController implements ActionListener {
 
         String nombre = formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase();
         if (nombre == null) {
-
         } else {
             File file = Crear_archivo(path, nombre);
             Object[] idsubcategorias = new Object[subcarpeta.size()];
@@ -331,18 +331,27 @@ public class ClientelController implements ActionListener {
                 carpetas[i] = cd.llenar().get(i).getCarpeta();
                 idcarpetas[i] = cd.llenar().get(i).getIddirectorios();
             }
-            file.mkdir();
-            for (int i = 0; i < directorios.size(); i++) {
-                File fil = Crear_archivo(path+File.separator+nombre, carpetas[i].toString());
-                System.out.println("carpeta "+fil);
-                fil.mkdir();
-                for (int j = 0; j < subcategorias.length; j++) {
-                    if (idsubcategorias[j].equals(idcarpetas[i])) {
-                        File subfile = Crear_archivo(fil.toString(), subcategorias[j].toString());
-                        System.out.println("sub "+subfile);
-                        subfile.mkdir();
+            try {
+                file.mkdir();
+                System.out.println("carpeta "+file);
+                for (int i = 0; i < directorios.size(); i++) {
+                    File fil = Crear_archivo(file.toString(), carpetas[i].toString());
+                    System.out.println("carpeta " + fil);
+                    try {
+                        fil.mkdir();
+                        for (int j = 0; j < subcategorias.length; j++) {
+                            if (idsubcategorias[j].equals(idcarpetas[i])) {
+                                File subfile = Crear_archivo(fil.toString(), subcategorias[j].toString());
+                                System.out.println("sub " + subfile);
+                                subfile.mkdir();
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             abrirarchivo(directorio + File.separator + nombre);
         }
