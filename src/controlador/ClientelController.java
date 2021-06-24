@@ -180,7 +180,7 @@ public class ClientelController implements ActionListener {
                         modelo.setNotas(formulario.txtnotas.getText());
                         modelo.setCodigo(formulario.txtcodigo.getText().toUpperCase());
                         modelo.setDv(formulario.txtdv.getText());
-                        modelo.setRuta(directorio + File.separator + formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase());
+                        modelo.setRuta(directorio + File.separator + formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase().replace(" ", "_"));
                         if (formulario.clientepotecial.isSelected()) {
                             modelo.setCliente_potencial(1);
                         } else {
@@ -315,7 +315,7 @@ public class ClientelController implements ActionListener {
         subcarpeta = csubcarpeta.allsubcategorias();
         directorios = cd.llenar();
 
-        String nombre = formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase();
+        String nombre = formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase().replace(" ", "_");
         if (nombre == null) {
         } else {
             File file = Crear_archivo(path, nombre);
