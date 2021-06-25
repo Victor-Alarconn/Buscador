@@ -48,129 +48,98 @@ public class DirectorioController implements ActionListener {
         this.vdirectorio = vdirectorio;
         this.user = user;
         this.vdirectorio.agregarcarpeta.addActionListener(this);
-        this.vdirectorio.eliminaragregarcarpeta.addActionListener(this);
-        this.vdirectorio.eliminarcarpeta.addActionListener(this);
+        this.vdirectorio.eliminarmenuitem.addActionListener(this);
         this.vdirectorio.guardarcarpeta.addActionListener(this);
-        this.vdirectorio.agregarsubcarpeta.addActionListener(this);
+
     }
 
     public void iniciar() {
         vdirectorio.setTitle("Carpetas");
         vdirectorio.setLocationRelativeTo(null);
-        model.addColumn("Agregar carpeta");
-        model2.addColumn("Carpetas");
-        model2.addColumn("id");
-        vdirectorio.tablaagregarcarpetas.setModel(model);
-        vdirectorio.tablacarpetas.setModel(model2);
-        vdirectorio.tablacarpetas.getColumn("id").setWidth(0);
-        vdirectorio.tablacarpetas.getColumn("id").setMinWidth(0);
-        vdirectorio.tablacarpetas.getColumn("id").setMaxWidth(0);
         busqueda();
+    }
+
+    public void registrardirectorio() {
+        if (cdirectorio.registrar(mdirectorio)) {
+            modelo = new DefaultTreeModel(raiz);
+            vdirectorio.arbol.setModel(modelo);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == vdirectorio.guardarcarpeta) {
-            for (int i = 0; i < vdirectorio.tablaagregarcarpetas.getRowCount(); i++) {
-                mdirectorio.setCarpeta(vdirectorio.tablaagregarcarpetas.getValueAt(i, 0).toString());
-                mdirectorio.setUsuarios_idusuarios(user.getIdusuario());
-                if (!cdirectorio.registrar(mdirectorio)) {
-                    JOptionPane.showMessageDialog(null, "error guardado de documento");
-                }
-            }
-            limpiaragregarcarpeta();
-            limpiartablacarpeta();
             busqueda();
         }
 
         Object[] dato = new Object[1];
         if (e.getSource() == vdirectorio.agregarcarpeta) {
-            if (vdirectorio.txtregistrarcarpeta.getText().length() != 0) {
-                dato[0] = vdirectorio.txtregistrarcarpeta.getText();
-                model.addRow(dato);
-                vdirectorio.tablaagregarcarpetas.setModel(model);
-                vdirectorio.txtregistrarcarpeta.setText("");
-            }
-        }
-        if (e.getSource() == vdirectorio.eliminaragregarcarpeta) {
-            int fila = vdirectorio.tablaagregarcarpetas.getSelectedRow();
-            if (fila >= 0) {
-                model.removeRow(fila);
-            } else {
-                JOptionPane.showMessageDialog(vdirectorio, "La tabla esta vacia o no sea seleccionado nada aun!");
-            }
-        }
-
-        if (e.getSource() == vdirectorio.eliminarcarpeta) {
-            int fila = vdirectorio.tablacarpetas.getSelectedRow();
-            if (fila >= 0) {
-                mdirectorio.setCarpeta(String.valueOf(vdirectorio.tablacarpetas.getValueAt(fila, 0)));
-                if (cdirectorio.eliminar(mdirectorio)) {
-                    model2.removeRow(fila);
+            if (vdirectorio.arbol.getSelectionCount() > 0) {
+                DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) vdirectorio.arbol.getSelectionPath().getLastPathComponent();
+                if (nodo.getLevel() > 0) {
+                    String carpeta = JOptionPane.showInputDialog(vdirectorio, "Ingrese el nombre de la carpeta");
+                    mdirectorio.setUsuarios_idusuarios(user.getIdusuario());
+                    mdirectorio.setCarpeta(carpeta);
+                    Directorio direct = (Directorio) nodo.getUserObject();
+                    mdirectorio.setDirectorios_iddirectorios(direct.getIddirectorios());
+                    mdirectorio.setNodo_level(nodo.getLevel()+1);
+                    registrardirectorio();
+                    busqueda();
                 }
+            } else {
+                mdirectorio.setUsuarios_idusuarios(user.getIdusuario());
+                mdirectorio.setCarpeta("ppp");
+                mdirectorio.setDirectorios_iddirectorios(0);
+                mdirectorio.setNodo_level(1);
+                registrardirectorio();
+                busqueda();
             }
-
+//            
+//        
         }
-        //boton para agregar subcarpeta 
-        if (e.getSource() == vdirectorio.agregarsubcarpeta) {
-            SubCarpetas vsubcarpetas = new SubCarpetas(null, true);
-            int fila = vdirectorio.tablacarpetas.getSelectedRow();
-            if (fila >= 0) {
-                mdirectorio.setCarpeta(String.valueOf(vdirectorio.tablacarpetas.getValueAt(fila, 0)));
-                mdirectorio.setIddirectorios(Integer.parseInt(String.valueOf(vdirectorio.tablacarpetas.getValueAt(fila, 1))));
-                SubCarpetasController ctrsubcarpeta = new SubCarpetasController(msubcarpeta, csubcarpeta, vsubcarpetas, mdirectorio, user);
-                ctrsubcarpeta.iniciar();
-                vsubcarpetas.setVisible(true);
-            }
+        if (e.getSource() == vdirectorio.eliminarmenuitem) {
+//            DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) vdirectorio.arbol.getSelectionPath().getLastPathComponent();
+
+//            Directorio directorio = (Directorio) nodo.getUserObject();
         }
 
+//        if (e.getSource() == vdirectorio.eliminarcarpeta) {
+//                         
+//        }
+//        //boton para agregar subcarpeta 
+//        if (e.getSource() == vdirectorio.agregarsubcarpeta) {
+//            
+//        }
     }
 
     public void busqueda() {
         ArrayList<Directorio> directorio;
         Object[] dato = new Object[2];
-        //sub carpeta
-        ArrayList<String> subcarpeta;
-        Object[] datos = new Object[1];
 
         directorio = cdirectorio.llenar();
-        raiz = new DefaultMutableTreeNode("Raiz");
+        raiz = new DefaultMutableTreeNode("Directorios");
+        m(directorio);
         for (int i = 0; i < directorio.size(); i++) {
-            //subcarpeta
-            msubcarpeta.setDirectorios_iddirectorios(directorio.get(i).getIddirectorios());
-            subcarpeta = csubcarpeta.llenar(msubcarpeta);
-            for (int j = 0; j < subcarpeta.size(); j++) {
-                DefaultMutableTreeNode p = new DefaultMutableTreeNode(subcarpeta.get(j));
-                DefaultMutableTreeNode r = new DefaultMutableTreeNode(directorio.get(i).getCarpeta());
-                r.add(p);
-                raiz.add(r);
+            DefaultMutableTreeNode directorios = new DefaultMutableTreeNode();
+            directorios.setUserObject(directorio.get(i));
+            if (directorio.get(i).getDirectorios_iddirectorios() != 0) {
+                for (int j = 0; j < directorio.size(); j++) {
+                    if (directorio.get(i).getIddirectorios() == directorio.get(j).getDirectorios_iddirectorios()) {
+                        DefaultMutableTreeNode subdirectorios = new DefaultMutableTreeNode();
+                        subdirectorios.setUserObject(directorio.get(j));
+                        directorios.add(subdirectorios);
+                        raiz.add(directorios);
+                    }
+                }
+            } else {
+                raiz.add(directorios);
             }
-            dato[0] = directorio.get(i).getCarpeta();
-            dato[1] = directorio.get(i).getIddirectorios();
-            model2.addRow(dato);
-            vdirectorio.tablacarpetas.setModel(model2);
+
         }
         modelo = new DefaultTreeModel(raiz);
         vdirectorio.arbol.setModel(modelo);
-
     }
-
-    public void limpiaragregarcarpeta() {
-        if (vdirectorio.tablaagregarcarpetas.getRowCount() >= 0) {
-            int count = vdirectorio.tablaagregarcarpetas.getRowCount();
-            for (int i = 0; i < count; i++) {
-                model.removeRow(0);
-            }
-        }
+    public void m(ArrayList<Directorio> directorio){
+        
     }
-
-    public void limpiartablacarpeta() {
-        if (vdirectorio.tablacarpetas.getRowCount() >= 0) {
-            int count = vdirectorio.tablacarpetas.getRowCount();
-            for (int i = 0; i < count; i++) {
-                model2.removeRow(0);
-            }
-        }
-    }
-
 }

@@ -24,11 +24,14 @@ public class Consultas_Directorio extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "INSERT INTO directorios (carpeta, usuarios_idusuario) VALUES(?,?)";
+        String sql = "INSERT INTO directorios (carpeta, usuarios_idusuario,"
+                + " directorios_iddirectorios, nodo_level) VALUES(?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, directorio.getCarpeta());
             ps.setInt(2, directorio.getUsuarios_idusuarios());
+            ps.setInt(3, directorio.getDirectorios_iddirectorios());
+            ps.setInt(4, directorio.getNodo_level());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -59,6 +62,8 @@ public class Consultas_Directorio extends Conexion {
                 Directorio mdirectorio = new Directorio();
                 mdirectorio.setCarpeta(rs.getString("carpeta"));
                 mdirectorio.setIddirectorios(rs.getInt("iddirectorios"));
+                mdirectorio.setDirectorios_iddirectorios(rs.getInt("directorios_iddirectorios"));
+                mdirectorio.setNodo_level(rs.getInt("nodo_level"));
                 lista.add(mdirectorio);
             }
             return lista;
@@ -79,10 +84,10 @@ public class Consultas_Directorio extends Conexion {
     public boolean eliminar(Directorio directorio) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = " DELETE FROM directorios  WHERE carpeta=? ";
+        String sql = " DELETE FROM directorios  WHERE iddirectorios=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
-            ps.setString(1, directorio.getCarpeta());
+            ps.setInt(1, directorio.getIddirectorios());
             ps.execute();
             return true;
         } catch (SQLException e) {

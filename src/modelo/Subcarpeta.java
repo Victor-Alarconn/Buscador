@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author yonathan
@@ -47,6 +49,14 @@ public class Subcarpeta {
     public void setDirectorios_iddirectorios(int directorios_iddirectorios) {
         this.directorios_iddirectorios = directorios_iddirectorios;
     }
+    //se sobre escribe elmetodo par que no retorne el modelo
+    @Override
+    public String toString() {
+        return subcarpeta; //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
     
     
     
