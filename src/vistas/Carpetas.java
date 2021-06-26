@@ -18,28 +18,8 @@ public class Carpetas extends javax.swing.JDialog {
     
     
     public void transparecia() {
-    
-
-        agregarcarpeta.setOpaque(false);
-        agregarcarpeta.setContentAreaFilled(false);
-//        agregarcarpeta.setBorderPainted(false);
-
-        eliminaragregarcarpeta.setOpaque(false);
-        eliminaragregarcarpeta.setContentAreaFilled(false);
-//        eliminaragregarcarpeta.setBorderPainted(false);
-
-        guardarcarpeta.setOpaque(false);
-        guardarcarpeta.setContentAreaFilled(false);
-        
-        agregarsubcarpeta.setOpaque(false);
-        agregarsubcarpeta.setContentAreaFilled(false);
-//        guardarcarpeta.setBorderPainted(false);
-
-       
         panel2panel3.setOpaque(false);
         arbol.setOpaque(false);
-       
-
     }
     /**
      * Creates new form Carpetas
@@ -67,14 +47,8 @@ public class Carpetas extends javax.swing.JDialog {
         agregarmenuitem = new javax.swing.JMenuItem();
         eliminarmenuitem = new javax.swing.JMenuItem();
         panel2panel3 = new javax.swing.JPanel();
-        guardarcarpeta = new javax.swing.JButton();
-        agregarcarpeta = new javax.swing.JButton();
-        eliminaragregarcarpeta = new javax.swing.JButton();
-        agregarsubcarpeta = new javax.swing.JButton();
         tr = new javax.swing.JScrollPane();
         arbol = new javax.swing.JTree();
-        jPanel1 = new javax.swing.JPanel();
-        txtdirectorio = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         agregarmenuitem.setText("Nueva carpeta");
@@ -89,45 +63,12 @@ public class Carpetas extends javax.swing.JDialog {
         panel2panel3.setName("panel2panel3"); // NOI18N
         panel2panel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        guardarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
-        guardarcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
-        panel2panel3.add(guardarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 72, -1));
-
-        agregarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        agregarcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
-        panel2panel3.add(agregarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 65, 57));
-
-        eliminaragregarcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        eliminaragregarcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
-        panel2panel3.add(eliminaragregarcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 65, -1));
-
-        agregarsubcarpeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/subcarpetas.png"))); // NOI18N
-        agregarsubcarpeta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
-        panel2panel3.add(agregarsubcarpeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 65, 57));
+        tr.setBorder(null);
 
         arbol.setComponentPopupMenu(PopupMenu);
         tr.setViewportView(arbol);
 
-        panel2panel3.add(tr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 210, 550));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(txtdirectorio, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(txtdirectorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
-
-        panel2panel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 310, 110));
+        panel2panel3.add(tr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 520, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,17 +134,11 @@ public class Carpetas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPopupMenu PopupMenu;
-    public javax.swing.JButton agregarcarpeta;
     public javax.swing.JMenuItem agregarmenuitem;
-    public javax.swing.JButton agregarsubcarpeta;
     public javax.swing.JTree arbol;
-    public javax.swing.JButton eliminaragregarcarpeta;
     public javax.swing.JMenuItem eliminarmenuitem;
-    public javax.swing.JButton guardarcarpeta;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panel2panel3;
     public javax.swing.JScrollPane tr;
-    private javax.swing.JTextField txtdirectorio;
     // End of variables declaration//GEN-END:variables
 }

@@ -116,7 +116,7 @@ public class OrganizadorController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == principal.crearcliente) {
             Formulario formulario = new Formulario(principal, true);
-            ClientelController controlador = new ClientelController(modelo, consulta,
+            ClienteController controlador = new ClienteController(modelo, consulta,
                     formulario, servicio, mods, shcp, cshcp, documento, cdocumentos,
                     mconfiguracion, cconfiguraciones, mod);
             controlador.iniciar();
