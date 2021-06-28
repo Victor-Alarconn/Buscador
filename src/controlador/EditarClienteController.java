@@ -12,7 +12,7 @@ import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
 import Consultas.Consultas_Modalidad;
-import Consultas.Consultas_Servicio;
+import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,7 +48,7 @@ public class EditarClienteController implements ActionListener {
     private final Configuracion mconfiguracion;
 
     //consultas
-    private final Consultas_Servicio cons;
+    private final Consultas_Servicios cons;
     private final Consultas_Cliente consultas;
     private final Consultas_Servicios_has_Clientes_Potenciales cshcp;
     private final Consultas_Documentos cdocumentos;
@@ -67,7 +67,7 @@ public class EditarClienteController implements ActionListener {
 
     public EditarClienteController(Cliente modelo, Servicio mods,
             Servicios_has_Clientes_Potenciales shcp, Documentos mdocumento, Configuracion mconfiguracion,
-            Consultas_Servicio cons, Consultas_Cliente consultas,
+            Consultas_Servicios cons, Consultas_Cliente consultas,
             Consultas_Servicios_has_Clientes_Potenciales cshcp, Consultas_Documentos cdocumentos,
             Consultas_Configuraciones cconfiguraciones, Consultas_Clase cc, Consultas_Llego cl,
             Editarcliente formulario) {
@@ -288,12 +288,11 @@ public class EditarClienteController implements ActionListener {
 
     public void inicializarcliente() {
         formulario.tabladocumentos1.setModel(model1);
-        if (cconfiguraciones.cargar(mconfiguracion)) {
-            directorio = mconfiguracion.getDirectorio();
-        }
-
+        ArrayList<Configuracion> configuracion=cconfiguraciones.cargar();
+        directorio = configuracion.get(0).getDirectorio();// toca organizar el guardado
+        
         formulario.txtservicio1.removeAllItems();
-        Consultas_Servicio modc = new Consultas_Servicio();
+        Consultas_Servicios modc = new Consultas_Servicios();
         lista = modc.llenar();
         for (int i = 0; i < lista.size(); i++) {
             formulario.txtservicio1.addItem(lista.get(i).getServicio());

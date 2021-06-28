@@ -5,7 +5,7 @@
  */
 package controlador;
 
-import Consultas.Consultas_Servicio;
+import Consultas.Consultas_Servicios;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -24,14 +24,14 @@ import vistas.Servicios;
 public class ServicioController implements ActionListener {
 
     private final Servicio modelo;
-    private final Consultas_Servicio consulta;
+    private final Consultas_Servicios consulta;
     private final Servicios vservicios;
     private final Usuario user;
 
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
 
-    public ServicioController(Servicio modelo, Consultas_Servicio consulta, Servicios vservicios, Usuario user) {
+    public ServicioController(Servicio modelo, Consultas_Servicios consulta, Servicios vservicios, Usuario user) {
         this.modelo = modelo;
         this.consulta = consulta;
         this.vservicios = vservicios;

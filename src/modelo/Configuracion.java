@@ -13,6 +13,24 @@ public class Configuracion {
     private int idconfiguracion;
     private String directorio;
     private int usuarios_idusuario;
+    private int modulos_idmodulos;
+    private String modulo;
+
+    public String getModulo() {
+        return modulo;
+    }
+
+    public void setModulo(String modulo) {
+        this.modulo = modulo;
+    }
+
+    public int getModulos_idmodulos() {
+        return modulos_idmodulos;
+    }
+
+    public void setModulos_idmodulos(int modulos_idmodulos) {
+        this.modulos_idmodulos = modulos_idmodulos;
+    }
 
     public int getUsuarios_idusuario() {
         return usuarios_idusuario;

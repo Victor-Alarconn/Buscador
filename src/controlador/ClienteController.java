@@ -12,7 +12,7 @@ import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
 import Consultas.Consultas_Modalidad;
-import Consultas.Consultas_Servicio;
+import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -52,7 +52,7 @@ public class ClienteController implements ActionListener {
     private final Usuario user;
 
     //consultas
-    private final Consultas_Servicio cons;
+    private final Consultas_Servicios cons;
     private final Consultas_Cliente consultas;
     private final Consultas_Servicios_has_Clientes_Potenciales cshcp;
     private final Consultas_Documentos cdocumentos;
@@ -66,7 +66,7 @@ public class ClienteController implements ActionListener {
     ArrayList<Servicio> lista;
     
     public ClienteController(Cliente modelo, Consultas_Cliente consultas,
-            Formulario formulario, Consultas_Servicio cons, Servicio mods, Servicios_has_Clientes_Potenciales shcp,
+            Formulario formulario, Consultas_Servicios cons, Servicio mods, Servicios_has_Clientes_Potenciales shcp,
             Consultas_Servicios_has_Clientes_Potenciales cshcp, Documentos documento, Consultas_Documentos cdocumentos,
             Configuracion mconfiguracion, Consultas_Configuraciones cconfiguraciones, Usuario user) {
         this.modelo = modelo;

@@ -5,7 +5,7 @@
  */
 package vistas;
 
-import Consultas.Consultas_Servicio;
+import Consultas.Consultas_Servicios;
 import Consultas.Consultas_usuario;
 import controlador.ServicioController;
 import controlador.CrearUsuarioController;
@@ -59,53 +59,123 @@ public class Configuraciones extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu3 = new javax.swing.JMenu();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        EditarMenuItem = new javax.swing.JMenuItem();
+        EliminarMenuItem = new javax.swing.JMenuItem();
         panel2panel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        txtdirectorio = new rojerusan.RSMetroTextFullPlaceHolder();
-        buscar = new rojerusan.RSMaterialButtonRound();
-        guardarconfiguracion = new rojerusan.RSMaterialButtonRound();
         usuariodefecto = new javax.swing.JCheckBox();
+        jPanel2 = new javax.swing.JPanel();
+        txtdirectorio = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        btnbuscar = new javax.swing.JButton();
+        guardarconfiguracion = new javax.swing.JButton();
+        txtmodulo = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablarutas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
-        jMenu3.setText("jMenu3");
+        EditarMenuItem.setText("Editar");
+        jPopupMenu1.add(EditarMenuItem);
+
+        EliminarMenuItem.setText("Eliminar");
+        jPopupMenu1.add(EliminarMenuItem);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        panel2panel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Configuraciones"));
         panel2panel1.setName("panel2panel1"); // NOI18N
         panel2panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Directorio");
-        panel2panel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 83, -1, -1));
-
-        txtdirectorio.setForeground(new java.awt.Color(0, 0, 0));
-        txtdirectorio.setBorderColor(new java.awt.Color(102, 102, 102));
-        txtdirectorio.setPhColor(new java.awt.Color(210, 43, 7));
-        txtdirectorio.setPlaceholder("Directorio");
-        panel2panel1.add(txtdirectorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(189, 73, 370, -1));
-
-        buscar.setBackground(new java.awt.Color(102, 102, 102));
-        buscar.setText("buscar");
-        buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarActionPerformed(evt);
-            }
-        });
-        panel2panel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(579, 63, 230, 60));
-
-        guardarconfiguracion.setBackground(new java.awt.Color(102, 102, 102));
-        guardarconfiguracion.setText("Guardar");
-        guardarconfiguracion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarconfiguracionActionPerformed(evt);
-            }
-        });
-        panel2panel1.add(guardarconfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(579, 143, 230, 60));
-
         usuariodefecto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         usuariodefecto.setText("Desactivar el usuario por defecto");
-        panel2panel1.add(usuariodefecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, -1, -1));
+        panel2panel1.add(usuariodefecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, -1, -1));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setText("Directorio");
+
+        btnbuscar.setText("buscar");
+
+        guardarconfiguracion.setText("Guardar");
+
+        txtmodulo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setText("Modulo");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtmodulo, 0, 210, Short.MAX_VALUE)
+                    .addComponent(txtdirectorio))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(guardarconfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnbuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtdirectorio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnbuscar))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtmodulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(guardarconfiguracion))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        panel2panel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 490, 130));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Rutas"));
+
+        tablarutas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablarutas.setComponentPopupMenu(jPopupMenu1);
+        jScrollPane1.setViewportView(tablarutas);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 7, Short.MAX_VALUE))
+        );
+
+        panel2panel1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 490, 250));
 
         jLabel1.setBackground(new java.awt.Color(102, 102, 255));
         panel2panel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -114,31 +184,21 @@ public class Configuraciones extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel2panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel2panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel2panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panel2panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        JFileChooser jf = new JFileChooser();
-        jf.setCurrentDirectory(new File("c:\\"));
-        jf.setDialogTitle("Selecione una carpeta");
-        jf.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        jf.setAcceptAllFileFilterUsed(false);
-        if (jf.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            File archivo = jf.getSelectedFile();
-            txtdirectorio.setText(archivo.getPath());
-        }
-    }//GEN-LAST:event_buscarActionPerformed
-
-    private void guardarconfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarconfiguracionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_guardarconfiguracionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,13 +243,21 @@ public class Configuraciones extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private rojerusan.RSMaterialButtonRound buscar;
-    public rojerusan.RSMaterialButtonRound guardarconfiguracion;
+    public javax.swing.JMenuItem EditarMenuItem;
+    public javax.swing.JMenuItem EliminarMenuItem;
+    public javax.swing.JButton btnbuscar;
+    public javax.swing.JButton guardarconfiguracion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panel2panel1;
-    public rojerusan.RSMetroTextFullPlaceHolder txtdirectorio;
+    public javax.swing.JTable tablarutas;
+    public javax.swing.JTextField txtdirectorio;
+    public javax.swing.JComboBox<Object> txtmodulo;
     public javax.swing.JCheckBox usuariodefecto;
     // End of variables declaration//GEN-END:variables
 }

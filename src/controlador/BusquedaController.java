@@ -11,7 +11,7 @@ import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
-import Consultas.Consultas_Servicio;
+import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import Consultas.Consultas_usuario;
 import Organizador.Dialogos;
@@ -52,7 +52,7 @@ public class BusquedaController implements ActionListener {
     Dialogos dialogo = new Dialogos();
 
     Servicio mods = new Servicio();
-    Consultas_Servicio servicio = new Consultas_Servicio();
+    Consultas_Servicios servicio = new Consultas_Servicios();
 
     Servicios_has_Clientes_Potenciales shcp = new Servicios_has_Clientes_Potenciales();
     Consultas_Servicios_has_Clientes_Potenciales cshcp = new Consultas_Servicios_has_Clientes_Potenciales();

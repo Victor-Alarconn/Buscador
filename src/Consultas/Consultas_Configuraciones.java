@@ -10,6 +10,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modelo.Configuracion;
 
 /**
@@ -23,12 +24,12 @@ public class Consultas_Configuraciones extends Conexion {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO configuracion (idconfiguracion,directorio,usuarios_idusuario) VALUES(?,?,?)";
+        String sql = "INSERT INTO configuracion (directorio,usuarios_idusuario,modulos_idmodulo) VALUES(?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
-            ps.setInt(1, configuraciones.getIdconfiguracion());
-            ps.setString(2, configuraciones.getDirectorio());
-            ps.setInt(3, configuraciones.getUsuarios_idusuario());
+            ps.setString(1, configuraciones.getDirectorio());
+            ps.setInt(2, configuraciones.getUsuarios_idusuario());
+            ps.setInt(3, configuraciones.getModulos_idmodulos());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -44,23 +45,28 @@ public class Consultas_Configuraciones extends Conexion {
     }
 
     //consulta para cargar las configuraciones en la vista
-    public boolean cargar(Configuracion configuraciones) {
+    public ArrayList<Configuracion> cargar() {
+        ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = " SELECT * FROM configuracion WHERE idconfiguracion=1";
+        String sql = " SELECT idconfiguracion,directorio,modulo FROM configuracion inner join modulos"
+                + " on modulos_idmodulo=modulos.idmodulo";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery();
 
-            if (rs.next()) {
+            while(rs.next()) {
+                Configuracion configuraciones = new Configuracion();
                 configuraciones.setDirectorio(rs.getString("directorio"));
-                return true;
+                configuraciones.setIdconfiguracion(rs.getInt("idconfiguracion"));
+                configuraciones.setModulo(rs.getString("modulo"));
+                lista.add(configuraciones);
             }
-            return false;
+            return lista;
         } catch (SQLException e) {
             System.err.println(e);
-            return false;
+          
         } finally {
             try {
                 con.close();
@@ -68,17 +74,19 @@ public class Consultas_Configuraciones extends Conexion {
                 System.err.println(e);
             }
         }
+        return null;
     }
 
     //consulta para modificar las configuraciones
     public boolean modificar(Configuracion configuraciones) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE  configuracion SET directorio=? WHERE idconfiguracion=? ";
+        String sql = "UPDATE  configuracion SET directorio=?, modulos_idmodulo=? WHERE idconfiguracion=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, configuraciones.getDirectorio());
-            ps.setInt(2, configuraciones.getIdconfiguracion());
+            ps.setInt(2, configuraciones.getModulos_idmodulos());
+            ps.setInt(3, configuraciones.getIdconfiguracion());
             ps.execute();
             return true;
         } catch (SQLException e) {
