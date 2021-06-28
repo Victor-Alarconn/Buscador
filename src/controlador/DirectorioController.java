@@ -37,7 +37,6 @@ public class DirectorioController implements ActionListener {
 
     DefaultMutableTreeNode raiz;
     DefaultTreeModel modelo;
-    DefaultTreeCellRenderer redener;
 
     public DirectorioController(Consultas_Directorio cdirectorio,
             Directorio mdirectorio, Carpetas vdirectorio, Usuario user) {
@@ -106,10 +105,6 @@ public class DirectorioController implements ActionListener {
         ArrayList<Directorio> directorio;
         Object[] dato = new Object[2];
         directorio = cdirectorio.llenar();
-        redener = (DefaultTreeCellRenderer) vdirectorio.arbol.getCellRenderer();
-        redener.setLeafIcon(new ImageIcon("/img/clienteadd.png"));
-        redener.setOpenIcon(new ImageIcon("/img/clienteadd.png"));
-        redener.setClosedIcon(new ImageIcon("/img/clienteadd.png"));
         raiz = new DefaultMutableTreeNode("Directorios");
         for (int i = 0; i < directorio.size(); i++) {
             DefaultMutableTreeNode directorios = new DefaultMutableTreeNode();
