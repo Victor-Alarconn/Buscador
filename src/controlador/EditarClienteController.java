@@ -23,6 +23,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 import modelo.Configuracion;
@@ -91,10 +93,9 @@ public class EditarClienteController implements ActionListener {
 
     public void iniciar() {
         busqueda();
-        formulario.setTitle("Ediatar Cliente Potencial");
+        formulario.setTitle("Editar Cliente Potencial");
         formulario.setLocationRelativeTo(null);
         model.addColumn("Servicio/Producto");
-        model.addColumn("Fecha de inicio");
         formulario.tablaservicios1.setModel(model);
         model1.addColumn("ID");
         model1.addColumn("Documento");
@@ -104,6 +105,12 @@ public class EditarClienteController implements ActionListener {
         formulario.tabladocumentos1.getColumn("ID").setWidth(0);
         formulario.tabladocumentos1.getColumn("ID").setMinWidth(0);
         formulario.tabladocumentos1.getColumn("ID").setMaxWidth(0);
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+        formulario.tablaservicios1.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
+        formulario.tabladocumentos1.getColumnModel().getColumn(1).setCellRenderer(modelocentrar);
+        formulario.tabladocumentos1.getColumnModel().getColumn(2).setCellRenderer(modelocentrar);
+        formulario.tabladocumentos1.getColumnModel().getColumn(3).setCellRenderer(modelocentrar);
         inicializarcliente();
     }
 
@@ -124,9 +131,9 @@ public class EditarClienteController implements ActionListener {
             modelo.setModalidad(formulario.txtmodalidad1.getSelectedItem().toString());
             modelo.setNotas(formulario.txtnotas1.getText());
             modelo.setDv(formulario.txtdv1.getText());
-            if (formulario.txtfecha_arriendo1.getDate()!=null) {
+            if (formulario.txtfecha_arriendo1.getDate() != null) {
                 modelo.setFecha_arriendo(sdf.format(formulario.txtfecha_arriendo1.getDate()));
-            } 
+            }
             modelo.setVlrprincipal(Integer.parseInt(formulario.txtvlrprincipal1.getText()));
             modelo.setNumequipos(Integer.parseInt(formulario.txtnumequipos1.getText()));
             modelo.setVlrterminal(Integer.parseInt(formulario.txtvlrterminal1.getText()));
@@ -151,7 +158,6 @@ public class EditarClienteController implements ActionListener {
                         if (lista.get(j).getServicio().equals(formulario.tablaservicios1.getValueAt(i, 0).toString())) {
                             shcp.setServicios_idservicio(lista.get(j).getIdservicio());
                             shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                            shcp.setFecha_de_inicio(formulario.tablaservicios1.getValueAt(i, 1).toString());
                             if (!cshcp.buscar(shcp)) {
                                 if (!cshcp.registrarservicio(shcp)) {
                                     JOptionPane.showMessageDialog(null, "error guardado de servicios");
@@ -184,11 +190,8 @@ public class EditarClienteController implements ActionListener {
         Object[] dato = new Object[5];
         if (e.getSource() == formulario.agregarservicio1) {
             dato[0] = formulario.txtservicio1.getSelectedItem().toString();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            dato[1] = sdf.format(formulario.txtfecha_inicio1.getDate());
             model.addRow(dato);
             formulario.tablaservicios1.setModel(model);
-            formulario.txtfecha_inicio1.setCalendar(null);
         }
         //boton agregar documento
         Object[] tabladocumentos = new Object[5];
@@ -210,8 +213,6 @@ public class EditarClienteController implements ActionListener {
             if (cons.buscar(mods)) {
                 shcp.setServicios_idservicio(mods.getIdservicio());
                 shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                System.out.println(modelo.getIdclientes_potenciales());
-                shcp.setFecha_de_inicio(formulario.tablaservicios1.getValueAt(fila, 1).toString());
                 if (fila >= 0) {
                     if (cshcp.eliminar(shcp)) {
                         model.removeRow(fila);
@@ -314,7 +315,6 @@ public class EditarClienteController implements ActionListener {
         Object[] datos = new Object[2];
         for (int i = 0; i < servicio.size(); i++) {
             datos[0] = servicio.get(i).getServicio();
-            datos[1] = servicio.get(i).getFecha();
             model.addRow(datos);
             formulario.tablaservicios1.setModel(model);
         }

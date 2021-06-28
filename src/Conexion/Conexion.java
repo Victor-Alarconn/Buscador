@@ -37,7 +37,7 @@ public class Conexion {
 
     public Connection getConexion() {
         
-        File fichero = new File("C:\\Users\\Yonathan Carvajal\\Documents\\NetBeansProjects\\git\\organizador0.1/env.txt");
+        File fichero = new File("C:\\Users\\yonat\\OneDrive\\Documentos\\NetBeansProjects\\organizador0.1/env.txt");
         try {
             BufferedReader fil = new BufferedReader(new FileReader(fichero));
             String linea;

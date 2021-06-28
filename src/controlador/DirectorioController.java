@@ -9,9 +9,11 @@ import Consultas.Consultas_Directorio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import modelo.Directorio;
 import modelo.Usuario;
@@ -35,6 +37,7 @@ public class DirectorioController implements ActionListener {
 
     DefaultMutableTreeNode raiz;
     DefaultTreeModel modelo;
+    DefaultTreeCellRenderer redener;
 
     public DirectorioController(Consultas_Directorio cdirectorio,
             Directorio mdirectorio, Carpetas vdirectorio, Usuario user) {
@@ -44,6 +47,8 @@ public class DirectorioController implements ActionListener {
         this.user = user;
         this.vdirectorio.agregarmenuitem.addActionListener(this);
         this.vdirectorio.eliminarmenuitem.addActionListener(this);
+        
+       
 
     }
 
@@ -101,6 +106,10 @@ public class DirectorioController implements ActionListener {
         ArrayList<Directorio> directorio;
         Object[] dato = new Object[2];
         directorio = cdirectorio.llenar();
+        redener = (DefaultTreeCellRenderer) vdirectorio.arbol.getCellRenderer();
+        redener.setLeafIcon(new ImageIcon("/img/clienteadd.png"));
+        redener.setOpenIcon(new ImageIcon("/img/clienteadd.png"));
+        redener.setClosedIcon(new ImageIcon("/img/clienteadd.png"));
         raiz = new DefaultMutableTreeNode("Directorios");
         for (int i = 0; i < directorio.size(); i++) {
             DefaultMutableTreeNode directorios = new DefaultMutableTreeNode();

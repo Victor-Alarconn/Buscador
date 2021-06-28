@@ -96,7 +96,6 @@ public class ClienteController implements ActionListener {
         formulario.setTitle("Cliente Potencial");
         formulario.setLocationRelativeTo(null);
         model.addColumn("Servicio/Producto");
-        model.addColumn("Fecha de inicio");
         formulario.tablaservicios.setModel(model);
         model1.addColumn("Documento");
         model1.addColumn("Fecha inicio");
@@ -211,7 +210,6 @@ public class ClienteController implements ActionListener {
                                         if (lista.get(j).getServicio().equals(formulario.tablaservicios.getValueAt(i, 0).toString())) {
                                             shcp.setServicios_idservicio(lista.get(j).getIdservicio());
                                             shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                                            shcp.setFecha_de_inicio(formulario.tablaservicios.getValueAt(i, 1).toString());
                                             if (!cshcp.registrarservicio(shcp)) {
                                                 JOptionPane.showMessageDialog(null, "error guardando de servicios");
                                             }
@@ -252,17 +250,9 @@ public class ClienteController implements ActionListener {
         //boton agregar servicio
         Object[] dato = new Object[5];
         if (e.getSource() == formulario.agregarservicio) {
-            if (formulario.txtfecha_inicio.getDate() != null) {
                 dato[0] = formulario.txtservicio.getSelectedItem().toString();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                dato[1] = sdf.format(formulario.txtfecha_inicio.getDate());
                 model.addRow(dato);
                 formulario.tablaservicios.setModel(model);
-                formulario.txtfecha_inicio.setCalendar(null);
-            } else {
-                JOptionPane.showMessageDialog(formulario, "Campo de fecha vacio");
-            }
-            
         }
         //boton agregar documento
         Object[] tabladocumentos = new Object[5];

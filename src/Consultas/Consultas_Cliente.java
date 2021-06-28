@@ -286,7 +286,7 @@ public class Consultas_Cliente extends Conexion {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = " SELECT servicios.servicio,servicios_has_clientes_potenciales.fecha_de_inicio FROM servicios_has_clientes_potenciales INNER JOIN"
+        String sql = " SELECT servicios.servicio FROM servicios_has_clientes_potenciales INNER JOIN"
                 + " servicios ON servicios.idservicio=servicios_has_clientes_potenciales.servicios_idservicio "
                 + "WHERE servicios_has_clientes_potenciales.clientes_potenciales_idclientes_potenciales=?";
         try {
@@ -298,7 +298,6 @@ public class Consultas_Cliente extends Conexion {
             while (rs.next()) {
                 Servicio servicio = new Servicio();
                 servicio.setServicio(rs.getString(1));
-                servicio.setFecha(rs.getString(2));
                 lista.add(servicio);
             }
             return lista;

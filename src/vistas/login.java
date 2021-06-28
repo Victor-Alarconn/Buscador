@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import modelo.Usuario;
 
-
 /**
  *
  * @author yonathan
@@ -36,10 +35,10 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
 //          this.setUndecorated(true);
-        
+
         initComponents();
-        this.setIconImage (new ImageIcon("add.png").getImage());
-        this.setLocationRelativeTo(null);        
+        this.setIconImage(new ImageIcon("add.png").getImage());
+        this.setLocationRelativeTo(null);
         keyevent();
         this.setResizable(false);
         txtcontrasena.setBorder(new RoundedBorder(5));
@@ -47,6 +46,8 @@ public class login extends javax.swing.JFrame {
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/logo.png"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(logo.getWidth(), logo.getHeight(), Image.SCALE_DEFAULT));
         logo.setIcon(fondo);
+        validar.setOpaque(false);
+        validar.setContentAreaFilled(false);
     }
 
     public void keyevent() {
@@ -98,44 +99,54 @@ public class login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true), "Login de Usuario", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Usuario");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Contraseña");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         nombreuser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         nombreuser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 2, true));
-        jPanel1.add(nombreuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 250, 40));
+        jPanel1.add(nombreuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 250, 40));
 
         txtcontrasena.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtcontrasena.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 2, true));
-        jPanel1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 250, 40));
+        jPanel1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 250, 40));
 
+        validar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        validar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/login.png"))); // NOI18N
         validar.setText("ingresar");
+        validar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 1, true));
         validar.setHideActionText(true);
         validar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 validarActionPerformed(evt);
             }
         });
-        jPanel1.add(validar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
+        jPanel1.add(validar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 155, 110, 40));
         jPanel1.add(jlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-        jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 240, 70));
+        jPanel1.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 240, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -191,27 +202,24 @@ public class login extends javax.swing.JFrame {
     public javax.swing.JButton validar;
     // End of variables declaration//GEN-END:variables
 }
+
 class RoundedBorder implements Border {
 
     private int radius;
-
 
     RoundedBorder(int radius) {
         this.radius = radius;
     }
 
-
     public Insets getBorderInsets(Component c) {
-        return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+        return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
     }
-
 
     public boolean isBorderOpaque() {
         return true;
     }
 
-
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+        g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
     }
 }

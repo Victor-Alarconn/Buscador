@@ -12,7 +12,6 @@ package modelo;
 public class Servicio {
     private int idservicio;
     private String servicio;
-    private String fecha;
     private int usuarios_idusuarios;
 
     public int getUsuarios_idusuarios() {
@@ -21,16 +20,6 @@ public class Servicio {
 
     public void setUsuarios_idusuarios(int usuarios_idusuarios) {
         this.usuarios_idusuarios = usuarios_idusuarios;
-    }
-    
-    
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
     }
     public int getIdservicio() {
         return idservicio;
