@@ -59,9 +59,9 @@ public class Configuraciones extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        EditarMenuItem = new javax.swing.JMenuItem();
-        EliminarMenuItem = new javax.swing.JMenuItem();
+        popup = new javax.swing.JPopupMenu();
+        EditarMenuItem1 = new javax.swing.JMenuItem();
+        eliminarMenuItem1 = new javax.swing.JMenuItem();
         panel2panel1 = new javax.swing.JPanel();
         usuariodefecto = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
@@ -71,16 +71,19 @@ public class Configuraciones extends javax.swing.JDialog {
         guardarconfiguracion = new javax.swing.JButton();
         txtmodulo = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        idtabla = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablarutas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
-        EditarMenuItem.setText("Editar");
-        jPopupMenu1.add(EditarMenuItem);
+        EditarMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editarmenu-24.png"))); // NOI18N
+        EditarMenuItem1.setText("Editar");
+        popup.add(EditarMenuItem1);
 
-        EliminarMenuItem.setText("Eliminar");
-        jPopupMenu1.add(EliminarMenuItem);
+        eliminarMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminarmenu24px.png"))); // NOI18N
+        eliminarMenuItem1.setText("Eliminar");
+        popup.add(eliminarMenuItem1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -113,16 +116,19 @@ public class Configuraciones extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtmodulo, 0, 210, Short.MAX_VALUE)
-                    .addComponent(txtdirectorio))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(guardarconfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnbuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(idtabla, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtmodulo, 0, 210, Short.MAX_VALUE)
+                            .addComponent(txtdirectorio))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(guardarconfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnbuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -138,7 +144,9 @@ public class Configuraciones extends javax.swing.JDialog {
                     .addComponent(txtmodulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(guardarconfiguracion))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(idtabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         panel2panel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 490, 130));
@@ -156,7 +164,6 @@ public class Configuraciones extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tablarutas.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(tablarutas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -243,18 +250,19 @@ public class Configuraciones extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JMenuItem EditarMenuItem;
-    public javax.swing.JMenuItem EliminarMenuItem;
+    public javax.swing.JMenuItem EditarMenuItem1;
     public javax.swing.JButton btnbuscar;
+    public javax.swing.JMenuItem eliminarMenuItem1;
     public javax.swing.JButton guardarconfiguracion;
+    public javax.swing.JTextField idtabla;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panel2panel1;
+    public javax.swing.JPopupMenu popup;
     public javax.swing.JTable tablarutas;
     public javax.swing.JTextField txtdirectorio;
     public javax.swing.JComboBox<Object> txtmodulo;

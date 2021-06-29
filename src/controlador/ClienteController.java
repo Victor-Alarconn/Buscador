@@ -57,14 +57,15 @@ public class ClienteController implements ActionListener {
     private final Consultas_Servicios_has_Clientes_Potenciales cshcp;
     private final Consultas_Documentos cdocumentos;
     private final Consultas_Configuraciones cconfiguraciones;
-    
+
     private final Formulario formulario;
     private String directorio = null;
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model1 = new DefaultTableModel();
-    
+
     ArrayList<Servicio> lista;
-    
+    ArrayList<Configuracion> mconfig;
+
     public ClienteController(Cliente modelo, Consultas_Cliente consultas,
             Formulario formulario, Consultas_Servicios cons, Servicio mods, Servicios_has_Clientes_Potenciales shcp,
             Consultas_Servicios_has_Clientes_Potenciales cshcp, Documentos documento, Consultas_Documentos cdocumentos,
@@ -81,14 +82,14 @@ public class ClienteController implements ActionListener {
         this.mconfiguracion = mconfiguracion;
         this.cconfiguraciones = cconfiguraciones;
         this.user = user;
-        
+
         this.formulario.guardarformulario.addActionListener(this);
         this.formulario.agregarservicio.addActionListener(this);
         this.formulario.agregardocumento.addActionListener(this);
         this.formulario.eliminardocumento.addActionListener(this);
         this.formulario.eliminarservicio.addActionListener(this);
     }
-    
+
     public void iniciar() {
         busqueda();
         keyevent();
@@ -99,31 +100,43 @@ public class ClienteController implements ActionListener {
         formulario.tablaservicios.setModel(model);
         model1.addColumn("Documento");
         model1.addColumn("Fecha inicio");
-        model1.addColumn("Fecha vvence");
+        model1.addColumn("Fecha vence");
         formulario.tabladocumentos.setModel(model1);
-        
+
+        mconfig = cconfiguraciones.cargar();
+        for (int i = 0; i < mconfig.size(); i++) {
+            if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
+                directorio = mconfig.get(i).getDirectorio();
+            }
+        }
+        if (directorio==null) {
+            formulario.mensajealerta.setVisible(true);
+        }else{
+            formulario.mensajealerta.setVisible(false);
+        }
+
         formulario.txtservicio.removeAllItems();
         lista = cons.llenar();
         for (int i = 0; i < lista.size(); i++) {
             formulario.txtservicio.addItem(lista.get(i).getServicio());
         }
-        
+
         formulario.txtclase.removeAllItems();
         Consultas_Clase mod = new Consultas_Clase();
         ArrayList<String> lista2 = mod.llenar();
         for (int i = 0; i < lista2.size(); i++) {
             formulario.txtclase.addItem(lista2.get(i));
         }
-        
+
         formulario.txtmodalidad.removeAllItems();
         Consultas_Modalidad mmodalidad = new Consultas_Modalidad();
         ArrayList<String> lista4 = new ArrayList<String>();
-        
+
         lista4 = mmodalidad.llenar();
         for (int i = 0; i < lista4.size(); i++) {
             formulario.txtmodalidad.addItem(lista4.get(i));
         }
-        
+
         formulario.txtllego.removeAllItems();
         ArrayList<String> lista3 = new ArrayList<String>();
         Consultas_Llego modelo = new Consultas_Llego();
@@ -132,15 +145,14 @@ public class ClienteController implements ActionListener {
             formulario.txtllego.addItem(lista3.get(i));
         }
         
+        
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         if (e.getSource() == formulario.guardarformulario) {
-            if (cconfiguraciones.cargar(mconfiguracion)) {
-                directorio = mconfiguracion.getDirectorio();
-            }
+
             modelo.setNit(formulario.txtnit.getText());
             modelo.setEmpresa(formulario.txtempresa.getText());
             if (formulario.txtnombre.getText().equals("")) {
@@ -160,7 +172,7 @@ public class ClienteController implements ActionListener {
                 if (!formulario.txtvlrprincipal.getText().equals("")) {
                     modelo.setVlrprincipal(Integer.parseInt(formulario.txtvlrprincipal.getText()));
                 }
-                
+
                 if (!formulario.txtvlrterminal.getText().equals("")) {
                     modelo.setVlrterminal(Integer.parseInt(formulario.txtvlrterminal.getText()));
                 }
@@ -201,58 +213,54 @@ public class ClienteController implements ActionListener {
                         modelo.setContacto(formulario.txtcontacto.getText());
                         modelo.setUsuarios_idusuario(user.getIdusuario());
                         //guardando el cliente 
+
                         if (consultas.registrar(modelo)) {
-                            modelo.setNit(formulario.txtnit.getText());
-                            if (consultas.buscarr(modelo)) {
-                                // guardando la tabla servicios
-                                for (int i = 0; i < formulario.tablaservicios.getRowCount(); i++) {
-                                    for (int j = 0; j < lista.size(); j++) {
-                                        if (lista.get(j).getServicio().equals(formulario.tablaservicios.getValueAt(i, 0).toString())) {
-                                            shcp.setServicios_idservicio(lista.get(j).getIdservicio());
-                                            shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                                            if (!cshcp.registrarservicio(shcp)) {
-                                                JOptionPane.showMessageDialog(null, "error guardando de servicios");
-                                            }
+                            // guardando la tabla servicios
+                            for (int i = 0; i < formulario.tablaservicios.getRowCount(); i++) {
+                                for (int j = 0; j < lista.size(); j++) {
+                                    if (lista.get(j).getServicio().equals(formulario.tablaservicios.getValueAt(i, 0).toString())) {
+                                        shcp.setServicios_idservicio(lista.get(j).getIdservicio());
+                                        shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                                        if (!cshcp.registrarservicio(shcp)) {
+                                            JOptionPane.showMessageDialog(null, "error guardando de servicios");
                                         }
                                     }
                                 }
-                                //guardando la tabla documnetos
-                                for (int i = 0; i < formulario.tabladocumentos.getRowCount(); i++) {
-                                    mdocumento.setDocumento(formulario.tabladocumentos.getValueAt(i, 0).toString());
-                                    mdocumento.setFecha_inicio(formulario.tabladocumentos.getValueAt(i, 1).toString());
-                                    mdocumento.setFecha_vencimiento(formulario.tabladocumentos.getValueAt(i, 2).toString());
-                                    mdocumento.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                                    if (!cdocumentos.registrar(mdocumento)) {
-                                        JOptionPane.showMessageDialog(null, "error guardando de documentos");
-                                    }
-                                }
-                                JOptionPane.showMessageDialog(null, "registro guardado");
-                                crear_carpeta(directorio);
-                                formulario.dispose();
-                                this.limpiar();
-                                this.limpiardocumentos();
-                                this.limpiarservicios();
-                                
-                            } else {
-                                JOptionPane.showMessageDialog(null, "error de registro cliente");
                             }
+                            //guardando la tabla documnetos
+                            for (int i = 0; i < formulario.tabladocumentos.getRowCount(); i++) {
+                                mdocumento.setDocumento(formulario.tabladocumentos.getValueAt(i, 0).toString());
+                                mdocumento.setFecha_inicio(formulario.tabladocumentos.getValueAt(i, 1).toString());
+                                mdocumento.setFecha_vencimiento(formulario.tabladocumentos.getValueAt(i, 2).toString());
+                                mdocumento.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                                if (!cdocumentos.registrar(mdocumento)) {
+                                    JOptionPane.showMessageDialog(null, "error guardando de documentos");
+                                }
+                            }
+                            JOptionPane.showMessageDialog(null, "registro guardado");
+                            crear_carpeta(directorio);
+                            formulario.dispose();
+                            this.limpiar();
+                            this.limpiardocumentos();
+                            this.limpiarservicios();
+
                         } else {
                             JOptionPane.showMessageDialog(null, "error guardado el cliente");
                         }
-                        //cortar
+
                     }
                 } else {
                     JOptionPane.showMessageDialog(formulario, "El campo fecha esta vacio");
                 }
             }
-            
+
         }
         //boton agregar servicio
         Object[] dato = new Object[5];
         if (e.getSource() == formulario.agregarservicio) {
-                dato[0] = formulario.txtservicio.getSelectedItem().toString();
-                model.addRow(dato);
-                formulario.tablaservicios.setModel(model);
+            dato[0] = formulario.txtservicio.getSelectedItem().toString();
+            model.addRow(dato);
+            formulario.tablaservicios.setModel(model);
         }
         //boton agregar documento
         Object[] tabladocumentos = new Object[5];
@@ -270,7 +278,7 @@ public class ClienteController implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(formulario, "Campos de fechas vacios");
             }
-            
+
         }
         //boton eliminar servicio
         if (e.getSource() == formulario.eliminarservicio) {
@@ -280,7 +288,7 @@ public class ClienteController implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
             }
-            
+
         }
         //boton eliminar documnento
         if (e.getSource() == formulario.eliminardocumento) {
@@ -291,7 +299,7 @@ public class ClienteController implements ActionListener {
                 JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
             }
         }
-        
+
     }
 
     // funcion para crear una carpeta 
@@ -307,10 +315,10 @@ public class ClienteController implements ActionListener {
                 file.mkdir();
                 for (int i = 0; i < directorios.size(); i++) {
                     File fil = Crear_archivo(file.toString(), directorios.get(i).toString());
-                    if (directorios.get(i).getNodo_level()==1) {
+                    if (directorios.get(i).getNodo_level() == 1) {
                         fil.mkdir();
                         busacarsubcarpetas(directorios.get(i), directorios, fil);
-                    }   
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -318,7 +326,7 @@ public class ClienteController implements ActionListener {
             abrirarchivo(directorio + File.separator + nombre);
         }
     }
-    
+
     public void busacarsubcarpetas(Directorio y, ArrayList<Directorio> d, File fil) {
         for (int j = 0; j < d.size(); j++) {
             if (y.getIddirectorios() == d.get(j).getDirectorios_iddirectorios()) {
@@ -327,8 +335,9 @@ public class ClienteController implements ActionListener {
                 busacarsubcarpetas(d.get(j), d, subfile);
             }
         }
-        
+
     }
+
     public void busqueda() {
         ArrayList<Directorio> directorios;
         Consultas_Directorio cd = new Consultas_Directorio();
@@ -371,7 +380,7 @@ public class ClienteController implements ActionListener {
         formulario.txtfecha_llegada.setCalendar(null);
         formulario.buttonGroup1.clearSelection();
     }
-    
+
     public void limpiarservicios() {
         if (formulario.tablaservicios.getRowCount() >= 0) {
             int count = formulario.tablaservicios.getRowCount();
@@ -380,7 +389,7 @@ public class ClienteController implements ActionListener {
             }
         }
     }
-    
+
     public void limpiardocumentos() {
         if (formulario.tabladocumentos.getRowCount() >= 0) {
             int count = formulario.tabladocumentos.getRowCount();
@@ -389,7 +398,7 @@ public class ClienteController implements ActionListener {
             }
         }
     }
-    
+
     public void keyevent() {
         formulario.txtnit.addKeyListener(new KeyAdapter() {
             @Override
@@ -398,7 +407,7 @@ public class ClienteController implements ActionListener {
             }
         });
     }
-    
+
     public void consultanit() {
         modelo.setNit(formulario.txtnit.getText());
         if (consultas.buscarr(modelo)) {

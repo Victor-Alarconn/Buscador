@@ -81,12 +81,36 @@ public class Consultas_Configuraciones extends Conexion {
     public boolean modificar(Configuracion configuraciones) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE  configuracion SET directorio=?, modulos_idmodulo=? WHERE idconfiguracion=? ";
+        String sql = "UPDATE  configuracion SET directorio=?, modulos_idmodulo=?, usuarios_idusuario=? WHERE idconfiguracion=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, configuraciones.getDirectorio());
             ps.setInt(2, configuraciones.getModulos_idmodulos());
-            ps.setInt(3, configuraciones.getIdconfiguracion());
+            ps.setInt(3, configuraciones.getUsuarios_idusuario());
+            ps.setInt(4, configuraciones.getIdconfiguracion());
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+
+    }
+    
+    //consulta para eliminar
+    public boolean eliminar(Configuracion configuraciones) {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = " DELETE FROM configuracion  WHERE idconfiguracion=? ";
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps.setInt(1, configuraciones.getIdconfiguracion());
             ps.execute();
             return true;
         } catch (SQLException e) {

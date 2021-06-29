@@ -288,9 +288,7 @@ public class EditarClienteController implements ActionListener {
 
     public void inicializarcliente() {
         formulario.tabladocumentos1.setModel(model1);
-        ArrayList<Configuracion> configuracion=cconfiguraciones.cargar();
-        directorio = configuracion.get(0).getDirectorio();// toca organizar el guardado
-        
+
         formulario.txtservicio1.removeAllItems();
         Consultas_Servicios modc = new Consultas_Servicios();
         lista = modc.llenar();

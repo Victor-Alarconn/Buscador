@@ -26,7 +26,7 @@ public class Consultas_Cliente extends Conexion {
     public boolean registrar(Cliente cliente) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-
+        ResultSet rs = null;
         String sql = "INSERT INTO clientes_potenciales (nit,nombre,empresa,"
                 + "celular1,celular2,email,fecha_llegada,clase,"
                 + "modalidad,notas,codigo,llego,categoria,ruta,dv,"
@@ -34,7 +34,7 @@ public class Consultas_Cliente extends Conexion {
                 + "cliente_potencial,vlrprincipal,numequipos,vlrterminal) VALUES(?,?,?,"
                 + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
-            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps = (PreparedStatement) con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, cliente.getNit());
             ps.setString(2, cliente.getNombre());
             ps.setString(3, cliente.getEmpresa());
@@ -57,7 +57,12 @@ public class Consultas_Cliente extends Conexion {
             ps.setInt(20, cliente.getVlrprincipal());
             ps.setInt(21, cliente.getNumequipos());
             ps.setInt(22, cliente.getVlrterminal());
-            ps.execute();
+            ps.executeUpdate();
+            rs = ps.getGeneratedKeys();// recupera el id autoincrementable del registro hecho
+            if (rs != null && rs.next()) {
+                int llave = rs.getInt(1);
+                cliente.setIdclientes_potenciales(llave);
+            }
             return true;
         } catch (SQLException e) {
             System.err.println(e);
