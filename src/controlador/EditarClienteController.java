@@ -138,6 +138,21 @@ public class EditarClienteController implements ActionListener {
             modelo.setNumequipos(Integer.parseInt(formulario.txtnumequipos1.getText()));
             modelo.setVlrterminal(Integer.parseInt(formulario.txtvlrterminal1.getText()));
 //            modelo.setCodigo(formulario.txtcodigo1.getText());
+            if (formulario.clientepotencial.isSelected()) {
+                modelo.setCliente_potencial(1);
+            } else {
+                modelo.setCliente_potencial(0);
+            }
+            if (formulario.electronica.isSelected()) {
+                modelo.setElectronica(1);
+            } else {
+                modelo.setElectronica(0);
+            }
+            if (formulario.sucursal.isSelected()) {
+                modelo.setSucursal(1);
+            } else {
+                modelo.setSucursal(0);
+            }
             //condicionales de selecion  de categoria 
             if (formulario.bequipos1.isSelected()) {
                 modelo.setCategoria("Equipos");
@@ -358,6 +373,16 @@ public class EditarClienteController implements ActionListener {
                     formulario.clientepotencial.setSelected(true);
                 } else {
                     formulario.clientepotencial.setSelected(false);
+                }
+                if (modelo.getElectronica() == 1) {
+                    formulario.electronica.setSelected(true);
+                } else {
+                    formulario.electronica.setSelected(false);
+                }
+                if (modelo.getSucursal() == 1) {
+                    formulario.sucursal.setSelected(true);
+                } else {
+                    formulario.sucursal.setSelected(false);
                 }
                 if (modelo.getCategoria() != null) {
                     if (modelo.getCategoria().equals("Equipos")) {

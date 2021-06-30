@@ -195,6 +195,16 @@ public class ClienteController implements ActionListener {
                         } else {
                             modelo.setCliente_potencial(0);
                         }
+                        if (formulario.electronica.isSelected()) {
+                            modelo.setElectronica(1);
+                        } else {
+                            modelo.setElectronica(0);
+                        }
+                        if (formulario.sucursal.isSelected()) {
+                            modelo.setSucursal(1);
+                        } else {
+                            modelo.setSucursal(0);
+                        }
                         if (formulario.bequipos.isSelected()) {
                             modelo.setCategoria("Equipos");
                         }

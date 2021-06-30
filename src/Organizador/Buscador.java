@@ -73,7 +73,7 @@ public class Buscador {
         if (md.isEmpty()) {
             for (int j = 0; j < lista.size(); j++) {
                 mm.setModulo(lista.get(j));
-                mm.setUsuarios_idusuario(1);
+                mm.setUsuarios_idusuario(4);
                 cm.registrar(mm);
             }
         } else {
@@ -87,7 +87,7 @@ public class Buscador {
             if (estado) {
                 for (int j = 0; j < lista.size(); j++) {
                     mm.setModulo(lista.get(j));
-                    mm.setUsuarios_idusuario(1);
+                    mm.setUsuarios_idusuario(4);
                     cm.registrar(mm);
                 }
 

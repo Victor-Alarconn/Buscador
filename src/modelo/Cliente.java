@@ -33,6 +33,25 @@ public class Cliente {
     private int vlrprincipal;
     private int numequipos;
     private int vlrterminal;
+    private int electronica;
+    private int sucursal;
+
+    public int getElectronica() {
+        return electronica;
+    }
+
+    public void setElectronica(int electronica) {
+        this.electronica = electronica;
+    }
+
+    public int getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(int sucursal) {
+        this.sucursal = sucursal;
+    }
+    
 
     public int getVlrprincipal() {
         return vlrprincipal;

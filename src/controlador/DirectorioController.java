@@ -105,7 +105,7 @@ public class DirectorioController implements ActionListener {
         ArrayList<Directorio> directorio;
         Object[] dato = new Object[2];
         directorio = cdirectorio.llenar();
-        raiz = new DefaultMutableTreeNode("Directorios");
+        raiz = new DefaultMutableTreeNode("Directorios Cliente");
         for (int i = 0; i < directorio.size(); i++) {
             DefaultMutableTreeNode directorios = new DefaultMutableTreeNode();
             directorios.setUserObject(directorio.get(i));

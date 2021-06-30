@@ -5,19 +5,8 @@
  */
 package vistas;
 
-import Consultas.Consultas_Servicios;
 import Consultas.Consultas_usuario;
-import controlador.ServicioController;
-import controlador.CrearUsuarioController;
-import java.awt.Dimension;
-import static java.awt.Frame.MAXIMIZED_BOTH;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.io.File;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import modelo.Servicio;
+
 import modelo.Usuario;
 
 /**

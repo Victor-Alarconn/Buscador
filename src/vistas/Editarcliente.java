@@ -107,6 +107,9 @@ public class Editarcliente extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         agregarservicio1 = new javax.swing.JButton();
         eliminarservicio1 = new javax.swing.JButton();
+        electronica = new javax.swing.JCheckBox();
+        sucursal = new javax.swing.JCheckBox();
+        clientepotencial = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
         txtnit1 = new javax.swing.JTextField();
         txtnombre1 = new javax.swing.JTextField();
@@ -138,7 +141,6 @@ public class Editarcliente extends javax.swing.JDialog {
         jScrollPane6 = new javax.swing.JScrollPane();
         txtnotas1 = new javax.swing.JTextArea();
         mensajenit = new javax.swing.JLabel();
-        clientepotencial = new javax.swing.JCheckBox();
         txtfecha_arriendo1 = new com.toedter.calendar.JDateChooser();
         jLabel38 = new javax.swing.JLabel();
         bequipos1 = new javax.swing.JRadioButton();
@@ -322,6 +324,20 @@ public class Editarcliente extends javax.swing.JDialog {
         eliminarservicio1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
         eliminarservicio1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
 
+        electronica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        electronica.setText("Electronica");
+
+        sucursal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        sucursal.setText("Sucursal");
+        sucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sucursalActionPerformed(evt);
+            }
+        });
+
+        clientepotencial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        clientepotencial.setText("Cliente potencial");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -329,14 +345,22 @@ public class Editarcliente extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(agregarservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(eliminarservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txtservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addComponent(txtservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(clientepotencial)
+                            .addGap(18, 18, 18)
+                            .addComponent(electronica)
+                            .addGap(18, 18, 18)
+                            .addComponent(sucursal))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(agregarservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(eliminarservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -344,7 +368,12 @@ public class Editarcliente extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtservicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(electronica)
+                        .addComponent(sucursal))
+                    .addComponent(clientepotencial))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -462,9 +491,6 @@ public class Editarcliente extends javax.swing.JDialog {
         mensajenit.setForeground(new java.awt.Color(255, 0, 0));
         mensajenit.setText("El nit ya existe");
 
-        clientepotencial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        clientepotencial.setText("Cliente potencial");
-
         txtfecha_arriendo1.setBackground(new java.awt.Color(255, 51, 51));
         txtfecha_arriendo1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         txtfecha_arriendo1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
@@ -542,7 +568,6 @@ public class Editarcliente extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(clientepotencial)
                             .addComponent(jLabel25))
                         .addGap(0, 9, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -559,8 +584,7 @@ public class Editarcliente extends javax.swing.JDialog {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(clientepotencial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(jLabel26)
@@ -695,6 +719,10 @@ public class Editarcliente extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtemail1ActionPerformed
 
+    private void sucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucursalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sucursalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -746,6 +774,7 @@ public class Editarcliente extends javax.swing.JDialog {
     public javax.swing.JRadioButton bsoftware1;
     public javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JCheckBox clientepotencial;
+    public javax.swing.JCheckBox electronica;
     public javax.swing.JButton eliminardocumento1;
     public javax.swing.JButton eliminarservicio1;
     public com.toedter.calendar.JDateChooser fecha_inicio_docum1;
@@ -784,6 +813,7 @@ public class Editarcliente extends javax.swing.JDialog {
     public javax.swing.JLabel mensajenit;
     public javax.swing.JPanel subpanel3;
     private javax.swing.JPanel subpanel4;
+    public javax.swing.JCheckBox sucursal;
     public javax.swing.JTable tabladocumentos1;
     public javax.swing.JTable tablaservicios1;
     public javax.swing.JTextField txtcelular11;

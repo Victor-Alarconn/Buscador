@@ -31,8 +31,8 @@ public class Consultas_Cliente extends Conexion {
                 + "celular1,celular2,email,fecha_llegada,clase,"
                 + "modalidad,notas,codigo,llego,categoria,ruta,dv,"
                 + "usuarios_idusuario,fecha_arriendo,contacto,"
-                + "cliente_potencial,vlrprincipal,numequipos,vlrterminal) VALUES(?,?,?,"
-                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "cliente_potencial,vlrprincipal,numequipos,vlrterminal,electronica,sucursal) VALUES(?,?,?,"
+                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, cliente.getNit());
@@ -57,6 +57,8 @@ public class Consultas_Cliente extends Conexion {
             ps.setInt(20, cliente.getVlrprincipal());
             ps.setInt(21, cliente.getNumequipos());
             ps.setInt(22, cliente.getVlrterminal());
+            ps.setInt(23, cliente.getElectronica());
+            ps.setInt(24, cliente.getSucursal());
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();// recupera el id autoincrementable del registro hecho
             if (rs != null && rs.next()) {
@@ -83,7 +85,7 @@ public class Consultas_Cliente extends Conexion {
         Connection con = getConexion();
         String sql = "UPDATE  clientes_potenciales SET nit=?, nombre=?, empresa=?,"
                 + " celular1=?, celular2=?, email=?, fecha_llegada=?, clase=?, modalidad=?, notas=?, codigo=?, llego=?, categoria=?,dv=?,"
-                + " fecha_arriendo=?, contacto=?, vlrprincipal=?, numequipos=?,vlrterminal=?"
+                + " fecha_arriendo=?, contacto=?, vlrprincipal=?, numequipos=?,vlrterminal=?, electronica=?, sucursal=?,cliente_potencial=?"
                 + " WHERE idclientes_potenciales=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
@@ -106,7 +108,10 @@ public class Consultas_Cliente extends Conexion {
             ps.setInt(17, cliente.getVlrprincipal());
             ps.setInt(18, cliente.getNumequipos());
             ps.setInt(19, cliente.getVlrterminal());
-            ps.setInt(20, cliente.getIdclientes_potenciales());
+            ps.setInt(20, cliente.getElectronica());
+            ps.setInt(21, cliente.getSucursal());
+            ps.setInt(22, cliente.getCliente_potencial());
+            ps.setInt(23, cliente.getIdclientes_potenciales());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -179,6 +184,8 @@ public class Consultas_Cliente extends Conexion {
                 cliente.setVlrprincipal(rs.getInt("vlrprincipal"));
                 cliente.setNumequipos(rs.getInt("numequipos"));
                 cliente.setVlrterminal(rs.getInt("vlrterminal"));
+                cliente.setElectronica(rs.getInt("electronica"));
+                cliente.setSucursal(rs.getInt("sucursal"));
                 return true;
             }
 
