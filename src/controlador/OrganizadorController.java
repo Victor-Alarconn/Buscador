@@ -36,6 +36,7 @@ import modelo.Modalidad;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import modelo.Usuario;
+import vistas.Backups;
 import vistas.Busqueda;
 import vistas.Carpetas;
 import vistas.Configuraciones;
@@ -104,6 +105,7 @@ public class OrganizadorController implements ActionListener {
         this.principal.otro.addActionListener(this);
         this.principal.busqueda.addActionListener(this);
         this.principal.modalidad.addActionListener(this);
+        this.principal.backup.addActionListener(this);
                 
     }
 
@@ -154,9 +156,7 @@ public class OrganizadorController implements ActionListener {
         }
         //boton agregar modalidad 
         if (e.getSource() == principal.modalidad) {
-
                VModalidad vm = new VModalidad(principal, true);
-               
                Modalidadcontroller mc = new Modalidadcontroller(mm, mcm, vm, mod);
                mc.iniciar();
                vm.setVisible(true);
@@ -176,7 +176,12 @@ public class OrganizadorController implements ActionListener {
             ctrc.iniciar();
             carpeta.setVisible(true);
         }
-
+        if (e.getSource()==principal.backup) {
+            Backups backup = new Backups(principal,true);
+            BackupController cbackup = new BackupController(consulta, modelo, backup, mod);
+            cbackup.iniciar();
+            backup.setVisible(true);
+        }
     }
 
     public void abrirarchivo(String archivo) {

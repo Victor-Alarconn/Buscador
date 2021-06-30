@@ -25,13 +25,17 @@ import vistas.login;
  * @author Yonathan Carvajal
  */
 public class Consultas_usuario extends Conexion {
-    
+
     //consulta para registrar 
     public boolean registrar(Usuario user) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-
-        String sql = "INSERT INTO usuarios (nombre,apellido, numero_documento,contrasena,roles_idroles,configuraciones,crearcliente,carpetas,servicios,otros,crearusuarios,editarcliente) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+        
+        String sql = "INSERT INTO usuarios (nombre,apellido,"
+                + " numero_documento,contrasena,roles_idroles,"
+                + "configuraciones,crearcliente,carpetas,servicios,"
+                + "otros,crearusuarios,editarcliente,modalidad,buscar,"
+                + "backups,cotizaciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, user.getNombre());
@@ -46,12 +50,16 @@ public class Consultas_usuario extends Conexion {
             ps.setInt(10, user.getOtros());
             ps.setInt(11, user.getCrearusuarios());
             ps.setInt(12, user.getEditarcliente());
+            ps.setInt(13, user.getModalidad());
+            ps.setInt(14, user.getBuscar());
+            ps.setInt(15, user.getBackups());
+            ps.setInt(16, user.getCotizaciones());
             ps.execute();
             return true;
         } catch (SQLException e) {
             System.err.println(e);
             return false;
-
+            
         } finally {
             try {
                 con.close();
@@ -59,9 +67,9 @@ public class Consultas_usuario extends Conexion {
                 System.err.println(e);
             }
         }
-
+        
     }
-    
+
     //consulta para modificar 
     public boolean modificar(Usuario user) {
         PreparedStatement ps = null;
@@ -83,7 +91,7 @@ public class Consultas_usuario extends Conexion {
                 System.err.println(e);
             }
         }
-
+        
     }
 
     //consulta para eliminar
@@ -106,9 +114,9 @@ public class Consultas_usuario extends Conexion {
                 System.err.println(e);
             }
         }
-
+        
     }
-    
+
     //consulta para buscar por filtrp y parametro en la tabla de usuarios
     public ArrayList<Usuario> buscarcaracter(String parametro, String filtro) {
         ArrayList listaPersona = new ArrayList();
@@ -149,7 +157,7 @@ public class Consultas_usuario extends Conexion {
         }
         return null;
     }
-    
+
     //consult para buscar el rol por nombre 
     public boolean buscar(Rol roles) {
         PreparedStatement ps = null;
@@ -175,9 +183,9 @@ public class Consultas_usuario extends Conexion {
                 System.err.println(e);
             }
         }
-
+        
     }
-    
+
     //consulta para buscar el rol por id
     public boolean buscarrol(Rol roles) {
         PreparedStatement ps = null;
@@ -203,9 +211,9 @@ public class Consultas_usuario extends Conexion {
                 System.err.println(e);
             }
         }
-
+        
     }
-    
+
     //consulta para traer la informacion del usuario por default
     public boolean buscarusueriodefault(Usuario user) {
         PreparedStatement ps = null;
@@ -231,9 +239,9 @@ public class Consultas_usuario extends Conexion {
                 System.err.println(e);
             }
         }
-
+        
     }
-    
+
     //consulta para traer todos los roles
     public ArrayList<String> llenar() {
         ArrayList lista = new ArrayList();
@@ -241,7 +249,7 @@ public class Consultas_usuario extends Conexion {
         ResultSet rs = null;
         Connection con = getConexion();
         String sql = " SELECT * FROM roles";
-
+        
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery(sql);
@@ -261,7 +269,7 @@ public class Consultas_usuario extends Conexion {
         }
         return null;
     }
-    
+
     //consulta para acceder por login 
     public boolean login(Usuario user) {
         PreparedStatement ps = null;
@@ -274,7 +282,6 @@ public class Consultas_usuario extends Conexion {
             ps.setString(2, this.MD5(user.getContrasena()));
             rs = ps.executeQuery();
             if (rs.next()) {
-
                 user.setRol(Integer.parseInt(rs.getString("roles_idroles")));
                 user.setConfiguraciones(Integer.parseInt(rs.getString("configuraciones")));
                 user.setCrearcliente(Integer.parseInt(rs.getString("crearcliente")));
@@ -284,15 +291,18 @@ public class Consultas_usuario extends Conexion {
                 user.setCrearusuarios(Integer.parseInt(rs.getString("crearusuarios")));
                 user.setEditarcliente(Integer.parseInt(rs.getString("editarcliente")));
                 user.setIdusuario(Integer.parseInt(rs.getString("idusuario")));
-//                user.setConfiguraciones(Integer.parseInt(rs.getString("configuraciones")));
+                user.setModalidad(rs.getInt("modalidad"));
+                user.setBuscar(rs.getInt("buscar"));
+                user.setBackups(rs.getInt("backups"));
+                user.setCotizaciones(0);
                 Principal principal = new Principal(user);
 //                user.setIdusuario(rs.getInt(1));
 
                 Cliente mod = new Cliente();
                 Consultas_Cliente modcp = new Consultas_Cliente();
-                OrganizadorController bctrl = new OrganizadorController(mod, modcp, principal,user);
+                OrganizadorController bctrl = new OrganizadorController(mod, modcp, principal, user);
                 bctrl.iniciar();
-
+                
                 principal.setExtendedState(MAXIMIZED_BOTH);
                 principal.setVisible(true);
                 return true;
@@ -308,7 +318,7 @@ public class Consultas_usuario extends Conexion {
                 System.err.println(e);
             }
         }
-
+        
     }
 
     //consulta para verificar si el usuario por defaul existe
@@ -322,6 +332,7 @@ public class Consultas_usuario extends Conexion {
             ps.setString(1, user.getNombre());
             rs = ps.executeQuery();
             if (rs.next()) {
+                user.setIdusuario(rs.getInt("idusuario"));
                 return true;
             }
             return false;
@@ -335,14 +346,14 @@ public class Consultas_usuario extends Conexion {
                 System.err.println(e);
             }
         }
-
+        
     }
-     
+
     //funcion para encriptar un string 
     public String MD5(String md5) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
-
+            
             byte[] array = md.digest(md5.getBytes());
             StringBuffer sb = new StringBuffer();
             for (int i = 0; i < array.length; i++) {
@@ -350,11 +361,11 @@ public class Consultas_usuario extends Conexion {
             }
             return sb.toString();
         } catch (java.security.NoSuchAlgorithmException e) {
-
+            
         }
         return null;
     }
-    
+
     //consulta para trer la informacion de un usuario
     public boolean buscarusuario(Usuario user) {
         PreparedStatement ps = null;
@@ -379,7 +390,11 @@ public class Consultas_usuario extends Conexion {
                 user.setCrearusuarios(Integer.parseInt(rs.getString("crearusuarios")));
                 user.setEditarcliente(Integer.parseInt(rs.getString("editarcliente")));
                 user.setEstado(Integer.parseInt(rs.getString("estado")));
+                user.setModalidad(rs.getInt("modalidad"));
+                user.setBuscar(rs.getInt("buscar"));
+                user.setBackups(rs.getInt("backups"));
                 rol.setIdroles(Integer.parseInt(rs.getString("roles_idroles")));
+                
                 this.buscarrol(rol);
                 user.setSobrerol(rol.getRol());
                 return true;
@@ -395,16 +410,16 @@ public class Consultas_usuario extends Conexion {
                 System.err.println(e);
             }
         }
-
+        
     }
-    
+
     //consulta para modificar un usuario
     public boolean modificarusuario(Usuario user) {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = "UPDATE  usuarios SET  nombre=?, apellido=?, numero_documento=?,"
                 + " roles_idroles=?, configuraciones=?, crearcliente=?, carpetas=?, servicios=?, otros=?,"
-                + "crearusuarios=?, editarcliente=?, estado=? WHERE idusuario=? ";
+                + "crearusuarios=?, editarcliente=?, estado=?,modalidad=?,buscar=?,backups=?,cotizaciones=? WHERE idusuario=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, user.getNombre());
@@ -419,7 +434,11 @@ public class Consultas_usuario extends Conexion {
             ps.setInt(10, user.getCrearusuarios());
             ps.setInt(11, user.getEditarcliente());
             ps.setInt(12, user.getEstado());
-            ps.setInt(13, user.getIdusuario());
+            ps.setInt(13, user.getModalidad());
+            ps.setInt(14, user.getBuscar());
+            ps.setInt(15, user.getBackups());
+            ps.setInt(16, user.getCotizaciones());
+            ps.setInt(17, user.getIdusuario());
             ps.execute();
             if (!user.getContrasena().equals("")) {
                 this.modificarcontrasena(user);
@@ -436,9 +455,9 @@ public class Consultas_usuario extends Conexion {
             }
         }
     }
-    
+
     //consulta para modificar la contraseña
-    public boolean modificarcontrasena(Usuario user){
+    public boolean modificarcontrasena(Usuario user) {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = "UPDATE  usuarios SET contrasena=? WHERE idusuario=? ";
@@ -459,5 +478,5 @@ public class Consultas_usuario extends Conexion {
             }
         }
     }
-
+    
 }

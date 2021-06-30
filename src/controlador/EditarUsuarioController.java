@@ -87,6 +87,26 @@ public class EditarUsuarioController implements ActionListener {
                     }else{
                         modelo.setEditarcliente(0);
                     }
+                    if (vista.checkmodalidad.isSelected()) {
+                        modelo.setModalidad(1);
+                    }else{
+                        modelo.setModalidad(0);
+                    }
+                    if (vista.checkbuscar.isSelected()) {
+                        modelo.setBuscar(1);
+                    }else{
+                        modelo.setBuscar(0);
+                    }
+                    if (vista.checkbackups.isSelected()) {
+                        modelo.setBackups(1);
+                    }else{
+                        modelo.setBackups(0);
+                    }
+                    if (vista.checkcotizaciones.isSelected()) {
+                        modelo.setCotizaciones(1);
+                    }else{
+                        modelo.setCotizaciones(0);
+                    }
                 }
                 if (!vista.checkdesactivar.isSelected()) {
                     modelo.setEstado(1);
@@ -153,6 +173,18 @@ public class EditarUsuarioController implements ActionListener {
             }
             if (modelo.getOtros() == 1) {
                 vista.checkotros.setSelected(true);
+            }
+            if (modelo.getModalidad() == 1) {
+                vista.checkmodalidad.setSelected(true);
+            }
+            if (modelo.getBuscar() == 1) {
+                vista.checkbuscar.setSelected(true);
+            }
+            if (modelo.getBackups() == 1) {
+                vista.checkbackups.setSelected(true);
+            }
+            if (modelo.getCotizaciones() == 1) {
+                vista.checkcotizaciones.setSelected(true);
             }
             if (modelo.getEstado() == 0) {
                 vista.checkdesactivar.setSelected(true);

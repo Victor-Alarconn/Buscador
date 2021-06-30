@@ -35,6 +35,15 @@ public class Cliente {
     private int vlrterminal;
     private int electronica;
     private int sucursal;
+    private String backupruta;
+
+    public String getBackupruta() {
+        return backupruta;
+    }
+
+    public void setBackupruta(String backupruta) {
+        this.backupruta = backupruta;
+    }
 
     public int getElectronica() {
         return electronica;

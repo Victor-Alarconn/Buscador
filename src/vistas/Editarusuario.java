@@ -60,6 +60,10 @@ public class Editarusuario extends javax.swing.JDialog {
         checkeditarcliente = new javax.swing.JCheckBox();
         checkdesactivar = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
+        checkmodalidad = new javax.swing.JCheckBox();
+        checkbuscar = new javax.swing.JCheckBox();
+        checkbackups = new javax.swing.JCheckBox();
+        checkcotizaciones = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -136,6 +140,18 @@ public class Editarusuario extends javax.swing.JDialog {
         checkdesactivar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkdesactivar.setText("Desactivar");
 
+        checkmodalidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        checkmodalidad.setText("Modalidad");
+
+        checkbuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        checkbuscar.setText("Buscar");
+
+        checkbackups.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        checkbackups.setText("Backups");
+
+        checkcotizaciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        checkcotizaciones.setText("Cotizaciones");
+
         javax.swing.GroupLayout paneluserLayout = new javax.swing.GroupLayout(paneluser);
         paneluser.setLayout(paneluserLayout);
         paneluserLayout.setHorizontalGroup(
@@ -152,24 +168,29 @@ public class Editarusuario extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(checkdesactivar)))
                 .addGap(57, 57, 57)
-                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, paneluserLayout.createSequentialGroup()
+                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(paneluserLayout.createSequentialGroup()
                         .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(checkconfiguraciones)
                             .addComponent(checkcarpetas)
-                            .addComponent(checkcrearusuario))
+                            .addComponent(checkcrearusuario)
+                            .addComponent(checkbackups))
                         .addGap(18, 18, 18)
                         .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkcotizaciones)
+                            .addComponent(checkotros)
                             .addGroup(paneluserLayout.createSequentialGroup()
-                                .addComponent(checkservicios)
+                                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(checkservicios)
+                                    .addComponent(checkmodalidad))
                                 .addGap(22, 22, 22)
                                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(checkbuscar)
                                     .addComponent(checkcrearcliente)
-                                    .addComponent(checkeditarcliente)))
-                            .addComponent(checkotros)))
-                    .addComponent(txtcontraseña, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtapellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                                    .addComponent(checkeditarcliente))))))
+                .addContainerGap(48, Short.MAX_VALUE))
             .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(paneluserLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -206,8 +227,16 @@ public class Editarusuario extends javax.swing.JDialog {
                             .addComponent(checkeditarcliente)
                             .addComponent(checkotros))
                         .addGap(18, 18, 18)
-                        .addComponent(checkcrearusuario)))
-                .addContainerGap(102, Short.MAX_VALUE))
+                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkcrearusuario)
+                            .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(checkmodalidad)
+                                .addComponent(checkbuscar)))))
+                .addGap(18, 18, 18)
+                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkbackups)
+                    .addComponent(checkcotizaciones))
+                .addContainerGap(64, Short.MAX_VALUE))
             .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(paneluserLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -285,12 +314,16 @@ public class Editarusuario extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JCheckBox checkbackups;
+    public javax.swing.JCheckBox checkbuscar;
     public javax.swing.JCheckBox checkcarpetas;
     public javax.swing.JCheckBox checkconfiguraciones;
+    public javax.swing.JCheckBox checkcotizaciones;
     public javax.swing.JCheckBox checkcrearcliente;
     public javax.swing.JCheckBox checkcrearusuario;
     public javax.swing.JCheckBox checkdesactivar;
     public javax.swing.JCheckBox checkeditarcliente;
+    public javax.swing.JCheckBox checkmodalidad;
     public javax.swing.JCheckBox checkotros;
     public javax.swing.JCheckBox checkservicios;
     public javax.swing.JButton guardaruser;

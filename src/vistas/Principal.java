@@ -50,6 +50,9 @@ public class Principal extends javax.swing.JFrame {
         
         carpetas.setOpaque(false);
         carpetas.setContentAreaFilled(false);
+        
+        backup.setOpaque(false);
+        backup.setContentAreaFilled(false);
 
     }
 //   DefaultTableModel model = new DefaultTableModel();
@@ -99,6 +102,15 @@ public class Principal extends javax.swing.JFrame {
                 if (modu.getCrearusuarios() == 0) {
                     crearusuario.setVisible(false);
                 }
+                if (modu.getModalidad() == 0) {
+                    modalidad.setVisible(false);
+                }
+                if (modu.getBuscar() == 0) {
+                    busqueda.setVisible(false);
+                }
+                if (modu.getBackups() == 0) {
+                    backup.setVisible(false);
+                }
             }
         }
     }
@@ -124,6 +136,7 @@ public class Principal extends javax.swing.JFrame {
         otro = new javax.swing.JButton();
         busqueda = new javax.swing.JButton();
         modalidad = new javax.swing.JButton();
+        backup = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -206,6 +219,14 @@ public class Principal extends javax.swing.JFrame {
         modalidad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         modalidad.setOpaque(false);
         jPanel1.add(modalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 170, 70));
+
+        backup.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        backup.setForeground(new java.awt.Color(255, 255, 255));
+        backup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Backup-64.png"))); // NOI18N
+        backup.setText("Backup's");
+        backup.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        backup.setOpaque(false);
+        jPanel1.add(backup, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 170, 70));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -270,6 +291,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton backup;
     public javax.swing.JButton busqueda;
     public javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JButton carpetas;

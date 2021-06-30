@@ -27,6 +27,43 @@ public class Usuario {
     private int editarcliente;
     private int estado; 
     private String sobreestado;
+    private int modalidad;
+    private int buscar;
+    private int backups;
+    private int cotizaciones;
+
+    public int getModalidad() {
+        return modalidad;
+    }
+
+    public void setModalidad(int modalidad) {
+        this.modalidad = modalidad;
+    }
+
+    public int getBuscar() {
+        return buscar;
+    }
+
+    public void setBuscar(int buscar) {
+        this.buscar = buscar;
+    }
+
+    public int getBackups() {
+        return backups;
+    }
+
+    public void setBackups(int backups) {
+        this.backups = backups;
+    }
+
+    public int getCotizaciones() {
+        return cotizaciones;
+    }
+
+    public void setCotizaciones(int cotizaciones) {
+        this.cotizaciones = cotizaciones;
+    }
+    
     
 
     public String getSobreestado() {

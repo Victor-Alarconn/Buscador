@@ -20,7 +20,11 @@ public class Dialogos {
     }
     
     public String crear(){
-        String respuesta = JOptionPane.showInputDialog(null, "Nombre", "Crear carpeta", JOptionPane.CLOSED_OPTION);
+        String respuesta = JOptionPane.showInputDialog(null, "Nombre", "Crear ca", JOptionPane.CLOSED_OPTION);
         return respuesta;
+    }
+    public int j(){
+       int respuesta = JOptionPane.showConfirmDialog(null, "El Usuario no posee un directoio desea crearlo?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+       return respuesta;
     }
 }

@@ -85,7 +85,8 @@ public class Consultas_Cliente extends Conexion {
         Connection con = getConexion();
         String sql = "UPDATE  clientes_potenciales SET nit=?, nombre=?, empresa=?,"
                 + " celular1=?, celular2=?, email=?, fecha_llegada=?, clase=?, modalidad=?, notas=?, codigo=?, llego=?, categoria=?,dv=?,"
-                + " fecha_arriendo=?, contacto=?, vlrprincipal=?, numequipos=?,vlrterminal=?, electronica=?, sucursal=?,cliente_potencial=?"
+                + " fecha_arriendo=?, contacto=?, vlrprincipal=?,"
+                + " numequipos=?,vlrterminal=?, electronica=?, sucursal=?,cliente_potencial=?,backupruta=?"
                 + " WHERE idclientes_potenciales=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
@@ -111,7 +112,31 @@ public class Consultas_Cliente extends Conexion {
             ps.setInt(20, cliente.getElectronica());
             ps.setInt(21, cliente.getSucursal());
             ps.setInt(22, cliente.getCliente_potencial());
-            ps.setInt(23, cliente.getIdclientes_potenciales());
+            ps.setString(23, cliente.getBackupruta());
+            ps.setInt(24, cliente.getIdclientes_potenciales());
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+
+    }
+    
+    public boolean modificarruta(Cliente cliente) {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = "UPDATE  clientes_potenciales SET backupruta=? WHERE idclientes_potenciales=? ";
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps.setString(1, cliente.getBackupruta());
+            ps.setInt(2, cliente.getIdclientes_potenciales());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -203,7 +228,7 @@ public class Consultas_Cliente extends Conexion {
 
     }
 
-    //consulta para buscar por el nit del cliente
+    //consulta para buscar por el nit del cliente en formulario
     public boolean buscarr(Cliente cliente) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -276,6 +301,7 @@ public class Consultas_Cliente extends Conexion {
                 cliente.setCelular1(rs.getString("celular1"));
                 cliente.setEmail(rs.getString("email"));
                 cliente.setContacto(rs.getString("contacto"));
+                cliente.setBackupruta(rs.getString("backupruta"));
                 listaPersona.add(cliente);
             }
             return listaPersona;

@@ -69,28 +69,31 @@ public class Buscador {
         ArrayList<String> lista = new ArrayList<>();
         lista.add("Clientes");
         lista.add("Cotizaciones");
+        lista.add("Backups");
         boolean estado = true;
         if (md.isEmpty()) {
             for (int j = 0; j < lista.size(); j++) {
                 mm.setModulo(lista.get(j));
-                mm.setUsuarios_idusuario(4);
+                mm.setUsuarios_idusuario(u.getIdusuario());
                 cm.registrar(mm);
             }
         } else {
-            for (int i = 0; i < md.size(); i++) {
-                for (int j = 0; j < lista.size(); j++) {
-                    if (md.get(i).getModulo().equals(lista.get(j))) {
+            for (int i = 0; i < lista.size(); i++) {
+               
+                for (int j = 0; j < md.size(); j++) {
+                    
+                    if (md.get(j).getModulo().equals(lista.get(i))) {
                         estado = false;
+                        break;
+                    } else {
+                        estado = true;
                     }
                 }
-            }
-            if (estado) {
-                for (int j = 0; j < lista.size(); j++) {
-                    mm.setModulo(lista.get(j));
-                    mm.setUsuarios_idusuario(4);
+                if (estado) {
+                    mm.setModulo(lista.get(i));
+                    mm.setUsuarios_idusuario(u.getIdusuario());
                     cm.registrar(mm);
                 }
-
             }
 
         }
