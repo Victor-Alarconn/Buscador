@@ -6,8 +6,11 @@
 package vistas;
 
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -33,6 +36,9 @@ public class Editarusuario extends javax.swing.JDialog {
 //        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
 //        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
 //        jLabel1.setIcon(fondo);
+this.getRootPane().registerKeyboardAction(e -> {
+            this.dispose();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     /**

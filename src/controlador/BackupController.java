@@ -130,8 +130,7 @@ public class BackupController implements ActionListener {
     public void buscar() {
         String parametro = vbackups.txtcodigo.getText().toUpperCase();
         String filtro = "codigo";
-        String filtrocliente = "todo";
-        cliente = ccliente.buscarcaracter(parametro, filtro, filtrocliente);
+        cliente = ccliente.buscarcaracter(parametro, filtro);
         vbackups.txtnombre.setText(cliente.get(0).getNombre());
         if (cliente.get(0).getBackupruta() == null || cliente.get(0).getBackupruta().equals("")) {
             int respuesta = dialogo.j();

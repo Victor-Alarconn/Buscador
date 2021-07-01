@@ -16,7 +16,9 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 import modelo.Usuario;
 
@@ -48,6 +50,9 @@ public class login extends javax.swing.JFrame {
         logo.setIcon(fondo);
         validar.setOpaque(false);
         validar.setContentAreaFilled(false);
+        this.getRootPane().registerKeyboardAction(e -> {
+            this.dispose();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     public void keyevent() {

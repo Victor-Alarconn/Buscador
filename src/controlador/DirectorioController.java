@@ -20,7 +20,6 @@ import modelo.Usuario;
 import vistas.Carpetas;
 import vistas.Configuraciones;
 
-
 /**
  *
  * @author yonathan
@@ -46,8 +45,6 @@ public class DirectorioController implements ActionListener {
         this.user = user;
         this.vdirectorio.agregarmenuitem.addActionListener(this);
         this.vdirectorio.eliminarmenuitem.addActionListener(this);
-        
-       
 
     }
 
@@ -95,9 +92,11 @@ public class DirectorioController implements ActionListener {
 
     public void agregarnodo(DefaultMutableTreeNode nodo) {
         String carpeta = JOptionPane.showInputDialog(vdirectorio, "Ingrese el nombre de la carpeta");
-        mdirectorio.setUsuarios_idusuarios(user.getIdusuario());
-        mdirectorio.setCarpeta(carpeta);
-        mdirectorio.setNodo_level(nodo.getLevel() + 1);
+        if (!carpeta.equals("")) {
+            mdirectorio.setUsuarios_idusuarios(user.getIdusuario());
+            mdirectorio.setCarpeta(carpeta);
+            mdirectorio.setNodo_level(nodo.getLevel() + 1);
+        }
 
     }
 

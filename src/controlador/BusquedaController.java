@@ -20,8 +20,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelo.Clases;
 import modelo.Cliente;
@@ -81,9 +87,8 @@ public class BusquedaController implements ActionListener {
         this.modelo = modelo;
         this.consulta = consulta;
         this.busqueda = busqueda;
-
-        this.busqueda.editar.addActionListener(this);
-        this.busqueda.abrirarchivos.addActionListener(this);
+        this.busqueda.abrirdirectorio.addActionListener(this);
+        this.busqueda.editarcliente.addActionListener(this);
     }
 
     public void iniciar() {
@@ -93,11 +98,11 @@ public class BusquedaController implements ActionListener {
         model.addColumn("ruta");
         model.addColumn("Nit");
         model.addColumn("Dv");
-        model.addColumn("Telefono");
-        model.addColumn("Correo");
-        model.addColumn("Contacto");
         model.addColumn("Nombre");
         model.addColumn("Codigo");
+        model.addColumn("Correo");
+        model.addColumn("Telefono");
+        model.addColumn("Contacto");
         model.addColumn("Fecha Inicio");
         model.addColumn("Fecha Arriendo");
         busqueda.tabladatos.setModel(model);
@@ -114,17 +119,28 @@ public class BusquedaController implements ActionListener {
         busqueda.tabladatos.getColumn("Dv").setMinWidth(40);
         busqueda.tabladatos.getColumn("Dv").setMaxWidth(40);
         keyevent();
+        MouseClicked();
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < busqueda.tabladatos.getColumnCount(); i++) {
+           busqueda.tabladatos.getColumnModel().getColumn(i).setCellRenderer(modelocentrar); 
+        }
+       busqueda.getRootPane().registerKeyboardAction(e -> {
+             busqueda();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
+        
+        
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == busqueda.abrirarchivos) {
+        if (e.getSource() == busqueda.abrirdirectorio) {
             int fila = busqueda.tabladatos.getSelectedRow();
             abrirarchivo(String.valueOf(busqueda.tabladatos.getValueAt(fila, 1)));
         }
 
-        if (e.getSource() == busqueda.editar) {
+        if (e.getSource() == busqueda.editarcliente) {
             Editarcliente editarcliente = new Editarcliente(null, true);
             int selecionar = busqueda.tabladatos.getSelectedRow();
             if (selecionar != -1) {
@@ -167,33 +183,19 @@ public class BusquedaController implements ActionListener {
         }
     }
 
-    public void limpiar() {
-//        pricipal.txtnombre.setText("");
-//        pricipal.txtapellido.setText("");
-//        pricipal.txtdocumento.setText("");
-    }
+
 
     public void busqueda() {
         if (busqueda.txtbuscar.getText().length() == 0) {
             limpiartabla();
             //dialogo.alerta();
         }
-        if (busqueda.txtbuscar.getText().length() > 0) {
+        if (busqueda.txtbuscar.getText().length() > 0 
+                || busqueda.filtro.getSelectedItem().equals("electronica")
+                ||busqueda.filtro.getSelectedItem().equals("sucursal")) {
             limpiartabla();
             ArrayList<Cliente> lista;
-//            String filtrocliente = null;
-//            if (principal.filtrocliente.getSelectedItem().toString().equals("cliente_potencial")) {
-//                filtrocliente = "1";
-//            }else{
-//                if (principal.filtrocliente.getSelectedItem().toString().equals("cliente")) {
-//                    filtrocliente = "0";
-//                }else{
-//                    if (principal.filtrocliente.getSelectedItem().toString().equals("todo")) {
-//                        
-//                    }
-//                }
-//            }
-            lista = consulta.buscarcaracter(busqueda.txtbuscar.getText(), busqueda.filtro.getSelectedItem().toString(),busqueda.filtrocliente.getSelectedItem().toString());
+            lista = consulta.buscarcaracter(busqueda.txtbuscar.getText(), busqueda.filtro.getSelectedItem().toString());
             int cantidad = lista.size();
             Object[] dato = new Object[11];
             for (int i = 0; i < cantidad; i++) {
@@ -201,11 +203,11 @@ public class BusquedaController implements ActionListener {
                 dato[1] = lista.get(i).getRuta();
                 dato[2] = lista.get(i).getNit();
                 dato[3] = lista.get(i).getDv();
-                dato[4] = lista.get(i).getCelular1();
-                dato[5] = lista.get(i).getEmail();
-                dato[6] = lista.get(i).getContacto();
-                dato[7] = lista.get(i).getNombre();
-                dato[8] = lista.get(i).getCodigo();
+                dato[4] = lista.get(i).getNombre();
+                dato[5] = lista.get(i).getCodigo();
+                dato[6] = lista.get(i).getEmail();
+                dato[7] = lista.get(i).getCelular1();
+                dato[8] = lista.get(i).getContacto();
                 dato[9] = lista.get(i).getFecha_llegada();
                 dato[10] = lista.get(i).getFecha_arriendo();
                 model.addRow(dato);
@@ -213,5 +215,37 @@ public class BusquedaController implements ActionListener {
             }
         }
     }
+    
+    public void MouseClicked() {
+        MouseListener mouseListener = new MouseListener() {
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (busqueda.tabladatos.getSelectedRows().length > 0) {
+                    busqueda.tabladatos.setComponentPopupMenu(busqueda.popup);
+                }
+                // MouseEvent.BUTTON3 es el boton derecho
+            }
+        };
+        busqueda.tabladatos.addMouseListener(mouseListener);
+    }
+    
+    
 
 }

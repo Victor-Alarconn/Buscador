@@ -10,9 +10,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import modelo.Usuario;
 
 /**
@@ -53,6 +56,11 @@ public class Principal extends javax.swing.JFrame {
         
         backup.setOpaque(false);
         backup.setContentAreaFilled(false);
+        
+        btnterminar.setOpaque(false);
+        btnterminar.setContentAreaFilled(false);
+        
+        jPanel2.setOpaque(false);
 
     }
 //   DefaultTableModel model = new DefaultTableModel();
@@ -62,17 +70,23 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+       
     }
 
     public Principal(Usuario modu) {
         initComponents();
         transparecia();
+        
+        
+         this.getRootPane().registerKeyboardAction(e -> {
+            this.dispose();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension tamanio = tk.getScreenSize();
         int ancho = (int) tamanio.getWidth();
         int alto = (int) tamanio.getHeight();
         this.setSize(new Dimension(ancho, alto));
-        
+        jPanel2.setPreferredSize(new Dimension(ancho, 70));
         
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/fondo2.png"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), alto, Image.SCALE_DEFAULT));
@@ -137,6 +151,9 @@ public class Principal extends javax.swing.JFrame {
         busqueda = new javax.swing.JButton();
         modalidad = new javax.swing.JButton();
         backup = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btnterminar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -157,7 +174,7 @@ public class Principal extends javax.swing.JFrame {
         crearcliente.setText("Crearcliente");
         crearcliente.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         crearcliente.setOpaque(false);
-        jPanel1.add(crearcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 170, 70));
+        jPanel1.add(crearcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 170, 70));
 
         configuraciones1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         configuraciones1.setForeground(new java.awt.Color(255, 255, 255));
@@ -169,14 +186,14 @@ public class Principal extends javax.swing.JFrame {
                 configuraciones1ActionPerformed(evt);
             }
         });
-        jPanel1.add(configuraciones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 170, 70));
+        jPanel1.add(configuraciones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 170, 70));
 
         servicios.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         servicios.setForeground(new java.awt.Color(255, 255, 255));
         servicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/service.png"))); // NOI18N
         servicios.setText("Servicios");
         servicios.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 170, 70));
+        jPanel1.add(servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 170, 70));
 
         crearusuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         crearusuario.setForeground(new java.awt.Color(255, 255, 255));
@@ -188,21 +205,21 @@ public class Principal extends javax.swing.JFrame {
                 crearusuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, 170, -1));
+        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, 170, -1));
 
         carpetas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         carpetas.setForeground(new java.awt.Color(255, 255, 255));
         carpetas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/folders.png"))); // NOI18N
         carpetas.setText("Carpetas");
         carpetas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(carpetas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 170, 70));
+        jPanel1.add(carpetas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, 170, 70));
 
         otro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         otro.setForeground(new java.awt.Color(255, 255, 255));
         otro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/otros.png"))); // NOI18N
         otro.setText("Otros");
         otro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(otro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 170, 70));
+        jPanel1.add(otro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 170, 70));
 
         busqueda.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         busqueda.setForeground(new java.awt.Color(255, 255, 255));
@@ -210,7 +227,7 @@ public class Principal extends javax.swing.JFrame {
         busqueda.setText("Buscar");
         busqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         busqueda.setOpaque(false);
-        jPanel1.add(busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 170, 70));
+        jPanel1.add(busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 170, 70));
 
         modalidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         modalidad.setForeground(new java.awt.Color(255, 255, 255));
@@ -218,7 +235,7 @@ public class Principal extends javax.swing.JFrame {
         modalidad.setText("Modalidad");
         modalidad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         modalidad.setOpaque(false);
-        jPanel1.add(modalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, 170, 70));
+        jPanel1.add(modalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 170, 70));
 
         backup.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         backup.setForeground(new java.awt.Color(255, 255, 255));
@@ -226,7 +243,48 @@ public class Principal extends javax.swing.JFrame {
         backup.setText("Backup's");
         backup.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         backup.setOpaque(false);
-        jPanel1.add(backup, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 170, 70));
+        jPanel1.add(backup, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, 170, 70));
+
+        jPanel2.setBackground(new java.awt.Color(209, 235, 247));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Organizador");
+
+        btnterminar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnterminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnterminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salir48px.png"))); // NOI18N
+        btnterminar.setText("Terminar");
+        btnterminar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        btnterminar.setOpaque(false);
+        btnterminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnterminarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 343, Short.MAX_VALUE)
+                .addComponent(btnterminar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(0, 11, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnterminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 80));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -253,6 +311,10 @@ public class Principal extends javax.swing.JFrame {
     private void crearusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearusuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_crearusuarioActionPerformed
+
+    private void btnterminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnterminarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnterminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,6 +354,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton backup;
+    public javax.swing.JButton btnterminar;
     public javax.swing.JButton busqueda;
     public javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JButton carpetas;
@@ -299,9 +362,11 @@ public class Principal extends javax.swing.JFrame {
     public javax.swing.JButton crearcliente;
     public javax.swing.JButton crearusuario;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     public javax.swing.JButton modalidad;
     public javax.swing.JButton otro;
     public javax.swing.JButton servicios;

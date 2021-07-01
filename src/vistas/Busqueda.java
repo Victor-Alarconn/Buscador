@@ -5,6 +5,10 @@
  */
 package vistas;
 
+import java.awt.event.KeyEvent;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+
 /**
  *
  * @author Yonathan Carvajal
@@ -14,14 +18,8 @@ public class Busqueda extends javax.swing.JDialog {
     
     
     public void transparecia() {
-        abrirarchivos.setOpaque(false);
-        abrirarchivos.setContentAreaFilled(false);
-        
-        editar.setOpaque(false);
-        editar.setContentAreaFilled(false);
-
 //        crearcliente.setOpaque(false);
-        panelprincipal.setOpaque(false);
+//        panelprincipal.setOpaque(false);
 //        crearcliente.setContentAreaFilled(false);
 
     }
@@ -32,6 +30,11 @@ public class Busqueda extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         transparecia();
+        this.getRootPane().registerKeyboardAction(e -> {
+            this.dispose();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
+         
+      
     }
 
     /**
@@ -43,32 +46,32 @@ public class Busqueda extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popup = new javax.swing.JPopupMenu();
+        abrirdirectorio = new javax.swing.JMenuItem();
+        editarcliente = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        panelprincipal = new javax.swing.JPanel();
-        txtbuscar = new rojerusan.RSMetroTextFullPlaceHolder();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabladatos = new rojerusan.RSTableMetro();
-        editar = new javax.swing.JButton();
-        abrirarchivos = new javax.swing.JButton();
-        filtro = new rojerusan.RSComboMetro();
-        filtrocliente = new rojerusan.RSComboMetro();
         jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        txtbuscar = new javax.swing.JTextField();
+        filtro = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabladatos = new javax.swing.JTable();
+
+        abrirdirectorio.setText("Abrir directorio");
+        popup.add(abrirdirectorio);
+
+        editarcliente.setText("Editar Cliente");
+        popup.add(editarcliente);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setMaximumSize(new java.awt.Dimension(1280, 1080));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        panelprincipal.setBackground(new java.awt.Color(255, 153, 153));
-        panelprincipal.setMaximumSize(new java.awt.Dimension(1280, 1080));
-        panelprincipal.setName("panelpricipal"); // NOI18N
-        panelprincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Busqueda"));
 
-        txtbuscar.setForeground(new java.awt.Color(0, 0, 0));
-        txtbuscar.setBorderColor(new java.awt.Color(102, 102, 102));
-        txtbuscar.setPhColor(new java.awt.Color(210, 43, 7));
-        panelprincipal.add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
+        filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nit", "nombre", "codigo", "electronica", "sucursal" }));
 
         tabladatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,88 +84,51 @@ public class Busqueda extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tabladatos.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
-        tabladatos.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
-        tabladatos.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
-        tabladatos.setColorSelBackgound(new java.awt.Color(216, 74, 44));
-        tabladatos.setRowHeight(30);
-        tabladatos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabladatosMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tabladatos);
+        jScrollPane1.setViewportView(tabladatos);
 
-        panelprincipal.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 1000, 460));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
+        );
 
-        editar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        editar.setForeground(new java.awt.Color(255, 255, 255));
-        editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png"))); // NOI18N
-        editar.setText("Editar");
-        editar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        editar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarActionPerformed(evt);
-            }
-        });
-        panelprincipal.add(editar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 30, 140, 70));
-
-        abrirarchivos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        abrirarchivos.setForeground(new java.awt.Color(255, 255, 255));
-        abrirarchivos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/open.png"))); // NOI18N
-        abrirarchivos.setText("Archivos");
-        abrirarchivos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        abrirarchivos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                abrirarchivosActionPerformed(evt);
-            }
-        });
-        panelprincipal.add(abrirarchivos, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, 170, 70));
-
-        filtro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nit\t", "nombre", "codigo" }));
-        filtro.setColorArrow(new java.awt.Color(0, 0, 0));
-        filtro.setColorBorde(new java.awt.Color(102, 102, 102));
-        filtro.setColorFondo(new java.awt.Color(102, 102, 102));
-        filtro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        panelprincipal.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 140, 40));
-
-        filtrocliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "todo", "cliente_potencial", "cliente" }));
-        filtrocliente.setColorArrow(new java.awt.Color(0, 0, 0));
-        filtrocliente.setColorBorde(new java.awt.Color(102, 102, 102));
-        filtrocliente.setColorFondo(new java.awt.Color(102, 102, 102));
-        filtrocliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        panelprincipal.add(filtrocliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 190, 40));
-
-        jPanel1.add(panelprincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 620));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 930, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 963, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tabladatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabladatosMouseClicked
-        //                int selecionar = tabladatos.rowAtPoint(evt.getPoint());
-    }//GEN-LAST:event_tabladatosMouseClicked
-
-    private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-
-    }//GEN-LAST:event_editarActionPerformed
-
-    private void abrirarchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirarchivosActionPerformed
-
-    }//GEN-LAST:event_abrirarchivosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,15 +173,15 @@ public class Busqueda extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton abrirarchivos;
-    public javax.swing.JButton editar;
-    public rojerusan.RSComboMetro filtro;
-    public rojerusan.RSComboMetro filtrocliente;
+    public javax.swing.JMenuItem abrirdirectorio;
+    public javax.swing.JMenuItem editarcliente;
+    public javax.swing.JComboBox<String> filtro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel panelprincipal;
-    public rojerusan.RSTableMetro tabladatos;
-    public rojerusan.RSMetroTextFullPlaceHolder txtbuscar;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JPopupMenu popup;
+    public javax.swing.JTable tabladatos;
+    public javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }

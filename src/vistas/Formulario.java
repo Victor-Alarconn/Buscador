@@ -12,12 +12,17 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
+import static java.awt.SystemColor.window;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import modelo.Servicio;
@@ -33,7 +38,6 @@ public class Formulario extends javax.swing.JDialog {
         bsoftware.setOpaque(false);
         bequipos.setOpaque(false);
         bredes.setOpaque(false);
-       
 
         guardarformulario.setOpaque(false);
         guardarformulario.setContentAreaFilled(false);
@@ -59,7 +63,6 @@ public class Formulario extends javax.swing.JDialog {
         subpanel3.setOpaque(false);
 
     }
-   
 
     /**
      * Creates new form Form
@@ -74,10 +77,13 @@ public class Formulario extends javax.swing.JDialog {
         int alto = (int) tamanio.getHeight();
         this.setResizable(false);
         jLabel1.setPreferredSize(new Dimension(ancho, alto));
+        this.getRootPane().registerKeyboardAction(e -> {
+            this.dispose();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
+
 //        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm.jpg"));
 //        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
 //        jLabel1.setIcon(fondo);
-
     }
 
     /**
@@ -895,6 +901,5 @@ public class Formulario extends javax.swing.JDialog {
     public javax.swing.JTextField txtvlrprincipal;
     public javax.swing.JTextField txtvlrterminal;
     // End of variables declaration//GEN-END:variables
+
 }
-
-

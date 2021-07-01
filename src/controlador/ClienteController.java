@@ -15,10 +15,13 @@ import Consultas.Consultas_Modalidad;
 import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import java.awt.Desktop;
+import java.awt.KeyEventPostProcessor;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +37,8 @@ import modelo.Servicios_has_Clientes_Potenciales;
 import vistas.Formulario;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.AbstractAction;
+import javax.swing.KeyStroke;
 import modelo.Directorio;
 import modelo.Usuario;
 
@@ -88,6 +93,7 @@ public class ClienteController implements ActionListener {
         this.formulario.agregardocumento.addActionListener(this);
         this.formulario.eliminardocumento.addActionListener(this);
         this.formulario.eliminarservicio.addActionListener(this);
+
     }
 
     public void iniciar() {
@@ -109,9 +115,9 @@ public class ClienteController implements ActionListener {
                 directorio = mconfig.get(i).getDirectorio();
             }
         }
-        if (directorio==null) {
+        if (directorio == null) {
             formulario.mensajealerta.setVisible(true);
-        }else{
+        } else {
             formulario.mensajealerta.setVisible(false);
         }
 
@@ -144,9 +150,11 @@ public class ClienteController implements ActionListener {
         for (int i = 0; i < lista3.size(); i++) {
             formulario.txtllego.addItem(lista3.get(i));
         }
+       
         
-        
+
     }
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -416,6 +424,7 @@ public class ClienteController implements ActionListener {
                 consultanit();
             }
         });
+
     }
 
     public void consultanit() {

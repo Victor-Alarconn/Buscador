@@ -5,6 +5,10 @@
  */
 package vistas;
 
+import java.awt.event.KeyEvent;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+
 /**
  *
  * @author Yonathan Carvajal
@@ -39,6 +43,9 @@ public class VModalidad extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         transparecia();
+        this.getRootPane().registerKeyboardAction(e -> {
+            this.dispose();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     /**

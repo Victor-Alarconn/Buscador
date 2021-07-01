@@ -11,6 +11,9 @@ import javax.swing.ImageIcon;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 /**
  *
  * @author Yonathan Carvajal
@@ -67,6 +70,9 @@ public class Editarcliente extends javax.swing.JDialog {
 //        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
 //        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
 //        jLabel1.setIcon(fondo);
+this.getRootPane().registerKeyboardAction(e -> {
+            this.dispose();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     /**

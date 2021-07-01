@@ -6,6 +6,9 @@
 package vistas;
 
 import Consultas.Consultas_usuario;
+import java.awt.event.KeyEvent;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 
 import modelo.Usuario;
 
@@ -21,7 +24,7 @@ public class Configuraciones extends javax.swing.JDialog {
     public void transparecia() {
         panel2panel1.setOpaque(false);
         usuariodefecto.setOpaque(false);
-        
+
     }
 
     /**
@@ -32,11 +35,14 @@ public class Configuraciones extends javax.swing.JDialog {
         initComponents();
         transparecia();
 //        this.setSize(new Dimension(ancho,alto));
-         this.setResizable(false);
+        this.setResizable(false);
 //        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
 //        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
 //        jLabel1.setIcon(fondo);
 //        labelc.setIcon(fondo);
+        this.getRootPane().registerKeyboardAction(e -> {
+            this.dispose();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     /**

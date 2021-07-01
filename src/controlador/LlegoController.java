@@ -55,7 +55,7 @@ public class LlegoController implements ActionListener{
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
         vl.tablallego.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
         vl.tablaagregarllego.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
-        vl.tablallego.setFont(new java.awt.Font("Tahoma", 0, 20));
+//        vl.tablallego.setFont(new java.awt.Font("Tahoma", 0, 20));
     }
 
     @Override

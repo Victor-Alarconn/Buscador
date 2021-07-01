@@ -5,6 +5,10 @@
  */
 package vistas;
 
+import java.awt.event.KeyEvent;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+
 /**
  *
  * @author yonat
@@ -17,6 +21,9 @@ public class Cotizaciones extends javax.swing.JDialog {
     public Cotizaciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.getRootPane().registerKeyboardAction(e -> {
+            this.dispose();
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     /**

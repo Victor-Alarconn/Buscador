@@ -128,7 +128,7 @@ public class Consultas_Cliente extends Conexion {
         }
 
     }
-    
+
     public boolean modificarruta(Cliente cliente) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -274,16 +274,20 @@ public class Consultas_Cliente extends Conexion {
     }
 
     //consulta para buscar si el nit del cliente contie un parametro
-    public ArrayList<Cliente> buscarcaracter(String parametro, String filtro, String filtrocliente) {
+    public ArrayList<Cliente> buscarcaracter(String parametro, String filtro) {
         ArrayList listaPersona = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
         String sql = null;
-        if (filtrocliente.equals("todo")) {
-            sql = " SELECT * FROM clientes_potenciales  WHERE " + filtro + " LIKE'%" + parametro + "%'";
+        if (filtro.equals("electronica")) {
+            sql = " SELECT * FROM clientes_potenciales  WHERE " + filtro + "=1";
         } else {
-            sql = " SELECT * FROM clientes_potenciales  WHERE " + filtro + " LIKE'%" + parametro + "%' AND cliente_potencial=" + filtrocliente + " ";
+            if (filtro.equals("sucursal")) {
+                sql = " SELECT * FROM clientes_potenciales  WHERE " + filtro + "=1";
+            } else {
+                sql = " SELECT * FROM clientes_potenciales  WHERE " + filtro + " LIKE'%" + parametro + "%'";
+            }
         }
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
