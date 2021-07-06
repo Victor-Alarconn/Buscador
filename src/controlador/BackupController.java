@@ -7,6 +7,7 @@ package controlador;
 
 import Consultas.Consultas_Cliente;
 import Consultas.Consultas_Configuraciones;
+import Consultas.Consultas_Mac;
 import Organizador.Dialogos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 import modelo.Configuracion;
+import modelo.Mac;
 import modelo.Usuario;
 import vistas.Backups;
 
@@ -40,6 +42,9 @@ public class BackupController implements ActionListener {
     private String directorio = null;
     ArrayList<Cliente> cliente;
 
+    Consultas_Mac cmac = new Consultas_Mac();
+    Mac mmac = new Mac();
+
     public BackupController(Consultas_Cliente ccliente, Cliente mcliente, Backups vbackups, Usuario user) {
         this.ccliente = ccliente;
         this.mcliente = mcliente;
@@ -54,13 +59,16 @@ public class BackupController implements ActionListener {
         vbackups.setLocationRelativeTo(null);
         model.addColumn("Backup");
         vbackups.tablabackups.setModel(model);
-
-        mconfig = cconfiguraciones.cargar();
-        for (int i = 0; i < mconfig.size(); i++) {
-            if (mconfig.get(i).getModulo().toLowerCase().equals("backups")) {
-                directorio = mconfig.get(i).getDirectorio();
+        mmac.setMacs(mmac.conseguirMAC());
+        if (cmac.buscar(mmac)) {
+            mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
+            for (int i = 0; i < mconfig.size(); i++) {
+                if (mconfig.get(i).getModulo().toLowerCase().equals("cli")) {
+                    directorio = mconfig.get(i).getDirectorio();
+                }
             }
         }
+
         keyevent();
     }
 
@@ -72,7 +80,7 @@ public class BackupController implements ActionListener {
 
         if (e.getSource() == vbackups.abrirdirectorio) {
             if (cliente != null) {
-                abrirarchivo(cliente.get(0).getBackupruta());
+                abrirarchivo(directorio+cliente.get(0).getBackupruta());
             }
         }
 
@@ -138,11 +146,11 @@ public class BackupController implements ActionListener {
                 String nombre = vbackups.txtnombre.getText().toUpperCase();
                 File file = Crear_archivo(directorio, parametro + "_" + nombre);
                 file.mkdir();
-                String ruta = directorio + File.separator + parametro + "_" + nombre;
+                String ruta = File.separator + parametro + "_" + nombre;
                 mcliente.setIdclientes_potenciales(cliente.get(0).getIdclientes_potenciales());
                 mcliente.setBackupruta(ruta);
                 ccliente.modificarruta(mcliente);
-                abrirarchivo(ruta);
+                abrirarchivo(directorio+ruta);
             }
         } else {
             backupsalmacenados(cliente.get(0).getBackupruta());

@@ -15,6 +15,15 @@ public class Configuracion {
     private int usuarios_idusuario;
     private int modulos_idmodulos;
     private String modulo;
+    private int macs_idmacs;
+
+    public int getMacs_idmacs() {
+        return macs_idmacs;
+    }
+
+    public void setMacs_idmacs(int macs_idmacs) {
+        this.macs_idmacs = macs_idmacs;
+    }
 
     public String getModulo() {
         return modulo;

@@ -31,29 +31,26 @@ public class Consultas_usuario extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
         
-        String sql = "INSERT INTO usuarios (nombre,apellido,"
-                + " numero_documento,contrasena,roles_idroles,"
+        String sql = "INSERT INTO usuarios (nombre,contrasena,roles_idroles,"
                 + "configuraciones,crearcliente,carpetas,servicios,"
                 + "otros,crearusuarios,editarcliente,modalidad,buscar,"
-                + "backups,cotizaciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "backups,cotizaciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, user.getNombre());
-            ps.setString(2, user.getApellido());
-            ps.setString(3, user.getNumero_documento());
-            ps.setString(4, this.MD5(user.getContrasena()));
-            ps.setInt(5, user.getRol());
-            ps.setInt(6, user.getConfiguraciones());
-            ps.setInt(7, user.getCrearcliente());
-            ps.setInt(8, user.getCarpetas());
-            ps.setInt(9, user.getServicios());
-            ps.setInt(10, user.getOtros());
-            ps.setInt(11, user.getCrearusuarios());
-            ps.setInt(12, user.getEditarcliente());
-            ps.setInt(13, user.getModalidad());
-            ps.setInt(14, user.getBuscar());
-            ps.setInt(15, user.getBackups());
-            ps.setInt(16, user.getCotizaciones());
+            ps.setString(2, this.MD5(user.getContrasena()));
+            ps.setInt(3, user.getRol());
+            ps.setInt(4, user.getConfiguraciones());
+            ps.setInt(5, user.getCrearcliente());
+            ps.setInt(6, user.getCarpetas());
+            ps.setInt(7, user.getServicios());
+            ps.setInt(8, user.getOtros());
+            ps.setInt(9, user.getCrearusuarios());
+            ps.setInt(10, user.getEditarcliente());
+            ps.setInt(11, user.getModalidad());
+            ps.setInt(12, user.getBuscar());
+            ps.setInt(13, user.getBackups());
+            ps.setInt(14, user.getCotizaciones());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -131,9 +128,7 @@ public class Consultas_usuario extends Conexion {
             while (rs.next()) {
                 Usuario user = new Usuario();
                 user.setIdusuario(Integer.parseInt(rs.getString(1)));
-                user.setNombre(rs.getString(2));
-                user.setApellido(rs.getString(3));
-                user.setNumero_documento(rs.getString(4));
+                user.setNombre(rs.getString("nombre"));
                 rol.setIdroles(Integer.parseInt(rs.getString("roles_idroles")));
                 this.buscarrol(rol);
                 user.setSobrerol(rol.getRol());
@@ -186,7 +181,7 @@ public class Consultas_usuario extends Conexion {
         
     }
 
-    //consulta para buscar el rol por id
+//    consulta para buscar el rol por id
     public boolean buscarrol(Rol roles) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -243,7 +238,7 @@ public class Consultas_usuario extends Conexion {
     }
 
     //consulta para traer todos los roles
-    public ArrayList<String> llenar() {
+    public ArrayList<Rol> llenar() {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -254,7 +249,10 @@ public class Consultas_usuario extends Conexion {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery(sql);
             while (rs.next()) {
-                lista.add(rs.getString("rol"));
+                Rol rol = new Rol();
+                rol.setIdroles(rs.getInt("idroles"));
+                rol.setRol(rs.getString("rol"));
+                lista.add(rol);
             }
             return lista;
         } catch (SQLException e) {
@@ -371,7 +369,7 @@ public class Consultas_usuario extends Conexion {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = " SELECT * FROM usuarios  WHERE usuarios.idusuario=? ";
+        String sql = " SELECT * FROM usuarios inner join roles on usuarios.roles_idroles=roles.idroles WHERE usuarios.idusuario=? ";
         Rol rol = new Rol();
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
@@ -379,9 +377,7 @@ public class Consultas_usuario extends Conexion {
             rs = ps.executeQuery();
             if (rs.next()) {
                 user.setNombre(rs.getString("nombre"));
-                user.setApellido(rs.getString("apellido"));
-                user.setNumero_documento(rs.getString("numero_documento"));
-                user.setRol(Integer.parseInt(rs.getString("roles_idroles")));
+                user.setRol(rs.getInt("roles_idroles"));
                 user.setConfiguraciones(Integer.parseInt(rs.getString("configuraciones")));
                 user.setCrearcliente(Integer.parseInt(rs.getString("crearcliente")));
                 user.setCarpetas(Integer.parseInt(rs.getString("carpetas")));
@@ -393,10 +389,7 @@ public class Consultas_usuario extends Conexion {
                 user.setModalidad(rs.getInt("modalidad"));
                 user.setBuscar(rs.getInt("buscar"));
                 user.setBackups(rs.getInt("backups"));
-                rol.setIdroles(Integer.parseInt(rs.getString("roles_idroles")));
-                
-                this.buscarrol(rol);
-                user.setSobrerol(rol.getRol());
+                user.setSobrerol(rs.getString("rol"));
                 return true;
             }
             return false;
@@ -417,28 +410,26 @@ public class Consultas_usuario extends Conexion {
     public boolean modificarusuario(Usuario user) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE  usuarios SET  nombre=?, apellido=?, numero_documento=?,"
+        String sql = "UPDATE  usuarios SET  nombre=?,"
                 + " roles_idroles=?, configuraciones=?, crearcliente=?, carpetas=?, servicios=?, otros=?,"
                 + "crearusuarios=?, editarcliente=?, estado=?,modalidad=?,buscar=?,backups=?,cotizaciones=? WHERE idusuario=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, user.getNombre());
-            ps.setString(2, user.getApellido());
-            ps.setString(3, user.getNumero_documento());
-            ps.setInt(4, user.getRol());
-            ps.setInt(5, user.getConfiguraciones());
-            ps.setInt(6, user.getCrearcliente());
-            ps.setInt(7, user.getCarpetas());
-            ps.setInt(8, user.getServicios());
-            ps.setInt(9, user.getOtros());
-            ps.setInt(10, user.getCrearusuarios());
-            ps.setInt(11, user.getEditarcliente());
-            ps.setInt(12, user.getEstado());
-            ps.setInt(13, user.getModalidad());
-            ps.setInt(14, user.getBuscar());
-            ps.setInt(15, user.getBackups());
-            ps.setInt(16, user.getCotizaciones());
-            ps.setInt(17, user.getIdusuario());
+            ps.setInt(2, user.getRol());
+            ps.setInt(3, user.getConfiguraciones());
+            ps.setInt(4, user.getCrearcliente());
+            ps.setInt(5, user.getCarpetas());
+            ps.setInt(6, user.getServicios());
+            ps.setInt(7, user.getOtros());
+            ps.setInt(8, user.getCrearusuarios());
+            ps.setInt(9, user.getEditarcliente());
+            ps.setInt(10, user.getEstado());
+            ps.setInt(11, user.getModalidad());
+            ps.setInt(12, user.getBuscar());
+            ps.setInt(13, user.getBackups());
+            ps.setInt(14, user.getCotizaciones());
+            ps.setInt(15, user.getIdusuario());
             ps.execute();
             if (!user.getContrasena().equals("")) {
                 this.modificarcontrasena(user);

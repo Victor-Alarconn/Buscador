@@ -313,7 +313,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_crearusuarioActionPerformed
 
     private void btnterminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnterminarActionPerformed
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnterminarActionPerformed
 
     /**

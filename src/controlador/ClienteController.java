@@ -11,6 +11,7 @@ import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
+import Consultas.Consultas_Mac;
 import Consultas.Consultas_Modalidad;
 import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
@@ -40,6 +41,7 @@ import java.util.regex.Pattern;
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 import modelo.Directorio;
+import modelo.Mac;
 import modelo.Usuario;
 
 /**
@@ -70,6 +72,9 @@ public class ClienteController implements ActionListener {
 
     ArrayList<Servicio> lista;
     ArrayList<Configuracion> mconfig;
+
+    Consultas_Mac cmac = new Consultas_Mac();
+    Mac mmac = new Mac();
 
     public ClienteController(Cliente modelo, Consultas_Cliente consultas,
             Formulario formulario, Consultas_Servicios cons, Servicio mods, Servicios_has_Clientes_Potenciales shcp,
@@ -108,17 +113,21 @@ public class ClienteController implements ActionListener {
         model1.addColumn("Fecha inicio");
         model1.addColumn("Fecha vence");
         formulario.tabladocumentos.setModel(model1);
-
-        mconfig = cconfiguraciones.cargar();
-        for (int i = 0; i < mconfig.size(); i++) {
-            if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
-                directorio = mconfig.get(i).getDirectorio();
+        mmac.setMacs(mmac.conseguirMAC());
+        if (cmac.buscar(mmac)) {
+            mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
+            for (int i = 0; i < mconfig.size(); i++) {
+                if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
+                    directorio = mconfig.get(i).getDirectorio();
+                    System.out.println(directorio);
+                }
             }
-        }
-        if (directorio == null) {
-            formulario.mensajealerta.setVisible(true);
-        } else {
-            formulario.mensajealerta.setVisible(false);
+            
+            if (directorio == null) {
+                formulario.mensajealerta.setVisible(true);
+            } else {
+                formulario.mensajealerta.setVisible(false);
+            }
         }
 
         formulario.txtservicio.removeAllItems();
@@ -150,11 +159,8 @@ public class ClienteController implements ActionListener {
         for (int i = 0; i < lista3.size(); i++) {
             formulario.txtllego.addItem(lista3.get(i));
         }
-       
-        
 
     }
-    
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -197,7 +203,7 @@ public class ClienteController implements ActionListener {
                         modelo.setNotas(formulario.txtnotas.getText());
                         modelo.setCodigo(formulario.txtcodigo.getText().toUpperCase());
                         modelo.setDv(formulario.txtdv.getText());
-                        modelo.setRuta(directorio + File.separator + formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase().trim());
+                        modelo.setRuta(File.separator + formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase().trim());
                         if (formulario.clientepotecial.isSelected()) {
                             modelo.setCliente_potencial(1);
                         } else {

@@ -57,18 +57,38 @@ this.getRootPane().registerKeyboardAction(e -> {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablauser = new rojerusan.RSTableMetro();
         ediataruser = new javax.swing.JButton();
         eliminaruser = new javax.swing.JButton();
-        txtbuscar = new javax.swing.JTextField();
         crearusuario = new javax.swing.JButton();
-        filtro = new rojerusan.RSComboMetro();
         jLabel1 = new javax.swing.JLabel();
+        filtro = new javax.swing.JComboBox<>();
+        txtbuscar = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablauser = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ediataruser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editaruser32.png"))); // NOI18N
+        ediataruser.setText("editar");
+        ediataruser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        jPanel1.add(ediataruser, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 100, 40));
+
+        eliminaruser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminaruser32.png"))); // NOI18N
+        eliminaruser.setText("eliminar");
+        eliminaruser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        jPanel1.add(eliminaruser, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 100, 40));
+
+        crearusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser32.png"))); // NOI18N
+        crearusuario.setText("crear");
+        crearusuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 90, 40));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nombre", "apellido", "numero_documento" }));
+        jPanel1.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 160, 25));
+        jPanel1.add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 160, 25));
 
         tablauser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,40 +101,9 @@ this.getRootPane().registerKeyboardAction(e -> {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tablauser.setColorBackgoundHead(new java.awt.Color(102, 102, 102));
-        tablauser.setColorFilasForeground1(new java.awt.Color(216, 74, 44));
-        tablauser.setColorFilasForeground2(new java.awt.Color(216, 74, 44));
-        tablauser.setColorSelBackgound(new java.awt.Color(216, 74, 44));
-        jScrollPane2.setViewportView(tablauser);
+        jScrollPane1.setViewportView(tablauser);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 770, 190));
-
-        ediataruser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editaruser32.png"))); // NOI18N
-        ediataruser.setText("editar");
-        ediataruser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(ediataruser, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 100, 40));
-
-        eliminaruser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminaruser32.png"))); // NOI18N
-        eliminaruser.setText("eliminar");
-        eliminaruser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(eliminaruser, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 100, 40));
-
-        txtbuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtbuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102), 2));
-        jPanel1.add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 190, 40));
-
-        crearusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser32.png"))); // NOI18N
-        crearusuario.setText("crear");
-        crearusuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 90, 40));
-
-        filtro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "nombre", "apellido", "numero_documento" }));
-        filtro.setColorArrow(new java.awt.Color(0, 0, 0));
-        filtro.setColorBorde(new java.awt.Color(102, 102, 102));
-        filtro.setColorFondo(new java.awt.Color(102, 102, 102));
-        filtro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel1.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 220, 40));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 760, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,11 +165,11 @@ this.getRootPane().registerKeyboardAction(e -> {
     public javax.swing.JButton crearusuario;
     public javax.swing.JButton ediataruser;
     public javax.swing.JButton eliminaruser;
-    public rojerusan.RSComboMetro filtro;
+    public javax.swing.JComboBox<String> filtro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    public rojerusan.RSTableMetro tablauser;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JTable tablauser;
     public javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 }

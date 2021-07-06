@@ -11,6 +11,7 @@ import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
+import Consultas.Consultas_Mac;
 import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import Consultas.Consultas_usuario;
@@ -35,6 +36,7 @@ import modelo.Configuracion;
 import modelo.Directorio;
 import modelo.Documentos;
 import modelo.Llego;
+import modelo.Mac;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import modelo.Usuario;
@@ -82,6 +84,11 @@ public class BusquedaController implements ActionListener {
     Usuario mod = new Usuario();
 
     Consultas_usuario consultasusuario = new Consultas_usuario();
+    
+    Consultas_Mac cmac = new Consultas_Mac();
+    Mac mmac = new Mac();
+    ArrayList<Configuracion> mconfig;
+    private String directorio = null;
 
     public BusquedaController(Cliente modelo, Consultas_Cliente consulta, Busqueda busqueda) {
         this.modelo = modelo;
@@ -118,6 +125,15 @@ public class BusquedaController implements ActionListener {
         busqueda.tabladatos.getColumn("Dv").setWidth(40);
         busqueda.tabladatos.getColumn("Dv").setMinWidth(40);
         busqueda.tabladatos.getColumn("Dv").setMaxWidth(40);
+        mmac.setMacs(mmac.conseguirMAC());
+        if (cmac.buscar(mmac)) {
+            mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
+            for (int i = 0; i < mconfig.size(); i++) {
+                if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
+                    directorio = mconfig.get(i).getDirectorio();
+                }
+            }
+        }
         keyevent();
         MouseClicked();
         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
@@ -137,7 +153,7 @@ public class BusquedaController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == busqueda.abrirdirectorio) {
             int fila = busqueda.tabladatos.getSelectedRow();
-            abrirarchivo(String.valueOf(busqueda.tabladatos.getValueAt(fila, 1)));
+            abrirarchivo(directorio+String.valueOf(busqueda.tabladatos.getValueAt(fila, 1)));
         }
 
         if (e.getSource() == busqueda.editarcliente) {

@@ -5,10 +5,14 @@
  */
 package Organizador;
 
+import Consultas.Consultas_Mac;
 import Consultas.Consultas_Modulos;
 import Consultas.Consultas_roles;
 import Consultas.Consultas_usuario;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.util.ArrayList;
+import modelo.Mac;
 import modelo.Modulo;
 import modelo.Rol;
 import modelo.Usuario;
@@ -31,9 +35,16 @@ public class Buscador {
         Buscador b = new Buscador();
         Consultas_Modulos cm = new Consultas_Modulos();
         Modulo mm = new Modulo();
-
+        Consultas_Mac cmac = new Consultas_Mac();
+        Mac mmac = new Mac();
         Rol rol = new Rol();
-
+        //consulta mac
+        String mac = mmac.conseguirMAC();
+        mmac.setMacs(mac);
+        if (!cmac.buscar(mmac)) {
+            cmac.registrar(mmac);
+        }
+        //registro de usuario por default
         Usuario u = new Usuario();
         u.setNombre("admin");
         u.setContrasena("123");
@@ -79,9 +90,9 @@ public class Buscador {
             }
         } else {
             for (int i = 0; i < lista.size(); i++) {
-               
+
                 for (int j = 0; j < md.size(); j++) {
-                    
+
                     if (md.get(j).getModulo().equals(lista.get(i))) {
                         estado = false;
                         break;
@@ -103,5 +114,7 @@ public class Buscador {
     public boolean agregarrol(Rol rol) {
         return cr.registrar(rol);
     }
+
+    
 
 }

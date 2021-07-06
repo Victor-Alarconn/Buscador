@@ -6,6 +6,7 @@
 package controlador;
 
 import Consultas.Consultas_Configuraciones;
+import Consultas.Consultas_Mac;
 import Consultas.Consultas_Modulos;
 import Consultas.Consultas_usuario;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
@@ -20,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 import modelo.Configuracion;
+import modelo.Mac;
 import modelo.Modulo;
 import modelo.Usuario;
 import vistas.Configuraciones;
@@ -43,6 +47,8 @@ public class ConfiguracionesController implements ActionListener {
 
     DefaultTableModel modell = new DefaultTableModel();
     ArrayList<Configuracion> configuracion;
+    Consultas_Mac cmac = new Consultas_Mac();
+    Mac mmac = new Mac();
 
     public ConfiguracionesController(Configuracion mconfiguraciones,
             Consultas_Configuraciones cconfiguraciones,
@@ -71,6 +77,10 @@ public class ConfiguracionesController implements ActionListener {
         vconfiguraciones.tablarutas.getColumn("Modulo").setMaxWidth(100);
         vconfiguraciones.setLocationRelativeTo(null);
         vconfiguraciones.idtabla.setVisible(false);
+        mmac.setMacs(mmac.conseguirMAC());
+        if (cmac.buscar(mmac)) {
+           mconfiguraciones.setMacs_idmacs(mmac.getIdmacs());
+        }
         config();
         MouseClicked();
     }
@@ -85,6 +95,8 @@ public class ConfiguracionesController implements ActionListener {
                 mconfiguraciones.setModulos_idmodulos(modulo.getIdmodulo());
                 mconfiguraciones.setDirectorio(vconfiguraciones.txtdirectorio.getText());
                 mconfiguraciones.setUsuarios_idusuario(user.getIdusuario());
+                mconfiguraciones.setMacs_idmacs(mconfiguraciones.getMacs_idmacs());
+
                 if (!vconfiguraciones.idtabla.getText().equals("")) {
                     mconfiguraciones.setIdconfiguracion(Integer.parseInt(vconfiguraciones.idtabla.getText()));
                     if (cconfiguraciones.modificar(mconfiguraciones)) {
@@ -187,7 +199,7 @@ public class ConfiguracionesController implements ActionListener {
             vconfiguraciones.txtmodulo.addItem(modulo.get(i));
         }
 
-        configuracion = cconfiguraciones.cargar();
+        configuracion = cconfiguraciones.cargar(mconfiguraciones.getMacs_idmacs());
         Object[] dato = new Object[3];
         for (int i = 0; i < configuracion.size(); i++) {
             dato[0] = configuracion.get(i).getIdconfiguracion();
@@ -242,4 +254,5 @@ public class ConfiguracionesController implements ActionListener {
         vconfiguraciones.txtdirectorio.setText("");
         vconfiguraciones.idtabla.setText("");
     }
+
 }

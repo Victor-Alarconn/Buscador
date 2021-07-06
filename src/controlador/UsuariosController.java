@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import modelo.Usuario;
@@ -43,15 +45,12 @@ public class UsuariosController implements ActionListener  {
         usuarios.setLocationRelativeTo(null);
         model.addColumn("ID");
         model.addColumn("Nombre");
-        model.addColumn("Apellido");
-        model.addColumn("Documento");
         model.addColumn("Rol");
         model.addColumn("Esatado");
         usuarios.tablauser.setModel(model);
         usuarios.tablauser.getColumn("ID").setWidth(0);
         usuarios.tablauser.getColumn("ID").setMinWidth(0);
         usuarios.tablauser.getColumn("ID").setMaxWidth(0);
-       
     
         keyevent();
 
@@ -110,21 +109,20 @@ public class UsuariosController implements ActionListener  {
         if (usuarios.txtbuscar.getText().length() > 0) {
             limpiartabla();
             ArrayList<Usuario> usuario;
-            Object[] dato = new Object[6];
+            Object[] dato = new Object[4];
             usuario = consulta.buscarcaracter(usuarios.txtbuscar.getText(),usuarios.filtro.getSelectedItem().toString());
             
             for (int i = 0; i < usuario.size(); i++) {
                 dato[0] = usuario.get(i).getIdusuario();
                 dato[1] = usuario.get(i).getNombre();
-                dato[2] = usuario.get(i).getApellido();
-                dato[3] = usuario.get(i).getNumero_documento();
-                dato[4] = usuario.get(i).getSobrerol();
-                dato[5] = usuario.get(i).getSobreestado();
+                dato[2] = usuario.get(i).getSobrerol();
+                dato[3] = usuario.get(i).getSobreestado();
                 model.addRow(dato);
                 usuarios.tablauser.setModel(model);
             }
         }
     }
+    
     
     
     

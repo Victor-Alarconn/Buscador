@@ -24,12 +24,13 @@ public class Consultas_Configuraciones extends Conexion {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO configuracion (directorio,usuarios_idusuario,modulos_idmodulo) VALUES(?,?,?)";
+        String sql = "INSERT INTO configuracion (directorio,usuarios_idusuario,modulos_idmodulo,macs_idmacs) VALUES(?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, configuraciones.getDirectorio());
             ps.setInt(2, configuraciones.getUsuarios_idusuario());
             ps.setInt(3, configuraciones.getModulos_idmodulos());
+            ps.setInt(4, configuraciones.getMacs_idmacs());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -45,13 +46,13 @@ public class Consultas_Configuraciones extends Conexion {
     }
 
     //consulta para cargar las configuraciones en la vista
-    public ArrayList<Configuracion> cargar() {
+    public ArrayList<Configuracion> cargar(int mac) {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
         String sql = " SELECT idconfiguracion,directorio,modulo FROM configuracion inner join modulos"
-                + " on modulos_idmodulo=modulos.idmodulo";
+                + " on modulos_idmodulo=modulos.idmodulo WHERE configuracion.macs_idmacs="+mac;
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery();

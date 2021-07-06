@@ -51,11 +51,6 @@ this.getRootPane().registerKeyboardAction(e -> {
     private void initComponents() {
 
         paneluser = new javax.swing.JPanel();
-        txtnombre = new rojerusan.RSMetroTextFullPlaceHolder();
-        txtapellido = new rojerusan.RSMetroTextFullPlaceHolder();
-        txtdocumento = new rojerusan.RSMetroTextFullPlaceHolder();
-        txtcontraseña = new rojerusan.RSPasswordTextPlaceHolder();
-        txtrol = new rojerusan.RSComboMetro();
         guardaruser = new javax.swing.JButton();
         checkconfiguraciones = new javax.swing.JCheckBox();
         checkcrearcliente = new javax.swing.JCheckBox();
@@ -70,47 +65,16 @@ this.getRootPane().registerKeyboardAction(e -> {
         checkbuscar = new javax.swing.JCheckBox();
         checkbackups = new javax.swing.JCheckBox();
         checkcotizaciones = new javax.swing.JCheckBox();
+        txtnombre = new javax.swing.JTextField();
+        txtcontraseña = new javax.swing.JPasswordField();
+        txtrol = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         paneluser.setBackground(new java.awt.Color(102, 255, 102));
         paneluser.setName("paneluser"); // NOI18N
-
-        txtnombre.setForeground(new java.awt.Color(0, 0, 0));
-        txtnombre.setBorderColor(new java.awt.Color(102, 102, 102));
-        txtnombre.setPhColor(new java.awt.Color(216, 74, 44));
-        txtnombre.setPlaceholder("Nombre");
-
-        txtapellido.setForeground(new java.awt.Color(0, 0, 0));
-        txtapellido.setBorderColor(new java.awt.Color(102, 102, 102));
-        txtapellido.setPhColor(new java.awt.Color(216, 74, 44));
-        txtapellido.setPlaceholder("Apellido");
-
-        txtdocumento.setForeground(new java.awt.Color(0, 0, 0));
-        txtdocumento.setBorderColor(new java.awt.Color(102, 102, 102));
-        txtdocumento.setPhColor(new java.awt.Color(216, 74, 44));
-        txtdocumento.setPlaceholder("Documento");
-
-        txtcontraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102), 2));
-        txtcontraseña.setForeground(new java.awt.Color(0, 0, 0));
-        txtcontraseña.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtcontraseña.setPhColor(new java.awt.Color(216, 74, 44));
-        txtcontraseña.setPlaceholder("Contraseña");
-        txtcontraseña.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcontraseñaActionPerformed(evt);
-            }
-        });
-
-        txtrol.setColorArrow(new java.awt.Color(0, 0, 0));
-        txtrol.setColorBorde(new java.awt.Color(102, 102, 102));
-        txtrol.setColorFondo(new java.awt.Color(102, 102, 102));
-        txtrol.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtrol.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                txtrolItemStateChanged(evt);
-            }
-        });
 
         guardaruser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         guardaruser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
@@ -158,26 +122,34 @@ this.getRootPane().registerKeyboardAction(e -> {
         checkcotizaciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkcotizaciones.setText("Cotizaciones");
 
+        txtrol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("Nombre");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setText("Contraseña");
+
         javax.swing.GroupLayout paneluserLayout = new javax.swing.GroupLayout(paneluser);
         paneluser.setLayout(paneluserLayout);
         paneluserLayout.setHorizontalGroup(
             paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneluserLayout.createSequentialGroup()
-                .addGap(185, 185, 185)
+                .addGap(28, 28, 28)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtrol, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
                     .addGroup(paneluserLayout.createSequentialGroup()
-                        .addComponent(guardaruser, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkdesactivar)))
-                .addGap(57, 57, 57)
-                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(paneluserLayout.createSequentialGroup()
+                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtrol, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtnombre, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                .addComponent(txtcontraseña))
+                            .addGroup(paneluserLayout.createSequentialGroup()
+                                .addComponent(guardaruser, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(checkdesactivar))
+                            .addComponent(jLabel3))
+                        .addGap(44, 44, 44)
                         .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(checkconfiguraciones)
                             .addComponent(checkcarpetas)
@@ -196,81 +168,76 @@ this.getRootPane().registerKeyboardAction(e -> {
                                     .addComponent(checkbuscar)
                                     .addComponent(checkcrearcliente)
                                     .addComponent(checkeditarcliente))))))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(paneluserLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jLabel1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 379, Short.MAX_VALUE)))
         );
         paneluserLayout.setVerticalGroup(
             paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneluserLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+            .addGroup(paneluserLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtrol, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(guardaruser)
+                    .addComponent(checkdesactivar))
+                .addGap(15, 15, 15))
+            .addGroup(paneluserLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(checkconfiguraciones)
+                    .addComponent(checkcrearcliente)
+                    .addComponent(checkservicios))
                 .addGap(18, 18, 18)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtdocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                    .addComponent(checkcarpetas)
+                    .addComponent(checkeditarcliente)
+                    .addComponent(checkotros))
+                .addGap(18, 18, 18)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(paneluserLayout.createSequentialGroup()
-                        .addComponent(txtrol, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(guardaruser)
-                            .addComponent(checkdesactivar)))
-                    .addGroup(paneluserLayout.createSequentialGroup()
-                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkconfiguraciones)
-                            .addComponent(checkcrearcliente)
-                            .addComponent(checkservicios))
-                        .addGap(18, 18, 18)
-                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(checkcarpetas)
-                            .addComponent(checkeditarcliente)
-                            .addComponent(checkotros))
-                        .addGap(18, 18, 18)
-                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(checkcrearusuario)
-                            .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(checkmodalidad)
-                                .addComponent(checkbuscar)))))
+                    .addComponent(checkcrearusuario)
+                    .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(checkmodalidad)
+                        .addComponent(checkbuscar)))
                 .addGap(18, 18, 18)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(checkbackups)
                     .addComponent(checkcotizaciones))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(paneluserLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 43, Short.MAX_VALUE)
                     .addComponent(jLabel1)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 216, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(paneluser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(paneluser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(paneluser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(paneluser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcontraseñaActionPerformed
-
-    private void txtrolItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_txtrolItemStateChanged
-
-    }//GEN-LAST:event_txtrolItemStateChanged
 
     private void checkotrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkotrosActionPerformed
         // TODO add your handling code here:
@@ -334,11 +301,11 @@ this.getRootPane().registerKeyboardAction(e -> {
     public javax.swing.JCheckBox checkservicios;
     public javax.swing.JButton guardaruser;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     public javax.swing.JPanel paneluser;
-    public rojerusan.RSMetroTextFullPlaceHolder txtapellido;
-    public rojerusan.RSPasswordTextPlaceHolder txtcontraseña;
-    public rojerusan.RSMetroTextFullPlaceHolder txtdocumento;
-    public rojerusan.RSMetroTextFullPlaceHolder txtnombre;
-    public rojerusan.RSComboMetro txtrol;
+    public javax.swing.JPasswordField txtcontraseña;
+    public javax.swing.JTextField txtnombre;
+    public javax.swing.JComboBox txtrol;
     // End of variables declaration//GEN-END:variables
 }

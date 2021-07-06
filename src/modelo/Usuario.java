@@ -13,8 +13,6 @@ public class Usuario {
     
     private int idusuario;
     private String nombre;
-    private String apellido; 
-    private String numero_documento;
     private int rol;
     private  String sobrerol;
     private String contrasena;
@@ -165,13 +163,7 @@ public class Usuario {
     public void setRol(int rol) {
         this.rol = rol;
     }
-    public String getNumero_documento() {
-        return numero_documento;
-    }
-
-    public void setNumero_documento(String numero_documento) {
-        this.numero_documento = numero_documento;
-    }
+    
 
     public int getIdusuario() {
         return idusuario;
@@ -189,12 +181,6 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+ 
     
 }

@@ -20,7 +20,7 @@ import modelo.Llego;
 public class Consultas_Llego extends Conexion {
     
     // consulta para registrar
-     public boolean registrar(Llego llego) {
+    public boolean registrar(Llego llego) {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
