@@ -16,6 +16,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 import modelo.Configuracion;
@@ -29,7 +30,7 @@ import vistas.Backups;
  */
 public class BackupController implements ActionListener {
 
-    private final Consultas.Consultas_Cliente ccliente;
+    private final Consultas_Cliente ccliente;
     private final Cliente mcliente;
     private final Backups vbackups;
     private final Usuario user;
@@ -40,7 +41,7 @@ public class BackupController implements ActionListener {
     ArrayList<Configuracion> mconfig;
     Consultas_Configuraciones cconfiguraciones = new Consultas_Configuraciones();
     private String directorio = null;
-    ArrayList<Cliente> cliente;
+    private boolean cliente;
 
     Consultas_Mac cmac = new Consultas_Mac();
     Mac mmac = new Mac();
@@ -62,8 +63,9 @@ public class BackupController implements ActionListener {
         mmac.setMacs(mmac.conseguirMAC());
         if (cmac.buscar(mmac)) {
             mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
+
             for (int i = 0; i < mconfig.size(); i++) {
-                if (mconfig.get(i).getModulo().toLowerCase().equals("cli")) {
+                if (mconfig.get(i).getModulo().toLowerCase().equals("backups")) {
                     directorio = mconfig.get(i).getDirectorio();
                 }
             }
@@ -79,8 +81,8 @@ public class BackupController implements ActionListener {
         }
 
         if (e.getSource() == vbackups.abrirdirectorio) {
-            if (cliente != null) {
-                abrirarchivo(directorio+cliente.get(0).getBackupruta());
+            if (cliente) {
+                abrirarchivo(directorio + mcliente.getBackupruta());
             }
         }
 
@@ -136,24 +138,45 @@ public class BackupController implements ActionListener {
     }
 
     public void buscar() {
-        String parametro = vbackups.txtcodigo.getText().toUpperCase();
-        String filtro = "codigo";
-        cliente = ccliente.buscarcaracter(parametro, filtro);
-        vbackups.txtnombre.setText(cliente.get(0).getNombre());
-        if (cliente.get(0).getBackupruta() == null || cliente.get(0).getBackupruta().equals("")) {
-            int respuesta = dialogo.j();
-            if (respuesta == 0) {
-                String nombre = vbackups.txtnombre.getText().toUpperCase();
-                File file = Crear_archivo(directorio, parametro + "_" + nombre);
-                file.mkdir();
-                String ruta = File.separator + parametro + "_" + nombre;
-                mcliente.setIdclientes_potenciales(cliente.get(0).getIdclientes_potenciales());
-                mcliente.setBackupruta(ruta);
-                ccliente.modificarruta(mcliente);
-                abrirarchivo(directorio+ruta);
+        mcliente.setCodigo(vbackups.txtcodigo.getText().toUpperCase());
+        if (ccliente.buscarcoodigocliente(mcliente)) {
+            System.out.println(mcliente.getBackupruta());
+            vbackups.txtnombre.setText(mcliente.getNombre());
+            if (mcliente.getBackupruta() == null || mcliente.getBackupruta().equals("")) {
+                int respuesta = dialogo.j();
+                if (respuesta == 0) {
+                    String nombre = vbackups.txtnombre.getText().toUpperCase();
+                    File file = Crear_archivo(directorio, mcliente.getCodigo() + "_" + nombre);
+                    file.mkdir();
+                    String ruta = File.separator + mcliente.getCodigo() + "_" + nombre;
+                    mcliente.setIdclientes_potenciales(mcliente.getIdclientes_potenciales());
+                    mcliente.setBackupruta(ruta);
+                    ccliente.modificarruta(mcliente);
+                    abrirarchivo(directorio + ruta);
+                    limpiarcampos();
+                }
+            } else {
+                limpiartabla();
+                cliente= true;
+                backupsalmacenados(directorio + mcliente.getBackupruta());
             }
-        } else {
-            backupsalmacenados(cliente.get(0).getBackupruta());
+        }else{
+            JOptionPane.showMessageDialog(vbackups, "el Cliente no se encuentra en la base de datos");
+        }
+
+    }
+
+    public void limpiarcampos() {
+        vbackups.txtcodigo.setText("");
+        vbackups.txtnombre.setText("");
+    }
+
+    public void limpiartabla() {
+        if (vbackups.tablabackups.getRowCount() >= 0) {
+            int count = vbackups.tablabackups.getRowCount();
+            for (int i = 0; i < count; i++) {
+                model.removeRow(0);
+            }
         }
     }
 

@@ -273,6 +273,55 @@ public class Consultas_Cliente extends Conexion {
 
     }
 
+    //buscar cliente por codigopublic boolean buscarr(Cliente cliente) {
+      public boolean buscarcoodigocliente(Cliente cliente) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = " SELECT * FROM clientes_potenciales  WHERE codigo=? ";
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps.setString(1, cliente.getCodigo());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                cliente.setIdclientes_potenciales(Integer.parseInt(rs.getString("idclientes_potenciales")));
+                cliente.setNit(rs.getString("nit"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setEmpresa(rs.getString("empresa"));
+                cliente.setCelular1(rs.getString("celular1"));
+                cliente.setCelular2(rs.getString("celular2"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setFecha_llegada(rs.getString("fecha_llegada"));
+                cliente.setClase(rs.getString("clase"));
+                cliente.setModalidad(rs.getString("modalidad"));
+                cliente.setNotas(rs.getString("notas"));
+                cliente.setCodigo(rs.getString("codigo"));
+                cliente.setLlego(rs.getString("llego"));
+                cliente.setCategoria(rs.getString("categoria"));
+                cliente.setRuta(rs.getString("ruta"));
+                cliente.setDv(rs.getString("dv"));
+                cliente.setBackupruta(rs.getString("backupruta"));
+                return true;
+            }
+
+            return false;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+
+    }  
+
+    
+    
+    
     //consulta para buscar si el nit del cliente contie un parametro
     public ArrayList<Cliente> buscarcaracter(String parametro, String filtro) {
         ArrayList listaPersona = new ArrayList();
