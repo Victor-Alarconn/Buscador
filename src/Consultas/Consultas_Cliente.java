@@ -31,8 +31,9 @@ public class Consultas_Cliente extends Conexion {
                 + "celular1,celular2,email,fecha_llegada,clase,"
                 + "modalidad,notas,codigo,llego,categoria,ruta,dv,"
                 + "usuarios_idusuario,fecha_arriendo,contacto,"
-                + "cliente_potencial,vlrprincipal,numequipos,vlrterminal,electronica,sucursal) VALUES(?,?,?,"
-                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "cliente_potencial,vlrprincipal,numequipos,vlrterminal,"
+                + "electronica,sucursal,fechacotizacion,rutacotizacion) VALUES(?,?,?,"
+                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, cliente.getNit());
@@ -59,6 +60,8 @@ public class Consultas_Cliente extends Conexion {
             ps.setInt(22, cliente.getVlrterminal());
             ps.setInt(23, cliente.getElectronica());
             ps.setInt(24, cliente.getSucursal());
+            ps.setString(25, cliente.getFechacotizacion());
+            ps.setString(26, cliente.getRutacotizacon());
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();// recupera el id autoincrementable del registro hecho
             if (rs != null && rs.next()) {
@@ -274,7 +277,7 @@ public class Consultas_Cliente extends Conexion {
     }
 
     //buscar cliente por codigopublic boolean buscarr(Cliente cliente) {
-      public boolean buscarcoodigocliente(Cliente cliente) {
+    public boolean buscarcoodigocliente(Cliente cliente) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
@@ -317,11 +320,47 @@ public class Consultas_Cliente extends Conexion {
             }
         }
 
-    }  
+    }
+    
+   public boolean buscarnombrecliente(Cliente cliente) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String parametro =cliente.getNombre();
+        String sql = " SELECT * FROM clientes_potenciales  WHERE nombre like'%" + parametro + "%'";
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                cliente.setIdclientes_potenciales(Integer.parseInt(rs.getString("idclientes_potenciales")));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setEmpresa(rs.getString("empresa"));
+                cliente.setCelular1(rs.getString("celular1"));
+                cliente.setCelular2(rs.getString("celular2"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setClase(rs.getString("clase"));
+                cliente.setModalidad(rs.getString("modalidad"));
+                cliente.setNotas(rs.getString("notas"));
+                cliente.setLlego(rs.getString("llego"));
+                cliente.setCategoria(rs.getString("categoria"));
+                cliente.setRutacotizacon(rs.getString("rutacotizacion"));
+                return true;
+            }
 
-    
-    
-    
+            return false;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+
+    }
+
     //consulta para buscar si el nit del cliente contie un parametro
     public ArrayList<Cliente> buscarcaracter(String parametro, String filtro) {
         ArrayList listaPersona = new ArrayList();

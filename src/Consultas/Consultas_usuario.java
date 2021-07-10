@@ -34,7 +34,7 @@ public class Consultas_usuario extends Conexion {
         String sql = "INSERT INTO usuarios (nombre,contrasena,roles_idroles,"
                 + "configuraciones,crearcliente,carpetas,servicios,"
                 + "otros,crearusuarios,editarcliente,modalidad,buscar,"
-                + "backups,cotizaciones) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "backups) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, user.getNombre());
@@ -50,7 +50,6 @@ public class Consultas_usuario extends Conexion {
             ps.setInt(11, user.getModalidad());
             ps.setInt(12, user.getBuscar());
             ps.setInt(13, user.getBackups());
-            ps.setInt(14, user.getCotizaciones());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -292,7 +291,6 @@ public class Consultas_usuario extends Conexion {
                 user.setModalidad(rs.getInt("modalidad"));
                 user.setBuscar(rs.getInt("buscar"));
                 user.setBackups(rs.getInt("backups"));
-                user.setCotizaciones(0);
                 Principal principal = new Principal(user);
 //                user.setIdusuario(rs.getInt(1));
 
@@ -412,7 +410,7 @@ public class Consultas_usuario extends Conexion {
         Connection con = getConexion();
         String sql = "UPDATE  usuarios SET  nombre=?,"
                 + " roles_idroles=?, configuraciones=?, crearcliente=?, carpetas=?, servicios=?, otros=?,"
-                + "crearusuarios=?, editarcliente=?, estado=?,modalidad=?,buscar=?,backups=?,cotizaciones=? WHERE idusuario=? ";
+                + "crearusuarios=?, editarcliente=?, estado=?,modalidad=?,buscar=?,backups=? WHERE idusuario=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, user.getNombre());
@@ -428,8 +426,7 @@ public class Consultas_usuario extends Conexion {
             ps.setInt(11, user.getModalidad());
             ps.setInt(12, user.getBuscar());
             ps.setInt(13, user.getBackups());
-            ps.setInt(14, user.getCotizaciones());
-            ps.setInt(15, user.getIdusuario());
+            ps.setInt(14, user.getIdusuario());
             ps.execute();
             if (!user.getContrasena().equals("")) {
                 this.modificarcontrasena(user);

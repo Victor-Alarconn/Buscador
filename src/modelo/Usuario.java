@@ -28,7 +28,6 @@ public class Usuario {
     private int modalidad;
     private int buscar;
     private int backups;
-    private int cotizaciones;
 
     public int getModalidad() {
         return modalidad;
@@ -53,16 +52,6 @@ public class Usuario {
     public void setBackups(int backups) {
         this.backups = backups;
     }
-
-    public int getCotizaciones() {
-        return cotizaciones;
-    }
-
-    public void setCotizaciones(int cotizaciones) {
-        this.cotizaciones = cotizaciones;
-    }
-    
-    
 
     public String getSobreestado() {
         return sobreestado;

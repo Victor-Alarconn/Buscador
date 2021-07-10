@@ -40,6 +40,7 @@ import vistas.Backups;
 import vistas.Busqueda;
 import vistas.Carpetas;
 import vistas.Configuraciones;
+import vistas.Cotizaciones;
 import vistas.Crearusuario;
 import vistas.Editarcliente;
 import vistas.Formulario;
@@ -89,8 +90,8 @@ public class OrganizadorController implements ActionListener {
     Consultas_Modalidad mcm = new Consultas_Modalidad();
 
 //    Usuario mod = new Usuario();
-
     Consultas_usuario consultasusuario = new Consultas_usuario();
+    
 
     public OrganizadorController(Cliente modelo, Consultas_Cliente consulta, Principal principal, Usuario mod) {
         this.modelo = modelo;
@@ -106,6 +107,7 @@ public class OrganizadorController implements ActionListener {
         this.principal.busqueda.addActionListener(this);
         this.principal.modalidad.addActionListener(this);
         this.principal.backup.addActionListener(this);
+        this.principal.Cotizaciones.addActionListener(this);
                 
     }
 
@@ -133,7 +135,7 @@ public class OrganizadorController implements ActionListener {
         }
 
         if (e.getSource() == principal.busqueda) {
-            Busqueda busqueda = new Busqueda(principal, true);
+            Busqueda busqueda = new Busqueda(principal, false);
             BusquedaController bc = new BusquedaController(modelo, consulta, busqueda);
             bc.iniciar();
             busqueda.setVisible(true);
@@ -181,6 +183,13 @@ public class OrganizadorController implements ActionListener {
             BackupController cbackup = new BackupController(consulta, modelo, backup, mod);
             cbackup.iniciar();
             backup.setVisible(true);
+        }
+        if (e.getSource() == principal.Cotizaciones) {
+            Cotizaciones cotizacones = new Cotizaciones(principal, true);
+            Cliente_PotencialController cp  = new Cliente_PotencialController(modelo, consulta, 
+                    cotizacones, mconfiguracion, cconfiguraciones, mod);
+            cp.iniciar();
+            cotizacones.setVisible(true);
         }
     }
 

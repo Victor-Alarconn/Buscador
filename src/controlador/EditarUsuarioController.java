@@ -105,11 +105,7 @@ public class EditarUsuarioController implements ActionListener {
                 } else {
                     modelo.setBackups(0);
                 }
-                if (vista.checkcotizaciones.isSelected()) {
-                    modelo.setCotizaciones(1);
-                } else {
-                    modelo.setCotizaciones(0);
-                }
+               
             }
             if (!vista.checkdesactivar.isSelected()) {
                 modelo.setEstado(1);
@@ -139,7 +135,6 @@ public class EditarUsuarioController implements ActionListener {
                     vista.checkmodalidad.setVisible(false);
                     vista.checkbuscar.setVisible(false);
                     vista.checkbackups.setVisible(false);
-                    vista.checkcotizaciones.setVisible(false);
                 } else {
                     if (roles.toString().equals("user")) {
                         vista.checkconfiguraciones.setVisible(true);
@@ -152,7 +147,6 @@ public class EditarUsuarioController implements ActionListener {
                         vista.checkmodalidad.setVisible(true);
                         vista.checkbuscar.setVisible(true);
                         vista.checkbackups.setVisible(true);
-                        vista.checkcotizaciones.setVisible(true);
                     }
                 }
             }
@@ -197,9 +191,6 @@ public class EditarUsuarioController implements ActionListener {
             }
             if (modelo.getBackups() == 1) {
                 vista.checkbackups.setSelected(true);
-            }
-            if (modelo.getCotizaciones() == 1) {
-                vista.checkcotizaciones.setSelected(true);
             }
             if (modelo.getEstado() == 0) {
                 vista.checkdesactivar.setSelected(true);

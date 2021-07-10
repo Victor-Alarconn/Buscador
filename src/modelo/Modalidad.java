@@ -38,6 +38,10 @@ public class Modalidad {
         this.usuarios_idusuario = usuarios_idusuario;
     }
     
+    @Override
+    public String toString() {
+        return modalidad; //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

@@ -37,5 +37,11 @@ public class Llego {
     public void setLlego(String llego) {
         this.llego = llego;
     }
+
+    @Override
+    public String toString() {
+        return llego; //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
 }

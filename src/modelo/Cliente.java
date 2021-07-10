@@ -36,7 +36,24 @@ public class Cliente {
     private int electronica;
     private int sucursal;
     private String backupruta;
+    private String fechacotizacion;
+    private String rutacotizacon;
 
+    public String getRutacotizacon() {
+        return rutacotizacon;
+    }
+
+    public void setRutacotizacon(String rutacotizacon) {
+        this.rutacotizacon = rutacotizacon;
+    }
+    public String getFechacotizacion() {
+        return fechacotizacion;
+    }
+
+    public void setFechacotizacion(String fechacotizacion) {
+        this.fechacotizacion = fechacotizacion;
+    }
+    
     public String getBackupruta() {
         return backupruta;
     }

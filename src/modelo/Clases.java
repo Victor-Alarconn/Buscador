@@ -37,4 +37,10 @@ public class Clases {
     public void setClase(String clase) {
         this.clase = clase;
     }
+
+    @Override
+    public String toString() {
+        return clase; //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

@@ -49,6 +49,7 @@ public class ConfiguracionesController implements ActionListener {
     ArrayList<Configuracion> configuracion;
     Consultas_Mac cmac = new Consultas_Mac();
     Mac mmac = new Mac();
+    ArrayList<Modulo> modulo;
 
     public ConfiguracionesController(Configuracion mconfiguraciones,
             Consultas_Configuraciones cconfiguraciones,
@@ -83,6 +84,7 @@ public class ConfiguracionesController implements ActionListener {
         }
         config();
         MouseClicked();
+         
     }
 
     @Override
@@ -165,7 +167,7 @@ public class ConfiguracionesController implements ActionListener {
             int fila = vconfiguraciones.tablarutas.getSelectedRow();
             vconfiguraciones.txtdirectorio.setText(vconfiguraciones.tablarutas.getValueAt(fila, 1).toString());
             vconfiguraciones.idtabla.setText(vconfiguraciones.tablarutas.getValueAt(fila, 0).toString());
-            for (int i = 0; i < vconfiguraciones.txtmodulo.getComponentCount(); i++) {
+            for (int i = 0; i < modulo.size(); i++) {
                 if (vconfiguraciones.txtmodulo.getModel().getElementAt(i).toString().equals(vconfiguraciones.tablarutas.getValueAt(fila, 2).toString())) {
                     vconfiguraciones.txtmodulo.setSelectedIndex(i);
                 }
@@ -193,7 +195,7 @@ public class ConfiguracionesController implements ActionListener {
             }
         }
 
-        ArrayList<Modulo> modulo = cmodulo.llenar();
+         modulo = cmodulo.llenar();
         vconfiguraciones.txtmodulo.removeAllItems();
         for (int i = 0; i < modulo.size(); i++) {
             vconfiguraciones.txtmodulo.addItem(modulo.get(i));

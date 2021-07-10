@@ -107,7 +107,7 @@ this.getRootPane().registerKeyboardAction(e -> {
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        txtservicio1 = new javax.swing.JComboBox<>();
+        txtservicio1 = new javax.swing.JComboBox();
         jScrollPane7 = new javax.swing.JScrollPane();
         tablaservicios1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -133,12 +133,12 @@ this.getRootPane().registerKeyboardAction(e -> {
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        txtclase1 = new javax.swing.JComboBox<>();
-        txtllego1 = new javax.swing.JComboBox<>();
+        txtclase1 = new javax.swing.JComboBox();
+        txtllego1 = new javax.swing.JComboBox();
         jLabel36 = new javax.swing.JLabel();
         txtfecha_llegada1 = new com.toedter.calendar.JDateChooser();
         jLabel37 = new javax.swing.JLabel();
-        txtmodalidad1 = new javax.swing.JComboBox<>();
+        txtmodalidad1 = new javax.swing.JComboBox();
         jLabel23 = new javax.swing.JLabel();
         txtempresa1 = new javax.swing.JTextField();
         txtcontacto1 = new javax.swing.JTextField();
@@ -301,7 +301,7 @@ this.getRootPane().registerKeyboardAction(e -> {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Servicios"));
 
-        txtservicio1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtservicio1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         tablaservicios1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -462,9 +462,9 @@ this.getRootPane().registerKeyboardAction(e -> {
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel31.setText("EMPRESA");
 
-        txtclase1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtclase1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        txtllego1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtllego1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel36.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel36.setText("COMO LLEGO");
@@ -477,7 +477,7 @@ this.getRootPane().registerKeyboardAction(e -> {
         jLabel37.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel37.setText("FECHA DE LLEGADA");
 
-        txtmodalidad1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtmodalidad1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel23.setText("MODALIDAD");
@@ -826,7 +826,7 @@ this.getRootPane().registerKeyboardAction(e -> {
     public javax.swing.JTable tablaservicios1;
     public javax.swing.JTextField txtcelular11;
     public javax.swing.JTextField txtcelular21;
-    public javax.swing.JComboBox<String> txtclase1;
+    public javax.swing.JComboBox txtclase1;
     public javax.swing.JTextField txtcodigo1;
     public javax.swing.JTextField txtcontacto1;
     public javax.swing.JTextField txtdocumento1;
@@ -835,13 +835,13 @@ this.getRootPane().registerKeyboardAction(e -> {
     public javax.swing.JTextField txtempresa1;
     public com.toedter.calendar.JDateChooser txtfecha_arriendo1;
     public com.toedter.calendar.JDateChooser txtfecha_llegada1;
-    public javax.swing.JComboBox<String> txtllego1;
-    public javax.swing.JComboBox<String> txtmodalidad1;
+    public javax.swing.JComboBox txtllego1;
+    public javax.swing.JComboBox txtmodalidad1;
     public javax.swing.JTextField txtnit1;
     public javax.swing.JTextField txtnombre1;
     public javax.swing.JTextArea txtnotas1;
     public javax.swing.JTextField txtnumequipos1;
-    public javax.swing.JComboBox<String> txtservicio1;
+    public javax.swing.JComboBox txtservicio1;
     public javax.swing.JTextField txtvlrprincipal1;
     public javax.swing.JTextField txtvlrterminal1;
     // End of variables declaration//GEN-END:variables

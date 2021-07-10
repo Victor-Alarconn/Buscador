@@ -48,10 +48,10 @@ public class Consultas_Llego extends Conexion {
     public boolean eliminar(Llego llego) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = " DELETE FROM llego  WHERE llego=? ";
+        String sql = " DELETE FROM llego  WHERE idllego=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
-            ps.setString(1, llego.getLlego());
+            ps.setInt(1, llego.getIdllego());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -68,7 +68,7 @@ public class Consultas_Llego extends Conexion {
     }
     
     //consulta para llenar tablas y combobox
-    public ArrayList<String> llenar() {
+    public ArrayList<Llego> llenar() {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -79,7 +79,10 @@ public class Consultas_Llego extends Conexion {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery(sql);
             while (rs.next()) {
-                lista.add(rs.getString("llego"));
+                Llego llego = new Llego();
+                llego.setIdllego(rs.getInt("idllego"));
+                llego.setLlego(rs.getString("llego"));
+                lista.add(llego);
             }
             return lista;
         } catch (SQLException e) {

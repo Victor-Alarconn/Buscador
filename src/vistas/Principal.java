@@ -60,6 +60,9 @@ public class Principal extends javax.swing.JFrame {
         btnterminar.setOpaque(false);
         btnterminar.setContentAreaFilled(false);
         
+        Cotizaciones.setOpaque(false);
+        Cotizaciones.setContentAreaFilled(false);
+        
         jPanel2.setOpaque(false);
 
     }
@@ -154,6 +157,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btnterminar = new javax.swing.JButton();
+        Cotizaciones = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -243,7 +247,7 @@ public class Principal extends javax.swing.JFrame {
         backup.setText("Backup's");
         backup.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         backup.setOpaque(false);
-        jPanel1.add(backup, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, 170, 70));
+        jPanel1.add(backup, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 170, 70));
 
         jPanel2.setBackground(new java.awt.Color(209, 235, 247));
 
@@ -285,6 +289,14 @@ public class Principal extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 80));
+
+        Cotizaciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Cotizaciones.setForeground(new java.awt.Color(255, 255, 255));
+        Cotizaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cotizacon-64.png"))); // NOI18N
+        Cotizaciones.setText("Cotizaciones");
+        Cotizaciones.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        Cotizaciones.setOpaque(false);
+        jPanel1.add(Cotizaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, 170, 70));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -353,6 +365,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton Cotizaciones;
     public javax.swing.JButton backup;
     public javax.swing.JButton btnterminar;
     public javax.swing.JButton busqueda;

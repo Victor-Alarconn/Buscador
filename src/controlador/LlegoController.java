@@ -47,9 +47,13 @@ public class LlegoController implements ActionListener{
         vl.setTitle("Otros");
         vl.setLocationRelativeTo(null);
         modell.addColumn("Agregar llego");
+        modell2.addColumn("ID");
         modell2.addColumn("Llego");
         vl.tablaagregarllego.setModel(modell);
         vl.tablallego.setModel(modell2);
+        vl.tablallego.getColumn("ID").setWidth(0);
+        vl.tablallego.getColumn("ID").setMinWidth(0);
+        vl.tablallego.getColumn("ID").setMaxWidth(0);
         busqueda();
         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -85,7 +89,7 @@ public class LlegoController implements ActionListener{
                 if (e.getSource() == vl.eliminarllego) {
                     int fila = vl.tablallego.getSelectedRow();
                     if (fila >= 0) {
-                        ml.setLlego(String.valueOf(vl.tablallego.getValueAt(fila, 0)));
+                        ml.setIdllego(Integer.parseInt(String.valueOf(vl.tablallego.getValueAt(fila, 0))));
                         if (cl.eliminar(ml)) {
                             if (fila >= 0) {
                                 modell2.removeRow(fila);
@@ -109,11 +113,11 @@ public class LlegoController implements ActionListener{
     }
     
     public void busqueda() {
-        ArrayList<String> llego;
-        llego=cl.llenar();
-        Object[] dato = new Object[1];
+        ArrayList<Llego> llego=cl.llenar();
+        Object[] dato = new Object[2];
         for (int i = 0; i < llego.size(); i++) {
-            dato[0] = llego.get(i);
+            dato[0] = llego.get(i).getIdllego();
+            dato[0] = llego.get(i).getLlego();
             modell2.addRow(dato);
             vl.tablallego.setModel(modell2);
         }

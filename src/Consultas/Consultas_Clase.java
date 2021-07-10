@@ -47,10 +47,10 @@ public class Consultas_Clase  extends Conexion {
     public boolean eliminar(Clases clases) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = " DELETE FROM clases  WHERE clase=? ";
+        String sql = " DELETE FROM clases  WHERE idclases=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
-            ps.setString(1, clases.getClase());
+            ps.setInt(1, clases.getIdclases());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ public class Consultas_Clase  extends Conexion {
     }
 
     //consulta para llenar los los combobox
-    public ArrayList<String> llenar() {
+    public ArrayList<Clases> llenar() {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -78,7 +78,10 @@ public class Consultas_Clase  extends Conexion {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery(sql);
             while (rs.next()) {
-                lista.add(rs.getString("clase"));
+                Clases clase = new Clases();
+                clase.setIdclases(rs.getInt("idclases"));
+                clase.setClase(rs.getString("clase"));
+                lista.add(clase);
             }
             return lista;
         } catch (SQLException e) {

@@ -27,4 +27,8 @@ public class Dialogos {
        int respuesta = JOptionPane.showConfirmDialog(null, "El Usuario no posee un directoio desea crearlo?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
        return respuesta;
     }
+    public String fechacotizacon(){
+        String respuesta = JOptionPane.showInputDialog(null, "fecha", "Fecha de cotizacion", JOptionPane.CLOSED_OPTION);
+        return respuesta;
+    }
 }

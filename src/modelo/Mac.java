@@ -31,7 +31,7 @@ public class Mac {
     public void setMacs(String macs) {
         this.macs = macs;
     }
-    
+    //metodo para traer la mac de l equipo
     public String conseguirMAC() {
         NetworkInterface a;
         String linea;

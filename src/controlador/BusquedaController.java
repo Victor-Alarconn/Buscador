@@ -145,8 +145,6 @@ public class BusquedaController implements ActionListener {
              busqueda();
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
         
-        
-
     }
 
     @Override

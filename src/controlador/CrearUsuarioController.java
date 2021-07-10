@@ -103,11 +103,7 @@ public class CrearUsuarioController implements ActionListener {
                 } else {
                     modelo.setBackups(0);
                 }
-                if (vista.checkcotizaciones.isSelected()) {
-                    modelo.setCotizaciones(1);
-                } else {
-                    modelo.setCotizaciones(0);
-                }
+                
             }
             if (consulta.registrar(modelo)) {
                 JOptionPane.showMessageDialog(null, "registro guardado");
@@ -132,7 +128,7 @@ public class CrearUsuarioController implements ActionListener {
                     vista.checkmodalidad.setVisible(false);
                     vista.checkbuscar.setVisible(false);
                     vista.checkbackups.setVisible(false);
-                    vista.checkcotizaciones.setVisible(false);
+                    
                 } else {
                     if (roles.toString().equals("user")) {
                         vista.checkconfiguraciones.setVisible(true);
@@ -145,7 +141,7 @@ public class CrearUsuarioController implements ActionListener {
                         vista.checkmodalidad.setVisible(true);
                         vista.checkbuscar.setVisible(true);
                         vista.checkbackups.setVisible(true);
-                        vista.checkcotizaciones.setVisible(true);
+                        
                     }
                 }
             }

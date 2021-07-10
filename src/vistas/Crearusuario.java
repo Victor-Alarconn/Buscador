@@ -61,7 +61,6 @@ public class Crearusuario extends javax.swing.JDialog {
         checkeditarcliente = new javax.swing.JCheckBox();
         checkmodalidad = new javax.swing.JCheckBox();
         checkbuscar = new javax.swing.JCheckBox();
-        checkcotizaciones = new javax.swing.JCheckBox();
         checkbackups = new javax.swing.JCheckBox();
         txtnombre = new javax.swing.JTextField();
         txtcontraseña = new javax.swing.JPasswordField();
@@ -112,9 +111,6 @@ public class Crearusuario extends javax.swing.JDialog {
         checkbuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkbuscar.setText("Buscar");
 
-        checkcotizaciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        checkcotizaciones.setText("Cotizaciones");
-
         checkbackups.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkbackups.setText("Backups");
 
@@ -157,7 +153,6 @@ public class Crearusuario extends javax.swing.JDialog {
                                 .addGap(72, 72, 72)))
                         .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(checkotros)
-                            .addComponent(checkcotizaciones)
                             .addGroup(paneluserLayout.createSequentialGroup()
                                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(checkservicios)
@@ -191,13 +186,8 @@ public class Crearusuario extends javax.swing.JDialog {
                             .addComponent(checkcrearusuario)
                             .addComponent(checkmodalidad)
                             .addComponent(checkbuscar))
-                        .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(paneluserLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(checkcotizaciones))
-                            .addGroup(paneluserLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(checkbackups))))
+                        .addGap(18, 18, 18)
+                        .addComponent(checkbackups))
                     .addGroup(paneluserLayout.createSequentialGroup()
                         .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
@@ -291,7 +281,6 @@ public class Crearusuario extends javax.swing.JDialog {
     public javax.swing.JCheckBox checkbuscar;
     public javax.swing.JCheckBox checkcarpetas;
     public javax.swing.JCheckBox checkconfiguraciones;
-    public javax.swing.JCheckBox checkcotizaciones;
     public javax.swing.JCheckBox checkcrearcliente;
     public javax.swing.JCheckBox checkcrearusuario;
     public javax.swing.JCheckBox checkeditarcliente;

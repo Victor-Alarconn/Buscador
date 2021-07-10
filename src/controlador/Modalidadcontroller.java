@@ -22,12 +22,12 @@ import vistas.VModalidad;
  * @author Yonathan Carvajal
  */
 public class Modalidadcontroller implements ActionListener {
-    
+
     private final Modalidad mm;
     private final Consultas_Modalidad mcm;
-    private final  VModalidad  vm;
+    private final VModalidad vm;
     private final Usuario user;
-    
+
     DefaultTableModel modell = new DefaultTableModel();
     DefaultTableModel modell2 = new DefaultTableModel();
 
@@ -40,24 +40,28 @@ public class Modalidadcontroller implements ActionListener {
         this.vm.eliminaragregarmodalidad.addActionListener(this);
         this.vm.eliminarmodalidad.addActionListener(this);
         this.vm.guardarmodalidad.addActionListener(this);
-    }  
-    
+    }
+
     public void iniciar() {
         vm.setTitle("Modalidad");
         vm.setLocationRelativeTo(null);
         modell.addColumn("Agregar Modalidad");
+        modell2.addColumn("ID");
         modell2.addColumn("Modalidades");
         vm.tablaagregarmodalidad.setModel(modell);
         vm.tablamodalidad.setModel(modell2);
+        vm.tablamodalidad.getColumn("ID").setWidth(0);
+        vm.tablamodalidad.getColumn("ID").setMinWidth(0);
+        vm.tablamodalidad.getColumn("ID").setMaxWidth(0);
         busqueda();
         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
-        vm.tablamodalidad.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
+        vm.tablamodalidad.getColumnModel().getColumn(1).setCellRenderer(modelocentrar);
     }
 
-     @Override
+    @Override
     public void actionPerformed(ActionEvent e) {
-         if (e.getSource() == vm.guardarmodalidad) {
+        if (e.getSource() == vm.guardarmodalidad) {
             for (int i = 0; i < vm.tablaagregarmodalidad.getRowCount(); i++) {
                 mm.setModalidad(vm.tablaagregarmodalidad.getValueAt(i, 0).toString());
                 mm.setUsuarios_idusuario(user.getIdusuario());
@@ -82,7 +86,7 @@ public class Modalidadcontroller implements ActionListener {
                 if (e.getSource() == vm.eliminarmodalidad) {
                     int fila = vm.tablamodalidad.getSelectedRow();
                     if (fila >= 0) {
-                        mm.setModalidad(String.valueOf(vm.tablamodalidad.getValueAt(fila, 0)));
+                        mm.setIdmodalidad(Integer.parseInt(String.valueOf(vm.tablamodalidad.getValueAt(fila, 0))));
                         if (mcm.eliminar(mm)) {
                             if (fila >= 0) {
                                 modell2.removeRow(fila);
@@ -104,13 +108,13 @@ public class Modalidadcontroller implements ActionListener {
             }
         }
     }
-    
+
     public void busqueda() {
-        ArrayList<String> llego;
-        llego=mcm.llenar();
-        Object[] dato = new Object[1];
+        ArrayList<Modalidad> llego = mcm.llenar();
+        Object[] dato = new Object[2];
         for (int i = 0; i < llego.size(); i++) {
-            dato[0] = llego.get(i);
+            dato[0] = llego.get(i).getIdmodalidad();
+            dato[1] = llego.get(i).getModalidad();
             modell2.addRow(dato);
             vm.tablamodalidad.setModel(modell2);
         }
@@ -134,10 +138,5 @@ public class Modalidadcontroller implements ActionListener {
             }
         }
     }
-    
-    
-            
-            
-            
-    
+
 }
