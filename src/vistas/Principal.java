@@ -292,7 +292,7 @@ public class Principal extends javax.swing.JFrame {
 
         Cotizaciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Cotizaciones.setForeground(new java.awt.Color(255, 255, 255));
-        Cotizaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cotizacon-64.png"))); // NOI18N
+        Cotizaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cotizacion-64.png"))); // NOI18N
         Cotizaciones.setText("Cotizaciones");
         Cotizaciones.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         Cotizaciones.setOpaque(false);

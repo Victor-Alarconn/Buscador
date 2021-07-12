@@ -122,13 +122,12 @@ public class Formulario extends javax.swing.JDialog {
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        txtservicio = new javax.swing.JComboBox<>();
+        txtservicio = new javax.swing.JComboBox();
         jScrollPane7 = new javax.swing.JScrollPane();
         tablaservicios = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         agregarservicio = new javax.swing.JButton();
         eliminarservicio = new javax.swing.JButton();
-        clientepotecial = new javax.swing.JCheckBox();
         electronica = new javax.swing.JCheckBox();
         sucursal = new javax.swing.JCheckBox();
         jPanel1 = new javax.swing.JPanel();
@@ -342,7 +341,7 @@ public class Formulario extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Servicios"));
 
-        txtservicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtservicio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         tablaservicios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -373,9 +372,6 @@ public class Formulario extends javax.swing.JDialog {
         eliminarservicio.setText("Eliminar");
         eliminarservicio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(216, 74, 44), 2, true));
 
-        clientepotecial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        clientepotecial.setText("Cliente potencial");
-
         electronica.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         electronica.setText("Electronica");
 
@@ -398,15 +394,12 @@ public class Formulario extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(txtservicio, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(clientepotecial)
                         .addGap(18, 18, 18)
-                        .addComponent(electronica)))
+                        .addComponent(electronica)
+                        .addGap(17, 17, 17)
+                        .addComponent(sucursal)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(sucursal)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(agregarservicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(eliminarservicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -419,7 +412,6 @@ public class Formulario extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtservicio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(clientepotecial)
                         .addComponent(electronica)
                         .addComponent(sucursal)))
                 .addGap(21, 21, 21)
@@ -829,7 +821,6 @@ public class Formulario extends javax.swing.JDialog {
     public javax.swing.JRadioButton bredes;
     public javax.swing.JRadioButton bsoftware;
     public javax.swing.ButtonGroup buttonGroup1;
-    public javax.swing.JCheckBox clientepotecial;
     public javax.swing.JCheckBox electronica;
     public javax.swing.JButton eliminardocumento;
     public javax.swing.JButton eliminarservicio;
@@ -894,7 +885,7 @@ public class Formulario extends javax.swing.JDialog {
     public javax.swing.JTextField txtnombre;
     public javax.swing.JTextArea txtnotas;
     public javax.swing.JTextField txtnumequipos;
-    public javax.swing.JComboBox<String> txtservicio;
+    public javax.swing.JComboBox txtservicio;
     public javax.swing.JTextField txtvlrprincipal;
     public javax.swing.JTextField txtvlrterminal;
     // End of variables declaration//GEN-END:variables

@@ -11,11 +11,15 @@ import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
+import Consultas.Consultas_Mac;
 import Consultas.Consultas_Modalidad;
 import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
+import Organizador.Dialogos;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,6 +36,7 @@ import modelo.Configuracion;
 import modelo.Directorio;
 import modelo.Documentos;
 import modelo.Llego;
+import modelo.Mac;
 import modelo.Modalidad;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
@@ -70,10 +75,17 @@ public class EditarClienteController implements ActionListener {
 
     Consultas_Llego cllego = new Consultas_Llego();
     Consultas_Modalidad mmodalidad = new Consultas_Modalidad();
+    Consultas_Servicios modc = new Consultas_Servicios();
     Consultas_Clase mod = new Consultas_Clase();
     ArrayList<Modalidad> modulo4;
     ArrayList<Llego> modulo;
     ArrayList<Clases> modulo1;
+
+    Consultas_Mac cmac = new Consultas_Mac();
+    Mac mmac = new Mac();
+    ArrayList<Configuracion> mconfig;
+    
+    Dialogos dialogo = new Dialogos();
 
     public EditarClienteController(Cliente modelo, Servicio mods,
             Servicios_has_Clientes_Potenciales shcp, Documentos mdocumento, Configuracion mconfiguracion,
@@ -99,6 +111,7 @@ public class EditarClienteController implements ActionListener {
         this.formulario.eliminarservicio1.addActionListener(this);
         this.formulario.agregardocumento1.addActionListener(this);
         this.formulario.eliminardocumento1.addActionListener(this);
+        this.formulario.clientepotencial.addActionListener(this);
     }
 
     public void iniciar() {
@@ -139,6 +152,23 @@ public class EditarClienteController implements ActionListener {
             formulario.txtllego1.addItem(modulo.get(i));
         }
 
+        formulario.txtservicio1.removeAllItems();
+        lista = modc.llenar();
+        for (int i = 0; i < lista.size(); i++) {
+            formulario.txtservicio1.addItem(lista.get(i));
+        }
+        mmac.setMacs(mmac.conseguirMAC());
+        if (cmac.buscar(mmac)) {
+            mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
+            for (int i = 0; i < mconfig.size(); i++) {
+                if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
+                    directorio = mconfig.get(i).getDirectorio();
+                }
+            }
+
+        }
+
+        System.out.println(directorio);
         inicializarcliente();
     }
 
@@ -165,7 +195,10 @@ public class EditarClienteController implements ActionListener {
             modelo.setVlrprincipal(Integer.parseInt(formulario.txtvlrprincipal1.getText()));
             modelo.setNumequipos(Integer.parseInt(formulario.txtnumequipos1.getText()));
             modelo.setVlrterminal(Integer.parseInt(formulario.txtvlrterminal1.getText()));
-//            modelo.setCodigo(formulario.txtcodigo1.getText());
+            if (!formulario.clientepotencial.isSelected()) {
+                modelo.setCodigo(formulario.txtcodigo1.getText());
+                modelo.setRuta(File.separator + formulario.txtcodigo1.getText().toUpperCase() + "_" + formulario.txtnombre1.getText().toUpperCase().trim());
+            }
             if (formulario.clientepotencial.isSelected()) {
                 modelo.setCliente_potencial(1);
             } else {
@@ -223,6 +256,9 @@ public class EditarClienteController implements ActionListener {
                     }
                 }
                 JOptionPane.showMessageDialog(null, "Cliente modificado");
+                if (!formulario.clientepotencial.isSelected()) {
+                    crear_carpeta(directorio);
+                }
                 formulario.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "error guardado el cliente");
@@ -268,6 +304,13 @@ public class EditarClienteController implements ActionListener {
             }
 
         }
+        if (e.getSource() == formulario.clientepotencial) {
+            if (!formulario.clientepotencial.isSelected()) {
+                formulario.txtcodigo1.setEnabled(true);
+            }else{
+                formulario.txtcodigo1.setEnabled(false);
+            }
+        }
         //boton eliminar documnento
         if (e.getSource() == formulario.eliminardocumento1) {
             int fila = formulario.tabladocumentos1.getSelectedRow();
@@ -283,6 +326,58 @@ public class EditarClienteController implements ActionListener {
 
         }
 
+    }
+
+    private void crear_carpeta(String path) {
+        Consultas_Directorio cd = new Consultas_Directorio();
+        ArrayList<Directorio> directorios;
+        directorios = cd.llenar();
+        String nombre = formulario.txtcodigo1.getText().toUpperCase() + "_" + formulario.txtnombre1.getText().toUpperCase().trim();
+        if (nombre == null) {
+        } else {
+            File file = Crear_archivo(path, nombre);
+            try {
+                file.mkdir();
+                for (int i = 0; i < directorios.size(); i++) {
+                    File fil = Crear_archivo(file.toString(), directorios.get(i).toString());
+                    if (directorios.get(i).getNodo_level() == 1) {
+                        fil.mkdir();
+                        busacarsubcarpetas(directorios.get(i), directorios, fil);
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            abrirarchivo(directorio + File.separator + nombre);
+        }
+    }
+
+    public void busacarsubcarpetas(Directorio y, ArrayList<Directorio> d, File fil) {
+        for (int j = 0; j < d.size(); j++) {
+            if (y.getIddirectorios() == d.get(j).getDirectorios_iddirectorios()) {
+                File subfile = Crear_archivo(fil.toString(), d.get(j).toString());
+                subfile.mkdir();
+                busacarsubcarpetas(d.get(j), d, subfile);
+            }
+        }
+
+    }
+
+    // funcion para abrir un archivo desde la tabla 
+    public void abrirarchivo(String archivo) {
+        try {
+            File objetofile = new File(archivo);
+            Desktop.getDesktop().open(objetofile);
+//            System.exit(0);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+// funcion para crear un archivo
+
+    public File Crear_archivo(String path, String nombre) {
+        File file = new File(path, nombre);
+        return file;
     }
 
     public void busqueda() {
@@ -332,13 +427,6 @@ public class EditarClienteController implements ActionListener {
     public void inicializarcliente() {
         formulario.tabladocumentos1.setModel(model1);
 
-        formulario.txtservicio1.removeAllItems();
-        Consultas_Servicios modc = new Consultas_Servicios();
-        lista = modc.llenar();
-        for (int i = 0; i < lista.size(); i++) {
-            formulario.txtservicio1.addItem(lista.get(i).getServicio());
-        }
-
         //llena la tabla de servicios 
         servicio = consultas.llenar(modelo);
         Object[] datos = new Object[2];
@@ -376,13 +464,16 @@ public class EditarClienteController implements ActionListener {
                 formulario.txtvlrterminal1.setText(String.valueOf(modelo.getVlrterminal()));
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 Date fechaDate = null;
-                fechaDate = sdf.parse(modelo.getFecha_llegada());
-                formulario.txtfecha_llegada1.setDate(fechaDate);
-//                if (modelo.getFecha_arriendo() != null) {
-//                    fechaDate = sdf.parse(modelo.getFecha_arriendo());
-//                    formulario.txtfecha_arriendo1.setDate(fechaDate);
-//                }
-             
+
+                if (modelo.getFecha_llegada() != null && !modelo.getFecha_llegada().equals("")) {
+                    fechaDate = sdf.parse(modelo.getFecha_llegada());
+                    formulario.txtfecha_llegada1.setDate(fechaDate);
+                }
+                if (modelo.getFecha_arriendo() != null && !modelo.getFecha_arriendo().equals("")) {
+                    fechaDate = sdf.parse(modelo.getFecha_arriendo());
+                    formulario.txtfecha_arriendo1.setDate(fechaDate);
+                }
+
                 for (int i = 0; i < modulo4.size(); i++) {
                     if (formulario.txtmodalidad1.getModel().getElementAt(i).toString().equals(modelo.getModalidad())) {
                         formulario.txtmodalidad1.setSelectedIndex(i);
@@ -393,7 +484,7 @@ public class EditarClienteController implements ActionListener {
                 formulario.txtcodigo1.setText(modelo.getCodigo());
                 formulario.txtcelular21.setText(modelo.getCelular2());
                 formulario.txtemail1.setText(modelo.getEmail());
-          
+
                 for (int i = 0; i < modulo1.size(); i++) {
                     if (formulario.txtclase1.getModel().getElementAt(i).toString().equals(modelo.getClase())) {
                         formulario.txtclase1.setSelectedIndex(i);

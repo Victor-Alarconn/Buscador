@@ -23,12 +23,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import javax.swing.AbstractButton;
-import javax.swing.ButtonModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
@@ -37,10 +34,8 @@ import modelo.Documentos;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import vistas.Formulario;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.swing.AbstractAction;
-import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import modelo.Clases;
 import modelo.Directorio;
 import modelo.Llego;
@@ -80,7 +75,7 @@ public class ClienteController implements ActionListener {
     Consultas_Mac cmac = new Consultas_Mac();
     Mac mmac = new Mac();
     Dialogos dialogo = new Dialogos();
-    
+
     Consultas_Llego cllego = new Consultas_Llego();
     Consultas_Modalidad mmodalidad = new Consultas_Modalidad();
     Consultas_Clase mod = new Consultas_Clase();
@@ -110,7 +105,6 @@ public class ClienteController implements ActionListener {
         this.formulario.agregardocumento.addActionListener(this);
         this.formulario.eliminardocumento.addActionListener(this);
         this.formulario.eliminarservicio.addActionListener(this);
-        this.formulario.clientepotecial.addActionListener(this);
 
     }
 
@@ -126,6 +120,9 @@ public class ClienteController implements ActionListener {
         model1.addColumn("Fecha inicio");
         model1.addColumn("Fecha vence");
         formulario.tabladocumentos.setModel(model1);
+        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+        formulario.tablaservicios.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
         mmac.setMacs(mmac.conseguirMAC());
         if (cmac.buscar(mmac)) {
             mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
@@ -140,11 +137,11 @@ public class ClienteController implements ActionListener {
                 formulario.mensajealerta.setVisible(false);
             }
         }
-        
+
         formulario.txtservicio.removeAllItems();
         lista = cons.llenar();
         for (int i = 0; i < lista.size(); i++) {
-            formulario.txtservicio.addItem(lista.get(i).getServicio());
+            formulario.txtservicio.addItem(lista.get(i));
         }
 
         formulario.txtclase.removeAllItems();
@@ -154,12 +151,11 @@ public class ClienteController implements ActionListener {
         }
 
         formulario.txtmodalidad.removeAllItems();
-         modulo4 = mmodalidad.llenar();
+        modulo4 = mmodalidad.llenar();
         for (int i = 0; i < modulo4.size(); i++) {
             formulario.txtmodalidad.addItem(modulo4.get(i));
         }
 
-        
         modulo = cllego.llenar();
         formulario.txtllego.removeAllItems();
         for (int i = 0; i < modulo.size(); i++) {
@@ -203,20 +199,15 @@ public class ClienteController implements ActionListener {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                     modelo.setFecha_llegada(sdf.format(formulario.txtfecha_llegada.getDate()));
                     modelo.setModalidad(formulario.txtmodalidad.getSelectedItem().toString());
-                    if (formulario.txtcodigo.getText().equals("") && !formulario.clientepotecial.isSelected()) {
+                    if (formulario.txtcodigo.getText().equals("")) {
                         JOptionPane.showMessageDialog(formulario, "El campo codigo esta vacio");
                     } else {
                         modelo.setNotas(formulario.txtnotas.getText());
                         modelo.setCodigo(formulario.txtcodigo.getText().toUpperCase());
                         modelo.setDv(formulario.txtdv.getText());
-                        if (!formulario.clientepotecial.isSelected()) {
-                            modelo.setRuta(File.separator + formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase().trim());
-                        }
-                        if (formulario.clientepotecial.isSelected()) {
-                            modelo.setCliente_potencial(1);
-                        } else {
-                            modelo.setCliente_potencial(0);
-                        }
+
+                        modelo.setRuta(File.separator + formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase().trim());
+
                         if (formulario.electronica.isSelected()) {
                             modelo.setElectronica(1);
                         } else {
@@ -270,9 +261,7 @@ public class ClienteController implements ActionListener {
                                 }
                             }
                             JOptionPane.showMessageDialog(null, "registro guardado");
-                            if (!formulario.clientepotecial.isSelected()) {
-                                crear_carpeta(directorio);
-                            }
+                            crear_carpeta(directorio);
                             formulario.dispose();
                             this.limpiar();
                             this.limpiardocumentos();
@@ -331,11 +320,6 @@ public class ClienteController implements ActionListener {
                 model1.removeRow(fila);
             } else {
                 JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
-            }
-        }
-        if (e.getSource() == formulario.clientepotecial) {
-            if (formulario.clientepotecial.isSelected()) {
-                modelo.setFechacotizacion(dialogo.fechacotizacon());
             }
         }
 

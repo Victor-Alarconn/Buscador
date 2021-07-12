@@ -89,7 +89,7 @@ public class Consultas_Cliente extends Conexion {
         String sql = "UPDATE  clientes_potenciales SET nit=?, nombre=?, empresa=?,"
                 + " celular1=?, celular2=?, email=?, fecha_llegada=?, clase=?, modalidad=?, notas=?, codigo=?, llego=?, categoria=?,dv=?,"
                 + " fecha_arriendo=?, contacto=?, vlrprincipal=?,"
-                + " numequipos=?,vlrterminal=?, electronica=?, sucursal=?,cliente_potencial=?,backupruta=?"
+                + " numequipos=?,vlrterminal=?, electronica=?, sucursal=?,cliente_potencial=?,ruta=?"
                 + " WHERE idclientes_potenciales=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
@@ -115,7 +115,7 @@ public class Consultas_Cliente extends Conexion {
             ps.setInt(20, cliente.getElectronica());
             ps.setInt(21, cliente.getSucursal());
             ps.setInt(22, cliente.getCliente_potencial());
-            ps.setString(23, cliente.getBackupruta());
+            ps.setString(23, cliente.getRuta());
             ps.setInt(24, cliente.getIdclientes_potenciales());
             ps.execute();
             return true;
@@ -321,15 +321,16 @@ public class Consultas_Cliente extends Conexion {
         }
 
     }
-    
-   public boolean buscarnombrecliente(Cliente cliente) {
+
+    public boolean buscarnombrecliente(Cliente cliente) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String parametro =cliente.getNombre();
-        String sql = " SELECT * FROM clientes_potenciales  WHERE nombre like'%" + parametro + "%'";
+        String parametro = cliente.getNombre();
+        String sql = " SELECT * FROM clientes_potenciales  WHERE nombre=?";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
+            ps.setString(1, cliente.getNombre());
             rs = ps.executeQuery();
             if (rs.next()) {
                 cliente.setIdclientes_potenciales(Integer.parseInt(rs.getString("idclientes_potenciales")));
@@ -374,7 +375,11 @@ public class Consultas_Cliente extends Conexion {
             if (filtro.equals("sucursal")) {
                 sql = " SELECT * FROM clientes_potenciales  WHERE " + filtro + "=1";
             } else {
-                sql = " SELECT * FROM clientes_potenciales  WHERE " + filtro + " LIKE'%" + parametro + "%'";
+                if (filtro.equals("cliente potencial")) {
+                    sql = " SELECT * FROM clientes_potenciales  WHERE cliente_potencial=1";
+                } else {
+                    sql = " SELECT * FROM clientes_potenciales  WHERE " + filtro + " LIKE'%" + parametro + "%'";
+                }
             }
         }
         try {
@@ -394,6 +399,9 @@ public class Consultas_Cliente extends Conexion {
                 cliente.setEmail(rs.getString("email"));
                 cliente.setContacto(rs.getString("contacto"));
                 cliente.setBackupruta(rs.getString("backupruta"));
+                cliente.setRutacotizacon(rs.getString("rutacotizacion"));
+                cliente.setCliente_potencial(rs.getInt("cliente_potencial"));
+                cliente.setFechacotizacion(rs.getString("fechacotizacion"));
                 listaPersona.add(cliente);
             }
             return listaPersona;

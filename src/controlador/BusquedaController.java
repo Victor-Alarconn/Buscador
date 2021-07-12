@@ -89,6 +89,7 @@ public class BusquedaController implements ActionListener {
     Mac mmac = new Mac();
     ArrayList<Configuracion> mconfig;
     private String directorio = null;
+    private String directoriocotizaciones = null;
 
     public BusquedaController(Cliente modelo, Consultas_Cliente consulta, Busqueda busqueda) {
         this.modelo = modelo;
@@ -112,6 +113,10 @@ public class BusquedaController implements ActionListener {
         model.addColumn("Contacto");
         model.addColumn("Fecha Inicio");
         model.addColumn("Fecha Arriendo");
+        //datos para clientes potenciales
+        model.addColumn("rutacotizacion");
+        model.addColumn("clientepotencial");
+        model.addColumn("Fecha Cotizacion");
         busqueda.tabladatos.setModel(model);
         busqueda.tabladatos.getColumn("ID").setWidth(0);
         busqueda.tabladatos.getColumn("ID").setMinWidth(0);
@@ -125,6 +130,12 @@ public class BusquedaController implements ActionListener {
         busqueda.tabladatos.getColumn("Dv").setWidth(40);
         busqueda.tabladatos.getColumn("Dv").setMinWidth(40);
         busqueda.tabladatos.getColumn("Dv").setMaxWidth(40);
+        busqueda.tabladatos.getColumn("rutacotizacion").setWidth(0);
+        busqueda.tabladatos.getColumn("rutacotizacion").setMinWidth(0);
+        busqueda.tabladatos.getColumn("rutacotizacion").setMaxWidth(0);
+        busqueda.tabladatos.getColumn("clientepotencial").setWidth(0);
+        busqueda.tabladatos.getColumn("clientepotencial").setMinWidth(0);
+        busqueda.tabladatos.getColumn("clientepotencial").setMaxWidth(0);
         mmac.setMacs(mmac.conseguirMAC());
         if (cmac.buscar(mmac)) {
             mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
@@ -133,6 +144,12 @@ public class BusquedaController implements ActionListener {
                     directorio = mconfig.get(i).getDirectorio();
                 }
             }
+            for (int i = 0; i < mconfig.size(); i++) {
+                if (mconfig.get(i).getModulo().toLowerCase().equals("cotizaciones")) {
+                    directoriocotizaciones  = mconfig.get(i).getDirectorio();
+                }
+            }
+            
         }
         keyevent();
         MouseClicked();
@@ -150,8 +167,12 @@ public class BusquedaController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == busqueda.abrirdirectorio) {
-            int fila = busqueda.tabladatos.getSelectedRow();
-            abrirarchivo(directorio+String.valueOf(busqueda.tabladatos.getValueAt(fila, 1)));
+             int fila = busqueda.tabladatos.getSelectedRow();
+            if (String.valueOf(busqueda.tabladatos.getValueAt(fila, 12)).equals("1")) {
+                abrirarchivo(directoriocotizaciones +String.valueOf(busqueda.tabladatos.getValueAt(fila, 11)));
+            }else{
+                abrirarchivo(directorio+String.valueOf(busqueda.tabladatos.getValueAt(fila, 1)));
+            }        
         }
 
         if (e.getSource() == busqueda.editarcliente) {
@@ -206,12 +227,13 @@ public class BusquedaController implements ActionListener {
         }
         if (busqueda.txtbuscar.getText().length() > 0 
                 || busqueda.filtro.getSelectedItem().equals("electronica")
-                ||busqueda.filtro.getSelectedItem().equals("sucursal")) {
+                ||busqueda.filtro.getSelectedItem().equals("sucursal")
+                ||busqueda.filtro.getSelectedItem().equals("cliente potencial")) {
             limpiartabla();
             ArrayList<Cliente> lista;
             lista = consulta.buscarcaracter(busqueda.txtbuscar.getText(), busqueda.filtro.getSelectedItem().toString());
             int cantidad = lista.size();
-            Object[] dato = new Object[11];
+            Object[] dato = new Object[14];
             for (int i = 0; i < cantidad; i++) {
                 dato[0] = lista.get(i).getIdclientes_potenciales();
                 dato[1] = lista.get(i).getRuta();
@@ -224,6 +246,9 @@ public class BusquedaController implements ActionListener {
                 dato[8] = lista.get(i).getContacto();
                 dato[9] = lista.get(i).getFecha_llegada();
                 dato[10] = lista.get(i).getFecha_arriendo();
+                dato[11] = lista.get(i).getRutacotizacon();
+                dato[12] = lista.get(i).getCliente_potencial();
+                dato[13] = lista.get(i).getFechacotizacion();
                 model.addRow(dato);
                 busqueda.tabladatos.setModel(model);
             }

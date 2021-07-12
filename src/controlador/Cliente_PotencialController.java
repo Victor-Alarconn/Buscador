@@ -253,8 +253,8 @@ public class Cliente_PotencialController implements ActionListener {
 
     public void consultanombre() {
         modelo.setNombre(formulario.txtnombre.getText());
-        System.out.println(formulario.txtllego);
         if (consultas.buscarnombrecliente(modelo)) {
+            System.out.println(modelo.getCelular1());
             formulario.txtnombre.setText(modelo.getNombre());
             formulario.txtcelular1.setText(modelo.getCelular1());
             formulario.txtcelular2.setText(modelo.getCelular2());

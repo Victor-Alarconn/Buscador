@@ -72,7 +72,7 @@ public class Busqueda extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Busqueda"));
 
-        filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nit", "nombre", "codigo", "electronica", "sucursal" }));
+        filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nit", "nombre", "codigo", "electronica", "sucursal", "cliente potencial" }));
 
         tabladatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

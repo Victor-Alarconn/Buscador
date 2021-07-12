@@ -35,5 +35,11 @@ public class Servicio {
 
     public void setServicio(String servicio) {
         this.servicio = servicio;
-    }   
+    } 
+
+    @Override
+    public String toString() {
+        return servicio; //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
