@@ -109,11 +109,12 @@ public class ClienteController implements ActionListener {
     }
 
     public void iniciar() {
+        formulario.setTitle("Cliente");
+        formulario.setLocationRelativeTo(null);
         busqueda();
         keyevent();
         formulario.mensajenit.setVisible(false);
-        formulario.setTitle("Cliente");
-        formulario.setLocationRelativeTo(null);
+        
         model.addColumn("Servicio/Producto");
         formulario.tablaservicios.setModel(model);
         model1.addColumn("Documento");

@@ -66,6 +66,7 @@ public class ConfiguracionesController implements ActionListener {
 
     public void iniciar() {
         vconfiguraciones.setTitle("Configuraciones");
+        vconfiguraciones.setResizable(false);
         modell.addColumn("ID");
         modell.addColumn("Ruta");
         modell.addColumn("Modulo");

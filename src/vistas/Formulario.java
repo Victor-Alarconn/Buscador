@@ -71,12 +71,12 @@ public class Formulario extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         transparecia();
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension tamanio = tk.getScreenSize();
-        int ancho = (int) tamanio.getWidth();
-        int alto = (int) tamanio.getHeight();
-        this.setResizable(false);
-        jLabel1.setPreferredSize(new Dimension(ancho, alto));
+//        Toolkit tk = Toolkit.getDefaultToolkit();
+//        Dimension tamanio = tk.getScreenSize();
+//        int ancho = (int) tamanio.getWidth();
+//        int alto = (int) tamanio.getHeight();
+//        this.setResizable(false);
+//        jLabel1.setPreferredSize(new Dimension(ancho, alto));
         this.getRootPane().registerKeyboardAction(e -> {
             this.dispose();
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);

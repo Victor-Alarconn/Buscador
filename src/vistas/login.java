@@ -39,6 +39,7 @@ public class login extends javax.swing.JFrame {
 //          this.setUndecorated(true);
 
         initComponents();
+        
         this.setIconImage(new ImageIcon("add.png").getImage());
         this.setLocationRelativeTo(null);
         keyevent();
@@ -53,6 +54,8 @@ public class login extends javax.swing.JFrame {
         this.getRootPane().registerKeyboardAction(e -> {
             this.dispose();
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
+        Image icon = new ImageIcon(getClass().getResource("/img/Organize.png")).getImage();
+        setIconImage(icon);
     }
 
     public void keyevent() {

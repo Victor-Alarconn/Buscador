@@ -23,7 +23,7 @@ public class Carpetas extends javax.swing.JDialog {
     public void transparecia() {
         panel2panel3.setOpaque(false);
         arbol.setOpaque(false);
-        arbolcotizacion.setOpaque(false);
+//        arbolcotizacion.setOpaque(false);
     }
     /**
      * Creates new form Carpetas
@@ -56,8 +56,6 @@ public class Carpetas extends javax.swing.JDialog {
         panel2panel3 = new javax.swing.JPanel();
         tr = new javax.swing.JScrollPane();
         arbol = new javax.swing.JTree();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        arbolcotizacion = new javax.swing.JTree();
         jLabel1 = new javax.swing.JLabel();
 
         agregarmenuitem.setText("Nueva carpeta");
@@ -78,11 +76,6 @@ public class Carpetas extends javax.swing.JDialog {
         tr.setViewportView(arbol);
 
         panel2panel3.add(tr, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 230, 550));
-
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setViewportView(arbolcotizacion);
-
-        panel2panel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 290, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,10 +143,8 @@ public class Carpetas extends javax.swing.JDialog {
     private javax.swing.JPopupMenu PopupMenu;
     public javax.swing.JMenuItem agregarmenuitem;
     public javax.swing.JTree arbol;
-    private javax.swing.JTree arbolcotizacion;
     public javax.swing.JMenuItem eliminarmenuitem;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panel2panel3;
     public javax.swing.JScrollPane tr;
     // End of variables declaration//GEN-END:variables

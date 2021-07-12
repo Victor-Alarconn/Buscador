@@ -85,13 +85,14 @@ public class OrganizadorController implements ActionListener {
 
     Directorio mod1 = new Directorio();
     Consultas_Directorio modc1 = new Consultas_Directorio();
-    
+
     Modalidad mm = new Modalidad();
     Consultas_Modalidad mcm = new Consultas_Modalidad();
 
 //    Usuario mod = new Usuario();
     Consultas_usuario consultasusuario = new Consultas_usuario();
     
+     
 
     public OrganizadorController(Cliente modelo, Consultas_Cliente consulta, Principal principal, Usuario mod) {
         this.modelo = modelo;
@@ -108,18 +109,18 @@ public class OrganizadorController implements ActionListener {
         this.principal.modalidad.addActionListener(this);
         this.principal.backup.addActionListener(this);
         this.principal.Cotizaciones.addActionListener(this);
-                
+
     }
 
     public void iniciar() {
         principal.setTitle("Organizador");
-        
+       
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == principal.crearcliente) {
-            Formulario formulario = new Formulario(principal, true);
+            Formulario formulario  = new Formulario(principal, false);
             ClienteController controlador = new ClienteController(modelo, consulta,
                     formulario, servicio, mods, shcp, cshcp, documento, cdocumentos,
                     mconfiguracion, cconfiguraciones, mod);
@@ -141,52 +142,55 @@ public class OrganizadorController implements ActionListener {
             busqueda.setVisible(true);
         }
         if (e.getSource() == principal.servicios) {
-            Servicios servic= new Servicios(principal, true);
+            Servicios servic = new Servicios(principal, false);
             ServicioController ctrl = new ServicioController(mods, servicio, servic, mod);
             ctrl.iniciar();
-            servic.setVisible(true);     
+            servic.setVisible(true);
         }
         if (e.getSource() == principal.otro) {
-            Otros otro = new Otros(principal, true);
+            Otros otro = new Otros(principal, false);
             ClaseController cctrl = new ClaseController(conc, mc, otro, mod);
             cctrl.iniciar();
 
             LlegoController lc = new LlegoController(ml, conl, otro, mod);
             lc.iniciar();
             otro.setVisible(true);
-            
+
         }
         //boton agregar modalidad 
         if (e.getSource() == principal.modalidad) {
-               VModalidad vm = new VModalidad(principal, true);
-               Modalidadcontroller mc = new Modalidadcontroller(mm, mcm, vm, mod);
-               mc.iniciar();
-               vm.setVisible(true);
+           
+                VModalidad vm = new VModalidad(principal, false);
+                Modalidadcontroller mc = new Modalidadcontroller(mm, mcm, vm, mod);
+                mc.iniciar();
+                vm.setVisible(true);
+            
+
         }
-        
+
         if (e.getSource() == principal.crearusuario) {
 
-               Usuarios usu = new Usuarios(principal,true);
-               UsuariosController uc = new UsuariosController(mod, consultasusuario, usu);
-               uc.iniciar();
-               usu.setVisible(true);
+            Usuarios usu = new Usuarios(principal, false);
+            UsuariosController uc = new UsuariosController(mod, consultasusuario, usu);
+            uc.iniciar();
+            usu.setVisible(true);
         }
-        
+
         if (e.getSource() == principal.carpetas) {
-            Carpetas carpeta = new Carpetas(principal, true);
+            Carpetas carpeta = new Carpetas(principal, false);
             DirectorioController ctrc = new DirectorioController(modc1, mod1, carpeta, mod);
             ctrc.iniciar();
             carpeta.setVisible(true);
         }
-        if (e.getSource()==principal.backup) {
-            Backups backup = new Backups(principal,true);
+        if (e.getSource() == principal.backup) {
+            Backups backup = new Backups(principal, false);
             BackupController cbackup = new BackupController(consulta, modelo, backup, mod);
             cbackup.iniciar();
             backup.setVisible(true);
         }
         if (e.getSource() == principal.Cotizaciones) {
-            Cotizaciones cotizacones = new Cotizaciones(principal, true);
-            Cliente_PotencialController cp  = new Cliente_PotencialController(modelo, consulta, 
+            Cotizaciones cotizacones = new Cotizaciones(principal, false);
+            CotizacionController cp = new CotizacionController(modelo, consulta,
                     cotizacones, mconfiguracion, cconfiguraciones, mod);
             cp.iniciar();
             cotizacones.setVisible(true);

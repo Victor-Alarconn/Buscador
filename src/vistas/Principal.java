@@ -11,6 +11,11 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -31,38 +36,38 @@ public class Principal extends javax.swing.JFrame {
         configuraciones1.setOpaque(false);
         configuraciones1.setContentAreaFilled(false);
 //        configuraciones1.setBorderPainted(false);
-        
+
         crearcliente.setOpaque(false);
         crearcliente.setContentAreaFilled(false);
 //        crearcliente.setBorderPainted(false);
 
         otro.setOpaque(false);
         otro.setContentAreaFilled(false);
-        
+
         servicios.setOpaque(false);
         servicios.setContentAreaFilled(false);
-        
+
         crearusuario.setOpaque(false);
         crearusuario.setContentAreaFilled(false);
-        
+
         busqueda.setOpaque(false);
         busqueda.setContentAreaFilled(false);
-        
+
         modalidad.setOpaque(false);
         modalidad.setContentAreaFilled(false);
-        
+
         carpetas.setOpaque(false);
         carpetas.setContentAreaFilled(false);
-        
+
         backup.setOpaque(false);
         backup.setContentAreaFilled(false);
-        
+
         btnterminar.setOpaque(false);
         btnterminar.setContentAreaFilled(false);
-        
+
         Cotizaciones.setOpaque(false);
         Cotizaciones.setContentAreaFilled(false);
-        
+
         jPanel2.setOpaque(false);
 
     }
@@ -73,15 +78,17 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
-       
+
     }
 
     public Principal(Usuario modu) {
         initComponents();
         transparecia();
+        BufferedImage image = null;
+        Image icon = new ImageIcon(getClass().getResource("/img/Organize.png")).getImage();
+        setIconImage(icon);
         
-        
-         this.getRootPane().registerKeyboardAction(e -> {
+        this.getRootPane().registerKeyboardAction(e -> {
             this.dispose();
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
         Toolkit tk = Toolkit.getDefaultToolkit();
@@ -90,15 +97,17 @@ public class Principal extends javax.swing.JFrame {
         int alto = (int) tamanio.getHeight();
         this.setSize(new Dimension(ancho, alto));
         jPanel2.setPreferredSize(new Dimension(ancho, 70));
-        
+
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/fondo2.png"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), alto, Image.SCALE_DEFAULT));
+
         jLabel1.setIcon(fondo);
-       
-        
+
         this.modu = modu;
 //        System.out.println(modu.getConfiguraciones());
-        if (modu.getRol() == 1) {
+
+        if (modu.getRol()
+                == 1) {
         } else {
             if (modu.getRol() == 2) {
                 if (modu.getConfiguraciones() == 0) {
@@ -345,13 +354,17 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -384,4 +397,5 @@ public class Principal extends javax.swing.JFrame {
     public javax.swing.JButton otro;
     public javax.swing.JButton servicios;
     // End of variables declaration//GEN-END:variables
+
 }

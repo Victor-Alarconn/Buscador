@@ -38,7 +38,34 @@ public class Cliente {
     private String backupruta;
     private String fechacotizacion;
     private String rutacotizacon;
+    private String numero_cotizacion;
+    private int  programa;
+    private int eqipos;
 
+    public String getNumero_cotizacion() {
+        return numero_cotizacion;
+    }
+
+    public void setNumero_cotizacion(String numero_cotizacion) {
+        this.numero_cotizacion = numero_cotizacion;
+    }
+
+    public int getPrograma() {
+        return programa;
+    }
+
+    public void setPrograma(int programa) {
+        this.programa = programa;
+    }
+
+    public int getEqipos() {
+        return eqipos;
+    }
+
+    public void setEqipos(int eqipos) {
+        this.eqipos = eqipos;
+    }
+    
     public String getRutacotizacon() {
         return rutacotizacon;
     }

@@ -32,8 +32,8 @@ public class Consultas_Cliente extends Conexion {
                 + "modalidad,notas,codigo,llego,categoria,ruta,dv,"
                 + "usuarios_idusuario,fecha_arriendo,contacto,"
                 + "cliente_potencial,vlrprincipal,numequipos,vlrterminal,"
-                + "electronica,sucursal,fechacotizacion,rutacotizacion) VALUES(?,?,?,"
-                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "electronica,sucursal,fechacotizacion,rutacotizacion,numero_cotizacion,programa,equipos) VALUES(?,?,?,"
+                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, cliente.getNit());
@@ -62,6 +62,9 @@ public class Consultas_Cliente extends Conexion {
             ps.setInt(24, cliente.getSucursal());
             ps.setString(25, cliente.getFechacotizacion());
             ps.setString(26, cliente.getRutacotizacon());
+            ps.setString(27, cliente.getNumero_cotizacion());
+            ps.setInt(28, cliente.getPrograma());
+            ps.setInt(29, cliente.getEqipos());
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();// recupera el id autoincrementable del registro hecho
             if (rs != null && rs.next()) {
@@ -345,6 +348,9 @@ public class Consultas_Cliente extends Conexion {
                 cliente.setLlego(rs.getString("llego"));
                 cliente.setCategoria(rs.getString("categoria"));
                 cliente.setRutacotizacon(rs.getString("rutacotizacion"));
+                cliente.setNumero_cotizacion(rs.getString("numero_cotizacion"));
+                cliente.setPrograma(rs.getInt("programa"));
+                cliente.setEqipos(rs.getInt("equipos"));
                 return true;
             }
 
