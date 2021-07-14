@@ -111,10 +111,8 @@ public class ClienteController implements ActionListener {
     public void iniciar() {
         formulario.setTitle("Cliente");
         formulario.setLocationRelativeTo(null);
-        busqueda();
         keyevent();
         formulario.mensajenit.setVisible(false);
-        
         model.addColumn("Servicio/Producto");
         formulario.tablaservicios.setModel(model);
         model1.addColumn("Documento");
@@ -124,19 +122,18 @@ public class ClienteController implements ActionListener {
         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
         formulario.tablaservicios.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
-        mmac.setMacs(mmac.conseguirMAC());
-        if (cmac.buscar(mmac)) {
-            mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
-            for (int i = 0; i < mconfig.size(); i++) {
-                if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
-                    directorio = mconfig.get(i).getDirectorio();
-                }
+
+        mconfig = cconfiguraciones.cargar(mmac.conseguirMAC());
+        for (int i = 0; i < mconfig.size(); i++) {
+            if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
+                directorio = mconfig.get(i).getDirectorio();
+                break;
             }
-            if (directorio == null) {
-                formulario.mensajealerta.setVisible(true);
-            } else {
-                formulario.mensajealerta.setVisible(false);
-            }
+        }
+        if (directorio == null) {
+            formulario.mensajealerta.setVisible(true);
+        } else {
+            formulario.mensajealerta.setVisible(false);
         }
 
         formulario.txtservicio.removeAllItems();
@@ -195,6 +192,9 @@ public class ClienteController implements ActionListener {
                 }
                 if (!formulario.txtnumequipos.getText().equals("")) {
                     modelo.setNumequipos(Integer.parseInt(formulario.txtnumequipos.getText()));
+                }
+                if (!formulario.txtvalor_total.getText().equals("")) {
+                    modelo.setValor_total(formulario.txtvalor_total.getText());
                 }
                 if (formulario.txtfecha_llegada.getDate() != null) {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -361,17 +361,6 @@ public class ClienteController implements ActionListener {
         }
 
     }
-
-    public void busqueda() {
-        ArrayList<Directorio> directorios;
-        Consultas_Directorio cd = new Consultas_Directorio();
-        directorios = cd.llenar();
-        Object[] dato = new Object[1];
-        for (int i = 0; i < directorios.size(); i++) {
-            dato[0] = directorios.get(i);
-        }
-    }
-
 // funcion para abrir un archivo desde la tabla 
     public void abrirarchivo(String archivo) {
         try {

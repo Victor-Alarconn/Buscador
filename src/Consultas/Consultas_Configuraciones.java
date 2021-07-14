@@ -46,17 +46,19 @@ public class Consultas_Configuraciones extends Conexion {
     }
 
     //consulta para cargar las configuraciones en la vista
-    public ArrayList<Configuracion> cargar(int mac) {
+    public ArrayList<Configuracion> cargar(String mac) {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = " SELECT idconfiguracion,directorio,modulo FROM configuracion inner join modulos"
-                + " on modulos_idmodulo=modulos.idmodulo WHERE configuracion.macs_idmacs="+mac;
+        String sql = " SELECT idconfiguracion,directorio,modulo FROM configuracion "
+                + "inner join modulos "
+                + "on modulos_idmodulo=modulos.idmodulo "
+                + "inner join macs "
+                + "on  configuracion.macs_idmacs=macs.idmacs WHERE macs.macs='" + mac + "'";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery();
-
             while(rs.next()) {
                 Configuracion configuraciones = new Configuracion();
                 configuraciones.setDirectorio(rs.getString("directorio"));

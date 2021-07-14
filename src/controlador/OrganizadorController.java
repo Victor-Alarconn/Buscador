@@ -119,6 +119,7 @@ public class OrganizadorController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+            
         if (e.getSource() == principal.crearcliente) {
             Formulario formulario  = new Formulario(principal, false);
             ClienteController controlador = new ClienteController(modelo, consulta,

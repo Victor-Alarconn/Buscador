@@ -11,7 +11,11 @@ import Consultas.Consultas_roles;
 import Consultas.Consultas_usuario;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 import modelo.Mac;
 import modelo.Modulo;
 import modelo.Rol;
@@ -30,7 +34,7 @@ public class Buscador {
     static Consultas_roles cr = new Consultas_roles();
 
     public static void main(String[] args) {
-
+        
         Consultas_usuario cu = new Consultas_usuario();
         Buscador b = new Buscador();
         Consultas_Modulos cm = new Consultas_Modulos();
@@ -114,7 +118,4 @@ public class Buscador {
     public boolean agregarrol(Rol rol) {
         return cr.registrar(rol);
     }
-
-    
-
 }

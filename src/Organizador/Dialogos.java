@@ -31,4 +31,8 @@ public class Dialogos {
         String respuesta = JOptionPane.showInputDialog(null, "fecha", "Fecha de cotizacion", JOptionPane.CLOSED_OPTION);
         return respuesta;
     }
+    public int confirmacion(){
+       int respuesta = JOptionPane.showConfirmDialog(null, "Desea agregar la carpeta a los clientes ya existentes?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+       return respuesta;
+    }
 }

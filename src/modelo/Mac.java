@@ -7,12 +7,18 @@ package modelo;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.SocketException;
+import static java.time.Clock.system;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author yonat
  */
 public class Mac {
+
     private int idmacs;
     private String macs;
 
@@ -31,23 +37,41 @@ public class Mac {
     public void setMacs(String macs) {
         this.macs = macs;
     }
-    //metodo para traer la mac de l equipo
+
+    //metodo para traer la mac del equipo
     public String conseguirMAC() {
-        NetworkInterface a;
-        String linea;
+        String firstInterface = null;
+        Map<String, String> addressByNetwork = new HashMap<>();
+        Enumeration<NetworkInterface> networkInterfaces;
         try {
-            a = NetworkInterface.getByInetAddress(InetAddress.getLocalHost());
-            byte[] mac = a.getHardwareAddress();
+            networkInterfaces = NetworkInterface.getNetworkInterfaces();
+            while (networkInterfaces.hasMoreElements()) {
+                NetworkInterface network = networkInterfaces.nextElement();
+                byte[] bmac = network.getHardwareAddress();
+                if (bmac != null) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < bmac.length; i++) {
+                        sb.append(String.format("%02X%s", bmac[i], (i < bmac.length - 1) ? "-" : ""));
+                    }
 
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < mac.length; i++) {
-                sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+                    if (sb.toString().isEmpty() == false) {
+                        addressByNetwork.put(network.getName(), sb.toString());
+                    }
+
+                    if (sb.toString().isEmpty() == false && firstInterface == null) {
+                        firstInterface = network.getName();
+                    }
+                }
             }
-            return sb.toString();
+        } catch (SocketException e) {
+            System.out.println(e.getMessage());
+        }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (firstInterface != null) {
+            String MACAddress = addressByNetwork.get(firstInterface);
+            return MACAddress;
         }
         return null;
     }
+
 }

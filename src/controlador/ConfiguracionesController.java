@@ -196,13 +196,13 @@ public class ConfiguracionesController implements ActionListener {
             }
         }
 
-         modulo = cmodulo.llenar();
+        modulo = cmodulo.llenar();
         vconfiguraciones.txtmodulo.removeAllItems();
         for (int i = 0; i < modulo.size(); i++) {
             vconfiguraciones.txtmodulo.addItem(modulo.get(i));
         }
 
-        configuracion = cconfiguraciones.cargar(mconfiguraciones.getMacs_idmacs());
+        configuracion = cconfiguraciones.cargar(mmac.conseguirMAC());
         Object[] dato = new Object[3];
         for (int i = 0; i < configuracion.size(); i++) {
             dato[0] = configuracion.get(i).getIdconfiguracion();

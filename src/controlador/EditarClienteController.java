@@ -20,6 +20,8 @@ import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -84,7 +86,7 @@ public class EditarClienteController implements ActionListener {
     Consultas_Mac cmac = new Consultas_Mac();
     Mac mmac = new Mac();
     ArrayList<Configuracion> mconfig;
-    
+
     Dialogos dialogo = new Dialogos();
 
     public EditarClienteController(Cliente modelo, Servicio mods,
@@ -115,7 +117,6 @@ public class EditarClienteController implements ActionListener {
     }
 
     public void iniciar() {
-        busqueda();
         formulario.setTitle("Editar Cliente Potencial");
         formulario.setLocationRelativeTo(null);
         model.addColumn("Servicio/Producto");
@@ -139,36 +140,28 @@ public class EditarClienteController implements ActionListener {
         for (int i = 0; i < modulo1.size(); i++) {
             formulario.txtclase1.addItem(modulo1.get(i));
         }
-
         formulario.txtmodalidad1.removeAllItems();
         modulo4 = mmodalidad.llenar();
         for (int i = 0; i < modulo4.size(); i++) {
             formulario.txtmodalidad1.addItem(modulo4.get(i));
         }
-
         modulo = cllego.llenar();
         formulario.txtllego1.removeAllItems();
         for (int i = 0; i < modulo.size(); i++) {
             formulario.txtllego1.addItem(modulo.get(i));
         }
-
         formulario.txtservicio1.removeAllItems();
         lista = modc.llenar();
         for (int i = 0; i < lista.size(); i++) {
             formulario.txtservicio1.addItem(lista.get(i));
         }
-        mmac.setMacs(mmac.conseguirMAC());
-        if (cmac.buscar(mmac)) {
-            mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
-            for (int i = 0; i < mconfig.size(); i++) {
-                if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
-                    directorio = mconfig.get(i).getDirectorio();
-                }
+        mconfig = cconfiguraciones.cargar(mmac.conseguirMAC());
+        for (int i = 0; i < mconfig.size(); i++) {
+            if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
+                directorio = mconfig.get(i).getDirectorio();
+                break;
             }
-
         }
-
-        System.out.println(directorio);
         inicializarcliente();
     }
 
@@ -195,6 +188,7 @@ public class EditarClienteController implements ActionListener {
             modelo.setVlrprincipal(Integer.parseInt(formulario.txtvlrprincipal1.getText()));
             modelo.setNumequipos(Integer.parseInt(formulario.txtnumequipos1.getText()));
             modelo.setVlrterminal(Integer.parseInt(formulario.txtvlrterminal1.getText()));
+            modelo.setValor_total(formulario.txtvalor_total1.getText());
             if (!formulario.clientepotencial.isSelected()) {
                 modelo.setCodigo(formulario.txtcodigo1.getText());
                 modelo.setRuta(File.separator + formulario.txtcodigo1.getText().toUpperCase() + "_" + formulario.txtnombre1.getText().toUpperCase().trim());
@@ -307,7 +301,7 @@ public class EditarClienteController implements ActionListener {
         if (e.getSource() == formulario.clientepotencial) {
             if (!formulario.clientepotencial.isSelected()) {
                 formulario.txtcodigo1.setEnabled(true);
-            }else{
+            } else {
                 formulario.txtcodigo1.setEnabled(false);
             }
         }
@@ -380,17 +374,6 @@ public class EditarClienteController implements ActionListener {
         return file;
     }
 
-    public void busqueda() {
-        ArrayList<Directorio> directorio;
-        Consultas_Directorio cd = new Consultas_Directorio();
-        directorio = cd.llenar();
-        Object[] dato = new Object[1];
-        for (int i = 0; i < directorio.size(); i++) {
-            dato[0] = directorio.get(i);
-        }
-
-    }
-
     public void limpiar() {
         formulario.txtnit1.setText("");
         formulario.txtnombre1.setText("");
@@ -456,12 +439,14 @@ public class EditarClienteController implements ActionListener {
                 for (int i = 0; i < modulo.size(); i++) {
                     if (formulario.txtllego1.getModel().getElementAt(i).toString().equals(modelo.getLlego())) {
                         formulario.txtllego1.setSelectedIndex(i);
+                        break;
                     }
                 }
 
                 formulario.txtvlrprincipal1.setText(String.valueOf(modelo.getVlrprincipal()));
                 formulario.txtnumequipos1.setText(String.valueOf(modelo.getNumequipos()));
                 formulario.txtvlrterminal1.setText(String.valueOf(modelo.getVlrterminal()));
+                formulario.txtvalor_total1.setText(String.valueOf(modelo.getValor_total()));
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 Date fechaDate = null;
 
@@ -477,6 +462,7 @@ public class EditarClienteController implements ActionListener {
                 for (int i = 0; i < modulo4.size(); i++) {
                     if (formulario.txtmodalidad1.getModel().getElementAt(i).toString().equals(modelo.getModalidad())) {
                         formulario.txtmodalidad1.setSelectedIndex(i);
+                        break;
                     }
                 }
                 formulario.txtnotas1.setText(modelo.getNotas());
@@ -488,6 +474,7 @@ public class EditarClienteController implements ActionListener {
                 for (int i = 0; i < modulo1.size(); i++) {
                     if (formulario.txtclase1.getModel().getElementAt(i).toString().equals(modelo.getClase())) {
                         formulario.txtclase1.setSelectedIndex(i);
+                        break;
                     }
                 }
                 formulario.txtempresa1.setText(modelo.getEmpresa());

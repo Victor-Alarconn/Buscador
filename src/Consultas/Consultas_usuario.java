@@ -30,7 +30,6 @@ public class Consultas_usuario extends Conexion {
     public boolean registrar(Usuario user) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        
         String sql = "INSERT INTO usuarios (nombre,contrasena,roles_idroles,"
                 + "configuraciones,crearcliente,carpetas,servicios,"
                 + "otros,crearusuarios,editarcliente,modalidad,buscar,"

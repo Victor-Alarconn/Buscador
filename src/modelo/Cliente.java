@@ -41,7 +41,16 @@ public class Cliente {
     private String numero_cotizacion;
     private int  programa;
     private int eqipos;
+    private String valor_total;
 
+    public String getValor_total() {
+        return valor_total;
+    }
+
+    public void setValor_total(String valor_total) {
+        this.valor_total = valor_total;
+    }
+    
     public String getNumero_cotizacion() {
         return numero_cotizacion;
     }

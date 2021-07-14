@@ -92,19 +92,17 @@ public class CotizacionController implements ActionListener {
         busqueda();
         formulario.setTitle("Cliente Potencial");
         formulario.setLocationRelativeTo(null);
-        mmac.setMacs(mmac.conseguirMAC());
-        if (cmac.buscar(mmac)) {
-            mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
-            for (int i = 0; i < mconfig.size(); i++) {
-                if (mconfig.get(i).getModulo().toLowerCase().equals("cotizaciones")) {
-                    directorio = mconfig.get(i).getDirectorio();
-                }
+
+        mconfig = cconfiguraciones.cargar(mmac.conseguirMAC());
+        for (int i = 0; i < mconfig.size(); i++) {
+            if (mconfig.get(i).getModulo().toLowerCase().equals("cotizaciones")) {
+                directorio = mconfig.get(i).getDirectorio();
             }
-            if (directorio == null) {
-                formulario.mensajealerta.setVisible(true);
-            } else {
-                formulario.mensajealerta.setVisible(false);
-            }
+        }
+        if (directorio == null) {
+            formulario.mensajealerta.setVisible(true);
+        } else {
+            formulario.mensajealerta.setVisible(false);
         }
 
         formulario.txtclase.removeAllItems();
@@ -228,13 +226,14 @@ public class CotizacionController implements ActionListener {
             System.out.println(e);
         }
     }
-    
+
 // funcion para crear un archivo
     public File Crear_archivo(String path, String nombre) {
         File file = new File(path, nombre);
         return file;
     }
 //funcion para limpiar el formulario
+
     public void limpiar() {
         formulario.txtnombre.setText("");
         formulario.txtcelular1.setText("");
@@ -243,6 +242,7 @@ public class CotizacionController implements ActionListener {
         formulario.txtempresa.setText("");
         formulario.txtnotas.setText("");
     }
+
     //funcion para consultar el cotizante 
     public void consultanombre() {
         modelo.setNombre(formulario.txtnombre.getText());
@@ -260,8 +260,8 @@ public class CotizacionController implements ActionListener {
             } else {
                 formulario.programa.setSelected(false);
             }
-            if (modelo.getEqipos()== 1) {
-               formulario.equipos.setSelected(true);
+            if (modelo.getEqipos() == 1) {
+                formulario.equipos.setSelected(true);
             } else {
                 formulario.equipos.setSelected(false);
             }

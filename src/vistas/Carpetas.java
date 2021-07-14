@@ -11,6 +11,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
+import javax.swing.tree.DefaultTreeCellRenderer;
 
 /**
  *
@@ -35,6 +36,7 @@ public class Carpetas extends javax.swing.JDialog {
 //        ImageIcon rm = new ImageIcon(getClass().getResource("/img/rm1.jpg"));
 //        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT));
 //        jLabel1.setIcon(fondo);
+
         transparecia();
         this.getRootPane().registerKeyboardAction(e -> {
             this.dispose();

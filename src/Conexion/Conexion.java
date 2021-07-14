@@ -28,7 +28,6 @@ public class Conexion {
 //    private final String url = "jdbc:mysql://localhost:3306/" + base;
 //    private Connection con = null;
 
-
     private String base;
     private String user;
     private String password;
@@ -36,7 +35,7 @@ public class Conexion {
     private Connection con = null;
 
     public Connection getConexion() {
-        
+
         File fichero = new File("env.txt");
         try {
             BufferedReader fil = new BufferedReader(new FileReader(fichero));
@@ -45,21 +44,25 @@ public class Conexion {
             while ((linea = fil.readLine()) != null) {
                 if (linea.contains("base")) {
                     base = linea.replace("base: ", "");
+                    continue;
                 }
                 if (linea.contains("user")) {
                     user = linea.replace("user: ", "");
+                    continue;
                 }
                 if (linea.contains("password")) {
                     password = linea.replace("password: ", "");
+                    continue;
                 }
                 if (linea.contains("url")) {
                     url = linea.replace("url: ", "");
+                    continue;
                 }
             }
         } catch (IOException e) {
             System.out.println("Ha ocurrido un Error" + e);
             JOptionPane.showMessageDialog(null, "Se ha producido un error", "ERROR", JOptionPane.WARNING_MESSAGE);
-        }  
+        }
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = (Connection) DriverManager.getConnection(this.url, this.user, this.password);

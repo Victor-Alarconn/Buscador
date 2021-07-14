@@ -84,7 +84,7 @@ public class BusquedaController implements ActionListener {
     Usuario mod = new Usuario();
 
     Consultas_usuario consultasusuario = new Consultas_usuario();
-    
+
     Consultas_Mac cmac = new Consultas_Mac();
     Mac mmac = new Mac();
     ArrayList<Configuracion> mconfig;
@@ -136,43 +136,39 @@ public class BusquedaController implements ActionListener {
         busqueda.tabladatos.getColumn("clientepotencial").setWidth(0);
         busqueda.tabladatos.getColumn("clientepotencial").setMinWidth(0);
         busqueda.tabladatos.getColumn("clientepotencial").setMaxWidth(0);
-        mmac.setMacs(mmac.conseguirMAC());
-        if (cmac.buscar(mmac)) {
-            mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
-            for (int i = 0; i < mconfig.size(); i++) {
-                if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
-                    directorio = mconfig.get(i).getDirectorio();
-                }
+        mconfig = cconfiguraciones.cargar(mmac.conseguirMAC());
+        for (int i = 0; i < mconfig.size(); i++) {
+            if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
+                directorio = mconfig.get(i).getDirectorio();
             }
-            for (int i = 0; i < mconfig.size(); i++) {
-                if (mconfig.get(i).getModulo().toLowerCase().equals("cotizaciones")) {
-                    directoriocotizaciones  = mconfig.get(i).getDirectorio();
-                }
+        }
+        for (int i = 0; i < mconfig.size(); i++) {
+            if (mconfig.get(i).getModulo().toLowerCase().equals("cotizaciones")) {
+                directoriocotizaciones = mconfig.get(i).getDirectorio();
             }
-            
         }
         keyevent();
         MouseClicked();
         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i = 0; i < busqueda.tabladatos.getColumnCount(); i++) {
-           busqueda.tabladatos.getColumnModel().getColumn(i).setCellRenderer(modelocentrar); 
+            busqueda.tabladatos.getColumnModel().getColumn(i).setCellRenderer(modelocentrar);
         }
-       busqueda.getRootPane().registerKeyboardAction(e -> {
-             busqueda();
+        busqueda.getRootPane().registerKeyboardAction(e -> {
+            busqueda();
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
-        
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == busqueda.abrirdirectorio) {
-             int fila = busqueda.tabladatos.getSelectedRow();
+            int fila = busqueda.tabladatos.getSelectedRow();
             if (String.valueOf(busqueda.tabladatos.getValueAt(fila, 12)).equals("1")) {
-                abrirarchivo(directoriocotizaciones +String.valueOf(busqueda.tabladatos.getValueAt(fila, 11)));
-            }else{
-                abrirarchivo(directorio+String.valueOf(busqueda.tabladatos.getValueAt(fila, 1)));
-            }        
+                abrirarchivo(directoriocotizaciones + String.valueOf(busqueda.tabladatos.getValueAt(fila, 11)));
+            } else {
+                abrirarchivo(directorio + String.valueOf(busqueda.tabladatos.getValueAt(fila, 1)));
+            }
         }
 
         if (e.getSource() == busqueda.editarcliente) {
@@ -218,17 +214,15 @@ public class BusquedaController implements ActionListener {
         }
     }
 
-
-
     public void busqueda() {
         if (busqueda.txtbuscar.getText().length() == 0) {
             limpiartabla();
             //dialogo.alerta();
         }
-        if (busqueda.txtbuscar.getText().length() > 0 
+        if (busqueda.txtbuscar.getText().length() > 0
                 || busqueda.filtro.getSelectedItem().equals("electronica")
-                ||busqueda.filtro.getSelectedItem().equals("sucursal")
-                ||busqueda.filtro.getSelectedItem().equals("cliente potencial")) {
+                || busqueda.filtro.getSelectedItem().equals("sucursal")
+                || busqueda.filtro.getSelectedItem().equals("cliente potencial")) {
             limpiartabla();
             ArrayList<Cliente> lista;
             lista = consulta.buscarcaracter(busqueda.txtbuscar.getText(), busqueda.filtro.getSelectedItem().toString());
@@ -254,7 +248,7 @@ public class BusquedaController implements ActionListener {
             }
         }
     }
-    
+
     public void MouseClicked() {
         MouseListener mouseListener = new MouseListener() {
 
@@ -284,7 +278,5 @@ public class BusquedaController implements ActionListener {
         };
         busqueda.tabladatos.addMouseListener(mouseListener);
     }
-    
-    
 
 }

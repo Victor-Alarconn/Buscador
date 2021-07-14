@@ -8,6 +8,7 @@ package controlador;
 import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Mac;
+import Organizador.Dialogos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -51,6 +52,8 @@ public class DirectorioController implements ActionListener {
     private String directorio = null;
     ArrayList<Cliente> rutas;
 
+    Dialogos dialogo = new Dialogos();
+
     public DirectorioController(Consultas_Directorio cdirectorio,
             Directorio mdirectorio, Carpetas vdirectorio, Usuario user) {
         this.cdirectorio = cdirectorio;
@@ -65,18 +68,19 @@ public class DirectorioController implements ActionListener {
     public void iniciar() {
         vdirectorio.setTitle("Carpetas");
         vdirectorio.setLocationRelativeTo(null);
-        mmac.setMacs(mmac.conseguirMAC());
-        if (cmac.buscar(mmac)) {
-            mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
-            for (int i = 0; i < mconfig.size(); i++) {
-                if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
-                    directorio = mconfig.get(i).getDirectorio();
-                }
-            }
+        //cambia los iconos del arbol
+        DefaultTreeCellRenderer render = (DefaultTreeCellRenderer) vdirectorio.arbol.getCellRenderer();
+        render.setLeafIcon(new ImageIcon(getClass().getResource("/img/folderstree.png")));
+        render.setOpenIcon(new ImageIcon(getClass().getResource("/img/treeopen.png")));
+        render.setClosedIcon(new ImageIcon(getClass().getResource("/img/folderstree.png")));
 
+        mconfig = cconfiguraciones.cargar(mmac.conseguirMAC());
+        for (int i = 0; i < mconfig.size(); i++) {
+            if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
+                directorio = mconfig.get(i).getDirectorio();
+            }
         }
         rutas = cdirectorio.rutas();
-
         busqueda();
     }
 
@@ -93,11 +97,10 @@ public class DirectorioController implements ActionListener {
         if (e.getSource() == vdirectorio.agregarmenuitem) {
             if (vdirectorio.arbol.getSelectionCount() > 0) {
                 DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) vdirectorio.arbol.getSelectionPath().getLastPathComponent();
-                
+
                 if (nodo.getLevel() > 0) {
                     agregarnodo(nodo);
                     Directorio direct = (Directorio) nodo.getUserObject();
-
                     mdirectorio.setDirectorios_iddirectorios(direct.getIddirectorios());
                     registrardirectorio();
                     busqueda();
@@ -120,24 +123,21 @@ public class DirectorioController implements ActionListener {
 
     public void estructurarcarpeta(DefaultMutableTreeNode nodo, String carpeta) {
         TreeNode[] d = nodo.getPath();
-        
-
-        String miarray[] = new String[d.length-1];
-       
+        String miarray[] = new String[d.length - 1];
         for (int i = 1; i < d.length; i++) {
-           miarray[i-1] = d[i].toString();
-        } 
+            miarray[i - 1] = d[i].toString();
+        }
         StringBuffer cadena = new StringBuffer();
         for (int x = 0; x < miarray.length; x++) {
-            cadena = cadena.append(miarray[x]+File.separator);
+            cadena = cadena.append(miarray[x] + File.separator);
         }
+        System.out.println(directorio + rutas.get(0).getRuta() + File.separator + cadena);
         for (int i = 0; i < rutas.size(); i++) {
-        Crear_archivo(directorio+rutas.get(i).getRuta()+File.separator+cadena, carpeta);
+            Crear_archivo(directorio + rutas.get(i).getRuta() + File.separator + cadena, carpeta);
         }
-        
-       
+
     }
-    
+
     public void Crear_archivo(String path, String nombre) {
         File file = new File(path, nombre);
         file.mkdir();
@@ -149,7 +149,10 @@ public class DirectorioController implements ActionListener {
             mdirectorio.setUsuarios_idusuarios(user.getIdusuario());
             mdirectorio.setCarpeta(carpeta);
             mdirectorio.setNodo_level(nodo.getLevel() + 1);
-            estructurarcarpeta(nodo,carpeta);
+            int respuesta = dialogo.confirmacion();
+            if (respuesta == 0) {
+               estructurarcarpeta(nodo, carpeta); 
+            }
         }
 
     }
@@ -158,7 +161,9 @@ public class DirectorioController implements ActionListener {
         ArrayList<Directorio> directorio;
         Object[] dato = new Object[2];
         directorio = cdirectorio.llenar();
+
         raiz = new DefaultMutableTreeNode("Directorios Cliente");
+
         for (int i = 0; i < directorio.size(); i++) {
             DefaultMutableTreeNode directorios = new DefaultMutableTreeNode();
             directorios.setUserObject(directorio.get(i));
@@ -169,6 +174,7 @@ public class DirectorioController implements ActionListener {
         }
         modelo = new DefaultTreeModel(raiz);
         vdirectorio.arbol.setModel(modelo);
+
     }
 
     public void busacarsubcarpetas(Directorio y, ArrayList<Directorio> d, DefaultMutableTreeNode directorios) {

@@ -61,13 +61,10 @@ public class BackupController implements ActionListener {
         model.addColumn("Backup");
         vbackups.tablabackups.setModel(model);
         mmac.setMacs(mmac.conseguirMAC());
-        if (cmac.buscar(mmac)) {
-            mconfig = cconfiguraciones.cargar(mmac.getIdmacs());
-
-            for (int i = 0; i < mconfig.size(); i++) {
-                if (mconfig.get(i).getModulo().toLowerCase().equals("backups")) {
-                    directorio = mconfig.get(i).getDirectorio();
-                }
+        mconfig = cconfiguraciones.cargar(mmac.conseguirMAC());
+        for (int i = 0; i < mconfig.size(); i++) {
+            if (mconfig.get(i).getModulo().toLowerCase().equals("backups")) {
+                directorio = mconfig.get(i).getDirectorio();
             }
         }
 
@@ -140,7 +137,7 @@ public class BackupController implements ActionListener {
     public void buscar() {
         mcliente.setCodigo(vbackups.txtcodigo.getText().toUpperCase());
         if (ccliente.buscarcoodigocliente(mcliente)) {
-            System.out.println(mcliente.getBackupruta());
+//            System.out.println(mcliente.getBackupruta());
             vbackups.txtnombre.setText(mcliente.getNombre());
             if (mcliente.getBackupruta() == null || mcliente.getBackupruta().equals("")) {
                 int respuesta = dialogo.j();
@@ -157,10 +154,10 @@ public class BackupController implements ActionListener {
                 }
             } else {
                 limpiartabla();
-                cliente= true;
+                cliente = true;
                 backupsalmacenados(directorio + mcliente.getBackupruta());
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(vbackups, "el Cliente no se encuentra en la base de datos");
         }
 
