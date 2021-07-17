@@ -15,7 +15,7 @@ import Consultas.Consultas_Mac;
 import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import Consultas.Consultas_usuario;
-import Organizador.Dialogos;
+import Organizador.Recursos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -57,7 +57,7 @@ public class BusquedaController implements ActionListener {
     private final Busqueda busqueda;
 
     DefaultTableModel model = new DefaultTableModel();
-    Dialogos dialogo = new Dialogos();
+    Recursos dialogo = new Recursos();
 
     Servicio mods = new Servicio();
     Consultas_Servicios servicio = new Consultas_Servicios();
@@ -147,7 +147,7 @@ public class BusquedaController implements ActionListener {
                 directoriocotizaciones = mconfig.get(i).getDirectorio();
             }
         }
-        keyevent();
+//        keyevent();
         MouseClicked();
         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);

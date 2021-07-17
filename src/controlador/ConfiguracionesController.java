@@ -43,7 +43,7 @@ public class ConfiguracionesController implements ActionListener {
     Usuario u = new Usuario();
 
     Consultas_Modulos cmodulo = new Consultas_Modulos();
-    Modulo mmodulo = new Modulo();
+//    Modulo mmodulo = new Modulo();
 
     DefaultTableModel modell = new DefaultTableModel();
     ArrayList<Configuracion> configuracion;

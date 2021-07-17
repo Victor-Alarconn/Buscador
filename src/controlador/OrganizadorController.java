@@ -15,7 +15,7 @@ import Consultas.Consultas_Modalidad;
 import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import Consultas.Consultas_usuario;
-import Organizador.Dialogos;
+import Organizador.Recursos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -62,7 +62,7 @@ public class OrganizadorController implements ActionListener {
     private final Usuario mod;
 
     DefaultTableModel model = new DefaultTableModel();
-    Dialogos dialogo = new Dialogos();
+    Recursos dialogo = new Recursos();
 
     Servicio mods = new Servicio();
     Consultas_Servicios servicio = new Consultas_Servicios();

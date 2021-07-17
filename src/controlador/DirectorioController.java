@@ -8,7 +8,7 @@ package controlador;
 import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
 import Consultas.Consultas_Mac;
-import Organizador.Dialogos;
+import Organizador.Recursos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -52,7 +52,7 @@ public class DirectorioController implements ActionListener {
     private String directorio = null;
     ArrayList<Cliente> rutas;
 
-    Dialogos dialogo = new Dialogos();
+    Recursos dialogo = new Recursos();
 
     public DirectorioController(Consultas_Directorio cdirectorio,
             Directorio mdirectorio, Carpetas vdirectorio, Usuario user) {

@@ -5,21 +5,31 @@
  */
 package Organizador;
 
+import Consultas.Consultas_Clase;
+import Consultas.Consultas_Cliente;
+import Consultas.Consultas_Llego;
 import Consultas.Consultas_Mac;
+import Consultas.Consultas_Modalidad;
 import Consultas.Consultas_Modulos;
+import Consultas.Consultas_Servicios;
 import Consultas.Consultas_roles;
 import Consultas.Consultas_usuario;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.Iterator;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+
 import modelo.Mac;
 import modelo.Modulo;
 import modelo.Rol;
 import modelo.Usuario;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import vistas.login;
 
 /**
@@ -33,21 +43,24 @@ public class Buscador {
      */
     static Consultas_roles cr = new Consultas_roles();
 
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException, Exception {
+
         Consultas_usuario cu = new Consultas_usuario();
         Buscador b = new Buscador();
         Consultas_Modulos cm = new Consultas_Modulos();
-        Modulo mm = new Modulo();
         Consultas_Mac cmac = new Consultas_Mac();
+        
         Mac mmac = new Mac();
         Rol rol = new Rol();
+
         //consulta mac
         String mac = mmac.conseguirMAC();
+        cmac.jsonmacs();
         mmac.setMacs(mac);
         if (!cmac.buscar(mmac)) {
             cmac.registrar(mmac);
         }
+        
         //registro de usuario por default
         Usuario u = new Usuario();
         u.setNombre("admin");
@@ -79,8 +92,35 @@ public class Buscador {
         }
         login login = new login();
         login.setVisible(true);
+        
+        Modulo mm = new Modulo();
+        //llamda al metodo que crea el archivo modulos.json
+        cm.jsonmodulos();
+        
+        Consultas_Clase cc = new Consultas_Clase();
+        //llamda al metodo que crea el archivo clases.json
+        cc.jsonclases();
+        
+        Consultas_Llego llego = new Consultas_Llego();
+        //llamda al metodo que crea el archivo llego.json
+        llego.jsonllego();
+        
+        Consultas_Modalidad modalidad = new Consultas_Modalidad();
+        //llamda al metodo que crea el archivo modalidad.json 
+        modalidad.jsonmodalidad();
+        
+        Consultas_Servicios servicios = new Consultas_Servicios();
+        //llamda al metodo que crea el archivo servicios.json 
+        servicios.jsonservicios();
+        //llamda al metodo que crea el archivo clientes.json 
+        Consultas_Cliente cliente = new Consultas_Cliente();
+        cliente.jsonclientes();
+        
+        
+        
         //metodo para crear los modulos
         ArrayList<Modulo> md = cm.llenar();
+
         ArrayList<String> lista = new ArrayList<>();
         lista.add("Clientes");
         lista.add("Cotizaciones");
@@ -112,10 +152,13 @@ public class Buscador {
             }
 
         }
+        
 
     }
 
     public boolean agregarrol(Rol rol) {
+
         return cr.registrar(rol);
     }
+
 }

@@ -6,21 +6,33 @@
 package Consultas;
 
 import Conexion.Conexion;
+import Organizador.Recursos;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.Servicio;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
  * @author Yonathan Carvajal
  */
 public class Consultas_Servicios extends Conexion {
+
+    Recursos recursos = new Recursos();
     
     //consulta para registrar
-    public boolean registrar(Servicio servicio) {
+    public boolean registrar(Servicio servicio) throws IOException {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
@@ -30,6 +42,7 @@ public class Consultas_Servicios extends Conexion {
             ps.setString(1, servicio.getServicio());
             ps.setInt(2, servicio.getUsuarios_idusuarios());
             ps.execute();
+            jsonservicios();
             return true;
         } catch (SQLException e) {
             System.err.println(e);
@@ -43,9 +56,9 @@ public class Consultas_Servicios extends Conexion {
         }
 
     }
-    
+
     //consulta para modificar
-    public boolean modificar(Servicio servicio) {
+    public boolean modificar(Servicio servicio) throws IOException {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = "UPDATE  servicios SET servicio=? WHERE idservicio=? ";
@@ -53,6 +66,7 @@ public class Consultas_Servicios extends Conexion {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, servicio.getServicio());
             ps.execute();
+            jsonservicios();
             return true;
         } catch (SQLException e) {
             System.err.println(e);
@@ -66,9 +80,9 @@ public class Consultas_Servicios extends Conexion {
         }
 
     }
-    
+
     //consultas eliminar
-    public boolean eliminar(Servicio servicio) {
+    public boolean eliminar(Servicio servicio) throws IOException {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = " DELETE FROM servicios  WHERE servicio=? ";
@@ -76,6 +90,7 @@ public class Consultas_Servicios extends Conexion {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, servicio.getServicio());
             ps.execute();
+            jsonservicios();
             return true;
         } catch (SQLException e) {
             System.err.println(e);
@@ -89,25 +104,16 @@ public class Consultas_Servicios extends Conexion {
         }
 
     }
-    
-    //consulta para saber si un servicio contiene un letra
-    public ArrayList<Servicio> buscarcaracter(String parametro) {
-        ArrayList listaPersona = new ArrayList();
+
+    public void jsonservicios() throws IOException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String sql = " SELECT * FROM servicios  WHERE servicio LIKE'%" + parametro + "%'";
-
+        String sql = " SELECT * FROM servicios";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery(sql);
-            while (rs.next()) {
-                Servicio servicio = new Servicio();
-                servicio.setIdservicio(Integer.parseInt(rs.getString(1)));
-                servicio.setServicio(rs.getString(2));
-                listaPersona.add(servicio);
-            }
-            return listaPersona;
+            recursos.crearjson(rs, "servicios.json");
         } catch (SQLException e) {
             System.err.println(e);
             //return null;
@@ -118,69 +124,32 @@ public class Consultas_Servicios extends Conexion {
                 System.err.println(e);
             }
         }
-        return null;
-    }
-    
-    //consulta para buscar servicios
-    public boolean buscar(Servicio servicio) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection con = getConexion();
-        String sql = " SELECT * FROM servicios  WHERE servicio=? ";
-        try {
-            ps = (PreparedStatement) con.prepareStatement(sql);
-            ps.setString(1, servicio.getServicio());
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                servicio.setIdservicio(Integer.parseInt(rs.getString("idservicio")));
-                servicio.setServicio(rs.getString("servicio"));
-                return true;
-            }
-
-            return false;
-        } catch (SQLException e) {
-            System.err.println(e);
-            return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-        }
-
     }
 
     //consulta para llenar la tabla de servicios y combobox
     public ArrayList<Servicio> llenar() {
         ArrayList lista = new ArrayList();
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection con = getConexion();
-        String sql = " SELECT * FROM servicios";
-
-        try {
-            ps = (PreparedStatement) con.prepareStatement(sql);
-            rs = ps.executeQuery(sql);
-            while (rs.next()) {
+        JSONParser parser = new JSONParser();
+        try (Reader reader = new FileReader("temp" + File.separator + "servicios.json")) {
+            JSONArray jsonarray = (JSONArray) parser.parse(reader);
+            for (int i = 0; i < jsonarray.size(); i++) {
+                JSONObject jsonObject = (JSONObject) jsonarray.get(i);
                 Servicio servicio = new Servicio();
-                servicio.setServicio(rs.getString("servicio"));
-                servicio.setIdservicio(rs.getInt("idservicio"));
+                Long myLong = (Long) jsonObject.get("idservicio");
+                int id = Math.toIntExact(myLong);
+                servicio.setIdservicio(id);
+                servicio.setServicio((String) jsonObject.get("servicio"));
                 lista.add(servicio);
             }
             return lista;
-        } catch (SQLException e) {
-            System.err.println(e);
-            //return null;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         return null;
+
     }
-    
+
 }

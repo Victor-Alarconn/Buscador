@@ -13,12 +13,17 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import modelo.Rol;
 
+
+
 /**
  *
  * @author Yonathan Carvajal
  */
 public class Consultas_roles extends Conexion {
 
+
+    
+    
     public boolean registrar(Rol rol) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -48,6 +53,7 @@ public class Consultas_roles extends Conexion {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
+        
         if(con == null){
             JOptionPane.showMessageDialog(null, "error DB");
         }
@@ -71,5 +77,9 @@ public class Consultas_roles extends Conexion {
             }
         }
     }
+    
+    
+    
+    
 
 }

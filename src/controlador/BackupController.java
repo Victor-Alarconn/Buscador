@@ -8,14 +8,17 @@ package controlador;
 import Consultas.Consultas_Cliente;
 import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Mac;
-import Organizador.Dialogos;
+import Organizador.Recursos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
@@ -36,7 +39,7 @@ public class BackupController implements ActionListener {
     private final Usuario user;
 
     DefaultTableModel model = new DefaultTableModel();
-    Dialogos dialogo = new Dialogos();
+    Recursos dialogo = new Recursos();
 
     ArrayList<Configuracion> mconfig;
     Consultas_Configuraciones cconfiguraciones = new Consultas_Configuraciones();
@@ -148,7 +151,11 @@ public class BackupController implements ActionListener {
                     String ruta = File.separator + mcliente.getCodigo() + "_" + nombre;
                     mcliente.setIdclientes_potenciales(mcliente.getIdclientes_potenciales());
                     mcliente.setBackupruta(ruta);
-                    ccliente.modificarruta(mcliente);
+                    try {
+                        ccliente.modificarruta(mcliente);
+                    } catch (IOException ex) {
+                        Logger.getLogger(BackupController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     abrirarchivo(directorio + ruta);
                     limpiarcampos();
                 }

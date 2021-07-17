@@ -15,7 +15,7 @@ import Consultas.Consultas_Mac;
 import Consultas.Consultas_Modalidad;
 import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
-import Organizador.Dialogos;
+import Organizador.Recursos;
 import java.awt.Desktop;
 import java.awt.KeyEventPostProcessor;
 import java.awt.KeyboardFocusManager;
@@ -24,8 +24,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
@@ -74,7 +77,7 @@ public class ClienteController implements ActionListener {
 
     Consultas_Mac cmac = new Consultas_Mac();
     Mac mmac = new Mac();
-    Dialogos dialogo = new Dialogos();
+    Recursos dialogo = new Recursos();
 
     Consultas_Llego cllego = new Consultas_Llego();
     Consultas_Modalidad mmodalidad = new Consultas_Modalidad();
@@ -111,7 +114,7 @@ public class ClienteController implements ActionListener {
     public void iniciar() {
         formulario.setTitle("Cliente");
         formulario.setLocationRelativeTo(null);
-        keyevent();
+//        keyevent();
         formulario.mensajenit.setVisible(false);
         model.addColumn("Servicio/Producto");
         formulario.tablaservicios.setModel(model);
@@ -237,39 +240,42 @@ public class ClienteController implements ActionListener {
                         modelo.setContacto(formulario.txtcontacto.getText());
                         modelo.setUsuarios_idusuario(user.getIdusuario());
                         //guardando el cliente 
-
-                        if (consultas.registrar(modelo)) {
-                            // guardando la tabla servicios
-                            for (int i = 0; i < formulario.tablaservicios.getRowCount(); i++) {
-                                for (int j = 0; j < lista.size(); j++) {
-                                    if (lista.get(j).getServicio().equals(formulario.tablaservicios.getValueAt(i, 0).toString())) {
-                                        shcp.setServicios_idservicio(lista.get(j).getIdservicio());
-                                        shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                                        if (!cshcp.registrarservicio(shcp)) {
-                                            JOptionPane.showMessageDialog(null, "error guardando de servicios");
+                        try {
+                            if (consultas.registrar(modelo)) {
+                                // guardando la tabla servicios
+                                for (int i = 0; i < formulario.tablaservicios.getRowCount(); i++) {
+                                    for (int j = 0; j < lista.size(); j++) {
+                                        if (lista.get(j).getServicio().equals(formulario.tablaservicios.getValueAt(i, 0).toString())) {
+                                            shcp.setServicios_idservicio(lista.get(j).getIdservicio());
+                                            shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                                            if (!cshcp.registrarservicio(shcp)) {
+                                                JOptionPane.showMessageDialog(null, "error guardando de servicios");
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            //guardando la tabla documnetos
-                            for (int i = 0; i < formulario.tabladocumentos.getRowCount(); i++) {
-                                mdocumento.setDocumento(formulario.tabladocumentos.getValueAt(i, 0).toString());
-                                mdocumento.setFecha_inicio(formulario.tabladocumentos.getValueAt(i, 1).toString());
-                                mdocumento.setFecha_vencimiento(formulario.tabladocumentos.getValueAt(i, 2).toString());
-                                mdocumento.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                                if (!cdocumentos.registrar(mdocumento)) {
-                                    JOptionPane.showMessageDialog(null, "error guardando de documentos");
+                                //guardando la tabla documnetos
+                                for (int i = 0; i < formulario.tabladocumentos.getRowCount(); i++) {
+                                    mdocumento.setDocumento(formulario.tabladocumentos.getValueAt(i, 0).toString());
+                                    mdocumento.setFecha_inicio(formulario.tabladocumentos.getValueAt(i, 1).toString());
+                                    mdocumento.setFecha_vencimiento(formulario.tabladocumentos.getValueAt(i, 2).toString());
+                                    mdocumento.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                                    if (!cdocumentos.registrar(mdocumento)) {
+                                        JOptionPane.showMessageDialog(null, "error guardando de documentos");
+                                    }
                                 }
+                                JOptionPane.showMessageDialog(null, "registro guardado");
+                                crear_carpeta(directorio);
+                                formulario.dispose();
+                                this.limpiar();
+                                this.limpiardocumentos();
+                                this.limpiarservicios();
+                                
+                            } else {
+                                JOptionPane.showMessageDialog(null, "error guardado el cliente");
                             }
-                            JOptionPane.showMessageDialog(null, "registro guardado");
-                            crear_carpeta(directorio);
-                            formulario.dispose();
-                            this.limpiar();
-                            this.limpiardocumentos();
-                            this.limpiarservicios();
-
-                        } else {
-                            JOptionPane.showMessageDialog(null, "error guardado el cliente");
+                        } catch (IOException ex) {
+                            Logger.getLogger(ClienteController.class.getName()).log(Level.SEVERE, null, ex);
                         }
 
                     }

@@ -5,6 +5,14 @@
  */
 package modelo;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 /**
  *
  * @author Yonathan Carvajal
@@ -14,6 +22,7 @@ public class Modulo {
     private int idmodulo;
     private String modulo;
     private int usuarios_idusuario;
+    
 
     public int getIdmodulo() {
         return idmodulo;
@@ -41,8 +50,8 @@ public class Modulo {
 
     @Override
     public String toString() {
-        return modulo; //To change body of generated methods, choose Tools | Templates.
+//        return modulo; 
+        return modulo;
     }
-    
-    
+      
 }

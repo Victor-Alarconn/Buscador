@@ -8,7 +8,10 @@ package controlador;
 import Consultas.Consultas_Modalidad;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -65,8 +68,12 @@ public class Modalidadcontroller implements ActionListener {
             for (int i = 0; i < vm.tablaagregarmodalidad.getRowCount(); i++) {
                 mm.setModalidad(vm.tablaagregarmodalidad.getValueAt(i, 0).toString());
                 mm.setUsuarios_idusuario(user.getIdusuario());
-                if (!mcm.registrar(mm)) {
-                    JOptionPane.showMessageDialog(null, "error guardando la modalidad");
+                try {
+                    if (!mcm.registrar(mm)) {
+                        JOptionPane.showMessageDialog(null, "error guardando la modalidad");
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(Modalidadcontroller.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             limpiaragregarllego();
@@ -87,10 +94,14 @@ public class Modalidadcontroller implements ActionListener {
                     int fila = vm.tablamodalidad.getSelectedRow();
                     if (fila >= 0) {
                         mm.setIdmodalidad(Integer.parseInt(String.valueOf(vm.tablamodalidad.getValueAt(fila, 0))));
-                        if (mcm.eliminar(mm)) {
-                            if (fila >= 0) {
-                                modell2.removeRow(fila);
+                        try {
+                            if (mcm.eliminar(mm)) {
+                                if (fila >= 0) {
+                                    modell2.removeRow(fila);
+                                }
                             }
+                        } catch (IOException ex) {
+                            Logger.getLogger(Modalidadcontroller.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
 

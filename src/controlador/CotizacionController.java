@@ -15,17 +15,20 @@ import Consultas.Consultas_Mac;
 import Consultas.Consultas_Modalidad;
 import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
-import Organizador.Dialogos;
+import Organizador.Recursos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
@@ -66,7 +69,7 @@ public class CotizacionController implements ActionListener {
 
     Consultas_Mac cmac = new Consultas_Mac();
     Mac mmac = new Mac();
-    Dialogos dialogo = new Dialogos();
+    Recursos dialogo = new Recursos();
 
     Consultas_Llego cllego = new Consultas_Llego();
     Consultas_Modalidad mmodalidad = new Consultas_Modalidad();
@@ -166,15 +169,19 @@ public class CotizacionController implements ActionListener {
                     modelo.setNotas(formulario.txtnotas.getText());
                     modelo.setContacto(formulario.txtcontacto.getText());
                     modelo.setUsuarios_idusuario(user.getIdusuario());
-                    //guardando el cliente 
-                    if (consultas.registrar(modelo)) {
-                        crear_carpeta(directorio);
-                        JOptionPane.showMessageDialog(null, "registro guardado");
-                        formulario.dispose();
-                        this.limpiar();
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "error guardado el cliente");
+                    try {
+                        //guardando el cliente
+                        if (consultas.registrar(modelo)) {
+                            crear_carpeta(directorio);
+                            JOptionPane.showMessageDialog(null, "registro guardado");
+                            formulario.dispose();
+                            this.limpiar();
+                            
+                        } else {
+                            JOptionPane.showMessageDialog(null, "error guardado el cliente");
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(CotizacionController.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 } else {

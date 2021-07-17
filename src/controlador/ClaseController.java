@@ -8,7 +8,10 @@ package controlador;
 import Consultas.Consultas_Clase;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -69,8 +72,12 @@ public class ClaseController implements ActionListener {
             for (int i = 0; i < vc.tablaagregarclase.getRowCount(); i++) {
                 mc.setClase(vc.tablaagregarclase.getValueAt(i, 0).toString());
                 mc.setUsuarios_idusuarios(user.getIdusuario());
-                if (!cc.registrar(mc)) {
-                    JOptionPane.showMessageDialog(null, "error guardando la clase");
+                try {
+                    if (!cc.registrar(mc)) {
+                        JOptionPane.showMessageDialog(null, "error guardando la clase");
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(ClaseController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             limpiaragregarclase();
@@ -91,10 +98,14 @@ public class ClaseController implements ActionListener {
                     int fila = vc.tablaclase.getSelectedRow();
                     if (fila >= 0) {
                         mc.setIdclases(Integer.parseInt(String.valueOf(vc.tablaclase.getValueAt(fila, 0))));
-                        if (cc.eliminar(mc)) {
-                            if (fila >= 0) {
-                                model2.removeRow(fila);
+                        try {
+                            if (cc.eliminar(mc)) {
+                                if (fila >= 0) {
+                                    model2.removeRow(fila);
+                                }
                             }
+                        } catch (IOException ex) {
+                            Logger.getLogger(ClaseController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
 

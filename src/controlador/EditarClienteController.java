@@ -15,11 +15,12 @@ import Consultas.Consultas_Mac;
 import Consultas.Consultas_Modalidad;
 import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
-import Organizador.Dialogos;
+import Organizador.Recursos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -87,7 +88,7 @@ public class EditarClienteController implements ActionListener {
     Mac mmac = new Mac();
     ArrayList<Configuracion> mconfig;
 
-    Dialogos dialogo = new Dialogos();
+    Recursos dialogo = new Recursos();
 
     public EditarClienteController(Cliente modelo, Servicio mods,
             Servicios_has_Clientes_Potenciales shcp, Documentos mdocumento, Configuracion mconfiguracion,
@@ -120,6 +121,7 @@ public class EditarClienteController implements ActionListener {
         formulario.setTitle("Editar Cliente Potencial");
         formulario.setLocationRelativeTo(null);
         model.addColumn("Servicio/Producto");
+        model.addColumn("ID");
         formulario.tablaservicios1.setModel(model);
         model1.addColumn("ID");
         model1.addColumn("Documento");
@@ -129,6 +131,9 @@ public class EditarClienteController implements ActionListener {
         formulario.tabladocumentos1.getColumn("ID").setWidth(0);
         formulario.tabladocumentos1.getColumn("ID").setMinWidth(0);
         formulario.tabladocumentos1.getColumn("ID").setMaxWidth(0);
+//        formulario.tablaservicios1.getColumn("ID").setWidth(0);
+//        formulario.tablaservicios1.getColumn("ID").setMinWidth(0);
+//        formulario.tablaservicios1.getColumn("ID").setMaxWidth(0);
         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
         formulario.tablaservicios1.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
@@ -221,48 +226,49 @@ public class EditarClienteController implements ActionListener {
             if (formulario.botro1.isSelected()) {
                 modelo.setCategoria("Otro");
             }
-            if (consultas.modificar(modelo)) {
-                for (int i = 0; i < formulario.tablaservicios1.getRowCount(); i++) {
-
-                    for (int j = 0; j < lista.size(); j++) {
-                        if (lista.get(j).getServicio().equals(formulario.tablaservicios1.getValueAt(i, 0).toString())) {
-                            shcp.setServicios_idservicio(lista.get(j).getIdservicio());
-                            shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                            if (!cshcp.buscar(shcp)) {
-                                if (!cshcp.registrarservicio(shcp)) {
-                                    JOptionPane.showMessageDialog(null, "error guardado de servicios");
-                                }
+            try {
+                if (consultas.modificar(modelo)) {
+                    for (int i = 0; i < formulario.tablaservicios1.getRowCount(); i++) {
+                        shcp.setServicios_idservicio(Integer.parseInt(formulario.tablaservicios1.getValueAt(i, 1).toString()));
+                        shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                        if (!cshcp.buscar(shcp)) {
+                            if (!cshcp.registrarservicio(shcp)) {
+                                JOptionPane.showMessageDialog(null, "error guardado de servicios");
                             }
                         }
                     }
-                }
-                //guardando la tabla documnetos
-                for (int i = 0; i < formulario.tabladocumentos1.getRowCount(); i++) {
+                    //guardando la tabla documnetos
+                    for (int i = 0; i < formulario.tabladocumentos1.getRowCount(); i++) {
 //                    System.out.println(formulario.tabladocumentos1.getValueAt(i, 0));
-                    if (formulario.tabladocumentos1.getValueAt(i, 0) == null) {
-                        mdocumento.setDocumento(formulario.tabladocumentos1.getValueAt(i, 1).toString());
-                        mdocumento.setFecha_inicio(formulario.tabladocumentos1.getValueAt(i, 2).toString());
-                        mdocumento.setFecha_vencimiento(formulario.tabladocumentos1.getValueAt(i, 3).toString());
-                        mdocumento.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                        if (!cdocumentos.registrar(mdocumento)) {
-                            JOptionPane.showMessageDialog(null, "error guardado de documento");
+                        if (formulario.tabladocumentos1.getValueAt(i, 0) == null) {
+                            mdocumento.setDocumento(formulario.tabladocumentos1.getValueAt(i, 1).toString());
+                            mdocumento.setFecha_inicio(formulario.tabladocumentos1.getValueAt(i, 2).toString());
+                            mdocumento.setFecha_vencimiento(formulario.tabladocumentos1.getValueAt(i, 3).toString());
+                            mdocumento.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+                            if (!cdocumentos.registrar(mdocumento)) {
+                                JOptionPane.showMessageDialog(null, "error guardado de documento");
+                            }
                         }
                     }
+                    JOptionPane.showMessageDialog(null, "Cliente modificado");
+                    if (!formulario.clientepotencial.isSelected()) {
+                        crear_carpeta(directorio);
+                    }
+                    formulario.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "error guardado el cliente");
                 }
-                JOptionPane.showMessageDialog(null, "Cliente modificado");
-                if (!formulario.clientepotencial.isSelected()) {
-                    crear_carpeta(directorio);
-                }
-                formulario.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "error guardado el cliente");
+            } catch (IOException ex) {
+                Logger.getLogger(EditarClienteController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
         //boton agregar servicio
-        Object[] dato = new Object[5];
+        Object[] dato = new Object[2];
         if (e.getSource() == formulario.agregarservicio1) {
-            dato[0] = formulario.txtservicio1.getSelectedItem().toString();
+            Servicio servi = (Servicio) formulario.txtservicio1.getModel().getSelectedItem();
+            dato[0] = servi.getServicio();
+            dato[1] = servi.getIdservicio();
             model.addRow(dato);
             formulario.tablaservicios1.setModel(model);
         }
@@ -282,19 +288,15 @@ public class EditarClienteController implements ActionListener {
         //boton eliminar servicio
         if (e.getSource() == formulario.eliminarservicio1) {
             int fila = formulario.tablaservicios1.getSelectedRow();
-            mods.setServicio(formulario.tablaservicios1.getValueAt(fila, 0).toString());
-            if (cons.buscar(mods)) {
-                shcp.setServicios_idservicio(mods.getIdservicio());
-                shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
-                if (fila >= 0) {
-                    if (cshcp.eliminar(shcp)) {
-                        model.removeRow(fila);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
+            shcp.setServicios_idservicio(Integer.parseInt(formulario.tablaservicios1.getValueAt(fila, 1).toString()));
+            shcp.setClientes_potenciales_idclientes_potenciales(modelo.getIdclientes_potenciales());
+            if (fila >= 0) {
+                if (cshcp.eliminar(shcp)) {
+                    model.removeRow(fila);
+                    JOptionPane.showMessageDialog(formulario, "servicio borrado");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "error guardado");
+                JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
             }
 
         }
@@ -415,6 +417,7 @@ public class EditarClienteController implements ActionListener {
         Object[] datos = new Object[2];
         for (int i = 0; i < servicio.size(); i++) {
             datos[0] = servicio.get(i).getServicio();
+            datos[1] = servicio.get(i).getIdservicio();
             model.addRow(datos);
             formulario.tablaservicios1.setModel(model);
         }

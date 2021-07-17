@@ -8,7 +8,10 @@ package controlador;
 import Consultas.Consultas_Servicios;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Servicio;
@@ -58,8 +61,12 @@ public class ServicioController implements ActionListener {
             for (int i = 0; i < vservicios.tablaagregarservicios.getRowCount(); i++) {
                 modelo.setServicio(vservicios.tablaagregarservicios.getValueAt(i, 0).toString());
                 modelo.setUsuarios_idusuarios(user.getIdusuario());
-                if (!consulta.registrar(modelo)) {
-                    JOptionPane.showMessageDialog(null, "error guardado de documento");
+                try {
+                    if (!consulta.registrar(modelo)) {
+                        JOptionPane.showMessageDialog(null, "error guardado de documento");
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(ServicioController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -92,8 +99,12 @@ public class ServicioController implements ActionListener {
             int fila = vservicios.tablatotalservicios.getSelectedRow();
             if (fila >= 0) {
                 modelo.setServicio(String.valueOf(vservicios.tablatotalservicios.getValueAt(fila, 0)));
-                if (consulta.eliminar(modelo)) {
-                    model.removeRow(fila);
+                try {
+                    if (consulta.eliminar(modelo)) {
+                        model.removeRow(fila);
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(ServicioController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 

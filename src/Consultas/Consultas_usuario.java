@@ -16,9 +16,7 @@ import java.util.ArrayList;
 import modelo.Cliente;
 import modelo.Rol;
 import modelo.Usuario;
-import vistas.Configuraciones;
 import vistas.Principal;
-import vistas.login;
 
 /**
  *
@@ -26,6 +24,8 @@ import vistas.login;
  */
 public class Consultas_usuario extends Conexion {
 
+    
+    
     //consulta para registrar 
     public boolean registrar(Usuario user) {
         PreparedStatement ps = null;
@@ -115,6 +115,7 @@ public class Consultas_usuario extends Conexion {
     //consulta para buscar por filtrp y parametro en la tabla de usuarios
     public ArrayList<Usuario> buscarcaracter(String parametro, String filtro) {
         ArrayList listaPersona = new ArrayList();
+        
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
@@ -123,7 +124,9 @@ public class Consultas_usuario extends Conexion {
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery(sql);
+            
             while (rs.next()) {
+                
                 Usuario user = new Usuario();
                 user.setIdusuario(Integer.parseInt(rs.getString(1)));
                 user.setNombre(rs.getString("nombre"));
@@ -135,6 +138,9 @@ public class Consultas_usuario extends Conexion {
                 } else {
                     user.setSobreestado("Desactivado");
                 }
+                
+                
+                
                 listaPersona.add(user);
             }
             return listaPersona;
@@ -250,6 +256,7 @@ public class Consultas_usuario extends Conexion {
                 Rol rol = new Rol();
                 rol.setIdroles(rs.getInt("idroles"));
                 rol.setRol(rs.getString("rol"));
+                
                 lista.add(rol);
             }
             return lista;
