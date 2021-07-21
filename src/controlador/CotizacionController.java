@@ -9,17 +9,13 @@ import Consultas.Consultas_Clase;
 import Consultas.Consultas_Cliente;
 import Consultas.Consultas_Configuraciones;
 import Consultas.Consultas_Directorio;
-import Consultas.Consultas_Documentos;
 import Consultas.Consultas_Llego;
 import Consultas.Consultas_Mac;
 import Consultas.Consultas_Modalidad;
-import Consultas.Consultas_Servicios;
-import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import Organizador.Recursos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -32,20 +28,15 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import javax.swing.table.DefaultTableModel;
 import modelo.Clases;
 import modelo.Cliente;
 import modelo.Configuracion;
 import modelo.Directorio;
-import modelo.Documentos;
 import modelo.Llego;
 import modelo.Mac;
 import modelo.Modalidad;
-import modelo.Servicio;
-import modelo.Servicios_has_Clientes_Potenciales;
 import modelo.Usuario;
 import vistas.Cotizaciones;
-import vistas.Formulario;
 
 /**
  *
@@ -77,6 +68,7 @@ public class CotizacionController implements ActionListener {
     ArrayList<Modalidad> modulo4;
     ArrayList<Llego> modulo;
     ArrayList<Clases> modulo1;
+    boolean estado = false;
 
     public CotizacionController(Cliente modelo, Consultas_Cliente consultas,
             Cotizaciones formulario, Configuracion mconfiguracion, Consultas_Configuraciones cconfiguraciones, Usuario user) {
@@ -91,12 +83,12 @@ public class CotizacionController implements ActionListener {
         this.formulario.abrirdirectorio.addActionListener(this);
     }
 
-    public void iniciar() {
+    public void iniciar() throws IOException, org.json.simple.parser.ParseException {
         busqueda();
         formulario.setTitle("Cliente Potencial");
         formulario.setLocationRelativeTo(null);
 
-        mconfig = cconfiguraciones.cargar(mmac.conseguirMAC());
+        mconfig = cconfiguraciones.cargar();
         for (int i = 0; i < mconfig.size(); i++) {
             if (mconfig.get(i).getModulo().toLowerCase().equals("cotizaciones")) {
                 directorio = mconfig.get(i).getDirectorio();
@@ -136,56 +128,58 @@ public class CotizacionController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == formulario.guardarformulario) {
-            modelo.setEmpresa(formulario.txtempresa.getText());
-            if (formulario.txtnombre.getText().equals("")) {
-                JOptionPane.showMessageDialog(formulario, "El campo nombre esta vacio");
-            } else {
-                modelo.setNombre(formulario.txtnombre.getText());
-                modelo.setCelular1(formulario.txtcelular1.getText());
-                modelo.setNumero_cotizacion(formulario.numero_cotizacion.getText());
-                modelo.setEmail(formulario.txtemail.getText());
-                Clases modulo = (Clases) formulario.txtclase.getModel().getSelectedItem();
-                modelo.setClase(modulo.getClase());
-                Llego modulo1 = (Llego) formulario.txtllego.getModel().getSelectedItem();
-                modelo.setLlego(modulo1.getLlego());
-                modelo.setCliente_potencial(1);
-                modelo.setRutacotizacon(File.separator + formulario.txtnombre.getText().toUpperCase().trim());
-                if (formulario.programa.isSelected()) {
-                    modelo.setPrograma(1);
+            if (!estado) {
+                modelo.setEmpresa(formulario.txtempresa.getText());
+                if (formulario.txtnombre.getText().equals("")) {
+                    JOptionPane.showMessageDialog(formulario, "El campo nombre esta vacio");
                 } else {
-                    modelo.setPrograma(0);
-                }
-                if (formulario.equipos.isSelected()) {
-                    modelo.setEqipos(1);
-                } else {
-                    modelo.setEqipos(0);
-                }
-                modelo.setNumero_cotizacion(formulario.numero_cotizacion.getText());
-                if (formulario.txtfecha_cotizacion.getDate() != null) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                    modelo.setFechacotizacion(sdf.format(formulario.txtfecha_cotizacion.getDate()));
-                    Modalidad modulo2 = (Modalidad) formulario.txtmodalidad.getModel().getSelectedItem();
-                    modelo.setModalidad(modulo2.getModalidad());
-                    modelo.setNotas(formulario.txtnotas.getText());
-                    modelo.setContacto(formulario.txtcontacto.getText());
-                    modelo.setUsuarios_idusuario(user.getIdusuario());
-                    try {
-                        //guardando el cliente
-                        if (consultas.registrar(modelo)) {
-                            crear_carpeta(directorio);
-                            JOptionPane.showMessageDialog(null, "registro guardado");
-                            formulario.dispose();
-                            this.limpiar();
-                            
-                        } else {
-                            JOptionPane.showMessageDialog(null, "error guardado el cliente");
-                        }
-                    } catch (IOException ex) {
-                        Logger.getLogger(CotizacionController.class.getName()).log(Level.SEVERE, null, ex);
+                    modelo.setNombre(formulario.txtnombre.getText());
+                    modelo.setCelular1(formulario.txtcelular1.getText());
+                    modelo.setNumero_cotizacion(formulario.numero_cotizacion.getText());
+                    modelo.setEmail(formulario.txtemail.getText());
+                    Clases modulo = (Clases) formulario.txtclase.getModel().getSelectedItem();
+                    modelo.setClase(modulo.getClase());
+                    Llego modulo1 = (Llego) formulario.txtllego.getModel().getSelectedItem();
+                    modelo.setLlego(modulo1.getLlego());
+                    modelo.setCliente_potencial(1);
+                    modelo.setRutacotizacon(File.separator + formulario.txtnombre.getText().toUpperCase().trim());
+                    if (formulario.programa.isSelected()) {
+                        modelo.setPrograma(1);
+                    } else {
+                        modelo.setPrograma(0);
                     }
+                    if (formulario.equipos.isSelected()) {
+                        modelo.setEqipos(1);
+                    } else {
+                        modelo.setEqipos(0);
+                    }
+                    modelo.setNumero_cotizacion(formulario.numero_cotizacion.getText());
+                    if (formulario.txtfecha_cotizacion.getDate() != null) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                        modelo.setFechacotizacion(sdf.format(formulario.txtfecha_cotizacion.getDate()));
+                        Modalidad modulo2 = (Modalidad) formulario.txtmodalidad.getModel().getSelectedItem();
+                        modelo.setModalidad(modulo2.getModalidad());
+                        modelo.setNotas(formulario.txtnotas.getText());
+                        modelo.setContacto(formulario.txtcontacto.getText());
+                        modelo.setUsuarios_idusuario(user.getIdusuario());
+                        try {
+                            //guardando el cliente
+                            if (consultas.registrar(modelo)) {
+                                crear_carpeta(directorio);
+                                JOptionPane.showMessageDialog(null, "registro guardado");
+                                formulario.dispose();
+                                this.limpiar();
 
-                } else {
-                    JOptionPane.showMessageDialog(formulario, "El campo fecha esta vacio");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "error guardado el cliente");
+                            }
+                        } catch (IOException ex) {
+                            Logger.getLogger(CotizacionController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(formulario, "El campo fecha esta vacio");
+                    }
                 }
             }
 
@@ -254,6 +248,7 @@ public class CotizacionController implements ActionListener {
     public void consultanombre() {
         modelo.setNombre(formulario.txtnombre.getText());
         if (consultas.buscarnombrecliente(modelo)) {
+            estado = true;
             System.out.println(modelo.getCelular1());
             formulario.txtnombre.setText(modelo.getNombre());
             formulario.txtcelular1.setText(modelo.getCelular1());
@@ -299,6 +294,15 @@ public class CotizacionController implements ActionListener {
                 }
             }
 
+        } else {
+            estado = false;
+            formulario.txtcelular1.setText("");
+            formulario.numero_cotizacion.setText("");
+            formulario.txtemail.setText("");
+            formulario.txtempresa.setText("");
+            formulario.txtnotas.setText("");
+            formulario.txtcelular1.setText("");
+            formulario.txtfecha_cotizacion.setCalendar(null);
         }
     }
 

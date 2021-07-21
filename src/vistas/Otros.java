@@ -24,30 +24,6 @@ public class Otros extends javax.swing.JDialog {
     public void transparecia() {
         panelotros.setOpaque(false);
 
-        eliminaragregarclase.setOpaque(false);
-        eliminaragregarclase.setContentAreaFilled(false);
-
-        eliminarllego.setOpaque(false);
-        eliminarllego.setContentAreaFilled(false);
-
-        agregarclase.setOpaque(false);
-        agregarclase.setContentAreaFilled(false);
-
-        eliminarclase.setOpaque(false);
-        eliminarclase.setContentAreaFilled(false);
-
-        guardarclase.setOpaque(false);
-        guardarclase.setContentAreaFilled(false);
-
-        agregarllego.setOpaque(false);
-        agregarllego.setContentAreaFilled(false);
-
-        eliminaragregarllego.setOpaque(false);
-        eliminaragregarllego.setContentAreaFilled(false);
-
-        guardarllego.setOpaque(false);
-        guardarllego.setContentAreaFilled(false);
-
     }
 
     /**
@@ -75,28 +51,55 @@ public class Otros extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        agregarclases = new javax.swing.JMenuItem();
+        eliminarclases = new javax.swing.JMenuItem();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        agregarllego = new javax.swing.JMenuItem();
+        eliminarllego = new javax.swing.JMenuItem();
+        jPopupMenu3 = new javax.swing.JPopupMenu();
+        agregarmodalidad = new javax.swing.JMenuItem();
+        eliminarmodalidad = new javax.swing.JMenuItem();
+        jPopupMenu4 = new javax.swing.JPopupMenu();
+        agregarservicio = new javax.swing.JMenuItem();
+        eliminarservicio = new javax.swing.JMenuItem();
         panelotros = new javax.swing.JPanel();
-        agregarclase = new javax.swing.JButton();
-        eliminaragregarclase = new javax.swing.JButton();
-        guardarclase = new javax.swing.JButton();
-        agregarllego = new javax.swing.JButton();
-        eliminaragregarllego = new javax.swing.JButton();
-        guardarllego = new javax.swing.JButton();
-        eliminarclase = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaagregarclase = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tablaclase = new javax.swing.JTable();
-        txtregistrarclase = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tablallego = new javax.swing.JTable();
-        txtregistrarllego = new javax.swing.JTextField();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tablaagregarllego = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        arbolclase = new javax.swing.JTree();
         jPanel2 = new javax.swing.JPanel();
-        eliminarllego = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        arbolllego = new javax.swing.JTree();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        arbolmodalidad = new javax.swing.JTree();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        arbolservicios = new javax.swing.JTree();
+
+        agregarclases.setText("Agregar Clase");
+        jPopupMenu1.add(agregarclases);
+
+        eliminarclases.setText("Eliminar Clase");
+        jPopupMenu1.add(eliminarclases);
+
+        agregarllego.setText("Agregar Llego");
+        jPopupMenu2.add(agregarllego);
+
+        eliminarllego.setText("Eliminar Llego");
+        jPopupMenu2.add(eliminarllego);
+
+        agregarmodalidad.setText("Agregar Modalidad ");
+        jPopupMenu3.add(agregarmodalidad);
+
+        eliminarmodalidad.setText("Eliminar Modalidad");
+        jPopupMenu3.add(eliminarmodalidad);
+
+        agregarservicio.setText("Agregar Servicio");
+        jPopupMenu4.add(agregarservicio);
+
+        eliminarservicio.setText("Eliminar Servicio");
+        jPopupMenu4.add(eliminarservicio);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -104,157 +107,120 @@ public class Otros extends javax.swing.JDialog {
         panelotros.setName("panelotros"); // NOI18N
         panelotros.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        agregarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        agregarclase.setText("Agregar");
-        agregarclase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(agregarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 110, 57));
-
-        eliminaragregarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        eliminaragregarclase.setText("Eliminar");
-        eliminaragregarclase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(eliminaragregarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 110, -1));
-
-        guardarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
-        guardarclase.setText("Guardar");
-        guardarclase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(guardarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 110, -1));
-
-        agregarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        agregarllego.setText("Agregar");
-        agregarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(agregarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 270, 110, 57));
-
-        eliminaragregarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        eliminaragregarllego.setText("Eliminar");
-        eliminaragregarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(eliminaragregarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, 110, -1));
-
-        guardarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
-        guardarllego.setText("Guardar");
-        guardarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
-        panelotros.add(guardarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 420, 110, -1));
-
-        eliminarclase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        eliminarclase.setText("Eliminar");
-        eliminarclase.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        panelotros.add(eliminarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, -1));
-
-        tablaagregarclase.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaagregarclase);
-
-        panelotros.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 170, 180));
-
-        tablaclase.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tablaclase.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        jScrollPane2.setViewportView(tablaclase);
-
-        panelotros.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 170, 210));
-        panelotros.add(txtregistrarclase, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 170, -1));
-
-        tablallego.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        jScrollPane3.setViewportView(tablallego);
-
-        panelotros.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 170, 210));
-        panelotros.add(txtregistrarllego, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, 170, -1));
-
-        tablaagregarllego.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        jScrollPane4.setViewportView(tablaagregarllego);
-
-        panelotros.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, 170, 180));
-
-        jPanel1.setBackground(new java.awt.Color(159, 213, 209));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jScrollPane5.setBackground(new java.awt.Color(255, 102, 153));
+        jScrollPane5.setBorder(null);
+
+        arbolclase.setBackground(new java.awt.Color(240, 240, 240));
+        arbolclase.setMaximumSize(new java.awt.Dimension(0, 0));
+        arbolclase.setPreferredSize(new java.awt.Dimension(0, 0));
+        jScrollPane5.setViewportView(arbolclase);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 658, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 228, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        panelotros.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 660, 230));
+        panelotros.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 170, 460));
 
-        jPanel2.setBackground(new java.awt.Color(159, 213, 209));
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        eliminarllego.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        eliminarllego.setText("Eliminar");
-        eliminarllego.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(210, 43, 7), 2));
+        jScrollPane1.setBorder(null);
+
+        arbolllego.setBackground(new java.awt.Color(240, 240, 240));
+        jScrollPane1.setViewportView(arbolllego);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(eliminarllego, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(548, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(eliminarllego)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE))
         );
 
-        panelotros.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 660, 230));
+        panelotros.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 170, 460));
 
-        jLabel1.setBackground(new java.awt.Color(255, 51, 51));
-        panelotros.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -20, 708, 522));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jScrollPane2.setBorder(null);
+
+        arbolmodalidad.setBackground(new java.awt.Color(240, 240, 240));
+        jScrollPane2.setViewportView(arbolmodalidad);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        panelotros.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 260, 460));
+
+        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jScrollPane3.setBorder(null);
+
+        arbolservicios.setBackground(new java.awt.Color(240, 240, 240));
+        jScrollPane3.setViewportView(arbolservicios);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+
+        panelotros.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 220, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelotros, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelotros, javax.swing.GroupLayout.PREFERRED_SIZE, 894, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,27 +275,30 @@ public class Otros extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton agregarclase;
-    public javax.swing.JButton agregarllego;
-    public javax.swing.JButton eliminaragregarclase;
-    public javax.swing.JButton eliminaragregarllego;
-    public javax.swing.JButton eliminarclase;
-    public javax.swing.JButton eliminarllego;
-    public javax.swing.JButton guardarclase;
-    public javax.swing.JButton guardarllego;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JMenuItem agregarclases;
+    public javax.swing.JMenuItem agregarllego;
+    public javax.swing.JMenuItem agregarmodalidad;
+    public javax.swing.JMenuItem agregarservicio;
+    public javax.swing.JTree arbolclase;
+    public javax.swing.JTree arbolllego;
+    public javax.swing.JTree arbolmodalidad;
+    public javax.swing.JTree arbolservicios;
+    public javax.swing.JMenuItem eliminarclases;
+    public javax.swing.JMenuItem eliminarllego;
+    public javax.swing.JMenuItem eliminarmodalidad;
+    public javax.swing.JMenuItem eliminarservicio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    public javax.swing.JPopupMenu jPopupMenu1;
+    public javax.swing.JPopupMenu jPopupMenu2;
+    public javax.swing.JPopupMenu jPopupMenu3;
+    public javax.swing.JPopupMenu jPopupMenu4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JPanel panelotros;
-    public javax.swing.JTable tablaagregarclase;
-    public javax.swing.JTable tablaagregarllego;
-    public javax.swing.JTable tablaclase;
-    public javax.swing.JTable tablallego;
-    public javax.swing.JTextField txtregistrarclase;
-    public javax.swing.JTextField txtregistrarllego;
     // End of variables declaration//GEN-END:variables
 }

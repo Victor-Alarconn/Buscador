@@ -6,6 +6,7 @@
 package Consultas;
 
 import Conexion.Conexion;
+import Organizador.Recursos;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,8 @@ import modelo.Servicios_has_Clientes_Potenciales;
  * @author Yonathan Carvajal
  */
 public class Consultas_Servicios_has_Clientes_Potenciales extends Conexion {
+    
+    Recursos recursos = new Recursos();
 
     public boolean registrarservicio(Servicios_has_Clientes_Potenciales servicios) {
         PreparedStatement ps = null;
@@ -29,6 +32,7 @@ public class Consultas_Servicios_has_Clientes_Potenciales extends Conexion {
             ps.setInt(1, servicios.getServicios_idservicio());
             ps.setInt(2, servicios.getClientes_potenciales_idclientes_potenciales());
             ps.execute();
+            jsonserviciosclientes();
             return true;
         } catch (SQLException e) {
             System.err.println(e);
@@ -70,6 +74,29 @@ public class Consultas_Servicios_has_Clientes_Potenciales extends Conexion {
         }
 
     }
+    
+    //retorna json de servicios clientes
+    public void jsonserviciosclientes() {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = "SELECT servicio,servicios.idservicio,clientes_potenciales_idclientes_potenciales  FROM servicios_has_clientes_potenciales INNER JOIN"
+                + " servicios ON servicios.idservicio=servicios_has_clientes_potenciales.servicios_idservicio ";
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            rs = ps.executeQuery(sql);
+            recursos.crearjson(rs, "serviciosclientes.json");
+        } catch (SQLException e) {
+            System.err.println(e);
+            //return null;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
 
     public boolean eliminar(Servicios_has_Clientes_Potenciales servicios) {
         PreparedStatement ps = null;
@@ -81,6 +108,7 @@ public class Consultas_Servicios_has_Clientes_Potenciales extends Conexion {
             ps.setInt(1, servicios.getServicios_idservicio());
             ps.setInt(2, servicios.getClientes_potenciales_idclientes_potenciales());
             ps.execute();
+            jsonserviciosclientes();
             return true;
         } catch (SQLException e) {
             System.err.println(e);

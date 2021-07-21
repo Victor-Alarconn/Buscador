@@ -6,8 +6,10 @@
 package Consultas;
 
 import Conexion.Conexion;
+import Organizador.Recursos;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelo.Documentos;
@@ -17,7 +19,9 @@ import modelo.Documentos;
  * @author Yonathan Carvajal
  */
 public class Consultas_Documentos extends Conexion {
-    
+
+    Recursos recursos = new Recursos();
+
     //consulta para registrar
     public boolean registrar(Documentos documentos) {
         PreparedStatement ps = null;
@@ -45,7 +49,7 @@ public class Consultas_Documentos extends Conexion {
         }
 
     }
-    
+
     //consulta para buscar documentos
     public boolean buscar(int documentos) {
         PreparedStatement ps = null;
@@ -72,9 +76,30 @@ public class Consultas_Documentos extends Conexion {
         }
 
     }
-    
+
+    public void jsondocumentos() throws IOException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = " SELECT * FROM documentos ";
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            rs = ps.executeQuery(sql);
+            recursos.crearjson(rs, "documentos.json");
+        } catch (SQLException e) {
+            System.err.println(e);
+            //return null;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
+
     //consulta para eliminar
-    public boolean eliminar(Documentos documentos){
+    public boolean eliminar(Documentos documentos) {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = " DELETE FROM documentos  WHERE iddocumentos=? ";
@@ -86,14 +111,14 @@ public class Consultas_Documentos extends Conexion {
         } catch (SQLException e) {
             System.err.println(e);
             return false;
-        } finally{
+        } finally {
             try {
                 con.close();
             } catch (SQLException e) {
-                 System.err.println(e);
+                System.err.println(e);
             }
         }
-        
+
     }
-    
+
 }

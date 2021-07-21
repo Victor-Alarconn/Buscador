@@ -24,7 +24,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
@@ -40,11 +43,10 @@ import modelo.Mac;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import modelo.Usuario;
+import org.json.simple.parser.ParseException;
 import vistas.Busqueda;
-import vistas.Configuraciones;
 import vistas.Editarcliente;
-import vistas.Formulario;
-import vistas.Principal;
+
 
 /**
  *
@@ -99,7 +101,7 @@ public class BusquedaController implements ActionListener {
         this.busqueda.editarcliente.addActionListener(this);
     }
 
-    public void iniciar() {
+    public void iniciar() throws IOException, ParseException {
         busqueda.setTitle("Busqueda");
         busqueda.setLocationRelativeTo(null);
         model.addColumn("ID");
@@ -136,7 +138,7 @@ public class BusquedaController implements ActionListener {
         busqueda.tabladatos.getColumn("clientepotencial").setWidth(0);
         busqueda.tabladatos.getColumn("clientepotencial").setMinWidth(0);
         busqueda.tabladatos.getColumn("clientepotencial").setMaxWidth(0);
-        mconfig = cconfiguraciones.cargar(mmac.conseguirMAC());
+        mconfig = cconfiguraciones.cargar();
         for (int i = 0; i < mconfig.size(); i++) {
             if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
                 directorio = mconfig.get(i).getDirectorio();
@@ -179,7 +181,13 @@ public class BusquedaController implements ActionListener {
                 EditarClienteController editarcli = new EditarClienteController(modelo, mods, shcp, documento,
                         mconfiguracion, servicio, consulta, cshcp, cdocumentos, cconfiguraciones, conc, conl,
                         editarcliente);
-                editarcli.iniciar();
+                try {
+                    editarcli.iniciar();
+                } catch (IOException ex) {
+                    Logger.getLogger(BusquedaController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(BusquedaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 editarcliente.setVisible(true);
             }
 

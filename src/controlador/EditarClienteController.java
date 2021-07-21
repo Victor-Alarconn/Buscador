@@ -117,7 +117,7 @@ public class EditarClienteController implements ActionListener {
         this.formulario.clientepotencial.addActionListener(this);
     }
 
-    public void iniciar() {
+    public void iniciar() throws IOException, org.json.simple.parser.ParseException {
         formulario.setTitle("Editar Cliente Potencial");
         formulario.setLocationRelativeTo(null);
         model.addColumn("Servicio/Producto");
@@ -131,9 +131,9 @@ public class EditarClienteController implements ActionListener {
         formulario.tabladocumentos1.getColumn("ID").setWidth(0);
         formulario.tabladocumentos1.getColumn("ID").setMinWidth(0);
         formulario.tabladocumentos1.getColumn("ID").setMaxWidth(0);
-//        formulario.tablaservicios1.getColumn("ID").setWidth(0);
-//        formulario.tablaservicios1.getColumn("ID").setMinWidth(0);
-//        formulario.tablaservicios1.getColumn("ID").setMaxWidth(0);
+        formulario.tablaservicios1.getColumn("ID").setWidth(0);
+        formulario.tablaservicios1.getColumn("ID").setMinWidth(0);
+        formulario.tablaservicios1.getColumn("ID").setMaxWidth(0);
         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
         formulario.tablaservicios1.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
@@ -160,7 +160,7 @@ public class EditarClienteController implements ActionListener {
         for (int i = 0; i < lista.size(); i++) {
             formulario.txtservicio1.addItem(lista.get(i));
         }
-        mconfig = cconfiguraciones.cargar(mmac.conseguirMAC());
+        mconfig = cconfiguraciones.cargar();
         for (int i = 0; i < mconfig.size(); i++) {
             if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
                 directorio = mconfig.get(i).getDirectorio();

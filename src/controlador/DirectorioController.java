@@ -12,6 +12,7 @@ import Organizador.Recursos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -25,8 +26,8 @@ import modelo.Configuracion;
 import modelo.Directorio;
 import modelo.Mac;
 import modelo.Usuario;
+import org.json.simple.parser.ParseException;
 import vistas.Carpetas;
-import vistas.Configuraciones;
 
 /**
  *
@@ -65,7 +66,7 @@ public class DirectorioController implements ActionListener {
 
     }
 
-    public void iniciar() {
+    public void iniciar() throws IOException, ParseException {
         vdirectorio.setTitle("Carpetas");
         vdirectorio.setLocationRelativeTo(null);
         //cambia los iconos del arbol
@@ -74,7 +75,7 @@ public class DirectorioController implements ActionListener {
         render.setOpenIcon(new ImageIcon(getClass().getResource("/img/treeopen.png")));
         render.setClosedIcon(new ImageIcon(getClass().getResource("/img/folderstree.png")));
 
-        mconfig = cconfiguraciones.cargar(mmac.conseguirMAC());
+        mconfig = cconfiguraciones.cargar();
         for (int i = 0; i < mconfig.size(); i++) {
             if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
                 directorio = mconfig.get(i).getDirectorio();
@@ -159,7 +160,6 @@ public class DirectorioController implements ActionListener {
 
     public void busqueda() {
         ArrayList<Directorio> directorio;
-        Object[] dato = new Object[2];
         directorio = cdirectorio.llenar();
 
         raiz = new DefaultMutableTreeNode("Directorios Cliente");

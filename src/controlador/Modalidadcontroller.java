@@ -6,19 +6,26 @@
 package controlador;
 
 import Consultas.Consultas_Modalidad;
+import static controlador.ClaseController.personalizado;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
 import modelo.Modalidad;
 import modelo.Usuario;
-import vistas.VModalidad;
+import vistas.Otros;
+
 
 /**
  *
@@ -28,45 +35,40 @@ public class Modalidadcontroller implements ActionListener {
 
     private final Modalidad mm;
     private final Consultas_Modalidad mcm;
-    private final VModalidad vm;
+    private final Otros vm;
     private final Usuario user;
 
-    DefaultTableModel modell = new DefaultTableModel();
-    DefaultTableModel modell2 = new DefaultTableModel();
+    final static Color personalizado = new Color(240, 240, 240);
+    DefaultMutableTreeNode raiz;
+    DefaultTreeModel modelotree;
 
-    public Modalidadcontroller(Modalidad mm, Consultas_Modalidad mcm, VModalidad vm, Usuario user) {
+    public Modalidadcontroller(Modalidad mm, Consultas_Modalidad mcm, Otros vm, Usuario user) {
         this.mm = mm;
         this.mcm = mcm;
         this.vm = vm;
         this.user = user;
         this.vm.agregarmodalidad.addActionListener(this);
-        this.vm.eliminaragregarmodalidad.addActionListener(this);
         this.vm.eliminarmodalidad.addActionListener(this);
-        this.vm.guardarmodalidad.addActionListener(this);
     }
 
     public void iniciar() {
-        vm.setTitle("Modalidad");
         vm.setLocationRelativeTo(null);
-        modell.addColumn("Agregar Modalidad");
-        modell2.addColumn("ID");
-        modell2.addColumn("Modalidades");
-        vm.tablaagregarmodalidad.setModel(modell);
-        vm.tablamodalidad.setModel(modell2);
-        vm.tablamodalidad.getColumn("ID").setWidth(0);
-        vm.tablamodalidad.getColumn("ID").setMinWidth(0);
-        vm.tablamodalidad.getColumn("ID").setMaxWidth(0);
+        DefaultTreeCellRenderer render = (DefaultTreeCellRenderer) vm.arbolmodalidad.getCellRenderer();
+        render.setLeafIcon(new ImageIcon(getClass().getResource("/img/nube.png")));
+        render.setOpenIcon(new ImageIcon(getClass().getResource("/img/nube.png")));
+        render.setClosedIcon(new ImageIcon(getClass().getResource("/img/nube.png")));
+        render.setPreferredSize(new Dimension(200, 42));
+        render.setBackgroundNonSelectionColor(personalizado);
+        MouseClicked();
         busqueda();
-        DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
-        modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
-        vm.tablamodalidad.getColumnModel().getColumn(1).setCellRenderer(modelocentrar);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == vm.guardarmodalidad) {
-            for (int i = 0; i < vm.tablaagregarmodalidad.getRowCount(); i++) {
-                mm.setModalidad(vm.tablaagregarmodalidad.getValueAt(i, 0).toString());
+        if (e.getSource() == vm.agregarmodalidad) {
+            String carpeta = JOptionPane.showInputDialog(vm, "Ingrese el nombre del Modalidad");
+            if (!carpeta.equals("")) {
+                mm.setModalidad(carpeta);
                 mm.setUsuarios_idusuario(user.getIdusuario());
                 try {
                     if (!mcm.registrar(mm)) {
@@ -75,79 +77,64 @@ public class Modalidadcontroller implements ActionListener {
                 } catch (IOException ex) {
                     Logger.getLogger(Modalidadcontroller.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                busqueda();
             }
-            limpiaragregarllego();
-            limpiartablallego();
-            busqueda();
 
         } else {
-            Object[] dato = new Object[5];
-            if (e.getSource() == vm.agregarmodalidad) {
-                if (vm.txtregistrarmodalidad.getText().length() != 0) {
-                    dato[0] = vm.txtregistrarmodalidad.getText();
-                    modell.addRow(dato);
-                    vm.tablaagregarmodalidad.setModel(modell);
-                    vm.txtregistrarmodalidad.setText("");
-                }
-            } else {
-                if (e.getSource() == vm.eliminarmodalidad) {
-                    int fila = vm.tablamodalidad.getSelectedRow();
-                    if (fila >= 0) {
-                        mm.setIdmodalidad(Integer.parseInt(String.valueOf(vm.tablamodalidad.getValueAt(fila, 0))));
-                        try {
-                            if (mcm.eliminar(mm)) {
-                                if (fila >= 0) {
-                                    modell2.removeRow(fila);
-                                }
-                            }
-                        } catch (IOException ex) {
-                            Logger.getLogger(Modalidadcontroller.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+            if (e.getSource() == vm.eliminarmodalidad) {
+                DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) vm.arbolmodalidad.getSelectionPath().getLastPathComponent();
+                Modalidad modalidad = (Modalidad) nodo.getUserObject();
+                try {
+                    if (mcm.eliminar(modalidad)) {
+                        busqueda();
                     }
-
-                } else {
-                    if (e.getSource() == vm.eliminaragregarmodalidad) {
-                        int fila = vm.tablaagregarmodalidad.getSelectedRow();
-                        if (fila >= 0) {
-                            modell.removeRow(fila);
-                        } else {
-                            JOptionPane.showMessageDialog(vm, "La tabla esta vacia o no sea seleccionado nada aun!");
-                        }
-                    } else {
-                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(ServicioController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
 
     public void busqueda() {
-        ArrayList<Modalidad> llego = mcm.llenar();
+        ArrayList<Modalidad> moda = mcm.llenar();
+        raiz = new DefaultMutableTreeNode("Modalidades");
         Object[] dato = new Object[2];
-        for (int i = 0; i < llego.size(); i++) {
-            dato[0] = llego.get(i).getIdmodalidad();
-            dato[1] = llego.get(i).getModalidad();
-            modell2.addRow(dato);
-            vm.tablamodalidad.setModel(modell2);
+        for (int i = 0; i < moda.size(); i++) {
+            DefaultMutableTreeNode modalidad = new DefaultMutableTreeNode();
+            modalidad.setUserObject(moda.get(i));
+            raiz.add(modalidad);
         }
-
+        modelotree = new DefaultTreeModel(raiz);
+        vm.arbolmodalidad.setModel(modelotree);
     }
+    
+    public void MouseClicked() {
+        MouseListener mouseListener = new MouseListener() {
 
-    public void limpiaragregarllego() {
-        if (vm.tablaagregarmodalidad.getRowCount() >= 0) {
-            int count = vm.tablaagregarmodalidad.getRowCount();
-            for (int i = 0; i < count; i++) {
-                modell.removeRow(0);
+            @Override
+            public void mouseReleased(MouseEvent e) {
             }
-        }
-    }
 
-    public void limpiartablallego() {
-        if (vm.tablamodalidad.getRowCount() >= 0) {
-            int count = vm.tablamodalidad.getRowCount();
-            for (int i = 0; i < count; i++) {
-                modell2.removeRow(0);
+            @Override
+            public void mousePressed(MouseEvent e) {
             }
-        }
-    }
 
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (vm.arbolmodalidad.getSelectionRows().length > 0) {
+                    vm.arbolmodalidad.setComponentPopupMenu(vm.jPopupMenu3);
+                }
+                // MouseEvent.BUTTON3 es el boton derecho
+            }
+        };
+        vm.arbolmodalidad.addMouseListener(mouseListener);
+    }
 }

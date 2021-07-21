@@ -5,13 +5,20 @@
  */
 package modelo;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import static java.time.Clock.system;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -39,9 +46,24 @@ public class Mac {
     }
 
     //metodo para traer la mac del equipo
-    public String conseguirMAC() {
+    public String conseguirMAC() throws IOException {
+        File fichero = new File("temp/mac.json");
+        BufferedReader fil;
+        try {
+            fil = new BufferedReader(new FileReader(fichero));
+            String linea;
+            while ((linea = fil.readLine()) != null) {
+                fil.close();
+                return linea;
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Mac.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void almacenarmac() throws IOException {
         String firstInterface = null;
-        Map<String, String> addressByNetwork = new HashMap<>();
         Enumeration<NetworkInterface> networkInterfaces;
         try {
             networkInterfaces = NetworkInterface.getNetworkInterfaces();
@@ -53,25 +75,24 @@ public class Mac {
                     for (int i = 0; i < bmac.length; i++) {
                         sb.append(String.format("%02X%s", bmac[i], (i < bmac.length - 1) ? "-" : ""));
                     }
-
                     if (sb.toString().isEmpty() == false) {
-                        addressByNetwork.put(network.getName(), sb.toString());
-                    }
-
-                    if (sb.toString().isEmpty() == false && firstInterface == null) {
-                        firstInterface = network.getName();
+                        try {
+                            File archivo = new File("temp" + File.separator + "mac.json");
+                            archivo.deleteOnExit();
+                            FileWriter fw = new FileWriter(archivo);
+                            fw.write(sb.toString());
+                            fw.close();
+                            break;
+                        } catch (Exception e) {
+                        }
                     }
                 }
             }
         } catch (SocketException e) {
             System.out.println(e.getMessage());
         }
-
-        if (firstInterface != null) {
-            String MACAddress = addressByNetwork.get(firstInterface);
-            return MACAddress;
-        }
-        return null;
     }
+
+   
 
 }

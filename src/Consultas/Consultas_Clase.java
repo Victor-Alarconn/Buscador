@@ -11,14 +11,12 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.Clases;
-import modelo.Modulo;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -93,7 +91,6 @@ public class Consultas_Clase extends Conexion {
             ps = (PreparedStatement) con.prepareStatement(sql);
             rs = ps.executeQuery(sql);
             recursos.crearjson(rs, "clases.json");
-
         } catch (SQLException e) {
             System.err.println(e);
             //return null;

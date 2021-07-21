@@ -6,19 +6,23 @@
 package controlador;
 
 import Consultas.Consultas_Servicios;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
 import modelo.Servicio;
 import modelo.Usuario;
-import vistas.Configuraciones;
-import vistas.Principal;
-import vistas.Servicios;
+import vistas.Otros;
 
 /**
  *
@@ -28,38 +32,41 @@ public class ServicioController implements ActionListener {
 
     private final Servicio modelo;
     private final Consultas_Servicios consulta;
-    private final Servicios vservicios;
+    private final Otros vservicios;
     private final Usuario user;
 
-    DefaultTableModel model = new DefaultTableModel();
-    DefaultTableModel model2 = new DefaultTableModel();
+    DefaultMutableTreeNode raiz;
+    DefaultTreeModel modelotree;
+    final static Color personalizado = new Color(240,240,240);
+    
 
-    public ServicioController(Servicio modelo, Consultas_Servicios consulta, Servicios vservicios, Usuario user) {
+    public ServicioController(Servicio modelo, Consultas_Servicios consulta, Otros vservicios, Usuario user) {
         this.modelo = modelo;
         this.consulta = consulta;
         this.vservicios = vservicios;
         this.user = user;
-        this.vservicios.registrarservicio.addActionListener(this);
-        this.vservicios.eliminartablaagregarservicio.addActionListener(this);
-        this.vservicios.eliminartablaservico.addActionListener(this);
-        this.vservicios.guardarservicios.addActionListener(this);
+        this.vservicios.agregarservicio.addActionListener(this);
+        this.vservicios.eliminarservicio.addActionListener(this);
     }
 
     public void iniciar() {
-        vservicios.setTitle(" Crear servicios");
         vservicios.setLocationRelativeTo(null);
-        model.addColumn("Servicios");
-        model2.addColumn("Agregar Servicios");
-        vservicios.tablatotalservicios.setModel(model);
-        vservicios.tablaagregarservicios.setModel(model2);
+        //cambia los iconos del arbol
+        MouseClicked();
+        DefaultTreeCellRenderer render = (DefaultTreeCellRenderer) vservicios.arbolservicios.getCellRenderer();
+        render.setLeafIcon(new ImageIcon(getClass().getResource("/img/servicestree.png")));
+        render.setOpenIcon(new ImageIcon(getClass().getResource("/img/packsoft.png")));
+        render.setClosedIcon(new ImageIcon(getClass().getResource("/img/servicestree.png")));
+        render.setBackgroundNonSelectionColor(personalizado);
         busqueda();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == vservicios.guardarservicios) {
-            for (int i = 0; i < vservicios.tablaagregarservicios.getRowCount(); i++) {
-                modelo.setServicio(vservicios.tablaagregarservicios.getValueAt(i, 0).toString());
+        if (e.getSource() == vservicios.agregarservicio) {
+            String carpeta = JOptionPane.showInputDialog(vservicios, "Ingrese el nombre del servicio");
+            if (!carpeta.equals("")) {
+                modelo.setServicio(carpeta);
                 modelo.setUsuarios_idusuarios(user.getIdusuario());
                 try {
                     if (!consulta.registrar(modelo)) {
@@ -68,76 +75,65 @@ public class ServicioController implements ActionListener {
                 } catch (IOException ex) {
                     Logger.getLogger(ServicioController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-
-            limpiaragregarcarpeta();
-            limpiartablacarpeta();
-            busqueda();
-        }
-
-        Object[] dato = new Object[5];
-        if (e.getSource() == vservicios.registrarservicio) {
-            if (vservicios.txtregistroservicio.getText().length() != 0) {
-                dato[0] = vservicios.txtregistroservicio.getText();
-                model2.addRow(dato);
-                vservicios.tablaagregarservicios.setModel(model2);
-                vservicios.txtregistroservicio.setText("");
+                busqueda();
             }
 
         }
 
-        if (e.getSource() == vservicios.eliminartablaagregarservicio) {
-            int fila = vservicios.tablaagregarservicios.getSelectedRow();
-            if (fila >= 0) {
-                model2.removeRow(fila);
-            } else {
-                JOptionPane.showMessageDialog(vservicios, "La tabla esta vacia o no sea seleccionado nada aun!");
-            }
-        }
-
-        if (e.getSource() == vservicios.eliminartablaservico) {
-            int fila = vservicios.tablatotalservicios.getSelectedRow();
-            if (fila >= 0) {
-                modelo.setServicio(String.valueOf(vservicios.tablatotalservicios.getValueAt(fila, 0)));
-                try {
-                    if (consulta.eliminar(modelo)) {
-                        model.removeRow(fila);
-                    }
-                } catch (IOException ex) {
-                    Logger.getLogger(ServicioController.class.getName()).log(Level.SEVERE, null, ex);
+        if (e.getSource() == vservicios.eliminarservicio) {
+            DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) vservicios.arbolservicios.getSelectionPath().getLastPathComponent();
+            Servicio servi = (Servicio) nodo.getUserObject();
+            try {
+                if (consulta.eliminar(servi)) {
+                    busqueda();
                 }
+            } catch (IOException ex) {
+                Logger.getLogger(ServicioController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
     }
 
     public void busqueda() {
         ArrayList<Servicio> servicio;
+        raiz = new DefaultMutableTreeNode("Servicios");
         Object[] dato = new Object[1];
-        servicio =consulta.llenar();
+        servicio = consulta.llenar();
         for (int i = 0; i < servicio.size(); i++) {
-            dato[0] = servicio.get(i).getServicio();
-            model.addRow(dato);
-            vservicios.tablatotalservicios.setModel(model);
+            DefaultMutableTreeNode servi = new DefaultMutableTreeNode();
+            servi.setUserObject(servicio.get(i));
+            raiz.add(servi);
         }
+        modelotree = new DefaultTreeModel(raiz);
+        vservicios.arbolservicios.setModel(modelotree);
 
     }
+    public void MouseClicked() {
+        MouseListener mouseListener = new MouseListener() {
 
-    public void limpiaragregarcarpeta() {
-        if (vservicios.tablaagregarservicios.getRowCount() >= 0) {
-            int count = vservicios.tablaagregarservicios.getRowCount();
-            for (int i = 0; i < count; i++) {
-                model2.removeRow(0);
+            @Override
+            public void mouseReleased(MouseEvent e) {
             }
-        }
-    }
 
-    public void limpiartablacarpeta() {
-        if (vservicios.tablatotalservicios.getRowCount() >= 0) {
-            int count = vservicios.tablatotalservicios.getRowCount();
-            for (int i = 0; i < count; i++) {
-                model.removeRow(0);
+            @Override
+            public void mousePressed(MouseEvent e) {
             }
-        }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (vservicios.arbolservicios.getSelectionRows().length > 0) {
+                    vservicios.arbolservicios.setComponentPopupMenu(vservicios.jPopupMenu4);
+                }
+                // MouseEvent.BUTTON3 es el boton derecho
+            }
+        };
+        vservicios.arbolservicios.addMouseListener(mouseListener);
     }
 }

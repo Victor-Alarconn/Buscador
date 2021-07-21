@@ -80,15 +80,17 @@ public class Consultas_Servicios extends Conexion {
         }
 
     }
+    
+     
 
     //consultas eliminar
     public boolean eliminar(Servicio servicio) throws IOException {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = " DELETE FROM servicios  WHERE servicio=? ";
+        String sql = " DELETE FROM servicios  WHERE idservicio=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
-            ps.setString(1, servicio.getServicio());
+            ps.setInt(1, servicio.getIdservicio());
             ps.execute();
             jsonservicios();
             return true;

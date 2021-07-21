@@ -55,13 +55,11 @@ this.getRootPane().registerKeyboardAction(e -> {
         checkconfiguraciones = new javax.swing.JCheckBox();
         checkcrearcliente = new javax.swing.JCheckBox();
         checkcarpetas = new javax.swing.JCheckBox();
-        checkservicios = new javax.swing.JCheckBox();
         checkotros = new javax.swing.JCheckBox();
         checkcrearusuario = new javax.swing.JCheckBox();
         checkeditarcliente = new javax.swing.JCheckBox();
         checkdesactivar = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
-        checkmodalidad = new javax.swing.JCheckBox();
         checkbuscar = new javax.swing.JCheckBox();
         checkbackups = new javax.swing.JCheckBox();
         txtnombre = new javax.swing.JTextField();
@@ -89,9 +87,6 @@ this.getRootPane().registerKeyboardAction(e -> {
         checkcarpetas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkcarpetas.setText("Carpetas");
 
-        checkservicios.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        checkservicios.setText("Servicios");
-
         checkotros.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkotros.setText("Otros");
         checkotros.addActionListener(new java.awt.event.ActionListener() {
@@ -108,9 +103,6 @@ this.getRootPane().registerKeyboardAction(e -> {
 
         checkdesactivar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkdesactivar.setText("Desactivar");
-
-        checkmodalidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        checkmodalidad.setText("Modalidad");
 
         checkbuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         checkbuscar.setText("Buscar");
@@ -149,18 +141,16 @@ this.getRootPane().registerKeyboardAction(e -> {
                         .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(checkconfiguraciones)
                             .addComponent(checkcarpetas)
-                            .addComponent(checkcrearusuario)
-                            .addComponent(checkbackups))
+                            .addComponent(checkcrearusuario))
                         .addGap(18, 18, 18)
                         .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(checkotros)
                             .addGroup(paneluserLayout.createSequentialGroup()
                                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkservicios)
-                                    .addComponent(checkmodalidad))
-                                .addGap(22, 22, 22)
+                                    .addComponent(checkbackups)
+                                    .addComponent(checkbuscar))
+                                .addGap(34, 34, 34)
                                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(checkbuscar)
                                     .addComponent(checkcrearcliente)
                                     .addComponent(checkeditarcliente))))))
                 .addContainerGap(46, Short.MAX_VALUE))
@@ -193,20 +183,16 @@ this.getRootPane().registerKeyboardAction(e -> {
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(checkconfiguraciones)
                     .addComponent(checkcrearcliente)
-                    .addComponent(checkservicios))
+                    .addComponent(checkbuscar))
                 .addGap(18, 18, 18)
                 .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(checkcarpetas)
                     .addComponent(checkeditarcliente)
                     .addComponent(checkotros))
                 .addGap(18, 18, 18)
-                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(checkcrearusuario)
-                    .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(checkmodalidad)
-                        .addComponent(checkbuscar)))
-                .addGap(18, 18, 18)
-                .addComponent(checkbackups)
+                    .addComponent(checkbackups))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(paneluserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(paneluserLayout.createSequentialGroup()
@@ -288,9 +274,7 @@ this.getRootPane().registerKeyboardAction(e -> {
     public javax.swing.JCheckBox checkcrearusuario;
     public javax.swing.JCheckBox checkdesactivar;
     public javax.swing.JCheckBox checkeditarcliente;
-    public javax.swing.JCheckBox checkmodalidad;
     public javax.swing.JCheckBox checkotros;
-    public javax.swing.JCheckBox checkservicios;
     public javax.swing.JButton guardaruser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

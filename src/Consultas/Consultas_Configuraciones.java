@@ -6,21 +6,33 @@
 package Consultas;
 
 import Conexion.Conexion;
+import Organizador.Recursos;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.Configuracion;
+import modelo.Mac;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
  * @author Yonathan Carvajal
  */
 public class Consultas_Configuraciones extends Conexion {
-
+    
+    Recursos recursos = new Recursos();
+    Mac mmac = new Mac();
     //consulta para registrar 
-    public boolean registrar(Configuracion configuraciones) {
+    public boolean registrar(Configuracion configuraciones) throws IOException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
@@ -32,6 +44,7 @@ public class Consultas_Configuraciones extends Conexion {
             ps.setInt(3, configuraciones.getModulos_idmodulos());
             ps.setInt(4, configuraciones.getMacs_idmacs());
             ps.execute();
+            jsonconfiguraciones();
             return true;
         } catch (SQLException e) {
             System.err.println(e);
@@ -44,13 +57,13 @@ public class Consultas_Configuraciones extends Conexion {
             }
         }
     }
-
-    //consulta para cargar las configuraciones en la vista
-    public ArrayList<Configuracion> cargar(String mac) {
-        ArrayList lista = new ArrayList();
+    
+    
+    public void jsonconfiguraciones() throws IOException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
+        String mac = mmac.conseguirMAC();
         String sql = " SELECT idconfiguracion,directorio,modulo FROM configuracion "
                 + "inner join modulos "
                 + "on modulos_idmodulo=modulos.idmodulo "
@@ -58,18 +71,11 @@ public class Consultas_Configuraciones extends Conexion {
                 + "on  configuracion.macs_idmacs=macs.idmacs WHERE macs.macs='" + mac + "'";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while(rs.next()) {
-                Configuracion configuraciones = new Configuracion();
-                configuraciones.setDirectorio(rs.getString("directorio"));
-                configuraciones.setIdconfiguracion(rs.getInt("idconfiguracion"));
-                configuraciones.setModulo(rs.getString("modulo"));
-                lista.add(configuraciones);
-            }
-            return lista;
+            rs = ps.executeQuery(sql);
+            recursos.crearjson(rs, "configuraciones.json");
         } catch (SQLException e) {
             System.err.println(e);
-          
+            //return null;
         } finally {
             try {
                 con.close();
@@ -77,11 +83,37 @@ public class Consultas_Configuraciones extends Conexion {
                 System.err.println(e);
             }
         }
-        return null;
     }
 
+    //consulta para cargar las configuraciones en la vista
+    public ArrayList<Configuracion> cargar() throws ParseException {
+        ArrayList lista = new ArrayList();
+        JSONParser parser = new JSONParser();
+        try (Reader reader = new FileReader("temp" + File.separator + "configuraciones.json")) {
+            JSONArray jsonarray = (JSONArray) parser.parse(reader);
+            for (int i = 0; i < jsonarray.size(); i++) {
+                JSONObject jsonObject = (JSONObject) jsonarray.get(i);
+                Long myLong = (Long) jsonObject.get("idconfiguracion");
+                Configuracion configuraciones = new Configuracion();
+                configuraciones.setDirectorio((String) jsonObject.get("directorio"));
+                configuraciones.setIdconfiguracion(Math.toIntExact(myLong));
+                configuraciones.setModulo((String) jsonObject.get("modulo"));
+                lista.add(configuraciones);
+            }
+            return lista;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+        
+    }
+    
+
     //consulta para modificar las configuraciones
-    public boolean modificar(Configuracion configuraciones) {
+    public boolean modificar(Configuracion configuraciones) throws IOException {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = "UPDATE  configuracion SET directorio=?, modulos_idmodulo=?, usuarios_idusuario=? WHERE idconfiguracion=? ";
@@ -92,6 +124,7 @@ public class Consultas_Configuraciones extends Conexion {
             ps.setInt(3, configuraciones.getUsuarios_idusuario());
             ps.setInt(4, configuraciones.getIdconfiguracion());
             ps.execute();
+            jsonconfiguraciones();
             return true;
         } catch (SQLException e) {
             System.err.println(e);
@@ -107,13 +140,14 @@ public class Consultas_Configuraciones extends Conexion {
     }
     
     //consulta para eliminar
-    public boolean eliminar(Configuracion configuraciones) {
+    public boolean eliminar(Configuracion configuraciones) throws IOException {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = " DELETE FROM configuracion  WHERE idconfiguracion=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setInt(1, configuraciones.getIdconfiguracion());
+            jsonconfiguraciones();
             ps.execute();
             return true;
         } catch (SQLException e) {

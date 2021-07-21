@@ -31,8 +31,8 @@ public class Consultas_usuario extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = "INSERT INTO usuarios (nombre,contrasena,roles_idroles,"
-                + "configuraciones,crearcliente,carpetas,servicios,"
-                + "otros,crearusuarios,editarcliente,modalidad,buscar,"
+                + "configuraciones,crearcliente,carpetas,"
+                + "otros,crearusuarios,editarcliente,buscar,"
                 + "backups) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
@@ -42,13 +42,11 @@ public class Consultas_usuario extends Conexion {
             ps.setInt(4, user.getConfiguraciones());
             ps.setInt(5, user.getCrearcliente());
             ps.setInt(6, user.getCarpetas());
-            ps.setInt(7, user.getServicios());
-            ps.setInt(8, user.getOtros());
-            ps.setInt(9, user.getCrearusuarios());
-            ps.setInt(10, user.getEditarcliente());
-            ps.setInt(11, user.getModalidad());
-            ps.setInt(12, user.getBuscar());
-            ps.setInt(13, user.getBackups());
+            ps.setInt(7, user.getOtros());
+            ps.setInt(8, user.getCrearusuarios());
+            ps.setInt(9, user.getEditarcliente());
+            ps.setInt(10, user.getBuscar());
+            ps.setInt(11, user.getBackups());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -289,12 +287,10 @@ public class Consultas_usuario extends Conexion {
                 user.setConfiguraciones(Integer.parseInt(rs.getString("configuraciones")));
                 user.setCrearcliente(Integer.parseInt(rs.getString("crearcliente")));
                 user.setCarpetas(Integer.parseInt(rs.getString("carpetas")));
-                user.setServicios(Integer.parseInt(rs.getString("servicios")));
                 user.setOtros(Integer.parseInt(rs.getString("otros")));
                 user.setCrearusuarios(Integer.parseInt(rs.getString("crearusuarios")));
                 user.setEditarcliente(Integer.parseInt(rs.getString("editarcliente")));
                 user.setIdusuario(Integer.parseInt(rs.getString("idusuario")));
-                user.setModalidad(rs.getInt("modalidad"));
                 user.setBuscar(rs.getInt("buscar"));
                 user.setBackups(rs.getInt("backups"));
                 Principal principal = new Principal(user);
@@ -385,12 +381,10 @@ public class Consultas_usuario extends Conexion {
                 user.setConfiguraciones(Integer.parseInt(rs.getString("configuraciones")));
                 user.setCrearcliente(Integer.parseInt(rs.getString("crearcliente")));
                 user.setCarpetas(Integer.parseInt(rs.getString("carpetas")));
-                user.setServicios(Integer.parseInt(rs.getString("servicios")));
                 user.setOtros(Integer.parseInt(rs.getString("otros")));
                 user.setCrearusuarios(Integer.parseInt(rs.getString("crearusuarios")));
                 user.setEditarcliente(Integer.parseInt(rs.getString("editarcliente")));
                 user.setEstado(Integer.parseInt(rs.getString("estado")));
-                user.setModalidad(rs.getInt("modalidad"));
                 user.setBuscar(rs.getInt("buscar"));
                 user.setBackups(rs.getInt("backups"));
                 user.setSobrerol(rs.getString("rol"));
@@ -415,8 +409,8 @@ public class Consultas_usuario extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = "UPDATE  usuarios SET  nombre=?,"
-                + " roles_idroles=?, configuraciones=?, crearcliente=?, carpetas=?, servicios=?, otros=?,"
-                + "crearusuarios=?, editarcliente=?, estado=?,modalidad=?,buscar=?,backups=? WHERE idusuario=? ";
+                + " roles_idroles=?, configuraciones=?, crearcliente=?, carpetas=?, otros=?,"
+                + "crearusuarios=?, editarcliente=?, estado=?,buscar=?,backups=? WHERE idusuario=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, user.getNombre());
@@ -424,15 +418,13 @@ public class Consultas_usuario extends Conexion {
             ps.setInt(3, user.getConfiguraciones());
             ps.setInt(4, user.getCrearcliente());
             ps.setInt(5, user.getCarpetas());
-            ps.setInt(6, user.getServicios());
-            ps.setInt(7, user.getOtros());
-            ps.setInt(8, user.getCrearusuarios());
-            ps.setInt(9, user.getEditarcliente());
-            ps.setInt(10, user.getEstado());
-            ps.setInt(11, user.getModalidad());
-            ps.setInt(12, user.getBuscar());
-            ps.setInt(13, user.getBackups());
-            ps.setInt(14, user.getIdusuario());
+            ps.setInt(6, user.getOtros());
+            ps.setInt(7, user.getCrearusuarios());
+            ps.setInt(8, user.getEditarcliente());
+            ps.setInt(9, user.getEstado());
+            ps.setInt(10, user.getBuscar());
+            ps.setInt(11, user.getBackups());
+            ps.setInt(12, user.getIdusuario());
             ps.execute();
             if (!user.getContrasena().equals("")) {
                 this.modificarcontrasena(user);

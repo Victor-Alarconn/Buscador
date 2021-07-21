@@ -44,17 +44,12 @@ public class Principal extends javax.swing.JFrame {
         otro.setOpaque(false);
         otro.setContentAreaFilled(false);
 
-        servicios.setOpaque(false);
-        servicios.setContentAreaFilled(false);
-
         crearusuario.setOpaque(false);
         crearusuario.setContentAreaFilled(false);
 
         busqueda.setOpaque(false);
         busqueda.setContentAreaFilled(false);
 
-        modalidad.setOpaque(false);
-        modalidad.setContentAreaFilled(false);
 
         carpetas.setOpaque(false);
         carpetas.setContentAreaFilled(false);
@@ -119,17 +114,11 @@ public class Principal extends javax.swing.JFrame {
                 if (modu.getCarpetas() == 0) {
                     carpetas.setVisible(false);
                 }
-                if (modu.getServicios() == 0) {
-                    servicios.setVisible(false);
-                }
                 if (modu.getOtros() == 0) {
                     otro.setVisible(false);
                 }
                 if (modu.getCrearusuarios() == 0) {
                     crearusuario.setVisible(false);
-                }
-                if (modu.getModalidad() == 0) {
-                    modalidad.setVisible(false);
                 }
                 if (modu.getBuscar() == 0) {
                     busqueda.setVisible(false);
@@ -156,12 +145,10 @@ public class Principal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         crearcliente = new javax.swing.JButton();
         configuraciones1 = new javax.swing.JButton();
-        servicios = new javax.swing.JButton();
         crearusuario = new javax.swing.JButton();
         carpetas = new javax.swing.JButton();
         otro = new javax.swing.JButton();
         busqueda = new javax.swing.JButton();
-        modalidad = new javax.swing.JButton();
         backup = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -201,13 +188,6 @@ public class Principal extends javax.swing.JFrame {
         });
         jPanel1.add(configuraciones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 170, 70));
 
-        servicios.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        servicios.setForeground(new java.awt.Color(255, 255, 255));
-        servicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/service.png"))); // NOI18N
-        servicios.setText("Servicios");
-        servicios.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 170, 70));
-
         crearusuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         crearusuario.setForeground(new java.awt.Color(255, 255, 255));
         crearusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/useradd.png"))); // NOI18N
@@ -218,14 +198,14 @@ public class Principal extends javax.swing.JFrame {
                 crearusuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, 170, -1));
+        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 170, -1));
 
         carpetas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         carpetas.setForeground(new java.awt.Color(255, 255, 255));
         carpetas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/folders.png"))); // NOI18N
         carpetas.setText("Carpetas");
         carpetas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(carpetas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, 170, 70));
+        jPanel1.add(carpetas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 170, 70));
 
         otro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         otro.setForeground(new java.awt.Color(255, 255, 255));
@@ -240,15 +220,7 @@ public class Principal extends javax.swing.JFrame {
         busqueda.setText("Buscar");
         busqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         busqueda.setOpaque(false);
-        jPanel1.add(busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 170, 70));
-
-        modalidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        modalidad.setForeground(new java.awt.Color(255, 255, 255));
-        modalidad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/trespuntos.png"))); // NOI18N
-        modalidad.setText("Modalidad");
-        modalidad.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        modalidad.setOpaque(false);
-        jPanel1.add(modalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 170, 70));
+        jPanel1.add(busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 170, 70));
 
         backup.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         backup.setForeground(new java.awt.Color(255, 255, 255));
@@ -256,7 +228,7 @@ public class Principal extends javax.swing.JFrame {
         backup.setText("Backup's");
         backup.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         backup.setOpaque(false);
-        jPanel1.add(backup, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 170, 70));
+        jPanel1.add(backup, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, 170, 70));
 
         jPanel2.setBackground(new java.awt.Color(209, 235, 247));
 
@@ -305,7 +277,7 @@ public class Principal extends javax.swing.JFrame {
         Cotizaciones.setText("Cotizaciones");
         Cotizaciones.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         Cotizaciones.setOpaque(false);
-        jPanel1.add(Cotizaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, 170, 70));
+        jPanel1.add(Cotizaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 170, 70));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -393,9 +365,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    public javax.swing.JButton modalidad;
     public javax.swing.JButton otro;
-    public javax.swing.JButton servicios;
     // End of variables declaration//GEN-END:variables
 
 }

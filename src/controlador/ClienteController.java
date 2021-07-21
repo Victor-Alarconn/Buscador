@@ -45,6 +45,7 @@ import modelo.Llego;
 import modelo.Mac;
 import modelo.Modalidad;
 import modelo.Usuario;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -111,10 +112,10 @@ public class ClienteController implements ActionListener {
 
     }
 
-    public void iniciar() {
+    public void iniciar() throws IOException, ParseException {
         formulario.setTitle("Cliente");
         formulario.setLocationRelativeTo(null);
-//        keyevent();
+        keyevent();
         formulario.mensajenit.setVisible(false);
         model.addColumn("Servicio/Producto");
         formulario.tablaservicios.setModel(model);
@@ -126,7 +127,7 @@ public class ClienteController implements ActionListener {
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
         formulario.tablaservicios.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
 
-        mconfig = cconfiguraciones.cargar(mmac.conseguirMAC());
+        mconfig = cconfiguraciones.cargar();
         for (int i = 0; i < mconfig.size(); i++) {
             if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
                 directorio = mconfig.get(i).getDirectorio();

@@ -68,11 +68,6 @@ public class CrearUsuarioController implements ActionListener {
                 } else {
                     modelo.setCarpetas(0);
                 }
-                if (vista.checkservicios.isSelected()) {
-                    modelo.setServicios(1);
-                } else {
-                    modelo.setServicios(0);
-                }
                 if (vista.checkotros.isSelected()) {
                     modelo.setOtros(1);
                 } else {
@@ -87,11 +82,6 @@ public class CrearUsuarioController implements ActionListener {
                     modelo.setEditarcliente(1);
                 } else {
                     modelo.setEditarcliente(0);
-                }
-                if (vista.checkmodalidad.isSelected()) {
-                    modelo.setModalidad(1);
-                } else {
-                    modelo.setModalidad(0);
                 }
                 if (vista.checkbuscar.isSelected()) {
                     modelo.setBuscar(1);
@@ -121,11 +111,9 @@ public class CrearUsuarioController implements ActionListener {
                     vista.checkconfiguraciones.setVisible(false);
                     vista.checkcrearcliente.setVisible(false);
                     vista.checkcarpetas.setVisible(false);
-                    vista.checkservicios.setVisible(false);
                     vista.checkotros.setVisible(false);
                     vista.checkcrearusuario.setVisible(false);
                     vista.checkeditarcliente.setVisible(false);
-                    vista.checkmodalidad.setVisible(false);
                     vista.checkbuscar.setVisible(false);
                     vista.checkbackups.setVisible(false);
                     
@@ -134,11 +122,9 @@ public class CrearUsuarioController implements ActionListener {
                         vista.checkconfiguraciones.setVisible(true);
                         vista.checkcrearcliente.setVisible(true);
                         vista.checkcarpetas.setVisible(true);
-                        vista.checkservicios.setVisible(true);
                         vista.checkotros.setVisible(true);
                         vista.checkcrearusuario.setVisible(true);
                         vista.checkeditarcliente.setVisible(true);
-                        vista.checkmodalidad.setVisible(true);
                         vista.checkbuscar.setVisible(true);
                         vista.checkbackups.setVisible(true);
                         
@@ -156,7 +142,6 @@ public class CrearUsuarioController implements ActionListener {
         vista.checkconfiguraciones.setSelected(false);
         vista.checkcrearcliente.setSelected(false);
         vista.checkcarpetas.setSelected(false);
-        vista.checkservicios.setSelected(false);
         vista.checkotros.setSelected(false);
         vista.checkcrearusuario.setSelected(false);
         vista.checkeditarcliente.setSelected(false);

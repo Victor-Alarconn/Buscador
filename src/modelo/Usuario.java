@@ -19,23 +19,13 @@ public class Usuario {
     private int configuraciones;
     private int crearcliente;
     private int carpetas;
-    private int servicios;
     private int otros;
     private int crearusuarios;
     private int editarcliente;
     private int estado; 
     private String sobreestado;
-    private int modalidad;
     private int buscar;
     private int backups;
-
-    public int getModalidad() {
-        return modalidad;
-    }
-
-    public void setModalidad(int modalidad) {
-        this.modalidad = modalidad;
-    }
 
     public int getBuscar() {
         return buscar;
@@ -112,15 +102,7 @@ public class Usuario {
     public void setCarpetas(int carpetas) {
         this.carpetas = carpetas;
     }
-
-    public int getServicios() {
-        return servicios;
-    }
-
-    public void setServicios(int servicios) {
-        this.servicios = servicios;
-    }
-
+    
     public int getOtros() {
         return otros;
     }

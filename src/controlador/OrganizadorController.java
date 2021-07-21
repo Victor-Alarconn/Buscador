@@ -19,12 +19,10 @@ import Organizador.Recursos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.File;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import modelo.Clases;
 import modelo.Cliente;
@@ -36,19 +34,17 @@ import modelo.Modalidad;
 import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import modelo.Usuario;
+import org.json.simple.parser.ParseException;
 import vistas.Backups;
 import vistas.Busqueda;
 import vistas.Carpetas;
 import vistas.Configuraciones;
 import vistas.Cotizaciones;
-import vistas.Crearusuario;
-import vistas.Editarcliente;
 import vistas.Formulario;
 import vistas.Otros;
 import vistas.Principal;
-import vistas.Servicios;
+
 import vistas.Usuarios;
-import vistas.VModalidad;
 
 /**
  *
@@ -91,8 +87,15 @@ public class OrganizadorController implements ActionListener {
 
 //    Usuario mod = new Usuario();
     Consultas_usuario consultasusuario = new Consultas_usuario();
-    
-     
+    //instaciar vistas 
+    Busqueda busqueda;
+    Otros otro;
+    Usuarios usu;
+    Carpetas carpeta;
+    Formulario formulario;
+    Configuraciones vc;
+    Backups backup;
+    Cotizaciones cotizaciones;
 
     public OrganizadorController(Cliente modelo, Consultas_Cliente consulta, Principal principal, Usuario mod) {
         this.modelo = modelo;
@@ -102,11 +105,9 @@ public class OrganizadorController implements ActionListener {
         this.principal.crearcliente.addActionListener(this);
         this.principal.configuraciones1.addActionListener(this);
         this.principal.carpetas.addActionListener(this);
-        this.principal.servicios.addActionListener(this);
         this.principal.crearusuario.addActionListener(this);
         this.principal.otro.addActionListener(this);
         this.principal.busqueda.addActionListener(this);
-        this.principal.modalidad.addActionListener(this);
         this.principal.backup.addActionListener(this);
         this.principal.Cotizaciones.addActionListener(this);
 
@@ -114,87 +115,149 @@ public class OrganizadorController implements ActionListener {
 
     public void iniciar() {
         principal.setTitle("Organizador");
-       
+        //inicializar vistas 
+        busqueda = new Busqueda(principal, false);
+        busqueda.setVisible(false);
+        otro = new Otros(principal, false);
+        otro.setVisible(false);
+        usu = new Usuarios(principal, false);
+        usu.setVisible(false);
+        carpeta = new Carpetas(principal, false);
+        carpeta.setVisible(false);
+        formulario = new Formulario(principal, false);
+        formulario.setVisible(false);
+        vc = new Configuraciones(principal, true);
+        vc.setVisible(false);
+        backup = new Backups(principal, false);
+        backup.setVisible(false);
+        cotizaciones = new Cotizaciones(principal, false);
+        cotizaciones.setVisible(false);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-            
+        //abre el formulario para registrar el cliente 
         if (e.getSource() == principal.crearcliente) {
-            Formulario formulario  = new Formulario(principal, false);
-            ClienteController controlador = new ClienteController(modelo, consulta,
-                    formulario, servicio, mods, shcp, cshcp, documento, cdocumentos,
-                    mconfiguracion, cconfiguraciones, mod);
-            controlador.iniciar();
-            formulario.setVisible(true);
+            if (!formulario.isVisible() && !vc.isVisible()) {
+                formulario = new Formulario(principal, false);
+                ClienteController controlador = new ClienteController(modelo, consulta,
+                        formulario, servicio, mods, shcp, cshcp, documento, cdocumentos,
+                        mconfiguracion, cconfiguraciones, mod);
+                try {
+                    controlador.iniciar();
+                } catch (IOException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                formulario.setVisible(true);
+            }
         }
-
+        //abre la configuracion de rutas 
         if (e.getSource() == principal.configuraciones1) {
-            Configuraciones vc = new Configuraciones(principal, true);
-            ConfiguracionesController ccontroller = new ConfiguracionesController(mconfiguracion, cconfiguraciones, vc, mod);
-            ccontroller.iniciar();
-            vc.setVisible(true);
+            if (!vc.isVisible() && !formulario.isVisible() && !backup.isVisible() && !cotizaciones.isVisible()) {
+                vc = new Configuraciones(principal, true);
+                ConfiguracionesController ccontroller = new ConfiguracionesController(mconfiguracion, cconfiguraciones, vc, mod);
+                try {
+                    ccontroller.iniciar();
+                } catch (IOException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                vc.setVisible(true);
+            }
         }
-
+        //abre la vista de busqueda de clientes 
         if (e.getSource() == principal.busqueda) {
-            Busqueda busqueda = new Busqueda(principal, false);
-            BusquedaController bc = new BusquedaController(modelo, consulta, busqueda);
-            bc.iniciar();
-            busqueda.setVisible(true);
+            if (!busqueda.isVisible()) {
+                busqueda = new Busqueda(principal, false);
+                BusquedaController bc = new BusquedaController(modelo, consulta, busqueda);
+                try {
+                    bc.iniciar();
+                } catch (IOException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                busqueda.setVisible(true);
+            }
         }
-        if (e.getSource() == principal.servicios) {
-            Servicios servic = new Servicios(principal, false);
-            ServicioController ctrl = new ServicioController(mods, servicio, servic, mod);
-            ctrl.iniciar();
-            servic.setVisible(true);
-        }
+        //abre las vista de otros
         if (e.getSource() == principal.otro) {
-            Otros otro = new Otros(principal, false);
-            ClaseController cctrl = new ClaseController(conc, mc, otro, mod);
-            cctrl.iniciar();
+            if (!otro.isVisible()) {
+                otro = new Otros(principal, false);
+                ClaseController cctrl = new ClaseController(conc, mc, otro, mod);
+                cctrl.iniciar();
 
-            LlegoController lc = new LlegoController(ml, conl, otro, mod);
-            lc.iniciar();
-            otro.setVisible(true);
+                LlegoController lc = new LlegoController(ml, conl, otro, mod);
+                lc.iniciar();
 
-        }
-        //boton agregar modalidad 
-        if (e.getSource() == principal.modalidad) {
-           
-                VModalidad vm = new VModalidad(principal, false);
-                Modalidadcontroller mc = new Modalidadcontroller(mm, mcm, vm, mod);
+                Modalidadcontroller mc = new Modalidadcontroller(mm, mcm, otro, mod);
                 mc.iniciar();
-                vm.setVisible(true);
-            
+
+                ServicioController ctrl = new ServicioController(mods, servicio, otro, mod);
+                ctrl.iniciar();
+                otro.setVisible(true);
+            }
 
         }
 
+        //abre la vista de usuarios 
         if (e.getSource() == principal.crearusuario) {
+            if (!usu.isVisible()) {
+                usu = new Usuarios(principal, false);
+                UsuariosController uc = new UsuariosController(mod, consultasusuario, usu);
+                uc.iniciar();
+                usu.setVisible(true);
+            }
 
-            Usuarios usu = new Usuarios(principal, false);
-            UsuariosController uc = new UsuariosController(mod, consultasusuario, usu);
-            uc.iniciar();
-            usu.setVisible(true);
         }
-
+        //abre la vista de carpetas 
         if (e.getSource() == principal.carpetas) {
-            Carpetas carpeta = new Carpetas(principal, false);
-            DirectorioController ctrc = new DirectorioController(modc1, mod1, carpeta, mod);
-            ctrc.iniciar();
-            carpeta.setVisible(true);
+            if (!carpeta.isVisible()) {
+                carpeta = new Carpetas(principal, false);
+                DirectorioController ctrc = new DirectorioController(modc1, mod1, carpeta, mod);
+                try {
+                    ctrc.iniciar();
+                } catch (IOException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                carpeta.setVisible(true);
+            }
         }
+        //abre el formulario de backups 
         if (e.getSource() == principal.backup) {
-            Backups backup = new Backups(principal, false);
-            BackupController cbackup = new BackupController(consulta, modelo, backup, mod);
-            cbackup.iniciar();
-            backup.setVisible(true);
+            if (!backup.isVisible()) {
+                backup = new Backups(principal, false);
+                BackupController cbackup = new BackupController(consulta, modelo, backup, mod);
+                try {
+                    cbackup.iniciar();
+                } catch (IOException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                backup.setVisible(true);
+            }
         }
+        //abre el formularo de cotizaciones 
         if (e.getSource() == principal.Cotizaciones) {
-            Cotizaciones cotizacones = new Cotizaciones(principal, false);
-            CotizacionController cp = new CotizacionController(modelo, consulta,
-                    cotizacones, mconfiguracion, cconfiguraciones, mod);
-            cp.iniciar();
-            cotizacones.setVisible(true);
+            if (!cotizaciones.isVisible()) {
+                cotizaciones = new Cotizaciones(principal, false);
+                CotizacionController cp = new CotizacionController(modelo, consulta,
+                        cotizaciones, mconfiguracion, cconfiguraciones, mod);
+                try {
+                    cp.iniciar();
+                } catch (IOException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                cotizaciones.setVisible(true);
+            }
         }
     }
 

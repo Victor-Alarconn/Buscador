@@ -59,6 +59,7 @@ public class Conexion {
                     continue;
                 }
             }
+            fil.close();
         } catch (IOException e) {
             System.out.println("Ha ocurrido un Error" + e);
             JOptionPane.showMessageDialog(null, "Se ha producido un error", "ERROR", JOptionPane.WARNING_MESSAGE);

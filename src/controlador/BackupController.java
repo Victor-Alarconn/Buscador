@@ -25,6 +25,7 @@ import modelo.Cliente;
 import modelo.Configuracion;
 import modelo.Mac;
 import modelo.Usuario;
+import org.json.simple.parser.ParseException;
 import vistas.Backups;
 
 /**
@@ -58,13 +59,13 @@ public class BackupController implements ActionListener {
         this.vbackups.abrirdirectorio.addActionListener(this);
     }
 
-    public void iniciar() {
+    public void iniciar() throws IOException, ParseException {
         vbackups.setTitle("Backup's");
         vbackups.setLocationRelativeTo(null);
         model.addColumn("Backup");
         vbackups.tablabackups.setModel(model);
         mmac.setMacs(mmac.conseguirMAC());
-        mconfig = cconfiguraciones.cargar(mmac.conseguirMAC());
+        mconfig = cconfiguraciones.cargar();
         for (int i = 0; i < mconfig.size(); i++) {
             if (mconfig.get(i).getModulo().toLowerCase().equals("backups")) {
                 directorio = mconfig.get(i).getDirectorio();

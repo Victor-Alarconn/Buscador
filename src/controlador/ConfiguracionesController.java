@@ -14,9 +14,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -26,6 +29,7 @@ import modelo.Configuracion;
 import modelo.Mac;
 import modelo.Modulo;
 import modelo.Usuario;
+import org.json.simple.parser.ParseException;
 import vistas.Configuraciones;
 
 /**
@@ -64,7 +68,7 @@ public class ConfiguracionesController implements ActionListener {
         this.vconfiguraciones.eliminarMenuItem1.addActionListener(this);
     }
 
-    public void iniciar() {
+    public void iniciar() throws IOException, ParseException {
         vconfiguraciones.setTitle("Configuraciones");
         vconfiguraciones.setResizable(false);
         modell.addColumn("ID");
@@ -102,11 +106,15 @@ public class ConfiguracionesController implements ActionListener {
 
                 if (!vconfiguraciones.idtabla.getText().equals("")) {
                     mconfiguraciones.setIdconfiguracion(Integer.parseInt(vconfiguraciones.idtabla.getText()));
-                    if (cconfiguraciones.modificar(mconfiguraciones)) {
-                        JOptionPane.showMessageDialog(vconfiguraciones, "registro modificado");
-                        limpiarcampos();
-                    } else {
-                        JOptionPane.showMessageDialog(vconfiguraciones, "Error modificando el registro");
+                    try {
+                        if (cconfiguraciones.modificar(mconfiguraciones)) {
+                            JOptionPane.showMessageDialog(vconfiguraciones, "registro modificado");
+                            limpiarcampos();
+                        } else {
+                            JOptionPane.showMessageDialog(vconfiguraciones, "Error modificando el registro");
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(ConfiguracionesController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     boolean estado = false;
@@ -121,19 +129,27 @@ public class ConfiguracionesController implements ActionListener {
                             }
                         }
                         if (estado) {
+                            try {
+                                if (cconfiguraciones.registrar(mconfiguraciones)) {
+                                    JOptionPane.showMessageDialog(vconfiguraciones, "registro guardado");
+                                    limpiarcampos();
+                                } else {
+                                    JOptionPane.showMessageDialog(vconfiguraciones, "error al guardando");
+                                }
+                            } catch (IOException ex) {
+                                Logger.getLogger(ConfiguracionesController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    } else {
+                        try {
                             if (cconfiguraciones.registrar(mconfiguraciones)) {
                                 JOptionPane.showMessageDialog(vconfiguraciones, "registro guardado");
                                 limpiarcampos();
                             } else {
                                 JOptionPane.showMessageDialog(vconfiguraciones, "error al guardando");
                             }
-                        }
-                    } else {
-                        if (cconfiguraciones.registrar(mconfiguraciones)) {
-                            JOptionPane.showMessageDialog(vconfiguraciones, "registro guardado");
-                            limpiarcampos();
-                        } else {
-                            JOptionPane.showMessageDialog(vconfiguraciones, "error al guardando");
+                        } catch (IOException ex) {
+                            Logger.getLogger(ConfiguracionesController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
 
@@ -149,7 +165,13 @@ public class ConfiguracionesController implements ActionListener {
                 cu.modificar(u);
             }
             limpiartabla();
-            this.config();
+            try {
+                this.config();
+            } catch (IOException ex) {
+                Logger.getLogger(ConfiguracionesController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(ConfiguracionesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         if (e.getSource() == vconfiguraciones.btnbuscar) {
@@ -178,16 +200,26 @@ public class ConfiguracionesController implements ActionListener {
         if (e.getSource() == vconfiguraciones.eliminarMenuItem1) {
             int fila = vconfiguraciones.tablarutas.getSelectedRow();
             mconfiguraciones.setIdconfiguracion(Integer.parseInt(vconfiguraciones.tablarutas.getValueAt(fila, 0).toString()));
-            if (cconfiguraciones.eliminar(mconfiguraciones)) {
-                limpiartabla();
-                config();
+            try {
+                if (cconfiguraciones.eliminar(mconfiguraciones)) {
+                    limpiartabla();
+                    try {
+                        config();
+                    } catch (IOException ex) {
+                        Logger.getLogger(ConfiguracionesController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(ConfiguracionesController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(ConfiguracionesController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
 
     }
 
-    public void config() {
+    public void config() throws IOException, ParseException {
 
         u.setNombre("admin");
         if (cu.buscarusueriodefault(u)) {
@@ -202,7 +234,7 @@ public class ConfiguracionesController implements ActionListener {
             vconfiguraciones.txtmodulo.addItem(modulo.get(i));
         }
 
-        configuracion = cconfiguraciones.cargar(mmac.conseguirMAC());
+        configuracion = cconfiguraciones.cargar();
         Object[] dato = new Object[3];
         for (int i = 0; i < configuracion.size(); i++) {
             dato[0] = configuracion.get(i).getIdconfiguracion();

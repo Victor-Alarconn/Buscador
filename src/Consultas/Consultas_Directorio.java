@@ -103,7 +103,8 @@ public class Consultas_Directorio extends Conexion {
         }
 
     }
-    //consulta para traer las rutas de los clientes
+    
+    //consulta para traer las rutas de los clientes en el controlador directorio para actualizar las carpetas
     public ArrayList<Cliente> rutas() {
         ArrayList lista = new ArrayList();
         PreparedStatement ps = null;
