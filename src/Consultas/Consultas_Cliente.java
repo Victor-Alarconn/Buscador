@@ -299,6 +299,7 @@ public class Consultas_Cliente extends Conexion {
                     cliente.setIdclientes_potenciales(Math.toIntExact(myLong));
                     cliente.setNombre((String) jsonObject.get("nombre"));
                     cliente.setEmpresa((String) jsonObject.get("empresa"));
+                    cliente.setContacto((String) jsonObject.get("contacto"));
                     cliente.setCelular1((String) jsonObject.get("celular1"));
                     cliente.setCelular2((String) jsonObject.get("celular2"));
                     cliente.setEmail((String) jsonObject.get("email"));

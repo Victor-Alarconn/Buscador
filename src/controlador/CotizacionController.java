@@ -303,6 +303,8 @@ public class CotizacionController implements ActionListener {
             formulario.txtnotas.setText("");
             formulario.txtcelular1.setText("");
             formulario.txtfecha_cotizacion.setCalendar(null);
+            formulario.equipos.setSelected(false);
+            formulario.programa.setSelected(false);
         }
     }
 

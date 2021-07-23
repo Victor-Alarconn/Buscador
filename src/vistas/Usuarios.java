@@ -73,22 +73,22 @@ this.getRootPane().registerKeyboardAction(e -> {
         ediataruser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editaruser32.png"))); // NOI18N
         ediataruser.setText("editar");
         ediataruser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(ediataruser, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 100, 40));
+        jPanel1.add(ediataruser, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 100, 40));
 
         eliminaruser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminaruser32.png"))); // NOI18N
         eliminaruser.setText("eliminar");
         eliminaruser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(eliminaruser, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 100, 40));
+        jPanel1.add(eliminaruser, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, 100, 40));
 
         crearusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser32.png"))); // NOI18N
         crearusuario.setText("crear");
         crearusuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 90, 40));
+        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 90, 40));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nombre", "apellido", "numero_documento" }));
-        jPanel1.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 160, 25));
-        jPanel1.add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 160, 25));
+        jPanel1.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 160, 25));
+        jPanel1.add(txtbuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 160, 25));
 
         tablauser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,17 +103,17 @@ this.getRootPane().registerKeyboardAction(e -> {
         ));
         jScrollPane1.setViewportView(tablauser);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 760, 360));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 760, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 945, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
         );
 
         pack();

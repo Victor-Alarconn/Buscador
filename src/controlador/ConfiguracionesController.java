@@ -83,7 +83,7 @@ public class ConfiguracionesController implements ActionListener {
         vconfiguraciones.tablarutas.getColumn("Modulo").setMaxWidth(100);
         vconfiguraciones.setLocationRelativeTo(null);
         vconfiguraciones.idtabla.setVisible(false);
-        mmac.setMacs(mmac.conseguirMAC());
+        mmac.setMacs(mmac.conseguirMACi());
         if (cmac.buscar(mmac)) {
            mconfiguraciones.setMacs_idmacs(mmac.getIdmacs());
         }

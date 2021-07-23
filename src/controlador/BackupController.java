@@ -64,7 +64,7 @@ public class BackupController implements ActionListener {
         vbackups.setLocationRelativeTo(null);
         model.addColumn("Backup");
         vbackups.tablabackups.setModel(model);
-        mmac.setMacs(mmac.conseguirMAC());
+        mmac.setMacs(mmac.conseguirMACi());
         mconfig = cconfiguraciones.cargar();
         for (int i = 0; i < mconfig.size(); i++) {
             if (mconfig.get(i).getModulo().toLowerCase().equals("backups")) {

@@ -200,7 +200,6 @@ public class OrganizadorController implements ActionListener {
                 ctrl.iniciar();
                 otro.setVisible(true);
             }
-
         }
 
         //abre la vista de usuarios 
@@ -271,10 +270,5 @@ public class OrganizadorController implements ActionListener {
         }
     }
 
-    public void limpiar() {
-//        pricipal.txtnombre.setText("");
-//        pricipal.txtapellido.setText("");
-//        pricipal.txtdocumento.setText("");
-    }
 
 }

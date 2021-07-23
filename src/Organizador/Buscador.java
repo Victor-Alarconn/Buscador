@@ -44,14 +44,14 @@ public class Buscador {
 
         Consultas_usuario cu = new Consultas_usuario();
         Buscador b = new Buscador();
-        
+
         Consultas_Mac cmac = new Consultas_Mac();
 
         Mac mmac = new Mac();
         Rol rol = new Rol();
         mmac.almacenarmac();
         //consulta mac
-        String mac = mmac.conseguirMAC();
+        String mac = mmac.conseguirMACi();
         cmac.jsonmacs();
         mmac.setMacs(mac);
         if (!cmac.buscar(mmac)) {

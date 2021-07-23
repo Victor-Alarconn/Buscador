@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
@@ -19,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,7 +46,7 @@ public class Mac {
     }
 
     //metodo para traer la mac del equipo
-    public String conseguirMAC() throws IOException {
+    public String conseguirMACi() throws IOException {
         File fichero = new File("temp/mac.json");
         BufferedReader fil;
         try {
@@ -93,6 +93,5 @@ public class Mac {
         }
     }
 
-   
 
 }

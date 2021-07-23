@@ -63,7 +63,7 @@ public class Consultas_Configuraciones extends Conexion {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();
-        String mac = mmac.conseguirMAC();
+        String mac = mmac.conseguirMACi();
         String sql = " SELECT idconfiguracion,directorio,modulo FROM configuracion "
                 + "inner join modulos "
                 + "on modulos_idmodulo=modulos.idmodulo "
