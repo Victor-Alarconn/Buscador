@@ -149,7 +149,7 @@ public class BusquedaController implements ActionListener {
                 directoriocotizaciones = mconfig.get(i).getDirectorio();
             }
         }
-//        keyevent();
+        keyevent();
         MouseClicked();
         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);

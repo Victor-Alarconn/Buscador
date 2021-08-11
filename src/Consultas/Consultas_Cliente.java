@@ -387,7 +387,7 @@ public class Consultas_Cliente extends Conexion {
                     documento.setDocumento((String) jsonObject.get("documento"));
                     documento.setFecha_inicio((String) jsonObject.get("fecha_inicio"));
                     documento.setFecha_vencimiento((String) jsonObject.get("fecha_vencimiento"));
-                    lista.add(documento); 
+                    lista.add(documento);
                 }
             }
             return lista;
@@ -425,6 +425,7 @@ public class Consultas_Cliente extends Conexion {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
+//                System.out.println(((String) jsonObject.values().toString()).contains(parametro));
                 if (f) {
                     if (parametro1.equals((Long) jsonObject.get(filtro))) {
                         Cliente cliente = new Cliente();
@@ -450,7 +451,7 @@ public class Consultas_Cliente extends Conexion {
                         listaPersona.add(cliente);
                     }
                 } else {
-                    if (parametro.equals((String) jsonObject.get(filtro))) {
+                    if (((String) jsonObject.values().toString()).contains(parametro)) {
                         Cliente cliente = new Cliente();
                         Long myLong = (Long) jsonObject.get("idclientes_potenciales");
                         int id = Math.toIntExact(myLong);
