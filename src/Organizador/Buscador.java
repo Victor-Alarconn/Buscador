@@ -5,6 +5,7 @@
  */
 package Organizador;
 
+import Consultas.Consultas_Actividad;
 import Consultas.Consultas_Clase;
 import Consultas.Consultas_Cliente;
 import Consultas.Consultas_Configuraciones;
@@ -166,6 +167,9 @@ public class Buscador {
         //llamda al metodo que crea el archivo serviciosclientes.json
         Consultas_Documentos doc = new Consultas_Documentos();
         doc.jsondocumentos();
+        //llamda al metodo que crea el archivo serviciosclientes.json
+        Consultas_Actividad act = new Consultas_Actividad();
+        act.jsonactividades();
     }
 
 }

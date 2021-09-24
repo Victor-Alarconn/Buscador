@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import modelo.Actividad;
 import modelo.Clases;
 import modelo.Cliente;
 import modelo.Configuracion;
@@ -35,6 +36,7 @@ import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import modelo.Usuario;
 import org.json.simple.parser.ParseException;
+import vistas.Actividades;
 import vistas.Backups;
 import vistas.Busqueda;
 import vistas.Carpetas;
@@ -84,6 +86,8 @@ public class OrganizadorController implements ActionListener {
 
     Modalidad mm = new Modalidad();
     Consultas_Modalidad mcm = new Consultas_Modalidad();
+    
+    Actividad mactividad = new Actividad();
 
 //    Usuario mod = new Usuario();
     Consultas_usuario consultasusuario = new Consultas_usuario();
@@ -96,6 +100,7 @@ public class OrganizadorController implements ActionListener {
     Configuraciones vc;
     Backups backup;
     Cotizaciones cotizaciones;
+    Actividades vacciones;
 
     public OrganizadorController(Cliente modelo, Consultas_Cliente consulta, Principal principal, Usuario mod) {
         this.modelo = modelo;
@@ -110,6 +115,7 @@ public class OrganizadorController implements ActionListener {
         this.principal.busqueda.addActionListener(this);
         this.principal.backup.addActionListener(this);
         this.principal.Cotizaciones.addActionListener(this);
+        this.principal.acciones.addActionListener(this);
 
     }
 
@@ -132,6 +138,10 @@ public class OrganizadorController implements ActionListener {
         backup.setVisible(false);
         cotizaciones = new Cotizaciones(principal, false);
         cotizaciones.setVisible(false);
+        cotizaciones = new Cotizaciones(principal, false);
+        cotizaciones.setVisible(false);
+        vacciones = new Actividades(principal, false);
+        vacciones.setVisible(false);
     }
 
     @Override
@@ -258,6 +268,22 @@ public class OrganizadorController implements ActionListener {
                 cotizaciones.setVisible(true);
             }
         }
+
+        if (e.getSource() == principal.acciones) {
+            if (!vacciones.isVisible()) {
+                vacciones = new Actividades(principal, false);
+                ActividadesController cp = new ActividadesController(mactividad, vacciones, mod);
+                try {
+                    cp.iniciar();
+                } catch (IOException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                 vacciones.setVisible(true);
+            }        
+           
+        }
     }
 
     public void abrirarchivo(String archivo) {
@@ -269,6 +295,5 @@ public class OrganizadorController implements ActionListener {
             System.out.println(e);
         }
     }
-
 
 }

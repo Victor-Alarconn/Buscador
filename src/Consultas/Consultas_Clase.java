@@ -61,7 +61,7 @@ public class Consultas_Clase extends Conexion {
     public boolean eliminar(Clases clases) throws IOException {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = " DELETE FROM clases  WHERE idclases=? ";
+        String sql = "DELETE FROM clases  WHERE idclases=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setInt(1, clases.getIdclases());
