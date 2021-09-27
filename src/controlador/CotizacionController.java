@@ -137,6 +137,7 @@ public class CotizacionController implements ActionListener {
                     modelo.setCelular1(formulario.txtcelular1.getText());
                     modelo.setNumero_cotizacion(formulario.numero_cotizacion.getText());
                     modelo.setEmail(formulario.txtemail.getText());
+                    modelo.setReferido(formulario.txtreferido.getText());
                     Clases modulo = (Clases) formulario.txtclase.getModel().getSelectedItem();
                     modelo.setClase(modulo.getClase());
                     Llego modulo1 = (Llego) formulario.txtllego.getModel().getSelectedItem();
@@ -257,6 +258,7 @@ public class CotizacionController implements ActionListener {
             formulario.txtemail.setText(modelo.getEmail());
             formulario.txtempresa.setText(modelo.getEmpresa());
             formulario.txtnotas.setText(modelo.getNotas());
+            formulario.txtreferido.setText(modelo.getReferido());
             if (modelo.getPrograma() == 1) {
                 formulario.programa.setSelected(true);
             } else {
@@ -302,6 +304,7 @@ public class CotizacionController implements ActionListener {
             formulario.txtempresa.setText("");
             formulario.txtnotas.setText("");
             formulario.txtcelular1.setText("");
+            formulario.txtreferido.setText("");
             formulario.txtfecha_cotizacion.setCalendar(null);
             formulario.equipos.setSelected(false);
             formulario.programa.setSelected(false);

@@ -286,7 +286,7 @@ public class Principal extends javax.swing.JFrame {
 
         acciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         acciones.setForeground(new java.awt.Color(255, 255, 255));
-        acciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Backup-64.png"))); // NOI18N
+        acciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/activity.png"))); // NOI18N
         acciones.setText("Acciones");
         acciones.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
         acciones.setOpaque(false);

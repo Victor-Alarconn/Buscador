@@ -42,7 +42,16 @@ public class Cliente {
     private int  programa;
     private int eqipos;
     private String valor_total;
+    private String referido;
 
+    public String getReferido() {
+        return referido;
+    }
+
+    public void setReferido(String referido) {
+        this.referido = referido;
+    }
+    
     public String getValor_total() {
         return valor_total;
     }

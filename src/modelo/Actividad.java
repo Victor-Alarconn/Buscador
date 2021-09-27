@@ -18,11 +18,30 @@ public class Actividad {
     private String reporto;
     private String informe;
     private String del;
-    private String add;
+    private String agregar;
     private String swp;
     private String macin;
     private String macout;
+    private String hecho;
+   
+
+    public String getHecho() {
+        return hecho;
+    }
+
+    public void setHecho(String hecho) {
+        this.hecho = hecho;
+    }
     
+
+    public String getAgregar() {
+        return agregar;
+    }
+
+    public void setAgregar(String agregar) {
+        this.agregar = agregar;
+    }
+        
      public int getIdactividades() {
         return idactividades;
     }
@@ -79,13 +98,6 @@ public class Actividad {
         this.del = del;
     }
 
-    public String getAdd() {
-        return add;
-    }
-
-    public void setAdd(String add) {
-        this.add = add;
-    }
 
     public String getSwp() {
         return swp;

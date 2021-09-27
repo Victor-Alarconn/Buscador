@@ -44,8 +44,8 @@ public class Consultas_Cliente extends Conexion {
                 + "usuarios_idusuario,fecha_arriendo,contacto,"
                 + "cliente_potencial,vlrprincipal,numequipos,vlrterminal,"
                 + "electronica,sucursal,fechacotizacion,rutacotizacion,numero_cotizacion,"
-                + "programa,equipos,valor_total) VALUES(?,?,?,?,"
-                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "programa,equipos,valor_total,referido) VALUES(?,?,?,?,"
+                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, cliente.getNit());
@@ -78,6 +78,7 @@ public class Consultas_Cliente extends Conexion {
             ps.setInt(28, cliente.getPrograma());
             ps.setInt(29, cliente.getEqipos());
             ps.setString(30, cliente.getValor_total());
+            ps.setString(31, cliente.getReferido());
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();// recupera el id autoincrementable del registro hecho
             if (rs != null && rs.next()) {
@@ -306,6 +307,7 @@ public class Consultas_Cliente extends Conexion {
                     cliente.setClase((String) jsonObject.get("clase"));
                     cliente.setModalidad((String) jsonObject.get("modalidad"));
                     cliente.setNotas((String) jsonObject.get("notas"));
+                    cliente.setReferido((String) jsonObject.get("referido"));
                     cliente.setLlego((String) jsonObject.get("llego"));
                     cliente.setCategoria((String) jsonObject.get("categoria"));
                     cliente.setRutacotizacon((String) jsonObject.get("rutacotizacion"));

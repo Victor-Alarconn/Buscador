@@ -30,10 +30,101 @@ public class Consultas_Actividad extends Conexion {
 
     Recursos recursos = new Recursos();
 
+    public boolean registrar(Actividad actividad) throws IOException {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+
+        String sql = "INSERT INTO actividades (fecha,codigo,empresa,reporto,informe,del,agregar,swp,macin,macout,hecho) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps.setString(1, actividad.getFecha());
+            ps.setString(2, actividad.getCodigo());
+            ps.setString(3, actividad.getEmpresa());
+            ps.setString(4, actividad.getReporto());
+            ps.setString(5, actividad.getInforme());
+            ps.setString(6, actividad.getDel());
+            ps.setString(7, actividad.getAgregar());
+            ps.setString(8, actividad.getSwp());
+            ps.setString(9, actividad.getMacin());
+            ps.setString(10, actividad.getMacout());
+            ps.setString(11, actividad.getHecho());
+            ps.execute();
+            jsonactividades();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+
+    }
+    
+    public boolean actualizarestado(Actividad actividad) throws IOException {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = "UPDATE  actividades SET  hecho=? WHERE idactividades=? ";
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps.setString(1, actividad.getHecho());
+            ps.setInt(2, actividad.getIdactividades());
+            ps.execute();
+            jsonactividades();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        
+    }
+    public boolean modificar(Actividad actividad) throws IOException {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = "UPDATE  actividades SET fecha=?,codigo=?,empresa=?,reporto=?,informe=?,del=?,agregar=?,swp=?,macin=?,macout=?  WHERE idactividades=? ";
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps.setString(1, actividad.getFecha());
+            ps.setString(2, actividad.getCodigo());
+            ps.setString(3, actividad.getEmpresa());
+            ps.setString(4, actividad.getReporto());
+            ps.setString(5, actividad.getInforme());
+            ps.setString(6, actividad.getDel());
+            ps.setString(7, actividad.getAgregar());
+            ps.setString(8, actividad.getSwp());
+            ps.setString(9, actividad.getMacin());
+            ps.setString(10, actividad.getMacout());            
+            ps.setInt(11, actividad.getIdactividades());
+            ps.execute();
+            jsonactividades();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        
+    }
+
     public ArrayList<Actividad> llenar() {
         ArrayList lista = new ArrayList();
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
+        try ( Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
@@ -47,10 +138,11 @@ public class Consultas_Actividad extends Conexion {
                 actividad.setReporto((String) jsonObject.get("reporto"));
                 actividad.setInforme((String) jsonObject.get("informe"));
                 actividad.setDel((String) jsonObject.get("del"));
-                actividad.setAdd((String) jsonObject.get("add"));
+                actividad.setAgregar((String) jsonObject.get("agregar"));
                 actividad.setSwp((String) jsonObject.get("swp"));
                 actividad.setMacin((String) jsonObject.get("macin"));
                 actividad.setMacout((String) jsonObject.get("macout"));
+                actividad.setHecho((String) jsonObject.get("hecho"));
                 lista.add(actividad);
             }
             return lista;
@@ -88,7 +180,7 @@ public class Consultas_Actividad extends Conexion {
     public ArrayList<Actividad> buscarcaracter(String parametro) {
         ArrayList lista = new ArrayList();
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
+        try ( Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
@@ -104,10 +196,11 @@ public class Consultas_Actividad extends Conexion {
                     actividad.setReporto((String) jsonObject.get("reporto"));
                     actividad.setInforme((String) jsonObject.get("informe"));
                     actividad.setDel((String) jsonObject.get("del"));
-                    actividad.setAdd((String) jsonObject.get("add"));
+                    actividad.setAgregar((String) jsonObject.get("agregar"));
                     actividad.setSwp((String) jsonObject.get("swp"));
                     actividad.setMacin((String) jsonObject.get("macin"));
                     actividad.setMacout((String) jsonObject.get("macout"));
+                    actividad.setHecho((String) jsonObject.get("hecho"));
                     lista.add(actividad);
                 }
 

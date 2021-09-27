@@ -5,18 +5,22 @@
  */
 package vistas;
 
+import Organizador.TablaColor;
+
 /**
  *
  * @author programacion01
  */
 public class Actividades extends javax.swing.JDialog {
 
+//    TablaColor tablacolor = new TablaColor();
     /**
      * Creates new form Acciones
      */
     public Actividades(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+//        tablaactividades.setDefaultRenderer(tablaactividades.getColumnClass(0), tablacolor);
     }
 
     /**
@@ -28,6 +32,9 @@ public class Actividades extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popup = new javax.swing.JPopupMenu();
+        hecho = new javax.swing.JMenuItem();
+        editar = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -35,6 +42,13 @@ public class Actividades extends javax.swing.JDialog {
         txtbuscaractividad = new javax.swing.JTextField();
         btnagregar = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
+        btnactualizar = new javax.swing.JButton();
+
+        hecho.setText("Hecho");
+        popup.add(hecho);
+
+        editar.setText("Editar");
+        popup.add(editar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,6 +90,9 @@ public class Actividades extends javax.swing.JDialog {
 
         jLabel2.setText("Forma: 1-Jira/2-Email/3-Telefono/4-Whatsapp/5-Directo");
 
+        btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sync32.png"))); // NOI18N
+        btnactualizar.setText("Actualizar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,6 +104,8 @@ public class Actividades extends javax.swing.JDialog {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(txtbuscaractividad, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnactualizar)
+                            .addGap(26, 26, 26)
                             .addComponent(btnagregar))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1042, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -99,14 +118,16 @@ public class Actividades extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscaractividad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnagregar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnactualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtbuscaractividad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnagregar)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -156,11 +177,15 @@ public class Actividades extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnactualizar;
     public javax.swing.JToggleButton btnagregar;
+    public javax.swing.JMenuItem editar;
+    public javax.swing.JMenuItem hecho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JPopupMenu popup;
     public javax.swing.JTable tablaactividades;
     public javax.swing.JTextField txtbuscaractividad;
     // End of variables declaration//GEN-END:variables
