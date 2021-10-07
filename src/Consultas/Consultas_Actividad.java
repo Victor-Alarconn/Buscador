@@ -35,7 +35,7 @@ public class Consultas_Actividad extends Conexion {
         Connection con = getConexion();
 
         String sql = "INSERT INTO actividades (fecha,codigo,empresa,reporto,informe,del,agregar,swp,macin,macout,hecho) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-        
+
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
             ps.setString(1, actividad.getFecha());
@@ -64,7 +64,7 @@ public class Consultas_Actividad extends Conexion {
         }
 
     }
-    
+
     public boolean actualizarestado(Actividad actividad) throws IOException {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -86,8 +86,9 @@ public class Consultas_Actividad extends Conexion {
                 System.err.println(e);
             }
         }
-        
+
     }
+
     public boolean modificar(Actividad actividad) throws IOException {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -103,7 +104,7 @@ public class Consultas_Actividad extends Conexion {
             ps.setString(7, actividad.getAgregar());
             ps.setString(8, actividad.getSwp());
             ps.setString(9, actividad.getMacin());
-            ps.setString(10, actividad.getMacout());            
+            ps.setString(10, actividad.getMacout());
             ps.setInt(11, actividad.getIdactividades());
             ps.execute();
             jsonactividades();
@@ -118,32 +119,63 @@ public class Consultas_Actividad extends Conexion {
                 System.err.println(e);
             }
         }
-        
+
     }
 
-    public ArrayList<Actividad> llenar() {
+    public ArrayList<Actividad> llenar(String filtro) {
         ArrayList lista = new ArrayList();
+        boolean f = false;
+        if (filtro.equals("1")) {
+            f = true;
+        } else {
+            if (filtro.equals("0")) {
+                f = true;
+            }
+        }
         JSONParser parser = new JSONParser();
         try ( Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
-                Actividad actividad = new Actividad();
-                Long myLong = (Long) jsonObject.get("idactividades");
-                int id = Math.toIntExact(myLong);
-                actividad.setIdactividades(id);
-                actividad.setFecha((String) jsonObject.get("fecha"));
-                actividad.setCodigo((String) jsonObject.get("codigo"));
-                actividad.setEmpresa((String) jsonObject.get("empresa"));
-                actividad.setReporto((String) jsonObject.get("reporto"));
-                actividad.setInforme((String) jsonObject.get("informe"));
-                actividad.setDel((String) jsonObject.get("del"));
-                actividad.setAgregar((String) jsonObject.get("agregar"));
-                actividad.setSwp((String) jsonObject.get("swp"));
-                actividad.setMacin((String) jsonObject.get("macin"));
-                actividad.setMacout((String) jsonObject.get("macout"));
-                actividad.setHecho((String) jsonObject.get("hecho"));
-                lista.add(actividad);
+                if (f) {
+                    if (filtro.equals((String) jsonObject.get("hecho"))) {
+                        Actividad actividad = new Actividad();
+                        Long myLong = (Long) jsonObject.get("idactividades");
+                        int id = Math.toIntExact(myLong);
+                        actividad.setIdactividades(id);
+                        actividad.setFecha((String) jsonObject.get("fecha"));
+                        actividad.setCodigo((String) jsonObject.get("codigo"));
+                        actividad.setEmpresa((String) jsonObject.get("empresa"));
+                        actividad.setReporto((String) jsonObject.get("reporto"));
+                        actividad.setInforme((String) jsonObject.get("informe"));
+                        actividad.setDel((String) jsonObject.get("del"));
+                        actividad.setAgregar((String) jsonObject.get("agregar"));
+                        actividad.setSwp((String) jsonObject.get("swp"));
+                        actividad.setMacin((String) jsonObject.get("macin"));
+                        actividad.setMacout((String) jsonObject.get("macout"));
+                        actividad.setHecho((String) jsonObject.get("hecho"));
+                        lista.add(actividad);
+                    }
+                } else {
+
+                    Actividad actividad = new Actividad();
+                    Long myLong = (Long) jsonObject.get("idactividades");
+                    int id = Math.toIntExact(myLong);
+                    actividad.setIdactividades(id);
+                    actividad.setFecha((String) jsonObject.get("fecha"));
+                    actividad.setCodigo((String) jsonObject.get("codigo"));
+                    actividad.setEmpresa((String) jsonObject.get("empresa"));
+                    actividad.setReporto((String) jsonObject.get("reporto"));
+                    actividad.setInforme((String) jsonObject.get("informe"));
+                    actividad.setDel((String) jsonObject.get("del"));
+                    actividad.setAgregar((String) jsonObject.get("agregar"));
+                    actividad.setSwp((String) jsonObject.get("swp"));
+                    actividad.setMacin((String) jsonObject.get("macin"));
+                    actividad.setMacout((String) jsonObject.get("macout"));
+                    actividad.setHecho((String) jsonObject.get("hecho"));
+                    lista.add(actividad);
+
+                }
             }
             return lista;
 
@@ -177,31 +209,59 @@ public class Consultas_Actividad extends Conexion {
         }
     }
 
-    public ArrayList<Actividad> buscarcaracter(String parametro) {
+    public ArrayList<Actividad> buscarcaracter(String parametro, String filtro) {
         ArrayList lista = new ArrayList();
+        boolean f = false;
+        if (filtro.equals("1")) {
+            f = true;
+        } else {
+            if (filtro.equals("0")) {
+                f = true;
+            }
+        }
         JSONParser parser = new JSONParser();
         try ( Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
-//                System.out.println(((String) jsonObject.values().toString()).contains(parametro));                
-                if (((String) jsonObject.values().toString()).contains(parametro)) {
-                    Actividad actividad = new Actividad();
-                    Long myLong = (Long) jsonObject.get("idactividades");
-                    int id = Math.toIntExact(myLong);
-                    actividad.setIdactividades(id);
-                    actividad.setFecha((String) jsonObject.get("fecha"));
-                    actividad.setCodigo((String) jsonObject.get("codigo"));
-                    actividad.setEmpresa((String) jsonObject.get("empresa"));
-                    actividad.setReporto((String) jsonObject.get("reporto"));
-                    actividad.setInforme((String) jsonObject.get("informe"));
-                    actividad.setDel((String) jsonObject.get("del"));
-                    actividad.setAgregar((String) jsonObject.get("agregar"));
-                    actividad.setSwp((String) jsonObject.get("swp"));
-                    actividad.setMacin((String) jsonObject.get("macin"));
-                    actividad.setMacout((String) jsonObject.get("macout"));
-                    actividad.setHecho((String) jsonObject.get("hecho"));
-                    lista.add(actividad);
+                if (f) {
+                    if (filtro.equals((String) jsonObject.get("hecho")) && ((String) jsonObject.values().toString()).contains(parametro)) {
+                        Actividad actividad = new Actividad();
+                        Long myLong = (Long) jsonObject.get("idactividades");
+                        int id = Math.toIntExact(myLong);
+                        actividad.setIdactividades(id);
+                        actividad.setFecha((String) jsonObject.get("fecha"));
+                        actividad.setCodigo((String) jsonObject.get("codigo"));
+                        actividad.setEmpresa((String) jsonObject.get("empresa"));
+                        actividad.setReporto((String) jsonObject.get("reporto"));
+                        actividad.setInforme((String) jsonObject.get("informe"));
+                        actividad.setDel((String) jsonObject.get("del"));
+                        actividad.setAgregar((String) jsonObject.get("agregar"));
+                        actividad.setSwp((String) jsonObject.get("swp"));
+                        actividad.setMacin((String) jsonObject.get("macin"));
+                        actividad.setMacout((String) jsonObject.get("macout"));
+                        actividad.setHecho((String) jsonObject.get("hecho"));
+                        lista.add(actividad);
+                    }
+                } else {
+                    if (((String) jsonObject.values().toString()).contains(parametro)) {
+                        Actividad actividad = new Actividad();
+                        Long myLong = (Long) jsonObject.get("idactividades");
+                        int id = Math.toIntExact(myLong);
+                        actividad.setIdactividades(id);
+                        actividad.setFecha((String) jsonObject.get("fecha"));
+                        actividad.setCodigo((String) jsonObject.get("codigo"));
+                        actividad.setEmpresa((String) jsonObject.get("empresa"));
+                        actividad.setReporto((String) jsonObject.get("reporto"));
+                        actividad.setInforme((String) jsonObject.get("informe"));
+                        actividad.setDel((String) jsonObject.get("del"));
+                        actividad.setAgregar((String) jsonObject.get("agregar"));
+                        actividad.setSwp((String) jsonObject.get("swp"));
+                        actividad.setMacin((String) jsonObject.get("macin"));
+                        actividad.setMacout((String) jsonObject.get("macout"));
+                        actividad.setHecho((String) jsonObject.get("hecho"));
+                        lista.add(actividad);
+                    }
                 }
 
             }

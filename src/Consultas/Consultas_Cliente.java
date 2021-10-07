@@ -429,7 +429,7 @@ public class Consultas_Cliente extends Conexion {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
 //                System.out.println(((String) jsonObject.values().toString()).contains(parametro));
                 if (f) {
-                    if (parametro1.equals((Long) jsonObject.get(filtro))) {
+                    if (parametro1.equals((Long) jsonObject.get(filtro))&& ((String) jsonObject.values().toString()).contains(parametro)) {
                         Cliente cliente = new Cliente();
                         Long myLong = (Long) jsonObject.get("idclientes_potenciales");
                         int id = Math.toIntExact(myLong);

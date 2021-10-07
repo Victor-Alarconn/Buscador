@@ -54,6 +54,9 @@ public class ActividadesController implements ActionListener {
         this.vacciones.btnactualizar.addActionListener(this);
         this.vacciones.hecho.addActionListener(this);
         this.vacciones.editar.addActionListener(this);
+        this.vacciones.txthecho.addActionListener(this);
+        this.vacciones.txtsinhacer.addActionListener(this);
+        this.vacciones.txttodo.addActionListener(this);
     }
 
     public void iniciar() throws IOException, ParseException {
@@ -92,6 +95,7 @@ public class ActividadesController implements ActionListener {
         llenartable();
         keyevent();
         MouseClicked();
+        vacciones.txttodo.setSelected(true);
 //        
     }
 
@@ -117,6 +121,18 @@ public class ActividadesController implements ActionListener {
             } catch (IOException ex) {
                 Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            limpiartabla();
+            llenartable();
+        }
+        if (e.getSource() == vacciones.txttodo) {
+            limpiartabla();
+            llenartable();
+        }
+        if (e.getSource() == vacciones.txthecho) {
+            limpiartabla();
+            llenartable();
+        }
+        if (e.getSource() == vacciones.txtsinhacer) {
             limpiartabla();
             llenartable();
         }
@@ -175,7 +191,15 @@ public class ActividadesController implements ActionListener {
     }
 
     private void llenartable() {
-        listactividad = cactividad.llenar();
+        String filtro= "8";
+            if(vacciones.txthecho.isSelected()){
+                filtro ="1";
+            }else{
+                if(vacciones.txtsinhacer.isSelected()){
+                    filtro = "0";
+                }
+            }
+        listactividad = cactividad.llenar(filtro);
         int cantidad = listactividad.size();
         Object[] dato = new Object[12];
         for (int i = 0; i < cantidad; i++) {
@@ -204,8 +228,16 @@ public class ActividadesController implements ActionListener {
         }
         if (vacciones.txtbuscaractividad.getText().length() > 0) {
             limpiartabla();
+            String filtro= "8";
+            if(vacciones.txthecho.isSelected()){
+                filtro ="1";
+            }else{
+                if(vacciones.txtsinhacer.isSelected()){
+                    filtro = "0";
+                }
+            }            
             ArrayList<Actividad> listactividad = null;
-            listactividad = cactividad.buscarcaracter(vacciones.txtbuscaractividad.getText());
+            listactividad = cactividad.buscarcaracter(vacciones.txtbuscaractividad.getText(),filtro);
             int cantidad = listactividad.size();
             Object[] dato = new Object[12];
             for (int i = 0; i < cantidad; i++) {

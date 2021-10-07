@@ -35,6 +35,7 @@ public class Actividades extends javax.swing.JDialog {
         popup = new javax.swing.JPopupMenu();
         hecho = new javax.swing.JMenuItem();
         editar = new javax.swing.JMenuItem();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -43,6 +44,9 @@ public class Actividades extends javax.swing.JDialog {
         btnagregar = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
         btnactualizar = new javax.swing.JButton();
+        txthecho = new javax.swing.JCheckBox();
+        txtsinhacer = new javax.swing.JCheckBox();
+        txttodo = new javax.swing.JCheckBox();
 
         hecho.setText("Hecho");
         popup.add(hecho);
@@ -93,24 +97,43 @@ public class Actividades extends javax.swing.JDialog {
         btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sync32.png"))); // NOI18N
         btnactualizar.setText("Actualizar");
 
+        buttonGroup1.add(txthecho);
+        txthecho.setText("Hecho");
+
+        buttonGroup1.add(txtsinhacer);
+        txtsinhacer.setText("Sin hacer");
+
+        buttonGroup1.add(txttodo);
+        txttodo.setText("Todo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtbuscaractividad, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnactualizar)
-                            .addGap(26, 26, 26)
-                            .addComponent(btnagregar))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1042, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2))
-                .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(txtbuscaractividad, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(41, 41, 41)
+                                    .addComponent(txthecho)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtsinhacer)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txttodo)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnactualizar)
+                                    .addGap(26, 26, 26)
+                                    .addComponent(btnagregar))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1042, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +145,10 @@ public class Actividades extends javax.swing.JDialog {
                     .addComponent(btnactualizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtbuscaractividad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnagregar)))
+                        .addComponent(btnagregar)
+                        .addComponent(txthecho)
+                        .addComponent(txtsinhacer)
+                        .addComponent(txttodo)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -179,6 +205,7 @@ public class Actividades extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnactualizar;
     public javax.swing.JToggleButton btnagregar;
+    private javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JMenuItem editar;
     public javax.swing.JMenuItem hecho;
     private javax.swing.JLabel jLabel1;
@@ -188,5 +215,8 @@ public class Actividades extends javax.swing.JDialog {
     public javax.swing.JPopupMenu popup;
     public javax.swing.JTable tablaactividades;
     public javax.swing.JTextField txtbuscaractividad;
+    public javax.swing.JCheckBox txthecho;
+    public javax.swing.JCheckBox txtsinhacer;
+    public javax.swing.JCheckBox txttodo;
     // End of variables declaration//GEN-END:variables
 }
