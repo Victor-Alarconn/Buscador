@@ -34,6 +34,8 @@ import vistas.Principal;
  *
  * @author programacion01
  */
+
+
 public class ActividadesController implements ActionListener {
 
     private final Actividad macciones;
@@ -60,8 +62,9 @@ public class ActividadesController implements ActionListener {
     }
 
     public void iniciar() throws IOException, ParseException {
-
+//      agregamos titulo a la vista
         vacciones.setTitle("Actividades de Termianales");
+        
         vacciones.setLocationRelativeTo(null);
         model.addColumn("Id");
         model.addColumn("Fecha");
@@ -165,7 +168,7 @@ public class ActividadesController implements ActionListener {
                 macciones.setAgregar(String.valueOf(vacciones.tablaactividades.getValueAt(selecionar, 7)));
                 macciones.setSwp(String.valueOf(vacciones.tablaactividades.getValueAt(selecionar, 8)));
                 macciones.setMacin(String.valueOf(vacciones.tablaactividades.getValueAt(selecionar, 9)));
-                macciones.setMacout(String.valueOf(vacciones.tablaactividades.getValueAt(selecionar, 10)));                
+                macciones.setMacout(String.valueOf(vacciones.tablaactividades.getValueAt(selecionar, 10)));
                 EditarActividadController cag = new EditarActividadController(macciones, eactividad, user);
                 try {
                     cag.iniciar();
@@ -191,14 +194,14 @@ public class ActividadesController implements ActionListener {
     }
 
     private void llenartable() {
-        String filtro= "8";
-            if(vacciones.txthecho.isSelected()){
-                filtro ="1";
-            }else{
-                if(vacciones.txtsinhacer.isSelected()){
-                    filtro = "0";
-                }
+        String filtro = "8";
+        if (vacciones.txthecho.isSelected()) {
+            filtro = "1";
+        } else {
+            if (vacciones.txtsinhacer.isSelected()) {
+                filtro = "0";
             }
+        }
         listactividad = cactividad.llenar(filtro);
         int cantidad = listactividad.size();
         Object[] dato = new Object[12];
@@ -228,16 +231,16 @@ public class ActividadesController implements ActionListener {
         }
         if (vacciones.txtbuscaractividad.getText().length() > 0) {
             limpiartabla();
-            String filtro= "8";
-            if(vacciones.txthecho.isSelected()){
-                filtro ="1";
-            }else{
-                if(vacciones.txtsinhacer.isSelected()){
+            String filtro = "8";
+            if (vacciones.txthecho.isSelected()) {
+                filtro = "1";
+            } else {
+                if (vacciones.txtsinhacer.isSelected()) {
                     filtro = "0";
                 }
-            }            
+            }
             ArrayList<Actividad> listactividad = null;
-            listactividad = cactividad.buscarcaracter(vacciones.txtbuscaractividad.getText(),filtro);
+            listactividad = cactividad.buscarcaracter(vacciones.txtbuscaractividad.getText(), filtro);
             int cantidad = listactividad.size();
             Object[] dato = new Object[12];
             for (int i = 0; i < cantidad; i++) {

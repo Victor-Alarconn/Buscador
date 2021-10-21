@@ -401,7 +401,6 @@ public class Consultas_Cliente extends Conexion {
         return null;
     }
     //consulta para buscar si el nit del cliente contie un parametro
-
     public ArrayList<Cliente> buscarcaracter(String parametro, String filtro) {
         ArrayList listaPersona = new ArrayList();
         Long parametro1 = 0L;
@@ -477,17 +476,14 @@ public class Consultas_Cliente extends Conexion {
                         listaPersona.add(cliente);
                     }
                 }
-
             }
             return listaPersona;
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return null;
-
     }
 
 }
