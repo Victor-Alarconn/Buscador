@@ -15,13 +15,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.TabableView;
 import modelo.Actividad;
 import modelo.Usuario;
 import org.json.simple.parser.ParseException;
@@ -61,7 +60,7 @@ public class ActividadesController implements ActionListener {
         this.vacciones.txttodo.addActionListener(this);
     }
 
-    public void iniciar() throws IOException, ParseException {
+    public void iniciar() throws IOException, ParseException, java.text.ParseException {
 //      agregamos titulo a la vista
         vacciones.setTitle("Actividades de Termianales");
         
@@ -125,19 +124,35 @@ public class ActividadesController implements ActionListener {
                 Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
             }
             limpiartabla();
-            llenartable();
+            try {
+                llenartable();
+            } catch (java.text.ParseException ex) {
+                Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (e.getSource() == vacciones.txttodo) {
             limpiartabla();
-            llenartable();
+            try {
+                llenartable();
+            } catch (java.text.ParseException ex) {
+                Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (e.getSource() == vacciones.txthecho) {
             limpiartabla();
-            llenartable();
+            try {
+                llenartable();
+            } catch (java.text.ParseException ex) {
+                Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (e.getSource() == vacciones.txtsinhacer) {
             limpiartabla();
-            llenartable();
+            try {
+                llenartable();
+            } catch (java.text.ParseException ex) {
+                Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (e.getSource() == vacciones.hecho) {
             int selecionar = vacciones.tablaactividades.getSelectedRow();
@@ -150,7 +165,11 @@ public class ActividadesController implements ActionListener {
                     Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 limpiartabla();
-                llenartable();
+                try {
+                    llenartable();
+                } catch (java.text.ParseException ex) {
+                    Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 
@@ -188,13 +207,24 @@ public class ActividadesController implements ActionListener {
         vacciones.txtbuscaractividad.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                busqueda();
+                try {
+                    busqueda();
+                } catch (java.text.ParseException ex) {
+                    Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
-    private void llenartable() {
+    private void llenartable() throws java.text.ParseException {
         String filtro = "8";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String fechade = (dtf.format(LocalDateTime.now()));         
+        if(vacciones.fechade.getDate() != null){
+            fechade = (sdf.format(vacciones.fechade.getDate()));   
+        }
+             
         if (vacciones.txthecho.isSelected()) {
             filtro = "1";
         } else {
@@ -202,7 +232,7 @@ public class ActividadesController implements ActionListener {
                 filtro = "0";
             }
         }
-        listactividad = cactividad.llenar(filtro);
+        listactividad = cactividad.llenar(filtro,fechade);
         int cantidad = listactividad.size();
         Object[] dato = new Object[12];
         for (int i = 0; i < cantidad; i++) {
@@ -218,13 +248,12 @@ public class ActividadesController implements ActionListener {
             dato[9] = listactividad.get(i).getMacin();
             dato[10] = listactividad.get(i).getMacout();
             dato[11] = listactividad.get(i).getHecho();
-
             model.addRow(dato);
             vacciones.tablaactividades.setModel(model);
         }
     }
 
-    public void busqueda() {
+    public void busqueda() throws java.text.ParseException {
         if (vacciones.txtbuscaractividad.getText().length() == 0) {
             limpiartabla();
             llenartable();

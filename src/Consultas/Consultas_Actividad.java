@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import modelo.Actividad;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -122,7 +124,7 @@ public class Consultas_Actividad extends Conexion {
 
     }
 
-    public ArrayList<Actividad> llenar(String filtro) {
+    public ArrayList<Actividad> llenar(String filtro, String fechade) throws java.text.ParseException {
         ArrayList lista = new ArrayList();
         boolean f = false;
         if (filtro.equals("1")) {
@@ -133,6 +135,7 @@ public class Consultas_Actividad extends Conexion {
             }
         }
         JSONParser parser = new JSONParser();
+        SimpleDateFormat dateFormat = new SimpleDateFormat ("dd-MM-yyyy");
         try ( Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
@@ -157,23 +160,30 @@ public class Consultas_Actividad extends Conexion {
                         lista.add(actividad);
                     }
                 } else {
-
-                    Actividad actividad = new Actividad();
-                    Long myLong = (Long) jsonObject.get("idactividades");
-                    int id = Math.toIntExact(myLong);
-                    actividad.setIdactividades(id);
-                    actividad.setFecha((String) jsonObject.get("fecha"));
-                    actividad.setCodigo((String) jsonObject.get("codigo"));
-                    actividad.setEmpresa((String) jsonObject.get("empresa"));
-                    actividad.setReporto((String) jsonObject.get("reporto"));
-                    actividad.setInforme((String) jsonObject.get("informe"));
-                    actividad.setDel((String) jsonObject.get("del"));
-                    actividad.setAgregar((String) jsonObject.get("agregar"));
-                    actividad.setSwp((String) jsonObject.get("swp"));
-                    actividad.setMacin((String) jsonObject.get("macin"));
-                    actividad.setMacout((String) jsonObject.get("macout"));
-                    actividad.setHecho((String) jsonObject.get("hecho"));
-                    lista.add(actividad);
+                    Date date1 = dateFormat.parse((String) jsonObject.get("fecha"));
+                    Date date2 = dateFormat.parse(fechade);
+                    Date date3 = dateFormat.parse("08-09-2021");
+                    Calendar ca
+                    System.out.println(date1);
+                    System.out.println(date1.after(date2));
+                    if (date1.before(date2) && date1.after(date3)) {
+                        Actividad actividad = new Actividad();
+                        Long myLong = (Long) jsonObject.get("idactividades");
+                        int id = Math.toIntExact(myLong);
+                        actividad.setIdactividades(id);
+                        actividad.setFecha((String) jsonObject.get("fecha"));
+                        actividad.setCodigo((String) jsonObject.get("codigo"));
+                        actividad.setEmpresa((String) jsonObject.get("empresa"));
+                        actividad.setReporto((String) jsonObject.get("reporto"));
+                        actividad.setInforme((String) jsonObject.get("informe"));
+                        actividad.setDel((String) jsonObject.get("del"));
+                        actividad.setAgregar((String) jsonObject.get("agregar"));
+                        actividad.setSwp((String) jsonObject.get("swp"));
+                        actividad.setMacin((String) jsonObject.get("macin"));
+                        actividad.setMacout((String) jsonObject.get("macout"));
+                        actividad.setHecho((String) jsonObject.get("hecho"));
+                        lista.add(actividad);
+                    }
 
                 }
             }
