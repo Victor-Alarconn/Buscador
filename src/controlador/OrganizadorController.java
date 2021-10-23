@@ -279,6 +279,8 @@ public class OrganizadorController implements ActionListener {
                     Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ParseException ex) {
                     Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (java.text.ParseException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                  vacciones.setVisible(true);
             }        

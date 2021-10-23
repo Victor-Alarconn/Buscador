@@ -6,13 +6,20 @@
 package controlador;
 
 import Consultas.Consultas_Actividad;
+import Consultas.Consultas_Cliente;
+import Organizador.Recursos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelo.Actividad;
+import modelo.Cliente;
 import modelo.Usuario;
 import org.json.simple.parser.ParseException;
 import vistas.AgregarActividad;
@@ -27,6 +34,9 @@ public class AgregarActividadesController implements ActionListener {
     private final AgregarActividad vacciones;
     private final Usuario user;
     Consultas_Actividad cactividad = new Consultas_Actividad();
+    Cliente mcliente = new Cliente();
+    Consultas_Cliente ccliente = new Consultas_Cliente();
+    Recursos dialogo = new Recursos();
 
     public AgregarActividadesController(Actividad macciones, AgregarActividad vacciones, Usuario user) {
         this.macciones = macciones;
@@ -38,7 +48,7 @@ public class AgregarActividadesController implements ActionListener {
     public void iniciar() throws IOException, ParseException {
         vacciones.setTitle(" Agregar Actividad");
         vacciones.setLocationRelativeTo(null);
-
+        keyevent();
     }
 
     @Override
@@ -75,6 +85,26 @@ public class AgregarActividadesController implements ActionListener {
             } catch (IOException ex) {
                 Logger.getLogger(AgregarActividadesController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            
+        }
+    }
+    
+    public void keyevent() {
+        this.vacciones.txtcodigo.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    buscar();
+                }
+            }
+        });
+    }
+    
+    public void buscar() {
+        mcliente.setCodigo(vacciones.txtcodigo.getText().toUpperCase());
+        if (ccliente.buscarcoodigocliente(mcliente)) {
+            vacciones.txtempresa.setText(mcliente.getNombre());
         }
     }
 

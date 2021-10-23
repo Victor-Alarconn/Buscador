@@ -18,8 +18,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import modelo.Actividad;
 import modelo.Usuario;
@@ -33,8 +36,6 @@ import vistas.Principal;
  *
  * @author programacion01
  */
-
-
 public class ActividadesController implements ActionListener {
 
     private final Actividad macciones;
@@ -63,7 +64,7 @@ public class ActividadesController implements ActionListener {
     public void iniciar() throws IOException, ParseException, java.text.ParseException {
 //      agregamos titulo a la vista
         vacciones.setTitle("Actividades de Termianales");
-        
+
         vacciones.setLocationRelativeTo(null);
         model.addColumn("Id");
         model.addColumn("Fecha");
@@ -94,7 +95,7 @@ public class ActividadesController implements ActionListener {
         vacciones.tablaactividades.getColumn("Id").setMinWidth(0);
         vacciones.tablaactividades.getColumn("Id").setMaxWidth(0);
         vacciones.tablaactividades.setDefaultRenderer(vacciones.tablaactividades.getColumnClass(0), tablacolor);
-        llenartable();
+        llenartableinit();
         keyevent();
         MouseClicked();
         vacciones.txttodo.setSelected(true);
@@ -218,13 +219,9 @@ public class ActividadesController implements ActionListener {
 
     private void llenartable() throws java.text.ParseException {
         String filtro = "8";
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        String fechade = (dtf.format(LocalDateTime.now()));         
-        if(vacciones.fechade.getDate() != null){
-            fechade = (sdf.format(vacciones.fechade.getDate()));   
-        }
-             
+        String fechade = (sdf.format(vacciones.fechade.getDate()));
+        String fechahasta = (sdf.format(vacciones.fechahasta.getDate()));
         if (vacciones.txthecho.isSelected()) {
             filtro = "1";
         } else {
@@ -232,7 +229,38 @@ public class ActividadesController implements ActionListener {
                 filtro = "0";
             }
         }
-        listactividad = cactividad.llenar(filtro,fechade);
+        listactividad = cactividad.llenar(filtro, fechade, fechahasta);
+        int cantidad = listactividad.size();
+        Object[] dato = new Object[12];
+        for (int i = 0; i < cantidad; i++) {
+            dato[0] = listactividad.get(i).getIdactividades();
+            dato[1] = listactividad.get(i).getFecha();
+            dato[2] = listactividad.get(i).getCodigo();
+            dato[3] = listactividad.get(i).getEmpresa();
+            dato[4] = listactividad.get(i).getReporto();
+            dato[5] = listactividad.get(i).getInforme();
+            dato[6] = listactividad.get(i).getDel();
+            dato[7] = listactividad.get(i).getAgregar();
+            dato[8] = listactividad.get(i).getSwp();
+            dato[9] = listactividad.get(i).getMacin();
+            dato[10] = listactividad.get(i).getMacout();
+            dato[11] = listactividad.get(i).getHecho();
+            model.addRow(dato);
+            vacciones.tablaactividades.setModel(model);
+        }
+    }
+
+    private void llenartableinit() throws java.text.ParseException {
+        String filtro = "8";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String fechade = (dtf.format(LocalDateTime.now()));
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_WEEK, -7);
+        Date fechaParseada = new SimpleDateFormat("dd-MM-yyyy").parse(fechade);
+        vacciones.fechahasta.setDate(fechaParseada);
+        vacciones.fechade.setDate(calendar.getTime());
+        listactividad = cactividad.llenarinit(fechade);
         int cantidad = listactividad.size();
         Object[] dato = new Object[12];
         for (int i = 0; i < cantidad; i++) {
