@@ -5,7 +5,9 @@
  */
 package vistas;
 
+import Consultas.Consultas_Cliente;
 import Consultas.Consultas_usuario;
+import controlador.BusquedaController;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -13,6 +15,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -20,8 +23,11 @@ import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JTable;
 import javax.swing.KeyStroke;
+import modelo.Cliente;
 import modelo.Usuario;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -47,10 +53,6 @@ public class Principal extends javax.swing.JFrame {
         crearusuario.setOpaque(false);
         crearusuario.setContentAreaFilled(false);
 
-        busqueda.setOpaque(false);
-        busqueda.setContentAreaFilled(false);
-
-
         carpetas.setOpaque(false);
         carpetas.setContentAreaFilled(false);
 
@@ -67,7 +69,7 @@ public class Principal extends javax.swing.JFrame {
         acciones.setContentAreaFilled(false);
 
         jPanel2.setOpaque(false);
-
+        jPanel4.setOpaque(false);
     }
 //   DefaultTableModel model = new DefaultTableModel();
 
@@ -79,7 +81,7 @@ public class Principal extends javax.swing.JFrame {
 
     }
 
-    public Principal(Usuario modu) {
+    public Principal(Usuario modu) throws IOException, ParseException {
         initComponents();
         transparecia();
         BufferedImage image = null;
@@ -95,7 +97,9 @@ public class Principal extends javax.swing.JFrame {
         int alto = (int) tamanio.getHeight();
         this.setSize(new Dimension(ancho, alto));
         jPanel2.setPreferredSize(new Dimension(ancho, 70));
-
+        jPanel4.setPreferredSize(new Dimension(ancho-20, alto-170));
+//        tabladatos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/fondo2.png"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), alto, Image.SCALE_DEFAULT));
 
@@ -123,15 +127,16 @@ public class Principal extends javax.swing.JFrame {
                 if (modu.getCrearusuarios() == 0) {
                     crearusuario.setVisible(false);
                 }
-                if (modu.getBuscar() == 0) {
-                    busqueda.setVisible(false);
-                }
                 if (modu.getBackups() == 0) {
                     backup.setVisible(false);
                 }
                 
             }
         }
+        Cliente modelo = new Cliente();
+        Consultas_Cliente consulta = new Consultas_Cliente();
+        BusquedaController bc = new BusquedaController(modelo, consulta, this);               
+        bc.iniciar();              
     }
 
     /**
@@ -146,24 +151,41 @@ public class Principal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        popup = new javax.swing.JPopupMenu();
+        abrirdirectorio = new javax.swing.JMenuItem();
+        editarcliente = new javax.swing.JMenuItem();
+        backup = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        crearcliente = new javax.swing.JButton();
-        configuraciones1 = new javax.swing.JButton();
-        crearusuario = new javax.swing.JButton();
-        carpetas = new javax.swing.JButton();
-        otro = new javax.swing.JButton();
-        busqueda = new javax.swing.JButton();
-        backup = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btnterminar = new javax.swing.JButton();
+        otro = new javax.swing.JButton();
+        configuraciones1 = new javax.swing.JButton();
         Cotizaciones = new javax.swing.JButton();
+        carpetas = new javax.swing.JButton();
+        crearusuario = new javax.swing.JButton();
         acciones = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        txtbuscar = new javax.swing.JTextField();
+        filtro = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabladatos = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        crearcliente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
 
         jMenu2.setText("jMenu2");
+
+        abrirdirectorio.setText("Abrir directorio");
+        popup.add(abrirdirectorio);
+
+        editarcliente.setText("Editar Cliente");
+        popup.add(editarcliente);
+
+        backup.setText("Backup");
+        popup.add(backup);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -172,68 +194,6 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setMaximumSize(new java.awt.Dimension(1280, 1080));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        crearcliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        crearcliente.setForeground(new java.awt.Color(255, 255, 255));
-        crearcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clienteadd.png"))); // NOI18N
-        crearcliente.setText("Crearcliente");
-        crearcliente.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        crearcliente.setOpaque(false);
-        jPanel1.add(crearcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 170, 70));
-
-        configuraciones1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        configuraciones1.setForeground(new java.awt.Color(255, 255, 255));
-        configuraciones1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/configuraciones (2).png"))); // NOI18N
-        configuraciones1.setText("Directorio");
-        configuraciones1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        configuraciones1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                configuraciones1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(configuraciones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 170, 70));
-
-        crearusuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        crearusuario.setForeground(new java.awt.Color(255, 255, 255));
-        crearusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/useradd.png"))); // NOI18N
-        crearusuario.setText("Usuarios");
-        crearusuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        crearusuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crearusuarioActionPerformed(evt);
-            }
-        });
-        jPanel1.add(crearusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 170, -1));
-
-        carpetas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        carpetas.setForeground(new java.awt.Color(255, 255, 255));
-        carpetas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/folders.png"))); // NOI18N
-        carpetas.setText("Carpetas");
-        carpetas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(carpetas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 170, 70));
-
-        otro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        otro.setForeground(new java.awt.Color(255, 255, 255));
-        otro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/otros.png"))); // NOI18N
-        otro.setText("Otros");
-        otro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        jPanel1.add(otro, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 170, 70));
-
-        busqueda.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        busqueda.setForeground(new java.awt.Color(255, 255, 255));
-        busqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search_1.png"))); // NOI18N
-        busqueda.setText("Buscar");
-        busqueda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        busqueda.setOpaque(false);
-        jPanel1.add(busqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 170, 70));
-
-        backup.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        backup.setForeground(new java.awt.Color(255, 255, 255));
-        backup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Backup-64.png"))); // NOI18N
-        backup.setText("Backup's");
-        backup.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        backup.setOpaque(false);
-        jPanel1.add(backup, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, 170, 70));
 
         jPanel2.setBackground(new java.awt.Color(209, 235, 247));
 
@@ -253,6 +213,66 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        otro.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        otro.setForeground(new java.awt.Color(255, 255, 255));
+        otro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/more.png"))); // NOI18N
+        otro.setText("Otros");
+        otro.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        otro.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        otro.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        configuraciones1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        configuraciones1.setForeground(new java.awt.Color(255, 255, 255));
+        configuraciones1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/track.png"))); // NOI18N
+        configuraciones1.setText("Directorio");
+        configuraciones1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        configuraciones1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        configuraciones1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        configuraciones1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configuraciones1ActionPerformed(evt);
+            }
+        });
+
+        Cotizaciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Cotizaciones.setForeground(new java.awt.Color(255, 255, 255));
+        Cotizaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/cotizacion.png"))); // NOI18N
+        Cotizaciones.setText("Cotizaciones");
+        Cotizaciones.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        Cotizaciones.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Cotizaciones.setOpaque(false);
+        Cotizaciones.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        carpetas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        carpetas.setForeground(new java.awt.Color(255, 255, 255));
+        carpetas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/folder.png"))); // NOI18N
+        carpetas.setText("Carpetas");
+        carpetas.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        carpetas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        carpetas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        crearusuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        crearusuario.setForeground(new java.awt.Color(255, 255, 255));
+        crearusuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sync32.png"))); // NOI18N
+        crearusuario.setText("Usuarios");
+        crearusuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        crearusuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        crearusuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        crearusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearusuarioActionPerformed(evt);
+            }
+        });
+
+        acciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        acciones.setForeground(new java.awt.Color(255, 255, 255));
+        acciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser32.png"))); // NOI18N
+        acciones.setText("Acciones");
+        acciones.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        acciones.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        acciones.setOpaque(false);
+        acciones.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -260,48 +280,123 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 343, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(otro, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(configuraciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Cotizaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(carpetas, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(crearusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(acciones, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(btnterminar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGap(53, 53, 53))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 11, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnterminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 11, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 10, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(carpetas)
+                    .addComponent(Cotizaciones)
+                    .addComponent(configuraciones1)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnterminar)
+                        .addComponent(jLabel2)
+                        .addComponent(otro, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(acciones, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(crearusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 80));
 
-        Cotizaciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Cotizaciones.setForeground(new java.awt.Color(255, 255, 255));
-        Cotizaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cotizacion-64.png"))); // NOI18N
-        Cotizaciones.setText("Cotizaciones");
-        Cotizaciones.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        Cotizaciones.setOpaque(false);
-        jPanel1.add(Cotizaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 170, 70));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        acciones.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        acciones.setForeground(new java.awt.Color(255, 255, 255));
-        acciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/activity.png"))); // NOI18N
-        acciones.setText("Acciones");
-        acciones.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
-        acciones.setOpaque(false);
-        jPanel1.add(acciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 170, 70));
+        filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo", "electronica", "sucursal", "cliente potencial" }));
+
+        tabladatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11", "Title 12", "Title 13", "Title 14", "Title 15", "Title 16", "Title 17", "Title 18", "Title 19", "Title 20", "Title 21", "Title 22", "Title 23", "Title 24", "Title 25", "Title 26", "Title 27", "Title 28", "Title 29", "Title 30"
+            }
+        ));
+        jScrollPane1.setViewportView(tabladatos);
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Enter para buscar");
+
+        crearcliente.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        crearcliente.setForeground(new java.awt.Color(255, 255, 255));
+        crearcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crearuser32.png"))); // NOI18N
+        crearcliente.setText("Crearcliente");
+        crearcliente.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(210, 43, 7), 2, true));
+        crearcliente.setHideActionText(true);
+        crearcliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        crearcliente.setOpaque(false);
+        crearcliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(crearcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(105, 105, 105)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
+                        .addComponent(jLabel3))
+                    .addComponent(crearcliente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1415, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -364,22 +459,30 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Cotizaciones;
+    public javax.swing.JMenuItem abrirdirectorio;
     public javax.swing.JButton acciones;
-    public javax.swing.JButton backup;
+    public javax.swing.JMenuItem backup;
     public javax.swing.JButton btnterminar;
-    public javax.swing.JButton busqueda;
     public javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JButton carpetas;
     public javax.swing.JButton configuraciones1;
     public javax.swing.JButton crearcliente;
     public javax.swing.JButton crearusuario;
+    public javax.swing.JMenuItem editarcliente;
+    public javax.swing.JComboBox<String> filtro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JButton otro;
+    public javax.swing.JPopupMenu popup;
+    public javax.swing.JTable tabladatos;
+    public javax.swing.JTextField txtbuscar;
     // End of variables declaration//GEN-END:variables
 
 }

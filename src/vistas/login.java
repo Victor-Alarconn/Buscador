@@ -14,6 +14,9 @@ import java.awt.Shape;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -21,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.border.Border;
 import modelo.Usuario;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -62,7 +66,13 @@ public class login extends javax.swing.JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    loginenter();
+                    try {
+                        loginenter();
+                    } catch (IOException ex) {
+                        Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });
@@ -70,17 +80,23 @@ public class login extends javax.swing.JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    loginenter();
+                    try {
+                        loginenter();
+                    } catch (IOException ex) {
+                        Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });
     }
 
-    public void loginenter() {
+    public void loginenter() throws IOException, ParseException {
         user.setNombre(nombreuser.getText());
         user.setContrasena(txtcontrasena.getText());
         if (conu.login(user)) {
-            this.dispose();
+            this.dispose();            
         } else {
             JOptionPane.showMessageDialog(this, "usuario o contraseña incorectos");
         }
@@ -169,7 +185,13 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void validarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validarActionPerformed
-        loginenter();
+        try {
+            loginenter();
+        } catch (IOException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_validarActionPerformed
 
     /**

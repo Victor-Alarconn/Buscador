@@ -15,6 +15,9 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -48,6 +51,15 @@ public class AgregarActividadesController implements ActionListener {
     public void iniciar() throws IOException, ParseException {
         vacciones.setTitle(" Agregar Actividad");
         vacciones.setLocationRelativeTo(null);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String fechade = (dtf.format(LocalDateTime.now()));
+        Date fechaParseada;
+        try {
+            fechaParseada = new SimpleDateFormat("dd-MM-yyyy").parse(fechade);
+            vacciones.txtfecha.setDate(fechaParseada);
+        } catch (java.text.ParseException ex) {
+            Logger.getLogger(AgregarActividadesController.class.getName()).log(Level.SEVERE, null, ex);
+        }        
         keyevent();
     }
 
@@ -84,8 +96,7 @@ public class AgregarActividadesController implements ActionListener {
                 }
             } catch (IOException ex) {
                 Logger.getLogger(AgregarActividadesController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+            }           
             
         }
     }

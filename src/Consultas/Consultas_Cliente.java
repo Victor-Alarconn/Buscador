@@ -179,7 +179,7 @@ public class Consultas_Cliente extends Conexion {
     //consulta para buscar cliente 
     public boolean buscar(Cliente cliente) {
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
+        try ( Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
@@ -232,7 +232,7 @@ public class Consultas_Cliente extends Conexion {
     //consulta para buscar por el nit del cliente en formulario
     public boolean buscarr(Cliente cliente) {
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
+        try ( Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
@@ -255,7 +255,7 @@ public class Consultas_Cliente extends Conexion {
     //buscar cliente por codigopublic boolean buscarr(Cliente cliente) {
     public boolean buscarcoodigocliente(Cliente cliente) {
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
+        try ( Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
@@ -291,7 +291,7 @@ public class Consultas_Cliente extends Conexion {
 
     public boolean buscarnombrecliente(Cliente cliente) {
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
+        try ( Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
@@ -354,7 +354,7 @@ public class Consultas_Cliente extends Conexion {
     public ArrayList<Servicio> llenar(Cliente cliente) {
         ArrayList lista = new ArrayList();
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("temp" + File.separator + "serviciosclientes.json")) {
+        try ( Reader reader = new FileReader("temp" + File.separator + "serviciosclientes.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
@@ -379,7 +379,7 @@ public class Consultas_Cliente extends Conexion {
     public ArrayList<Documentos> clientedocumentos(Cliente cliente) {
         ArrayList lista = new ArrayList();
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("temp" + File.separator + "documentos.json")) {
+        try ( Reader reader = new FileReader("temp" + File.separator + "documentos.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
@@ -400,6 +400,7 @@ public class Consultas_Cliente extends Conexion {
         }
         return null;
     }
+
     //consulta para buscar si el nit del cliente contie un parametro
     public ArrayList<Cliente> buscarcaracter(String parametro, String filtro) {
         ArrayList listaPersona = new ArrayList();
@@ -420,15 +421,14 @@ public class Consultas_Cliente extends Conexion {
                 }
             }
         }
-
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
+        try ( Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
 //                System.out.println(((String) jsonObject.values().toString()).contains(parametro));
                 if (f) {
-                    if (parametro1.equals((Long) jsonObject.get(filtro))&& ((String) jsonObject.values().toString()).contains(parametro)) {
+                    if (parametro1.equals((Long) jsonObject.get(filtro)) && ((String) jsonObject.values().toString()).contains(parametro)) {
                         Cliente cliente = new Cliente();
                         Long myLong = (Long) jsonObject.get("idclientes_potenciales");
                         int id = Math.toIntExact(myLong);
@@ -452,7 +452,7 @@ public class Consultas_Cliente extends Conexion {
                         listaPersona.add(cliente);
                     }
                 } else {
-                    if (((String) jsonObject.values().toString()).contains(parametro)) {
+                    if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {
                         Cliente cliente = new Cliente();
                         Long myLong = (Long) jsonObject.get("idclientes_potenciales");
                         int id = Math.toIntExact(myLong);
@@ -476,6 +476,45 @@ public class Consultas_Cliente extends Conexion {
                         listaPersona.add(cliente);
                     }
                 }
+            }
+            return listaPersona;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<Cliente> ClientesAll() {
+        ArrayList listaPersona = new ArrayList();
+
+        JSONParser parser = new JSONParser();
+        try ( Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
+            JSONArray jsonarray = (JSONArray) parser.parse(reader);
+            for (int i = 0; i < jsonarray.size(); i++) {
+                JSONObject jsonObject = (JSONObject) jsonarray.get(i);
+                Cliente cliente = new Cliente();
+                Long myLong = (Long) jsonObject.get("idclientes_potenciales");
+                int id = Math.toIntExact(myLong);
+                cliente.setIdclientes_potenciales(id);
+                cliente.setNit((String) jsonObject.get("nit"));
+                cliente.setNombre((String) jsonObject.get("nombre"));
+                cliente.setCodigo((String) jsonObject.get("codigo"));
+                cliente.setFecha_llegada((String) jsonObject.get("fecha_llegada"));
+                cliente.setRuta((String) jsonObject.get("ruta"));
+                cliente.setFecha_arriendo((String) jsonObject.get("fecha_arriendo"));
+                cliente.setDv((String) jsonObject.get("dv"));
+                cliente.setCelular1((String) jsonObject.get("celular1"));
+                cliente.setEmail((String) jsonObject.get("email"));
+                cliente.setContacto((String) jsonObject.get("contacto"));
+                cliente.setBackupruta((String) jsonObject.get("backupruta"));
+                cliente.setRutacotizacon((String) jsonObject.get("rutacotizacion"));
+                Long myLongi = (Long) jsonObject.get("cliente_potencial");
+                int idcliente = Math.toIntExact(myLongi);
+                cliente.setCliente_potencial(idcliente);
+                cliente.setFechacotizacion((String) jsonObject.get("fechacotizacion"));
+                listaPersona.add(cliente);
             }
             return listaPersona;
         } catch (IOException e) {
