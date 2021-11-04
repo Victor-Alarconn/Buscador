@@ -8,15 +8,17 @@ package Consultas;
 import Conexion.Conexion;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import controlador.OrganizadorController;
+import Controladores.OrganizadorController;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import modelo.Cliente;
-import modelo.Rol;
-import modelo.Usuario;
-import vistas.Principal;
+import Modelos.Cliente;
+import Modelos.Rol;
+import Modelos.Usuario;
+import Vistas.Principal;
+import java.io.IOException;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -272,7 +274,7 @@ public class Consultas_usuario extends Conexion {
     }
 
     //consulta para acceder por login 
-    public boolean login(Usuario user) {
+    public boolean login(Usuario user) throws IOException, ParseException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConexion();

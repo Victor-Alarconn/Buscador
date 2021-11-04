@@ -12,7 +12,7 @@ import com.mysql.jdbc.PreparedStatement;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import modelo.Documentos;
+import Modelos.Documentos;
 
 /**
  *

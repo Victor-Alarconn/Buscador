@@ -11,7 +11,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import modelo.Servicios_has_Clientes_Potenciales;
+import Modelos.Servicios_has_Clientes_Potenciales;
 
 /**
  *

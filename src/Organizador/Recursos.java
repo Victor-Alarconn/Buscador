@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import vistas.Principal;
+import Vistas.Principal;
 import javax.swing.JOptionPane;
 
 /**
