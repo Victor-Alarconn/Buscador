@@ -33,7 +33,7 @@ public class Recursos {
     }
 
     public int j() {
-        int respuesta = JOptionPane.showConfirmDialog(null, "El Usuario no posee un directoio desea crearlo?", "Info", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int respuesta = JOptionPane.showConfirmDialog(null, "El Usuario no posee un directoio desea crearlo?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         return respuesta;
     }
 

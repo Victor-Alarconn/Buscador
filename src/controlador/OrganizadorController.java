@@ -37,6 +37,8 @@ import modelo.Servicios_has_Clientes_Potenciales;
 import modelo.Usuario;
 import org.json.simple.parser.ParseException;
 import vistas.Actividades;
+import vistas.Backups;
+import vistas.Busqueda;
 import vistas.Carpetas;
 import vistas.Configuraciones;
 import vistas.Cotizaciones;
@@ -90,12 +92,13 @@ public class OrganizadorController implements ActionListener {
 //    Usuario mod = new Usuario();
     Consultas_usuario consultasusuario = new Consultas_usuario();
     //instaciar vistas 
+    Busqueda busqueda;
     Otros otro;
     Usuarios usu;
     Carpetas carpeta;
     Formulario formulario;
     Configuraciones vc;
-
+    Backups backup;
     Cotizaciones cotizaciones;
     Actividades vacciones;
 
@@ -108,7 +111,9 @@ public class OrganizadorController implements ActionListener {
         this.principal.configuraciones1.addActionListener(this);
         this.principal.carpetas.addActionListener(this);
         this.principal.crearusuario.addActionListener(this);
-        this.principal.otro.addActionListener(this);        
+        this.principal.otro.addActionListener(this);
+        this.principal.busqueda.addActionListener(this);
+        this.principal.backup.addActionListener(this);
         this.principal.Cotizaciones.addActionListener(this);
         this.principal.acciones.addActionListener(this);
 
@@ -116,7 +121,9 @@ public class OrganizadorController implements ActionListener {
 
     public void iniciar() {
         principal.setTitle("Organizador");
-        //inicializar vistas         
+        //inicializar vistas 
+        busqueda = new Busqueda(principal, false);
+        busqueda.setVisible(false);
         otro = new Otros(principal, false);
         otro.setVisible(false);
         usu = new Usuarios(principal, false);
@@ -127,6 +134,8 @@ public class OrganizadorController implements ActionListener {
         formulario.setVisible(false);
         vc = new Configuraciones(principal, true);
         vc.setVisible(false);
+        backup = new Backups(principal, false);
+        backup.setVisible(false);
         cotizaciones = new Cotizaciones(principal, false);
         cotizaciones.setVisible(false);
         cotizaciones = new Cotizaciones(principal, false);
@@ -156,7 +165,7 @@ public class OrganizadorController implements ActionListener {
         }
         //abre la configuracion de rutas 
         if (e.getSource() == principal.configuraciones1) {
-            if (!vc.isVisible() && !formulario.isVisible()) {
+            if (!vc.isVisible() && !formulario.isVisible() && !backup.isVisible() && !cotizaciones.isVisible()) {
                 vc = new Configuraciones(principal, true);
                 ConfiguracionesController ccontroller = new ConfiguracionesController(mconfiguracion, cconfiguraciones, vc, mod);
                 try {
@@ -170,7 +179,20 @@ public class OrganizadorController implements ActionListener {
             }
         }
         //abre la vista de busqueda de clientes 
-       
+        if (e.getSource() == principal.busqueda) {
+            if (!busqueda.isVisible()) {
+                busqueda = new Busqueda(principal, false);
+                BusquedaController bc = new BusquedaController(modelo, consulta, busqueda);
+                try {
+                    bc.iniciar();
+                } catch (IOException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                busqueda.setVisible(true);
+            }
+        }
         //abre las vista de otros
         if (e.getSource() == principal.otro) {
             if (!otro.isVisible()) {
@@ -215,7 +237,21 @@ public class OrganizadorController implements ActionListener {
                 carpeta.setVisible(true);
             }
         }
-       
+        //abre el formulario de backups 
+        if (e.getSource() == principal.backup) {
+            if (!backup.isVisible()) {
+                backup = new Backups(principal, false);
+                BackupController cbackup = new BackupController(consulta, modelo, backup, mod);
+                try {
+                    cbackup.iniciar();
+                } catch (IOException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                backup.setVisible(true);
+            }
+        }
         //abre el formularo de cotizaciones 
         if (e.getSource() == principal.Cotizaciones) {
             if (!cotizaciones.isVisible()) {

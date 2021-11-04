@@ -44,8 +44,9 @@ import modelo.Servicio;
 import modelo.Servicios_has_Clientes_Potenciales;
 import modelo.Usuario;
 import org.json.simple.parser.ParseException;
+import vistas.Busqueda;
 import vistas.Editarcliente;
-import vistas.Principal;
+
 
 /**
  *
@@ -55,7 +56,7 @@ public class BusquedaController implements ActionListener {
 
     private final Cliente modelo;
     private final Consultas_Cliente consulta;
-    private final Principal busqueda;
+    private final Busqueda busqueda;
 
     DefaultTableModel model = new DefaultTableModel();
     Recursos dialogo = new Recursos();
@@ -92,13 +93,12 @@ public class BusquedaController implements ActionListener {
     private String directorio = null;
     private String directoriocotizaciones = null;
 
-    public BusquedaController(Cliente modelo, Consultas_Cliente consulta, Principal busqueda) {
+    public BusquedaController(Cliente modelo, Consultas_Cliente consulta, Busqueda busqueda) {
         this.modelo = modelo;
         this.consulta = consulta;
         this.busqueda = busqueda;
         this.busqueda.abrirdirectorio.addActionListener(this);
         this.busqueda.editarcliente.addActionListener(this);
-        this.busqueda.backup.addActionListener(this);
     }
 
     public void iniciar() throws IOException, ParseException {
@@ -159,7 +159,7 @@ public class BusquedaController implements ActionListener {
         busqueda.getRootPane().registerKeyboardAction(e -> {
             busqueda();
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
-        llenartabla();
+
     }
 
     @Override
@@ -191,24 +191,6 @@ public class BusquedaController implements ActionListener {
                 editarcliente.setVisible(true);
             }
 
-        }
-
-        //abre el formulario de backups 
-        if (e.getSource() == busqueda.backup) {
-//            Backups backup = new Backups(busqueda, false);
-            int selecionar = busqueda.tabladatos.getSelectedRow();
-            if (selecionar != -1) {
-                modelo.setCodigo(String.valueOf(busqueda.tabladatos.getValueAt(selecionar,5 )));
-                modelo.setNombre(String.valueOf(busqueda.tabladatos.getValueAt(selecionar,4 )));
-                BackupController cbackup = new BackupController(consulta, modelo, mod);
-                try {
-                    cbackup.iniciar();
-                } catch (IOException ex) {
-                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ParseException ex) {
-                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
         }
     }
 
@@ -243,7 +225,7 @@ public class BusquedaController implements ActionListener {
     public void busqueda() {
         if (busqueda.txtbuscar.getText().length() == 0) {
             limpiartabla();
-            llenartabla();
+            //dialogo.alerta();
         }
         if (busqueda.txtbuscar.getText().length() > 0
                 || busqueda.filtro.getSelectedItem().equals("electronica")
@@ -272,32 +254,6 @@ public class BusquedaController implements ActionListener {
                 model.addRow(dato);
                 busqueda.tabladatos.setModel(model);
             }
-        }
-    }
-
-    public void llenartabla() {
-        limpiartabla();
-        ArrayList<Cliente> lista;
-        lista = consulta.ClientesAll();
-        int cantidad = lista.size();
-        Object[] dato = new Object[14];
-        for (int i = 0; i < cantidad; i++) {
-            dato[0] = lista.get(i).getIdclientes_potenciales();
-            dato[1] = lista.get(i).getRuta();
-            dato[2] = lista.get(i).getNit();
-            dato[3] = lista.get(i).getDv();
-            dato[4] = lista.get(i).getNombre();
-            dato[5] = lista.get(i).getCodigo();
-            dato[6] = lista.get(i).getEmail();
-            dato[7] = lista.get(i).getCelular1();
-            dato[8] = lista.get(i).getContacto();
-            dato[9] = lista.get(i).getFecha_llegada();
-            dato[10] = lista.get(i).getFecha_arriendo();
-            dato[11] = lista.get(i).getRutacotizacon();
-            dato[12] = lista.get(i).getCliente_potencial();
-            dato[13] = lista.get(i).getFechacotizacion();
-            model.addRow(dato);
-            busqueda.tabladatos.setModel(model);
         }
     }
 
