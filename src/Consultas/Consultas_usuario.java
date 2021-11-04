@@ -8,17 +8,17 @@ package Consultas;
 import Conexion.Conexion;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import Controladores.OrganizadorController;
+import controlador.OrganizadorController;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Modelos.Cliente;
-import Modelos.Rol;
-import Modelos.Usuario;
+import modelo.Cliente;
+import modelo.Rol;
+import modelo.Usuario;
 import org.json.simple.parser.ParseException;
-import Vistas.Principal;
+import vistas.Principal;
 
 /**
  *

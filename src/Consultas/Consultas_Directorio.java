@@ -11,8 +11,8 @@ import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Modelos.Cliente;
-import Modelos.Directorio;
+import modelo.Cliente;
+import modelo.Directorio;
 
 /**
  *

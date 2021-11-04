@@ -22,13 +22,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Modelos.Mac;
-import Modelos.Modulo;
-import Modelos.Rol;
-import Modelos.Usuario;
+import modelo.Mac;
+import modelo.Modulo;
+import modelo.Rol;
+import modelo.Usuario;
 import org.json.simple.parser.ParseException;
 
-import Vistas.login;
+import vistas.login;
 
 /**
  *
