@@ -26,8 +26,9 @@ import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import Modelos.Actividad;
 import Modelos.Usuario;
-import org.json.simple.parser.ParseException;
 import Vistas.Actividades;
+import org.json.simple.parser.ParseException;
+
 import Vistas.AgregarActividad;
 import Vistas.EditarActividad;
 import Vistas.Principal;
