@@ -15,6 +15,7 @@ import Consultas.Consultas_Mac;
 import Consultas.Consultas_Servicios;
 import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
 import Consultas.Consultas_usuario;
+import Modelos.Actividad;
 import Organizador.Recursos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -43,6 +44,7 @@ import Modelos.Mac;
 import Modelos.Servicio;
 import Modelos.Servicios_has_Clientes_Potenciales;
 import Modelos.Usuario;
+import Vistas.AgregarActividad;
 import Vistas.Backups;
 import org.json.simple.parser.ParseException;
 import Vistas.Principal;
@@ -206,6 +208,30 @@ public class TablaClientesController implements ActionListener {
                 backup.setVisible(true);
             
         }
+        
+        //abre el formulario de actividades 
+        if (e.getSource() == busqueda.btnagregaractividad) {         
+                AgregarActividad aga = new AgregarActividad(busqueda, false);
+                Actividad model = new Actividad();
+                int selecionar = busqueda.tabladatos.getSelectedRow();
+                if (selecionar != -1) {
+                model.setEmpresa(String.valueOf(busqueda.tabladatos.getValueAt(selecionar, 4)));
+                model.setCodigo(String.valueOf(busqueda.tabladatos.getValueAt(selecionar, 5)));
+                AgregarActividadesController cbackup = new AgregarActividadesController(model,aga, mod);
+                try {
+                    cbackup.iniciar();
+                } catch (IOException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                aga.setVisible(true);
+                }
+                
+            
+        }
+        
+        
     }
 
     public void keyevent() {

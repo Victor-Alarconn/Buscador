@@ -37,7 +37,8 @@ public class Consultas_Actividad extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
 
-        String sql = "INSERT INTO actividades (fecha,codigo,empresa,reporto,informe,del,agregar,swp,macin,macout,hecho) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO actividades (fecha,codigo,empresa,reporto,informe,del,"
+                + "agregar,swp,macin,macout,hecho,concepto,prioridad,hora,qinformo,referencia) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
@@ -52,6 +53,11 @@ public class Consultas_Actividad extends Conexion {
             ps.setString(9, actividad.getMacin());
             ps.setString(10, actividad.getMacout());
             ps.setString(11, actividad.getHecho());
+            ps.setString(12, actividad.getConcepto());
+            ps.setString(13, actividad.getPrioridad());
+            ps.setString(14, actividad.getHora());
+            ps.setString(15, actividad.getQinformo());
+            ps.setString(16, actividad.getReferencia());
             ps.execute();
             jsonactividades();
             return true;
@@ -240,41 +246,12 @@ public class Consultas_Actividad extends Conexion {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
                 if (f) {
                     if (filtro.equals((String) jsonObject.get("hecho")) && ((String) jsonObject.values().toString()).contains(parametro)) {
-                        Actividad actividad = new Actividad();
-                        Long myLong = (Long) jsonObject.get("idactividades");
-                        int id = Math.toIntExact(myLong);
-                        actividad.setIdactividades(id);
-                        actividad.setFecha((String) jsonObject.get("fecha"));
-                        actividad.setCodigo((String) jsonObject.get("codigo"));
-                        actividad.setEmpresa((String) jsonObject.get("empresa"));
-                        actividad.setReporto((String) jsonObject.get("reporto"));
-                        actividad.setInforme((String) jsonObject.get("informe"));
-                        actividad.setDel((String) jsonObject.get("del"));
-                        actividad.setAgregar((String) jsonObject.get("agregar"));
-                        actividad.setSwp((String) jsonObject.get("swp"));
-                        actividad.setMacin((String) jsonObject.get("macin"));
-                        actividad.setMacout((String) jsonObject.get("macout"));
-                        actividad.setHecho((String) jsonObject.get("hecho"));
-                        lista.add(actividad);
+                        lista.add(crearacti(jsonObject));
                     }
                 } else {
                     if (((String) jsonObject.values().toString()).contains(parametro)) {
-                        Actividad actividad = new Actividad();
-                        Long myLong = (Long) jsonObject.get("idactividades");
-                        int id = Math.toIntExact(myLong);
-                        actividad.setIdactividades(id);
-                        actividad.setFecha((String) jsonObject.get("fecha"));
-                        actividad.setCodigo((String) jsonObject.get("codigo"));
-                        actividad.setEmpresa((String) jsonObject.get("empresa"));
-                        actividad.setReporto((String) jsonObject.get("reporto"));
-                        actividad.setInforme((String) jsonObject.get("informe"));
-                        actividad.setDel((String) jsonObject.get("del"));
-                        actividad.setAgregar((String) jsonObject.get("agregar"));
-                        actividad.setSwp((String) jsonObject.get("swp"));
-                        actividad.setMacin((String) jsonObject.get("macin"));
-                        actividad.setMacout((String) jsonObject.get("macout"));
-                        actividad.setHecho((String) jsonObject.get("hecho"));
-                        lista.add(actividad);
+                        
+                        lista.add(crearacti(jsonObject));
                     }
                 }
 
@@ -306,6 +283,11 @@ public class Consultas_Actividad extends Conexion {
         actividad.setMacin((String) jsonObject.get("macin"));
         actividad.setMacout((String) jsonObject.get("macout"));
         actividad.setHecho((String) jsonObject.get("hecho"));
+        actividad.setConcepto((String) jsonObject.get("concepto"));
+        actividad.setPrioridad((String) jsonObject.get("prioridad"));
+        actividad.setHora((String) jsonObject.get("hora"));
+        actividad.setQinformo((String) jsonObject.get("qinformo"));
+        actividad.setReferencia((String) jsonObject.get("referencia"));
         return actividad;
     }
 

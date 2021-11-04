@@ -42,7 +42,6 @@ public class Actividades extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaactividades = new javax.swing.JTable();
         txtbuscaractividad = new javax.swing.JTextField();
-        btnagregar = new javax.swing.JToggleButton();
         jLabel2 = new javax.swing.JLabel();
         btnactualizar = new javax.swing.JButton();
         txthecho = new javax.swing.JCheckBox();
@@ -110,9 +109,6 @@ public class Actividades extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tablaactividades);
 
-        btnagregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        btnagregar.setText("Agregar");
-
         jLabel2.setText("Forma: 1-Jira/2-Email/3-Telefono/4-Whatsapp/5-Directo");
 
         btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sync32.png"))); // NOI18N
@@ -157,10 +153,8 @@ public class Actividades extends javax.swing.JDialog {
                                     .addComponent(jLabel4)
                                     .addGap(10, 10, 10)
                                     .addComponent(fechahasta, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(33, 33, 33)
-                                    .addComponent(btnactualizar)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnagregar))
+                                    .addComponent(btnactualizar))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1042, Short.MAX_VALUE))
                             .addComponent(jLabel2))
                         .addGap(22, 22, 22))
@@ -178,20 +172,20 @@ public class Actividades extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtbuscaractividad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnagregar)
                             .addComponent(txthecho)
                             .addComponent(txtsinhacer)
                             .addComponent(txttodo)
-                            .addComponent(jLabel3)
-                            .addComponent(btnactualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18))
+                            .addComponent(jLabel3)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(fechahasta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fechade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(fechade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnactualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 27, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
@@ -246,7 +240,6 @@ public class Actividades extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnactualizar;
-    public javax.swing.JToggleButton btnagregar;
     private javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JMenuItem editar;
     public com.toedter.calendar.JDateChooser fechade;

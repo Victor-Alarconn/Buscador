@@ -23,6 +23,7 @@ import Modelos.Cliente;
 import Modelos.Usuario;
 import org.json.simple.parser.ParseException;
 import Vistas.AgregarActividad;
+import java.util.Calendar;
 
 /**
  *
@@ -45,10 +46,15 @@ public class AgregarActividadesController implements ActionListener {
         this.vacciones.btnguardar.addActionListener(this);
     }
 
-    public void iniciar() throws IOException, ParseException {
+    public void iniciar() throws IOException, ParseException, java.text.ParseException {
         vacciones.setTitle(" Agregar Actividad");
         vacciones.setLocationRelativeTo(null);
-        keyevent();
+        buscar();
+        String timeStamp = new SimpleDateFormat("h:mm a").format(Calendar.getInstance().getTime());
+         String timeStamp23 = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
+        SimpleDateFormat timeStamp2 = new SimpleDateFormat("dd-MM-yyyy");
+        vacciones.txthora.setText(timeStamp);
+        vacciones.txtfecha.setDate(timeStamp2.parse(timeStamp23));
     }
 
     @Override
@@ -63,6 +69,11 @@ public class AgregarActividadesController implements ActionListener {
             macciones.setMacin(vacciones.txtmacin.getText());
             macciones.setMacout(vacciones.txtmacsalida.getText());
             macciones.setHecho("0");
+            macciones.setConcepto(vacciones.txtconcepto.getText());
+            macciones.setHora(vacciones.txthora.getText());
+            macciones.setQinformo(vacciones.txtquieninformo.getSelectedItem().toString());
+            macciones.setPrioridad(vacciones.txtprioridad.getSelectedItem().toString());
+            macciones.setReferencia(vacciones.txtreferencia.getText());
             if (vacciones.jbtdel.isSelected()) {
                 macciones.setDel("x");
             } else {
@@ -90,21 +101,11 @@ public class AgregarActividadesController implements ActionListener {
         }
     }
     
-    public void keyevent() {
-        this.vacciones.txtcodigo.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    buscar();
-                }
-            }
-        });
-    }
-    
-    public void buscar() {
-        mcliente.setCodigo(vacciones.txtcodigo.getText().toUpperCase());
+    public void buscar() {    
+        mcliente.setCodigo(macciones.getCodigo().toUpperCase());
         if (ccliente.buscarcoodigocliente(mcliente)) {
             vacciones.txtempresa.setText(mcliente.getNombre());
+            vacciones.txtcodigo.setText(mcliente.getCodigo());
         }
     }
 

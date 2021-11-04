@@ -76,10 +76,8 @@
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Component id="fechahasta" min="-2" pref="109" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                  <Component id="btnactualizar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="btnagregar" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnactualizar" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane1" pref="1042" max="32767" attributes="0"/>
                           </Group>
@@ -105,14 +103,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtbuscaractividad" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="btnagregar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txthecho" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtsinhacer" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txttodo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnactualizar" alignment="3" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -121,9 +116,13 @@
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="fechade" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnactualizar" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace type="separate" pref="27" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="473" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -212,17 +211,6 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="txtbuscaractividad">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JToggleButton" name="btnagregar">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/img/add.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Agregar"/>
-      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
