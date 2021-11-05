@@ -64,7 +64,7 @@ public class Principal extends javax.swing.JFrame {
 
         Cotizaciones.setOpaque(false);
         Cotizaciones.setContentAreaFilled(false);
-        
+
         acciones.setOpaque(false);
         acciones.setContentAreaFilled(false);
 
@@ -86,7 +86,7 @@ public class Principal extends javax.swing.JFrame {
         transparecia();
         BufferedImage image = null;
         Image icon = new ImageIcon(getClass().getResource("/img/Organize.png")).getImage();
-        setIconImage(icon);        
+        setIconImage(icon);
         this.getRootPane().registerKeyboardAction(e -> {
             this.dispose();
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -96,10 +96,12 @@ public class Principal extends javax.swing.JFrame {
         int alto = (int) tamanio.getHeight();
         this.setSize(new Dimension(ancho, alto));
         jPanel2.setPreferredSize(new Dimension(ancho, 70));
-        jPanel4.setPreferredSize(new Dimension(ancho-20, alto-170));
+        jPanel4.setPreferredSize(new Dimension(ancho - 20, alto - 170));
         tabladatos.getTableHeader().setReorderingAllowed(false);
+        tabladatos.setRowSelectionAllowed(false);
+        tabladatos.setCellSelectionEnabled(true);
 //        tabladatos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
+
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/fondo2.png"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), alto, Image.SCALE_DEFAULT));
 
@@ -130,7 +132,7 @@ public class Principal extends javax.swing.JFrame {
                 if (modu.getBackups() == 0) {
                     backup.setVisible(false);
                 }
-                
+
             }
         }
         Cliente modelo = new Cliente();
@@ -349,6 +351,7 @@ public class Principal extends javax.swing.JFrame {
         ));
         tabladatos.setToolTipText("!Cliclk derecho para mas opciones¡");
         tabladatos.setComponentPopupMenu(popup);
+        tabladatos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tabladatos);
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));

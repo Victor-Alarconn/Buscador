@@ -26,6 +26,8 @@ public class Actividades extends javax.swing.JFrame {
         int alto = (int) tamanio.getHeight();
         jPanel1.setPreferredSize(new Dimension(ancho-20, alto-170));
         tablaactividades.getTableHeader().setReorderingAllowed(false);
+        tablaactividades.setRowSelectionAllowed(false);
+        tablaactividades.setCellSelectionEnabled(true);
     }
 
     /**
