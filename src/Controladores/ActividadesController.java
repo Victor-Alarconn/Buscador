@@ -22,18 +22,32 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import Modelos.Actividad;
 import Modelos.Usuario;
 import org.json.simple.parser.ParseException;
 import Vistas.Actividades;
-import Vistas.AgregarActividad;
 import Vistas.EditarActividad;
 import Vistas.Principal;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.TabStop;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.awt.Font;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import javax.swing.GroupLayout;
 import javax.swing.RowFilter;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -64,6 +78,7 @@ public class ActividadesController implements ActionListener {
         this.vacciones.txthecho.addActionListener(this);
         this.vacciones.txtsinhacer.addActionListener(this);
         this.vacciones.txttodo.addActionListener(this);
+        this.vacciones.generarpdf.addActionListener(this);
     }
 
     public void iniciar() throws IOException, ParseException, java.text.ParseException {
@@ -124,6 +139,10 @@ public class ActividadesController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == vacciones.generarpdf) {
+            GenerarPDF();
+        }
 
         if (e.getSource() == vacciones.btnactualizar) {
 
@@ -275,8 +294,10 @@ public class ActividadesController implements ActionListener {
                     filtro = "0";
                 }
             }
-            ArrayList<Actividad> listactividad = null;
-            listactividad = cactividad.buscarcaracter(vacciones.buscaractividad.getText(), filtro);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            String fechade = (sdf.format(vacciones.fechade.getDate()));
+            String fechahasta = (sdf.format(vacciones.fechahasta.getDate()));
+            listactividad = cactividad.buscarcaracter(vacciones.buscaractividad.getText(), filtro, fechade, fechahasta);
             llenartabla(listactividad);
         }
     }
@@ -344,6 +365,142 @@ public class ActividadesController implements ActionListener {
             dato[16] = listactividad.get(i).getReferencia();
             model.addRow(dato);
             vacciones.tablaactividades.setModel(model);
+        }
+    }
+
+    private void GenerarPDF() {
+        try {
+            int del = 0;
+            int add = 0;
+            int swp = 0;
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            String fechade = (sdf.format(vacciones.fechade.getDate()));
+            String fechahasta = (sdf.format(vacciones.fechahasta.getDate()));
+
+            Document documento = new Document(PageSize.A4.rotate(), 10f, 10f, 10f, 0f);
+//            documento.setPageSize(PageSize.A4.rotate());
+            String ruta = System.getProperty("user.home");
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/repor2.pdf"));
+            documento.open();
+            Paragraph titulo = new Paragraph("Actividad Terminales\n",
+                    FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLACK)
+            );
+            Paragraph subtitulo = new Paragraph(listactividad.get(0).getEmpresa() + "\n\n",
+                    FontFactory.getFont("arial", 16, Font.BOLD, BaseColor.BLACK)
+            );
+            Paragraph fechas = new Paragraph("Informe del: " + fechade + " hasta: " + fechahasta + " \n\n",
+                    FontFactory.getFont("arial", 12, Font.BOLD, BaseColor.BLACK)
+            );
+            //centrar el texto
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            subtitulo.setAlignment(Element.ALIGN_CENTER);
+            fechas.setAlignment(Element.ALIGN_CENTER);
+            //agregar  el texto al pdf
+            documento.add(titulo);
+            documento.add(subtitulo);
+            documento.add(fechas);
+
+            //crear tabla de pdf 
+            PdfPTable tabla = new PdfPTable(7);
+//            tabla.setWidthPercentage(100f);
+
+            tabla.addCell("Fecha");
+            tabla.addCell("Reporto");
+            tabla.addCell("Informo");
+            tabla.addCell("Proceso");
+            tabla.addCell("Mac Ingresa");
+            tabla.addCell("Mac Salida");
+            tabla.addCell("Concepto");
+
+            int cantidad = listactividad.size();
+            String proceso = null;
+            for (int i = 0; i < cantidad; i++) {
+                PdfPCell cell1 = new PdfPCell();
+//                    cell1.setBorder(Rectangle.NO_BORDER);
+//                    cell1.setPadding(4.0f);
+                Paragraph t = new Paragraph(listactividad.get(i).getFecha(),
+                        FontFactory.getFont("arial", 10, BaseColor.BLACK));
+                cell1.addElement(t);
+                t.setAlignment(Element.ALIGN_CENTER);
+
+                PdfPCell cell2 = new PdfPCell();
+                Paragraph t2 = new Paragraph(listactividad.get(i).getReporto(),
+                        FontFactory.getFont("arial", 10, BaseColor.BLACK));
+                cell2.addElement(t2);
+                t2.setAlignment(Element.ALIGN_CENTER);
+
+                PdfPCell cell3 = new PdfPCell();
+                Paragraph t3 = new Paragraph(listactividad.get(i).getInforme(),
+                        FontFactory.getFont("arial", 10, BaseColor.BLACK));
+                cell3.addElement(t3);
+                t3.setAlignment(Element.ALIGN_CENTER);
+                if (listactividad.get(i).getDel().toLowerCase().equals("x")) {
+                    proceso = "Del";
+                    del++;
+                } else {
+                    if (listactividad.get(i).getAgregar().toLowerCase().equals("x")) {
+                        proceso = "Add";
+                        add++;
+                    } else {
+                        if (listactividad.get(i).getSwp().toLowerCase().equals("x")) {
+                            proceso = "Swp";
+                            swp++;
+                        }
+                    }
+                }
+                PdfPCell cell4 = new PdfPCell();
+                Paragraph t4 = new Paragraph(proceso,
+                        FontFactory.getFont("arial", 10, BaseColor.BLACK));
+                t4.setAlignment(Element.ALIGN_CENTER);
+                cell4.addElement(t4);
+
+                PdfPCell cell5 = new PdfPCell();
+                Paragraph t5 = new Paragraph(listactividad.get(i).getMacin(),
+                        FontFactory.getFont("arial", 10, BaseColor.BLACK));
+                t5.setAlignment(Element.ALIGN_CENTER);
+                cell5.addElement(t5);
+
+                PdfPCell cell6 = new PdfPCell();
+                Paragraph t6 = new Paragraph(listactividad.get(i).getMacout(),
+                        FontFactory.getFont("arial", 10, BaseColor.BLACK));
+                cell6.addElement(t6);
+                t6.setAlignment(Element.ALIGN_CENTER);
+
+                PdfPCell cell7 = new PdfPCell();
+                Paragraph t7 = new Paragraph(listactividad.get(i).getConcepto(),
+                        FontFactory.getFont("arial", 10, BaseColor.BLACK));
+                cell7.addElement(t7);
+
+                tabla.addCell(cell1);
+                tabla.addCell(cell2);
+                tabla.addCell(cell3);
+                tabla.addCell(cell4);
+                tabla.addCell(cell5);
+                tabla.addCell(cell6);
+                tabla.addCell(cell7);
+            }
+            Paragraph cant = new Paragraph("Borradas: " + del + " Agregadas: " + add + " Cambiadas: " + swp + " \n\n",
+                    FontFactory.getFont("arial", 8, Font.BOLD, BaseColor.BLACK)
+            );
+            cant.setAlignment(Element.ALIGN_CENTER);
+            documento.add(cant);
+            float[] medidaCeldas = {0.25f, 0.25f, 0.25f, 0.25f, 0.30f, 0.30f, 0.70f};
+            tabla.setWidths(medidaCeldas);
+            documento.add(tabla);
+            documento.close();
+            abrirarchivo(ruta + "/Desktop/repor2.pdf");
+        } catch (FileNotFoundException | DocumentException ex) {
+            Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void abrirarchivo(String archivo) {
+        try {
+            File objetofile = new File(archivo);
+            Desktop.getDesktop().open(objetofile);
+//            System.exit(0);
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 

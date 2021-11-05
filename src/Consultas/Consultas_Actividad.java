@@ -143,7 +143,7 @@ public class Consultas_Actividad extends Conexion {
         }
         JSONParser parser = new JSONParser();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        try (Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
+        try ( Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
@@ -185,7 +185,7 @@ public class Consultas_Actividad extends Conexion {
         ArrayList lista = new ArrayList();
         JSONParser parser = new JSONParser();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        try (Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
+        try ( Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
@@ -229,7 +229,7 @@ public class Consultas_Actividad extends Conexion {
         }
     }
 
-    public ArrayList<Actividad> buscarcaracter(String parametro, String filtro) {
+    public ArrayList<Actividad> buscarcaracter(String parametro, String filtro, String fechade, String fechahasta) throws java.text.ParseException {
         ArrayList lista = new ArrayList();
         boolean f = false;
         if (filtro.equals("1")) {
@@ -240,17 +240,35 @@ public class Consultas_Actividad extends Conexion {
             }
         }
         JSONParser parser = new JSONParser();
-        try (Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try ( Reader reader = new FileReader("temp" + File.separator + "actividades.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
+                Date date1 = dateFormat.parse((String) jsonObject.get("fecha"));
+                Date date2 = dateFormat.parse(fechade);
+                Date date3 = dateFormat.parse(fechahasta);
                 if (f) {
-                    if (filtro.equals((String) jsonObject.get("hecho")) && ((String) jsonObject.values().toString()).contains(parametro)) {
-                        lista.add(crearacti(jsonObject));
+                    if (filtro.equals((String) jsonObject.get("hecho")) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {
+                        if (date1.compareTo(date3) == 0 || date1.compareTo(date2) == 0) {
+                            lista.add(crearacti(jsonObject));
+                        } else {
+                            if (date1.before(date3) && date1.after(date2)) {
+                                lista.add(crearacti(jsonObject));
+                            }
+                        }
                     }
                 } else {
-                    if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {                        
-                        lista.add(crearacti(jsonObject));
+                    String t = ((String) jsonObject.values().toString().toLowerCase());
+                    if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {
+                        if (date1.compareTo(date3) == 0 || date1.compareTo(date2) == 0) {
+                            lista.add(crearacti(jsonObject));
+                        } else {
+                            if (date1.before(date3) && date1.after(date2)) {
+                                lista.add(crearacti(jsonObject));
+                            }
+                        }
+
                     }
                 }
 
