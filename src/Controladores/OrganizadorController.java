@@ -134,7 +134,7 @@ public class OrganizadorController implements ActionListener {
         cotizaciones.setVisible(false);
         cotizaciones = new Cotizaciones(principal, false);
         cotizaciones.setVisible(false);
-        vacciones = new Actividades(principal, false);
+        vacciones = new Actividades();
         vacciones.setVisible(false);
     }
 
@@ -237,7 +237,7 @@ public class OrganizadorController implements ActionListener {
 
         if (e.getSource() == principal.acciones) {
             if (!vacciones.isVisible()) {
-                vacciones = new Actividades(principal, false);
+                vacciones = new Actividades();
                 ActividadesController cp = new ActividadesController(mactividad, vacciones, mod);
                 try {
                     cp.iniciar();

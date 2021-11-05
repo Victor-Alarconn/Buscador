@@ -249,8 +249,7 @@ public class Consultas_Actividad extends Conexion {
                         lista.add(crearacti(jsonObject));
                     }
                 } else {
-                    if (((String) jsonObject.values().toString()).contains(parametro)) {
-                        
+                    if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {                        
                         lista.add(crearacti(jsonObject));
                     }
                 }

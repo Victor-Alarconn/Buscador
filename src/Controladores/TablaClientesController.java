@@ -49,6 +49,9 @@ import Vistas.Backups;
 import org.json.simple.parser.ParseException;
 import Vistas.Principal;
 import Vistas.Editarcliente;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -94,6 +97,7 @@ public class TablaClientesController implements ActionListener {
     ArrayList<Configuracion> mconfig;
     private String directorio = null;
     private String directoriocotizaciones = null;
+    private TableRowSorter<TableModel> modeloOrdenado;
 
     public TablaClientesController(Cliente modelo, Consultas_Cliente consulta, Principal busqueda) {
         this.modelo = modelo;
@@ -140,6 +144,10 @@ public class TablaClientesController implements ActionListener {
         busqueda.tabladatos.getColumn("clientepotencial").setWidth(0);
         busqueda.tabladatos.getColumn("clientepotencial").setMinWidth(0);
         busqueda.tabladatos.getColumn("clientepotencial").setMaxWidth(0);
+//        modelo para hacer que la tabla se organice 
+        modeloOrdenado = new TableRowSorter<TableModel>(model);
+        busqueda.tabladatos.setRowSorter(modeloOrdenado);
+        modeloOrdenado.setRowFilter(RowFilter.regexFilter("2", 1));
         mconfig = cconfiguraciones.cargar();
         for (int i = 0; i < mconfig.size(); i++) {
             if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
@@ -224,7 +232,9 @@ public class TablaClientesController implements ActionListener {
                     Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ParseException ex) {
                     Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }   catch (java.text.ParseException ex) {
+                        Logger.getLogger(TablaClientesController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 aga.setVisible(true);
                 }
                 

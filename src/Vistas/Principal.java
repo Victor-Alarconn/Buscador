@@ -97,6 +97,7 @@ public class Principal extends javax.swing.JFrame {
         this.setSize(new Dimension(ancho, alto));
         jPanel2.setPreferredSize(new Dimension(ancho, 70));
         jPanel4.setPreferredSize(new Dimension(ancho-20, alto-170));
+        tabladatos.getTableHeader().setReorderingAllowed(false);
 //        tabladatos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/fondo2.png"));

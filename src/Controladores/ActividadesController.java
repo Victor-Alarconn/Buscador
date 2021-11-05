@@ -31,8 +31,11 @@ import Vistas.Actividades;
 import Vistas.AgregarActividad;
 import Vistas.EditarActividad;
 import Vistas.Principal;
+import javax.swing.RowFilter;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -49,6 +52,7 @@ public class ActividadesController implements ActionListener {
     ArrayList<Actividad> listactividad;
     Principal principal = new Principal();
     TablaColor tablacolor = new TablaColor();
+    private TableRowSorter<TableModel> modeloOrdenado;
 
     public ActividadesController(Actividad macciones, Actividades vacciones, Usuario user) {
         this.macciones = macciones;
@@ -105,6 +109,10 @@ public class ActividadesController implements ActionListener {
         vacciones.tablaactividades.getColumn("Hora").setWidth(70);
         vacciones.tablaactividades.getColumn("Hora").setMinWidth(70);
         vacciones.tablaactividades.getColumn("Hora").setMaxWidth(70);
+        // Metemos el modelo ordenable en la tabla.
+        modeloOrdenado = new TableRowSorter<TableModel>(model);
+        vacciones.tablaactividades.setRowSorter(modeloOrdenado);
+        modeloOrdenado.setRowFilter(RowFilter.regexFilter("2", 1));
         vacciones.tablaactividades.setDefaultRenderer(vacciones.tablaactividades.getColumnClass(0), tablacolor);
         llenartableinit();
         keyevent();
@@ -191,7 +199,7 @@ public class ActividadesController implements ActionListener {
                 macciones.setMacin(String.valueOf(vacciones.tablaactividades.getValueAt(selecionar, 10)));
                 macciones.setMacout(String.valueOf(vacciones.tablaactividades.getValueAt(selecionar, 11)));
                 macciones.setConcepto(String.valueOf(vacciones.tablaactividades.getValueAt(selecionar, 13)));
-                macciones.setPrioridad(String.valueOf(vacciones.tablaactividades.getValueAt(selecionar, 14)));                
+                macciones.setPrioridad(String.valueOf(vacciones.tablaactividades.getValueAt(selecionar, 14)));
                 macciones.setQinformo(String.valueOf(vacciones.tablaactividades.getValueAt(selecionar, 15)));
                 macciones.setReferencia(String.valueOf(vacciones.tablaactividades.getValueAt(selecionar, 16)));
                 EditarActividadController cag = new EditarActividadController(macciones, eactividad, user);
@@ -210,7 +218,7 @@ public class ActividadesController implements ActionListener {
     }
 
     public void keyevent() {
-        vacciones.txtbuscaractividad.addKeyListener(new KeyAdapter() {
+        vacciones.buscaractividad.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 try {
@@ -253,11 +261,11 @@ public class ActividadesController implements ActionListener {
     }
 
     public void busqueda() throws java.text.ParseException {
-        if (vacciones.txtbuscaractividad.getText().length() == 0) {
+        if (vacciones.buscaractividad.getText().length() == 0) {
             limpiartabla();
             llenartable();
         }
-        if (vacciones.txtbuscaractividad.getText().length() > 0) {
+        if (vacciones.buscaractividad.getText().length() > 0) {
             limpiartabla();
             String filtro = "8";
             if (vacciones.txthecho.isSelected()) {
@@ -268,7 +276,7 @@ public class ActividadesController implements ActionListener {
                 }
             }
             ArrayList<Actividad> listactividad = null;
-            listactividad = cactividad.buscarcaracter(vacciones.txtbuscaractividad.getText(), filtro);
+            listactividad = cactividad.buscarcaracter(vacciones.buscaractividad.getText(), filtro);
             llenartabla(listactividad);
         }
     }
@@ -313,7 +321,7 @@ public class ActividadesController implements ActionListener {
         vacciones.tablaactividades.addMouseListener(mouseListener);
     }
 
-    private void llenartabla(ArrayList<Actividad> listactividad1) {
+    private void llenartabla(ArrayList<Actividad> listactividad) {
         int cantidad = listactividad.size();
         Object[] dato = new Object[17];
         for (int i = 0; i < cantidad; i++) {
