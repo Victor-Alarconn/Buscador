@@ -6,10 +6,7 @@
 package Vistas;
 
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JComponent;

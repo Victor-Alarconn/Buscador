@@ -7,7 +7,11 @@ package Vistas;
 
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -21,6 +25,9 @@ public class Actividades extends javax.swing.JFrame {
      */
     public Actividades() {
         initComponents();
+        BufferedImage image = null;
+        Image icon = new ImageIcon(getClass().getResource("/img/Organize.png")).getImage();
+        setIconImage(icon);
         this.setExtendedState(MAXIMIZED_BOTH);
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension tamanio = tk.getScreenSize();
@@ -30,6 +37,9 @@ public class Actividades extends javax.swing.JFrame {
         tablaactividades.getTableHeader().setReorderingAllowed(false);
         tablaactividades.setRowSelectionAllowed(false);
         tablaactividades.setCellSelectionEnabled(true);
+        ImageIcon rm = new ImageIcon(getClass().getResource("/img/fondo2.png"));
+        Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), alto, Image.SCALE_DEFAULT));
+//        jLabel5.setIcon(fondo);
     }
 
     /**
@@ -205,11 +215,11 @@ public class Actividades extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 55, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103))
         );

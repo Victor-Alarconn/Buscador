@@ -45,11 +45,9 @@ import Modelos.Servicio;
 import Modelos.Servicios_has_Clientes_Potenciales;
 import Modelos.Usuario;
 import Vistas.AgregarActividad;
-import Vistas.Backups;
 import org.json.simple.parser.ParseException;
 import Vistas.Principal;
 import Vistas.Editarcliente;
-import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -144,10 +142,10 @@ public class TablaClientesController implements ActionListener {
         busqueda.tabladatos.getColumn("clientepotencial").setWidth(0);
         busqueda.tabladatos.getColumn("clientepotencial").setMinWidth(0);
         busqueda.tabladatos.getColumn("clientepotencial").setMaxWidth(0);
-//        modelo para hacer que la tabla se organice 
-        modeloOrdenado = new TableRowSorter<TableModel>(model);
+//      modelo para hacer que la tabla se organice 
+        modeloOrdenado = new TableRowSorter<>(model);
         busqueda.tabladatos.setRowSorter(modeloOrdenado);
-        modeloOrdenado.setRowFilter(RowFilter.regexFilter("2", 1));
+//        modeloOrdenado.setRowFilter(RowFilter.regexFilter("a", 1));
         mconfig = cconfiguraciones.cargar();
         for (int i = 0; i < mconfig.size(); i++) {
             if (mconfig.get(i).getModulo().toLowerCase().equals("clientes")) {
@@ -203,9 +201,11 @@ public class TablaClientesController implements ActionListener {
             }
         }
         //abre el formulario de backups 
-        if (e.getSource() == busqueda.backup) {         
-                Backups backup = new Backups(busqueda, false);
-                BackupController cbackup = new BackupController(consulta, modelo, backup, mod);
+        if (e.getSource() == busqueda.backup) {     
+            int selecionar = busqueda.tabladatos.getSelectedRow();
+            if (selecionar != -1) {
+                modelo.setCodigo(String.valueOf(busqueda.tabladatos.getValueAt(selecionar, 5)));
+                BackupController cbackup = new BackupController(consulta, modelo, mod);
                 try {
                     cbackup.iniciar();
                 } catch (IOException ex) {
@@ -213,35 +213,33 @@ public class TablaClientesController implements ActionListener {
                 } catch (ParseException ex) {
                     Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                backup.setVisible(true);
-            
+            }
+
         }
-        
+
         //abre el formulario de actividades 
-        if (e.getSource() == busqueda.btnagregaractividad) {         
-                AgregarActividad aga = new AgregarActividad(busqueda, false);
-                Actividad model = new Actividad();
-                int selecionar = busqueda.tabladatos.getSelectedRow();
-                if (selecionar != -1) {
+        if (e.getSource() == busqueda.btnagregaractividad) {
+            AgregarActividad aga = new AgregarActividad(busqueda, false);
+            Actividad model = new Actividad();
+            int selecionar = busqueda.tabladatos.getSelectedRow();
+            if (selecionar != -1) {
                 model.setEmpresa(String.valueOf(busqueda.tabladatos.getValueAt(selecionar, 4)));
                 model.setCodigo(String.valueOf(busqueda.tabladatos.getValueAt(selecionar, 5)));
-                AgregarActividadesController cbackup = new AgregarActividadesController(model,aga, mod);
+                AgregarActividadesController cbackup = new AgregarActividadesController(model, aga, mod);
                 try {
                     cbackup.iniciar();
                 } catch (IOException ex) {
                     Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ParseException ex) {
                     Logger.getLogger(OrganizadorController.class.getName()).log(Level.SEVERE, null, ex);
-                }   catch (java.text.ParseException ex) {
-                        Logger.getLogger(TablaClientesController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                aga.setVisible(true);
+                } catch (java.text.ParseException ex) {
+                    Logger.getLogger(TablaClientesController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-            
+                aga.setVisible(true);
+            }
+
         }
-        
-        
+
     }
 
     public void keyevent() {

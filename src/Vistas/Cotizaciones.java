@@ -17,6 +17,8 @@ public class Cotizaciones extends javax.swing.JDialog {
 
     /**
      * Creates new form Cotizaciones
+     * @param parent
+     * @param modal
      */
     public Cotizaciones(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

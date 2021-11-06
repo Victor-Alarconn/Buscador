@@ -5,12 +5,8 @@
  */
 package Vistas;
 
-import java.awt.Image;
 import java.awt.event.KeyEvent;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 
 /**

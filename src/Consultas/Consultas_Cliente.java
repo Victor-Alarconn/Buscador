@@ -259,7 +259,7 @@ public class Consultas_Cliente extends Conexion {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
-                if (cliente.getCodigo().equals((String) jsonObject.get("codigo"))) {
+                if (cliente.getCodigo().toLowerCase().equals((String) jsonObject.get("codigo").toString().toLowerCase())) {
                     Long myLong = (Long) jsonObject.get("idclientes_potenciales");
                     cliente.setIdclientes_potenciales(Math.toIntExact(myLong));
                     cliente.setNit((String) jsonObject.get("nit"));

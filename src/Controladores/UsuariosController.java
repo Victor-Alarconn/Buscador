@@ -10,8 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import Modelos.Usuario;
@@ -46,7 +44,7 @@ public class UsuariosController implements ActionListener  {
         model.addColumn("ID");
         model.addColumn("Nombre");
         model.addColumn("Rol");
-        model.addColumn("Esatado");
+        model.addColumn("Estado");
         usuarios.tablauser.setModel(model);
         usuarios.tablauser.getColumn("ID").setWidth(0);
         usuarios.tablauser.getColumn("ID").setMinWidth(0);

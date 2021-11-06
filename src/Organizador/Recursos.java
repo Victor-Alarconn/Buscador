@@ -8,9 +8,7 @@ package Organizador;
 import Consultas.ResultSetConverter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import Vistas.Principal;
 import javax.swing.JOptionPane;
 
@@ -33,7 +31,7 @@ public class Recursos {
     }
 
     public int j() {
-        int respuesta = JOptionPane.showConfirmDialog(null, "El Usuario no posee un directoio desea crearlo?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int respuesta = JOptionPane.showConfirmDialog(null, "El Usuario no posee un directoio desea crearlo?", "Informacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         return respuesta;
     }
 

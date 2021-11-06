@@ -36,8 +36,6 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.TabStop;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -125,9 +123,9 @@ public class ActividadesController implements ActionListener {
         vacciones.tablaactividades.getColumn("Hora").setMinWidth(70);
         vacciones.tablaactividades.getColumn("Hora").setMaxWidth(70);
         // Metemos el modelo ordenable en la tabla.
-        modeloOrdenado = new TableRowSorter<TableModel>(model);
+        modeloOrdenado = new TableRowSorter<>(model);
         vacciones.tablaactividades.setRowSorter(modeloOrdenado);
-        modeloOrdenado.setRowFilter(RowFilter.regexFilter("2", 1));
+//        modeloOrdenado.setRowFilter(RowFilter.regexFilter("2", 1));
         vacciones.tablaactividades.setDefaultRenderer(vacciones.tablaactividades.getColumnClass(0), tablacolor);
         llenartableinit();
         keyevent();
@@ -153,7 +151,7 @@ public class ActividadesController implements ActionListener {
             }
             limpiartabla();
             try {
-                llenartable();
+                busqueda();
             } catch (java.text.ParseException ex) {
                 Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -161,7 +159,7 @@ public class ActividadesController implements ActionListener {
         if (e.getSource() == vacciones.txttodo) {
             limpiartabla();
             try {
-                llenartable();
+                 busqueda();
             } catch (java.text.ParseException ex) {
                 Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -169,7 +167,7 @@ public class ActividadesController implements ActionListener {
         if (e.getSource() == vacciones.txthecho) {
             limpiartabla();
             try {
-                llenartable();
+                 busqueda();
             } catch (java.text.ParseException ex) {
                 Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -177,7 +175,7 @@ public class ActividadesController implements ActionListener {
         if (e.getSource() == vacciones.txtsinhacer) {
             limpiartabla();
             try {
-                llenartable();
+                 busqueda();
             } catch (java.text.ParseException ex) {
                 Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -194,7 +192,7 @@ public class ActividadesController implements ActionListener {
                 }
                 limpiartabla();
                 try {
-                    llenartable();
+                     busqueda();
                 } catch (java.text.ParseException ex) {
                     Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -251,6 +249,7 @@ public class ActividadesController implements ActionListener {
 
     private void llenartable() throws java.text.ParseException {
         String filtro = "8";
+        vacciones.buscaractividad.setText("");
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String fechade = (sdf.format(vacciones.fechade.getDate()));
         String fechahasta = (sdf.format(vacciones.fechahasta.getDate()));
@@ -378,7 +377,7 @@ public class ActividadesController implements ActionListener {
             String fechahasta = (sdf.format(vacciones.fechahasta.getDate()));
 
             Document documento = new Document(PageSize.A4.rotate(), 10f, 10f, 10f, 0f);
-//            documento.setPageSize(PageSize.A4.rotate());
+            //documento.setPageSize(PageSize.A4.rotate());
             String ruta = System.getProperty("user.home");
             PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/repor2.pdf"));
             documento.open();
@@ -479,8 +478,8 @@ public class ActividadesController implements ActionListener {
                 tabla.addCell(cell6);
                 tabla.addCell(cell7);
             }
-            Paragraph cant = new Paragraph("Borradas: " + del + " Agregadas: " + add + " Cambiadas: " + swp + " \n\n",
-                    FontFactory.getFont("arial", 8, Font.BOLD, BaseColor.BLACK)
+            Paragraph cant = new Paragraph("Agregadas: " + add +" Borradas: " + del +  " Cambiadas: " + swp + " \n\n",
+                    FontFactory.getFont("arial", 8, BaseColor.BLACK)
             );
             cant.setAlignment(Element.ALIGN_CENTER);
             documento.add(cant);

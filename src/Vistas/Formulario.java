@@ -5,27 +5,11 @@
  */
 package Vistas;
 
-import Consultas.Consultas_Servicios;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Insets;
-import static java.awt.SystemColor.window;
-import java.awt.Toolkit;
+
+
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.geom.RoundRectangle2D;
-import java.util.ArrayList;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import Modelos.Servicio;
 
 /**
  *

@@ -16,7 +16,7 @@ import Modelos.Usuario;
  *
  * @author yonathan
  */
-public class Configuraciones extends javax.swing.JDialog {
+public final class Configuraciones extends javax.swing.JDialog {
 
     Usuario modu;
     Consultas_usuario cons;

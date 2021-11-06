@@ -8,22 +8,15 @@ package Vistas;
 import Consultas.Consultas_Cliente;
 import Consultas.Consultas_usuario;
 import Controladores.TablaClientesController;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import Modelos.Cliente;
 import Modelos.Usuario;
@@ -104,7 +97,6 @@ public class Principal extends javax.swing.JFrame {
 
         ImageIcon rm = new ImageIcon(getClass().getResource("/img/fondo2.png"));
         Icon fondo = new ImageIcon(rm.getImage().getScaledInstance(this.getWidth(), alto, Image.SCALE_DEFAULT));
-
         jLabel1.setIcon(fondo);
 
         this.modu = modu;
@@ -183,16 +175,20 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu2.setText("jMenu2");
 
+        abrirdirectorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/folderstree.png"))); // NOI18N
         abrirdirectorio.setText("Abrir directorio");
         popup.add(abrirdirectorio);
 
+        editarcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/user.png"))); // NOI18N
         editarcliente.setText("Editar Cliente");
         popup.add(editarcliente);
         popup.add(jSeparator1);
 
+        backup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/database.png"))); // NOI18N
         backup.setText("Backup");
         popup.add(backup);
 
+        btnagregaractividad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/add.png"))); // NOI18N
         btnagregaractividad.setText("Agregar Actividad");
         popup.add(btnagregaractividad);
 
