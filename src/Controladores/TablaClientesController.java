@@ -249,6 +249,12 @@ public class TablaClientesController implements ActionListener {
                 busqueda();
             }
         });
+        busqueda.txtbuscar2.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                busqueda();
+            }
+        });
     }
 
     public void limpiartabla() {
@@ -304,10 +310,11 @@ public class TablaClientesController implements ActionListener {
         if (busqueda.txtbuscar.getText().length() > 0
                 || busqueda.filtro.getSelectedItem().equals("electronica")
                 || busqueda.filtro.getSelectedItem().equals("sucursal")
-                || busqueda.filtro.getSelectedItem().equals("cliente potencial")) {
+                || busqueda.filtro.getSelectedItem().equals("cliente potencial")
+                ||busqueda.txtbuscar2.getText().length() > 0) {
             limpiartabla();
             ArrayList<Cliente> lista;
-            lista = consulta.buscarcaracter(busqueda.txtbuscar.getText(), busqueda.filtro.getSelectedItem().toString());
+            lista = consulta.buscarcaracter(busqueda.txtbuscar.getText(),busqueda.txtbuscar2.getText(), busqueda.filtro.getSelectedItem().toString());
             int cantidad = lista.size();
             Object[] dato = new Object[14];
             for (int i = 0; i < cantidad; i++) {

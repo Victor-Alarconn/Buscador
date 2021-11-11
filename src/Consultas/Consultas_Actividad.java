@@ -229,7 +229,7 @@ public class Consultas_Actividad extends Conexion {
         }
     }
 
-    public ArrayList<Actividad> buscarcaracter(String parametro, String filtro, String fechade, String fechahasta) throws java.text.ParseException {
+    public ArrayList<Actividad> buscarcaracter(String parametro,String parametro2, String filtro, String fechade, String fechahasta) throws java.text.ParseException {
         ArrayList lista = new ArrayList();
         boolean f = false;
         if (filtro.equals("1")) {
@@ -258,9 +258,8 @@ public class Consultas_Actividad extends Conexion {
                             }
                         }
                     }
-                } else {
-                    String t = ((String) jsonObject.values().toString().toLowerCase());
-                    if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {
+                } else {                  
+                    if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase()) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro2.toLowerCase())) {
                         if (date1.compareTo(date3) == 0 || date1.compareTo(date2) == 0) {
                             lista.add(crearacti(jsonObject));
                         } else {

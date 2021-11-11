@@ -245,6 +245,16 @@ public class ActividadesController implements ActionListener {
                 }
             }
         });
+        vacciones.buscaractividad2.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                try {
+                    busqueda();
+                } catch (java.text.ParseException ex) {
+                    Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 
     private void llenartable() throws java.text.ParseException {
@@ -283,7 +293,7 @@ public class ActividadesController implements ActionListener {
             limpiartabla();
             llenartable();
         }
-        if (vacciones.buscaractividad.getText().length() > 0) {
+        if (vacciones.buscaractividad.getText().length() > 0 || vacciones.buscaractividad2.getText().length() > 00) {
             limpiartabla();
             String filtro = "8";
             if (vacciones.txthecho.isSelected()) {
@@ -296,7 +306,7 @@ public class ActividadesController implements ActionListener {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             String fechade = (sdf.format(vacciones.fechade.getDate()));
             String fechahasta = (sdf.format(vacciones.fechahasta.getDate()));
-            listactividad = cactividad.buscarcaracter(vacciones.buscaractividad.getText(), filtro, fechade, fechahasta);
+            listactividad = cactividad.buscarcaracter(vacciones.buscaractividad.getText(),vacciones.buscaractividad2.getText(), filtro, fechade, fechahasta);
             llenartabla(listactividad);
         }
     }
@@ -379,7 +389,7 @@ public class ActividadesController implements ActionListener {
             Document documento = new Document(PageSize.A4.rotate(), 10f, 10f, 10f, 0f);
             //documento.setPageSize(PageSize.A4.rotate());
             String ruta = System.getProperty("user.home");
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/repor2.pdf"));
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/"+listactividad.get(0).getEmpresa()+".pdf"));
             documento.open();
             Paragraph titulo = new Paragraph("Actividad Terminales\n",
                     FontFactory.getFont("arial", 22, Font.BOLD, BaseColor.BLACK)
@@ -487,7 +497,7 @@ public class ActividadesController implements ActionListener {
             tabla.setWidths(medidaCeldas);
             documento.add(tabla);
             documento.close();
-            abrirarchivo(ruta + "/Desktop/repor2.pdf");
+            abrirarchivo(ruta + "/Desktop/"+listactividad.get(0).getEmpresa()+".pdf");
         } catch (FileNotFoundException | DocumentException ex) {
             Logger.getLogger(ActividadesController.class.getName()).log(Level.SEVERE, null, ex);
         }

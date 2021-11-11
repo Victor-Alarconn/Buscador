@@ -402,7 +402,7 @@ public class Consultas_Cliente extends Conexion {
     }
 
     //consulta para buscar si el nit del cliente contie un parametro
-    public ArrayList<Cliente> buscarcaracter(String parametro, String filtro) {
+    public ArrayList<Cliente> buscarcaracter(String parametro,String parametro2, String filtro) {
         ArrayList listaPersona = new ArrayList();
         Long parametro1 = 0L;
         boolean f = false;
@@ -429,11 +429,10 @@ public class Consultas_Cliente extends Conexion {
 //                System.out.println(((String) jsonObject.values().toString()).contains(parametro));
                 if (f) {
                     if (parametro1.equals((Long) jsonObject.get(filtro)) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {
-
                         listaPersona.add(clientenew(jsonObject));
                     }
                 } else {
-                    if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {
+                    if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase()) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro2.toLowerCase())  ) {
                         listaPersona.add(clientenew(jsonObject));
                     }
                 }
