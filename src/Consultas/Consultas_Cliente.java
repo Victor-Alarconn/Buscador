@@ -257,7 +257,7 @@ public class Consultas_Cliente extends Conexion {
         JSONParser parser = new JSONParser();
         try ( Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
-            for (int i = 0; i < jsonarray.size(); i++) {
+            for (int i = 166; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
                 if (cliente.getCodigo().toLowerCase().equals((String) jsonObject.get("codigo").toString().toLowerCase())) {
                     Long myLong = (Long) jsonObject.get("idclientes_potenciales");

@@ -99,6 +99,8 @@ public class AgregarActividadesController implements ActionListener {
     
     public void buscar() {    
         mcliente.setCodigo(macciones.getCodigo().toUpperCase());
+        String t = mcliente.getCodigo();
+                
         if (ccliente.buscarcoodigocliente(mcliente)) {
             vacciones.txtempresa.setText(mcliente.getNombre());
             vacciones.txtcodigo.setText(mcliente.getCodigo());
