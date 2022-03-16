@@ -64,6 +64,33 @@ public class Consultas_usuario extends Conexion {
         }
         
     }
+    
+    
+//    public void prueba() throws IOException {
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        Connection con = getConexion();
+//        String sql = "SELECT distinct id_fmtomvto,id_visita,id_trafo,id_parte,id_fmto,id_fmtmain,fmv_tvari,fmv_valor,fmv_unidad,fmv_notas,fmv_estado,fmv_fchrlz,fmn_nompar FROM t000.vis_fmtomvto\n" +
+//        "inner join t000.vis_formain on vis_formain.id_formato=vis_fmtomvto.id_fmto\n" +
+//        "where vis_fmtomvto.id_visita='1' and vis_fmtomvto.id_fmtmain='1'";
+//        try {
+//            ps = (PreparedStatement) con.prepareStatement(sql);
+//            rs = ps.executeQuery(sql);
+//            while (rs.next()){
+//                System.out.println(rs.getString(1));
+//            }
+//        
+//        } catch (SQLException e) {
+//            System.err.println(e);
+//            //return null;
+//        } finally {
+//            try {
+//                con.close();
+//            } catch (SQLException e) {
+//                System.err.println(e);
+//            }
+//        }
+//    }
 
     //consulta para modificar 
     public boolean modificar(Usuario user) {

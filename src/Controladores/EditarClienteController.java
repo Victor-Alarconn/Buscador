@@ -249,9 +249,9 @@ public class EditarClienteController implements ActionListener {
                         }
                     }
                     JOptionPane.showMessageDialog(null, "Cliente modificado");
-                    if (!formulario.clientepotencial.isSelected()) {
-                        crear_carpeta(directorio);
-                    }
+//                    if (!formulario.clientepotencial.isSelected()) {
+//                        crear_carpeta(directorio);
+//                    }
                     formulario.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "error guardado el cliente");

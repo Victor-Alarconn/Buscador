@@ -166,7 +166,8 @@ public class CotizacionController implements ActionListener {
                         try {
                             //guardando el cliente
                             if (consultas.registrar(modelo)) {
-                                crear_carpeta(directorio);
+//                                crear_carpeta(directorio);
+                                   abrirarchivo(directorio );
                                 JOptionPane.showMessageDialog(null, "registro guardado");
                                 formulario.dispose();
                                 this.limpiar();
@@ -186,7 +187,7 @@ public class CotizacionController implements ActionListener {
 
         }
         if (e.getSource() == formulario.abrirdirectorio) {
-            abrirarchivo(directorio + modelo.getRutacotizacon());
+            abrirarchivo(directorio);
         }
     }
 
@@ -204,7 +205,7 @@ public class CotizacionController implements ActionListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            abrirarchivo(directorio + File.separator + nombre);
+            abrirarchivo(directorio );
         }
     }
 

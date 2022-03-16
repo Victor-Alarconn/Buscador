@@ -398,9 +398,9 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addComponent(jLabel3))
                     .addComponent(crearcliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));

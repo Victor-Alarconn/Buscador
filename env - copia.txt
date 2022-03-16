@@ -1,0 +1,9 @@
+base: organizador
+user: Pruebasmovil
+password: 101196111
+url: jdbc:mysql://190.85.232.81/organizador
+
+base: organizador
+user: Facturar
+password: Facturar123
+url: jdbc:mysql://192.168.1.128/organizadorprueba

@@ -48,6 +48,8 @@ public class Buscador {
 
         Consultas_Mac cmac = new Consultas_Mac();
 
+        
+        
         Mac mmac = new Mac();
         Rol rol = new Rol();
         mmac.almacenarmac();
