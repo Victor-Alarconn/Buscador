@@ -697,33 +697,58 @@
                                       <Component id="txtmodalidad1" alignment="0" pref="160" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtemail1" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Component id="jLabel29" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtcelular21" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel26" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel31" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtdv1" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                                              <Component id="jLabel27" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtcodigo1" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                                              <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtclase1" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                                              <Component id="jLabel30" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                              <Component id="txtemail1" min="-2" pref="160" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="txtempresa1" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                              <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                                      <Component id="jLabel31" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="txtclase1" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                                                      <Component id="jLabel30" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="jLabel26" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="txtempresa1" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jLabel38" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="txtfecha_arriendo1" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="txtcelular21" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                                                  <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                       </Group>
+                                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel38" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtfecha_arriendo1" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="txtdv1" alignment="1" min="-2" pref="157" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtcodigo1" min="-2" pref="157" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -771,7 +796,7 @@
                           <Component id="txtnombre1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="txtcodigo1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>

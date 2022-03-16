@@ -44,6 +44,7 @@ import Modelos.Mac;
 import Modelos.Servicio;
 import Modelos.Servicios_has_Clientes_Potenciales;
 import Modelos.Usuario;
+import Organizador.Fecha;
 import Vistas.AgregarActividad;
 import org.json.simple.parser.ParseException;
 import Vistas.Principal;
@@ -96,6 +97,8 @@ public class TablaClientesController implements ActionListener {
     private String directorio = null;
     private String directoriocotizaciones = null;
     private TableRowSorter<TableModel> modeloOrdenado;
+    
+    
 
     public TablaClientesController(Cliente modelo, Consultas_Cliente consulta, Principal busqueda) {
         this.modelo = modelo;
@@ -105,6 +108,7 @@ public class TablaClientesController implements ActionListener {
         this.busqueda.editarcliente.addActionListener(this);
         this.busqueda.backup.addActionListener(this);
         this.busqueda.btnagregaractividad.addActionListener(this);
+        this.busqueda.MarcarRetiro.addActionListener(this);
     }
 
     public void iniciar() throws IOException, ParseException {
@@ -123,13 +127,17 @@ public class TablaClientesController implements ActionListener {
         model.addColumn("rutacotizacion");
         model.addColumn("clientepotencial");
         model.addColumn("Fecha Cotizacion");
-        busqueda.tabladatos.setModel(model);
+        model.addColumn("Fecha retiro");
+        busqueda.tabladatos.setModel(model);        
         busqueda.tabladatos.getColumn("ID").setWidth(0);
         busqueda.tabladatos.getColumn("ID").setMinWidth(0);
         busqueda.tabladatos.getColumn("ID").setMaxWidth(0);
         busqueda.tabladatos.getColumn("ruta").setWidth(0);
         busqueda.tabladatos.getColumn("ruta").setMinWidth(0);
         busqueda.tabladatos.getColumn("ruta").setMaxWidth(0);
+        busqueda.tabladatos.getColumn("Nit").setWidth(100);
+        busqueda.tabladatos.getColumn("Nit").setMinWidth(100);
+        busqueda.tabladatos.getColumn("Nit").setMaxWidth(100);
         busqueda.tabladatos.getColumn("Codigo").setWidth(63);
         busqueda.tabladatos.getColumn("Codigo").setMinWidth(63);
         busqueda.tabladatos.getColumn("Codigo").setMaxWidth(63);
@@ -181,6 +189,17 @@ public class TablaClientesController implements ActionListener {
                 abrirarchivo(directorio + String.valueOf(busqueda.tabladatos.getValueAt(fila, 1)));
             }
         }
+        
+        
+        if (e.getSource() == busqueda.MarcarRetiro) {
+            
+            int selecionar = busqueda.tabladatos.getSelectedRow();
+            if (selecionar != -1) {    
+             modelo.setIdclientes_potenciales(Integer.parseInt(String.valueOf(busqueda.tabladatos.getValueAt(selecionar, 0))));
+             new Fecha(busqueda, true,modelo).setVisible(true);       
+            }
+        }
+        
 
         if (e.getSource() == busqueda.editarcliente) {
             Editarcliente editarcliente = new Editarcliente(null, true);
@@ -281,7 +300,7 @@ public class TablaClientesController implements ActionListener {
         ArrayList<Cliente> lista;
         lista = consulta.llenadoinicial();
         int cantidad = lista.size();
-        Object[] dato = new Object[14];
+        Object[] dato = new Object[15];
         for (int i = 0; i < cantidad; i++) {
             dato[0] = lista.get(i).getIdclientes_potenciales();
             dato[1] = lista.get(i).getRuta();
@@ -297,6 +316,7 @@ public class TablaClientesController implements ActionListener {
             dato[11] = lista.get(i).getRutacotizacon();
             dato[12] = lista.get(i).getCliente_potencial();
             dato[13] = lista.get(i).getFechacotizacion();
+            dato[14] = lista.get(i).getFecha_retiro();
             model.addRow(dato);
             busqueda.tabladatos.setModel(model);
         }
@@ -311,12 +331,13 @@ public class TablaClientesController implements ActionListener {
                 || busqueda.filtro.getSelectedItem().equals("electronica")
                 || busqueda.filtro.getSelectedItem().equals("sucursal")
                 || busqueda.filtro.getSelectedItem().equals("cliente potencial")
+                || busqueda.filtro.getSelectedItem().equals("clientes retirados")
                 ||busqueda.txtbuscar2.getText().length() > 0) {
             limpiartabla();
             ArrayList<Cliente> lista;
             lista = consulta.buscarcaracter(busqueda.txtbuscar.getText(),busqueda.txtbuscar2.getText(), busqueda.filtro.getSelectedItem().toString());
             int cantidad = lista.size();
-            Object[] dato = new Object[14];
+            Object[] dato = new Object[15];
             for (int i = 0; i < cantidad; i++) {
                 dato[0] = lista.get(i).getIdclientes_potenciales();
                 dato[1] = lista.get(i).getRuta();
@@ -332,6 +353,7 @@ public class TablaClientesController implements ActionListener {
                 dato[11] = lista.get(i).getRutacotizacon();
                 dato[12] = lista.get(i).getCliente_potencial();
                 dato[13] = lista.get(i).getFechacotizacion();
+                dato[14] = lista.get(i).getFecha_retiro();
                 model.addRow(dato);
                 busqueda.tabladatos.setModel(model);
             }

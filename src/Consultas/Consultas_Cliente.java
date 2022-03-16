@@ -175,6 +175,31 @@ public class Consultas_Cliente extends Conexion {
         }
 
     }
+    
+     public boolean MarcarClienteRetirado(Cliente cliente) throws IOException {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = "UPDATE  clientes_potenciales SET fecha_retiro=?,retiro=? WHERE idclientes_potenciales=? ";
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps.setString(1, cliente.getFecha_retiro());
+            ps.setInt(2, cliente.getRetiro());
+            ps.setInt(3, cliente.getIdclientes_potenciales());
+            ps.execute();
+            jsonclientes();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+
+    }
 
     //consulta para buscar cliente 
     public boolean buscar(Cliente cliente) {
@@ -418,6 +443,12 @@ public class Consultas_Cliente extends Conexion {
                     f = true;
                     parametro1 = 1L;
                     filtro = "cliente_potencial";
+                }else{
+                   if (filtro.equals("clientes retirados")) {
+                    f = true;
+                    parametro1 = 1L;
+                    filtro = "retiro";
+                   }
                 }
             }
         }
@@ -484,7 +515,7 @@ public class Consultas_Cliente extends Conexion {
         Long myLongi = (Long) jsonObject.get("cliente_potencial");
         int idcliente = Math.toIntExact(myLongi);
         cliente.setCliente_potencial(idcliente);
-        cliente.setFechacotizacion((String) jsonObject.get("fechacotizacion"));
+        cliente.setFecha_retiro((String) jsonObject.get("fecha_retiro"));
         return cliente;
     }
 

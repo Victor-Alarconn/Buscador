@@ -80,6 +80,14 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="MarcarRetiro">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Marcar como retirado"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+        </MenuItem>
       </SubComponents>
     </Container>
   </NonVisualComponents>
@@ -487,11 +495,12 @@
             <Component class="javax.swing.JComboBox" name="filtro">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
+                  <StringArray count="5">
                     <StringItem index="0" value="Todo"/>
                     <StringItem index="1" value="electronica"/>
                     <StringItem index="2" value="sucursal"/>
                     <StringItem index="3" value="cliente potencial"/>
+                    <StringItem index="4" value="clientes retirados"/>
                   </StringArray>
                 </Property>
               </Properties>

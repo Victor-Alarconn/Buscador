@@ -43,7 +43,25 @@ public class Cliente {
     private int eqipos;
     private String valor_total;
     private String referido;
+    private String fecha_retiro;
+    private int retiro;
 
+    public String getFecha_retiro() {
+        return fecha_retiro;
+    }
+
+    public void setFecha_retiro(String fecha_retiro) {
+        this.fecha_retiro = fecha_retiro;
+    }
+
+    public int getRetiro() {
+        return retiro;
+    }
+
+    public void setRetiro(int retiro) {
+        this.retiro = retiro;
+    }
+    
     public String getReferido() {
         return referido;
     }

@@ -151,6 +151,7 @@ public class Principal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         backup = new javax.swing.JMenuItem();
         btnagregaractividad = new javax.swing.JMenuItem();
+        MarcarRetiro = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -191,6 +192,9 @@ public class Principal extends javax.swing.JFrame {
         btnagregaractividad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/add.png"))); // NOI18N
         btnagregaractividad.setText("Agregar Actividad");
         popup.add(btnagregaractividad);
+
+        MarcarRetiro.setText("Marcar como retirado");
+        popup.add(MarcarRetiro);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -330,7 +334,7 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo", "electronica", "sucursal", "cliente potencial" }));
+        filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo", "electronica", "sucursal", "cliente potencial", "clientes retirados" }));
 
         tabladatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -477,6 +481,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Cotizaciones;
+    public javax.swing.JMenuItem MarcarRetiro;
     public javax.swing.JMenuItem abrirdirectorio;
     public javax.swing.JButton acciones;
     public javax.swing.JMenuItem backup;
