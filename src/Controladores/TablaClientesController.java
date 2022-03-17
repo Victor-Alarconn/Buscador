@@ -94,6 +94,7 @@ public class TablaClientesController implements ActionListener {
     Consultas_Mac cmac = new Consultas_Mac();
     Mac mmac = new Mac();
     ArrayList<Configuracion> mconfig;
+    ArrayList<Servicio> lista;
     private String directorio = null;
     private String directoriocotizaciones = null;
     private TableRowSorter<TableModel> modeloOrdenado;
@@ -165,6 +166,17 @@ public class TablaClientesController implements ActionListener {
                 directoriocotizaciones = mconfig.get(i).getDirectorio();
             }
         }
+        
+        busqueda.filtro2.removeAllItems();        
+        lista = servicio.llenar();       
+        mods.setServicio("Servicios");
+        lista.add(mods);           
+        for (int i = 0; i < lista.size(); i++) {
+           busqueda.filtro2.addItem(lista.get(i));
+        }         
+        busqueda.filtro2.setSelectedItem(mods);  
+        
+        
         keyevent();
         MouseClicked();
         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
@@ -173,7 +185,11 @@ public class TablaClientesController implements ActionListener {
             busqueda.tabladatos.getColumnModel().getColumn(i).setCellRenderer(modelocentrar);
         }
         busqueda.getRootPane().registerKeyboardAction(e -> {
-            busqueda();
+            try {
+                busqueda();
+            } catch (ParseException ex) {
+                Logger.getLogger(TablaClientesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         llenadoini();
@@ -265,13 +281,21 @@ public class TablaClientesController implements ActionListener {
         busqueda.txtbuscar.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                busqueda();
+                try {
+                    busqueda();
+                } catch (ParseException ex) {
+                    Logger.getLogger(TablaClientesController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         busqueda.txtbuscar2.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                busqueda();
+                try {
+                    busqueda();
+                } catch (ParseException ex) {
+                    Logger.getLogger(TablaClientesController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -295,34 +319,14 @@ public class TablaClientesController implements ActionListener {
         }
     }
 
-    private void llenadoini() {
+    private void llenadoini() throws ParseException {
         limpiartabla();
         ArrayList<Cliente> lista;
-        lista = consulta.llenadoinicial();
-        int cantidad = lista.size();
-        Object[] dato = new Object[15];
-        for (int i = 0; i < cantidad; i++) {
-            dato[0] = lista.get(i).getIdclientes_potenciales();
-            dato[1] = lista.get(i).getRuta();
-            dato[2] = lista.get(i).getNit();
-            dato[3] = lista.get(i).getDv();
-            dato[4] = lista.get(i).getNombre();
-            dato[5] = lista.get(i).getCodigo();
-            dato[6] = lista.get(i).getEmail();
-            dato[7] = lista.get(i).getCelular1();
-            dato[8] = lista.get(i).getContacto();
-            dato[9] = lista.get(i).getFecha_llegada();
-            dato[10] = lista.get(i).getFecha_arriendo();
-            dato[11] = lista.get(i).getRutacotizacon();
-            dato[12] = lista.get(i).getCliente_potencial();
-            dato[13] = lista.get(i).getFechacotizacion();
-            dato[14] = lista.get(i).getFecha_retiro();
-            model.addRow(dato);
-            busqueda.tabladatos.setModel(model);
-        }
+        lista = consulta.llenadoinicial((Servicio) busqueda.filtro2.getModel().getSelectedItem(),busqueda.filtro3.getSelectedItem().toString());
+        llenartabla(lista);
     }
 
-    public void busqueda() {
+    public void busqueda() throws ParseException {
         if (busqueda.txtbuscar.getText().length() == 0) {
             limpiartabla();
             llenadoini();
@@ -335,28 +339,11 @@ public class TablaClientesController implements ActionListener {
                 ||busqueda.txtbuscar2.getText().length() > 0) {
             limpiartabla();
             ArrayList<Cliente> lista;
-            lista = consulta.buscarcaracter(busqueda.txtbuscar.getText(),busqueda.txtbuscar2.getText(), busqueda.filtro.getSelectedItem().toString());
-            int cantidad = lista.size();
-            Object[] dato = new Object[15];
-            for (int i = 0; i < cantidad; i++) {
-                dato[0] = lista.get(i).getIdclientes_potenciales();
-                dato[1] = lista.get(i).getRuta();
-                dato[2] = lista.get(i).getNit();
-                dato[3] = lista.get(i).getDv();
-                dato[4] = lista.get(i).getNombre();
-                dato[5] = lista.get(i).getCodigo();
-                dato[6] = lista.get(i).getEmail();
-                dato[7] = lista.get(i).getCelular1();
-                dato[8] = lista.get(i).getContacto();
-                dato[9] = lista.get(i).getFecha_llegada();
-                dato[10] = lista.get(i).getFecha_arriendo();
-                dato[11] = lista.get(i).getRutacotizacon();
-                dato[12] = lista.get(i).getCliente_potencial();
-                dato[13] = lista.get(i).getFechacotizacion();
-                dato[14] = lista.get(i).getFecha_retiro();
-                model.addRow(dato);
-                busqueda.tabladatos.setModel(model);
-            }
+            lista = consulta.buscarcaracter(busqueda.txtbuscar.getText(),
+                    busqueda.txtbuscar2.getText(),
+                    busqueda.filtro.getSelectedItem().toString(), 
+                    (Servicio) busqueda.filtro2.getModel().getSelectedItem(), busqueda.filtro3.getSelectedItem().toString());
+           llenartabla(lista);
         }
     }
 
@@ -388,6 +375,30 @@ public class TablaClientesController implements ActionListener {
             }
         };
         busqueda.tabladatos.addMouseListener(mouseListener);
+    }
+    
+    private void llenartabla(ArrayList<Cliente> lista){
+        int cantidad = lista.size();
+            Object[] dato = new Object[15];
+            for (int i = 0; i < cantidad; i++) {
+                dato[0] = lista.get(i).getIdclientes_potenciales();
+                dato[1] = lista.get(i).getRuta();
+                dato[2] = lista.get(i).getNit();
+                dato[3] = lista.get(i).getDv();
+                dato[4] = lista.get(i).getNombre();
+                dato[5] = lista.get(i).getCodigo();
+                dato[6] = lista.get(i).getEmail();
+                dato[7] = lista.get(i).getCelular1();
+                dato[8] = lista.get(i).getContacto();
+                dato[9] = lista.get(i).getFecha_llegada();
+                dato[10] = lista.get(i).getFecha_arriendo();
+                dato[11] = lista.get(i).getRutacotizacon();
+                dato[12] = lista.get(i).getCliente_potencial();
+                dato[13] = lista.get(i).getFechacotizacion();
+                dato[14] = lista.get(i).getFecha_retiro();
+                model.addRow(dato);
+                busqueda.tabladatos.setModel(model);
+            }
     }
 
 }

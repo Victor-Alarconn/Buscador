@@ -175,8 +175,8 @@ public class Consultas_Cliente extends Conexion {
         }
 
     }
-    
-     public boolean MarcarClienteRetirado(Cliente cliente) throws IOException {
+
+    public boolean MarcarClienteRetirado(Cliente cliente) throws IOException {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = "UPDATE  clientes_potenciales SET fecha_retiro=?,retiro=? WHERE idclientes_potenciales=? ";
@@ -427,8 +427,9 @@ public class Consultas_Cliente extends Conexion {
     }
 
     //consulta para buscar si el nit del cliente contie un parametro
-    public ArrayList<Cliente> buscarcaracter(String parametro,String parametro2, String filtro) {
+    public ArrayList<Cliente> buscarcaracter(String parametro, String parametro2, String filtro, Servicio filtro2, String filtro3) throws ParseException {
         ArrayList listaPersona = new ArrayList();
+        ArrayList serviciosXpersona = new ArrayList();
         Long parametro1 = 0L;
         boolean f = false;
         if (filtro.equals("electronica")) {
@@ -443,30 +444,73 @@ public class Consultas_Cliente extends Conexion {
                     f = true;
                     parametro1 = 1L;
                     filtro = "cliente_potencial";
-                }else{
-                   if (filtro.equals("clientes retirados")) {
-                    f = true;
-                    parametro1 = 1L;
-                    filtro = "retiro";
-                   }
+                } else {
+                    if (filtro.equals("clientes retirados")) {
+                        f = true;
+                        parametro1 = 1L;
+                        filtro = "retiro";
+                    }
                 }
             }
         }
+        serviciosXpersona = serviciosxcliente(filtro2);
         JSONParser parser = new JSONParser();
         try ( Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
             for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
 //                System.out.println(((String) jsonObject.values().toString()).contains(parametro));
-                if (f) {
-                    if (parametro1.equals((Long) jsonObject.get(filtro)) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {
-                        listaPersona.add(clientenew(jsonObject));
+                if (!filtro2.getServicio().equals("Servicios")) {
+                    for (int j = 0; j < serviciosXpersona.size(); j++) {
+                        if (serviciosXpersona.get(j).equals((Long) jsonObject.get("idclientes_potenciales"))) {
+                            if (!filtro3.equals("Contrato")) {
+                                if (f) {
+                                    if (filtro3.equals(jsonObject.get("modalidad")) && parametro1.equals((Long) jsonObject.get(filtro)) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {
+                                        listaPersona.add(clientenew(jsonObject));
+                                    }
+                                } else {
+                                    if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase()) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro2.toLowerCase())) {
+                                        listaPersona.add(clientenew(jsonObject));
+                                    }
+                                }
+                            } else {
+                                if (f) {
+                                    if (parametro1.equals((Long) jsonObject.get(filtro)) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {
+                                        listaPersona.add(clientenew(jsonObject));
+                                    }
+                                } else {
+                                    if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase()) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro2.toLowerCase())) {
+                                        listaPersona.add(clientenew(jsonObject));
+                                    }
+                                }
+                            }
+
+                        }
                     }
                 } else {
-                    if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase()) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro2.toLowerCase())  ) {
-                        listaPersona.add(clientenew(jsonObject));
+                    if (!filtro3.equals("Contrato")) {
+                        if (f) {
+                            if (filtro3.equals(jsonObject.get("modalidad")) && parametro1.equals((Long) jsonObject.get(filtro)) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {
+                                listaPersona.add(clientenew(jsonObject));
+                            }
+                        } else {
+                            if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase()) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro2.toLowerCase())) {
+                                listaPersona.add(clientenew(jsonObject));
+                            }
+                        }
+                    } else {
+                        if (f) {
+                            if (parametro1.equals((Long) jsonObject.get(filtro)) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase())) {
+                                listaPersona.add(clientenew(jsonObject));
+                            }
+                        } else {
+                            if (((String) jsonObject.values().toString().toLowerCase()).contains(parametro.toLowerCase()) && ((String) jsonObject.values().toString().toLowerCase()).contains(parametro2.toLowerCase())) {
+                                listaPersona.add(clientenew(jsonObject));
+                            }
+                        }
                     }
                 }
+
             }
             return listaPersona;
         } catch (IOException e) {
@@ -477,22 +521,76 @@ public class Consultas_Cliente extends Conexion {
         return null;
     }
 
-    public ArrayList<Cliente> llenadoinicial() {
+    public ArrayList<Cliente> llenadoinicial(Servicio filtro2, String filtro3) throws ParseException {
         ArrayList listaPersona = new ArrayList();
+        ArrayList serviciosXpersona = new ArrayList();
         JSONParser parser = new JSONParser();
-        try ( Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
-            JSONArray jsonarray = (JSONArray) parser.parse(reader);
-            for (int i = 0; i < jsonarray.size(); i++) {
-                JSONObject jsonObject = (JSONObject) jsonarray.get(i);
-                listaPersona.add(clientenew(jsonObject));
+        serviciosXpersona = serviciosxcliente(filtro2);
+        if (!filtro2.getServicio().equals("Servicios")) {
+            try ( Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
+                JSONArray jsonarray = (JSONArray) parser.parse(reader);
+                for (int i = 0; i < jsonarray.size(); i++) {
+                    JSONObject jsonObject = (JSONObject) jsonarray.get(i);
+
+                    for (int j = 0; j < serviciosXpersona.size(); j++) {
+                        if (serviciosXpersona.get(j).equals((Long) jsonObject.get("idclientes_potenciales"))) {
+                            if (!filtro3.equals("Contrato")) {
+                                if (filtro3.equals(jsonObject.get("modalidad"))) {
+                                    listaPersona.add(clientenew(jsonObject));
+                                }
+                            } else {
+                                listaPersona.add(clientenew(jsonObject));
+                            }
+                        }
+                    }
+                }
+                return listaPersona;
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-            return listaPersona;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+
+        } else {
+            try ( Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
+                JSONArray jsonarray = (JSONArray) parser.parse(reader);
+                for (int i = 0; i < jsonarray.size(); i++) {
+                    JSONObject jsonObject = (JSONObject) jsonarray.get(i);
+                    if (!filtro3.equals("Contrato")) {
+                        if (filtro3.equals(jsonObject.get("modalidad"))) {
+                            listaPersona.add(clientenew(jsonObject));
+                        }
+                    } else {
+                        listaPersona.add(clientenew(jsonObject));
+                    }
+                }
+                return listaPersona;
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         return null;
+    }
+
+    private ArrayList serviciosxcliente(Servicio filtro2) throws ParseException {
+        ArrayList serviciosXpersona = new ArrayList();
+        JSONParser parser = new JSONParser();
+        try ( Reader reader = new FileReader("temp" + File.separator + "serviciosclientes.json")) {
+            JSONArray jsonarray = (JSONArray) parser.parse(reader);
+            int o = 1;
+            for (int i = 0; i < jsonarray.size(); i++) {
+                JSONObject jsonObject = (JSONObject) jsonarray.get(i);
+                if (filtro2.getIdservicio() == (Long) jsonObject.get("idservicio")) {
+                    serviciosXpersona.add(jsonObject.get("clientes_potenciales_idclientes_potenciales"));
+//                    System.out.println(o++);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return serviciosXpersona;
     }
 
     private Cliente clientenew(JSONObject jsonObject) {

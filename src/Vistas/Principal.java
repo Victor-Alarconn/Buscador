@@ -170,6 +170,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         crearcliente = new javax.swing.JButton();
         txtbuscar2 = new javax.swing.JTextField();
+        filtro2 = new javax.swing.JComboBox<>();
+        filtro3 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
@@ -193,6 +195,7 @@ public class Principal extends javax.swing.JFrame {
         btnagregaractividad.setText("Agregar Actividad");
         popup.add(btnagregaractividad);
 
+        MarcarRetiro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/principal/back.png"))); // NOI18N
         MarcarRetiro.setText("Marcar como retirado");
         popup.add(MarcarRetiro);
 
@@ -334,7 +337,7 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo", "electronica", "sucursal", "cliente potencial", "clientes retirados" }));
+        filtro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipos", "electronica", "sucursal", "cliente potencial", "clientes retirados" }));
 
         tabladatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -368,6 +371,11 @@ public class Principal extends javax.swing.JFrame {
         crearcliente.setOpaque(false);
         crearcliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        filtro2.setAutoscrolls(true);
+        filtro2.setPreferredSize(new java.awt.Dimension(108, 20));
+
+        filtro3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contrato", "Arrendamiento-Local", "Arrendamiento-nube", "Compra-Local", "Compra-Nube" }));
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -383,9 +391,13 @@ public class Principal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtbuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(filtro2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(filtro3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 484, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
                         .addComponent(crearcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -398,7 +410,9 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtbuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtbuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(filtro2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(filtro3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(7, 7, 7)
                         .addComponent(jLabel3))
                     .addComponent(crearcliente))
@@ -494,6 +508,8 @@ public class Principal extends javax.swing.JFrame {
     public javax.swing.JButton crearusuario;
     public javax.swing.JMenuItem editarcliente;
     public javax.swing.JComboBox<String> filtro;
+    public javax.swing.JComboBox<Object> filtro2;
+    public javax.swing.JComboBox<String> filtro3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
