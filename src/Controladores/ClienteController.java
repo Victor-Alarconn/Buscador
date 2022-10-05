@@ -5,16 +5,7 @@
  */
 package Controladores;
 
-import Consultas.Consultas_Clase;
-import Consultas.Consultas_Cliente;
-import Consultas.Consultas_Configuraciones;
-import Consultas.Consultas_Directorio;
-import Consultas.Consultas_Documentos;
-import Consultas.Consultas_Llego;
-import Consultas.Consultas_Mac;
-import Consultas.Consultas_Modalidad;
-import Consultas.Consultas_Servicios;
-import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
+import Consultas.*;
 import Organizador.Recursos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -29,20 +20,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Modelos.Cliente;
-import Modelos.Configuracion;
-import Modelos.Documentos;
-import Modelos.Servicio;
-import Modelos.Servicios_has_Clientes_Potenciales;
+import Modelos.*;
 import Vistas.Formulario;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
-import Modelos.Clases;
-import Modelos.Directorio;
-import Modelos.Llego;
-import Modelos.Mac;
-import Modelos.Modalidad;
-import Modelos.Usuario;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -55,14 +36,17 @@ public class ClienteController implements ActionListener {
     private final Cliente modelo;
     private final Servicio mods;
     private final Servicios_has_Clientes_Potenciales shcp;
+    private final Procesos_Electronicos_has_Clientes phcp;
     private final Documentos mdocumento;
     private final Configuracion mconfiguracion;
     private final Usuario user;
 
     //consultas
     private final Consultas_Servicios cons;
+    private final Consultas_Procesos_Electronicos consp;
     private final Consultas_Cliente consultas;
     private final Consultas_Servicios_has_Clientes_Potenciales cshcp;
+    private final Consultas_Procesos_Electronicos_has_Clientes cphcp;
     private final Consultas_Documentos cdocumentos;
     private final Consultas_Configuraciones cconfiguraciones;
 
@@ -70,8 +54,10 @@ public class ClienteController implements ActionListener {
     private String directorio = null;
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model1 = new DefaultTableModel();
+    DefaultTableModel modeltablaproceso = new DefaultTableModel();
 
     ArrayList<Servicio> lista;
+    ArrayList<Proceso_Electronico> listaprocesos;
     ArrayList<Configuracion> mconfig;
 
     Consultas_Mac cmac = new Consultas_Mac();
@@ -88,14 +74,18 @@ public class ClienteController implements ActionListener {
     public ClienteController(Cliente modelo, Consultas_Cliente consultas,
             Formulario formulario, Consultas_Servicios cons, Servicio mods, Servicios_has_Clientes_Potenciales shcp,
             Consultas_Servicios_has_Clientes_Potenciales cshcp, Documentos documento, Consultas_Documentos cdocumentos,
-            Configuracion mconfiguracion, Consultas_Configuraciones cconfiguraciones, Usuario user) {
+            Configuracion mconfiguracion, Consultas_Configuraciones cconfiguraciones, Usuario user,Consultas_Procesos_Electronicos consp,
+            Procesos_Electronicos_has_Clientes phcp,Consultas_Procesos_Electronicos_has_Clientes cphcp) {
         this.modelo = modelo;
         this.consultas = consultas;
         this.formulario = formulario;
         this.cons = cons;
+        this.consp = consp;
         this.mods = mods;
         this.shcp = shcp;
+        this.phcp = phcp;
         this.cshcp = cshcp;
+        this.cphcp = cphcp;
         this.mdocumento = documento;
         this.cdocumentos = cdocumentos;
         this.mconfiguracion = mconfiguracion;
@@ -107,6 +97,8 @@ public class ClienteController implements ActionListener {
         this.formulario.agregardocumento.addActionListener(this);
         this.formulario.eliminardocumento.addActionListener(this);
         this.formulario.eliminarservicio.addActionListener(this);
+        this.formulario.eliminarproceso.addActionListener(this);
+        this.formulario.agregarproceso.addActionListener(this);
 
     }
 
@@ -117,6 +109,8 @@ public class ClienteController implements ActionListener {
         formulario.mensajenit.setVisible(false);
         model.addColumn("Servicio/Producto");
         formulario.tablaservicios.setModel(model);
+        modeltablaproceso.addColumn("Proceso");
+        formulario.tablaprocesos.setModel(modeltablaproceso);
         model1.addColumn("Documento");
         model1.addColumn("Fecha inicio");
         model1.addColumn("Fecha vence");
@@ -142,6 +136,12 @@ public class ClienteController implements ActionListener {
         lista = cons.llenar();
         for (int i = 0; i < lista.size(); i++) {
             formulario.txtservicio.addItem(lista.get(i));
+        }
+        
+        formulario.txtprocesos.removeAllItems();
+        listaprocesos = consp.llenar();
+        for (int i = 0; i < listaprocesos.size(); i++) {
+            formulario.txtprocesos.addItem(listaprocesos.get(i));
         }
 
         formulario.txtclase.removeAllItems();
@@ -176,7 +176,7 @@ public class ClienteController implements ActionListener {
             } else {
                 modelo.setNombre(formulario.txtnombre.getText());
                 modelo.setCelular1(formulario.txtcelular1.getText());
-                modelo.setCelular2(formulario.txtcelular2.getText());
+                modelo.setNombre_referido(formulario.txtnombrereferido.getText());
 //            Pattern pattern = Pattern
 //                    .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 //                            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
@@ -185,10 +185,17 @@ public class ClienteController implements ActionListener {
                 modelo.setEmail(formulario.txtemail.getText());
                 modelo.setClase(formulario.txtclase.getSelectedItem().toString());
                 modelo.setLlego(formulario.txtllego.getSelectedItem().toString());
+                modelo.setTsoporte(formulario.txtsoporte.getSelectedItem().toString());
+                
                 if (!formulario.txtvlrprincipal.getText().equals("")) {
                     modelo.setVlrprincipal(Integer.parseInt(formulario.txtvlrprincipal.getText()));
                 }
-
+                if (!formulario.txtvlrnomina.getText().equals("")) {
+                    modelo.setVlrnomina(Integer.parseInt(formulario.txtvlrnomina.getText()));
+                }
+                 if (!formulario.txtvlrecepcion.getText().equals("")) {
+                    modelo.setVlrecepcion(Integer.parseInt(formulario.txtvlrecepcion.getText()));
+                }
                 if (!formulario.txtvlrterminal.getText().equals("")) {
                     modelo.setVlrterminal(Integer.parseInt(formulario.txtvlrterminal.getText()));
                 }
@@ -211,11 +218,11 @@ public class ClienteController implements ActionListener {
 
                         modelo.setRuta(File.separator + formulario.txtcodigo.getText().toUpperCase() + "_" + formulario.txtnombre.getText().toUpperCase().trim());
 
-                        if (formulario.electronica.isSelected()) {
-                            modelo.setElectronica(1);
-                        } else {
-                            modelo.setElectronica(0);
-                        }
+//                        if (formulario.electronica.isSelected()) {
+//                            modelo.setElectronica(1);
+//                        } else {
+//                            modelo.setElectronica(0);
+//                        }
                         if (formulario.sucursal.isSelected()) {
                             modelo.setSucursal(1);
                         } else {
@@ -253,6 +260,18 @@ public class ClienteController implements ActionListener {
                                         }
                                     }
                                 }
+                                // guardando la tabla procesos
+                                for (int i = 0; i < formulario.tablaprocesos.getRowCount(); i++) {
+                                    for (int j = 0; j < listaprocesos.size(); j++) {
+                                        if (listaprocesos.get(j).getProceso().equals(formulario.tablaprocesos.getValueAt(i, 0).toString())) {
+                                            phcp.setIdp_electronicos(listaprocesos.get(j).getIdp_electronicos());
+                                            phcp.setIdclientes_potenciales(modelo.getIdclientes_potenciales());
+                                            if (!cphcp.registrarservicio(phcp)) {
+                                                JOptionPane.showMessageDialog(null, "error guardando de servicios");
+                                            }
+                                        }
+                                    }
+                                }
                                 //guardando la tabla documnetos
                                 for (int i = 0; i < formulario.tabladocumentos.getRowCount(); i++) {
                                     mdocumento.setDocumento(formulario.tabladocumentos.getValueAt(i, 0).toString());
@@ -269,6 +288,7 @@ public class ClienteController implements ActionListener {
                                 this.limpiar();
                                 this.limpiardocumentos();
                                 this.limpiarservicios();
+                                this.limpiarprocesos();
                                 
                             } else {
                                 JOptionPane.showMessageDialog(null, "error guardado el cliente");
@@ -281,6 +301,23 @@ public class ClienteController implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(formulario, "El campo fecha esta vacio");
                 }
+            }
+
+        }
+        //boton agregar proceso
+        Object[] proceso = new Object[5];
+        if (e.getSource() == formulario.agregarproceso) {
+            proceso[0] = formulario.txtprocesos.getSelectedItem().toString();
+            modeltablaproceso.addRow(proceso);
+            formulario.tablaprocesos.setModel(modeltablaproceso);
+        }
+         //boton eliminar proceso
+        if (e.getSource() == formulario.eliminarproceso) {
+            int fila = formulario.tablaprocesos.getSelectedRow();
+            if (fila >= 0) {
+                modeltablaproceso.removeRow(fila);
+            } else {
+                JOptionPane.showMessageDialog(formulario, "La tabla esta vacia o no sea seleccionado nada aun!");
             }
 
         }
@@ -388,7 +425,7 @@ public class ClienteController implements ActionListener {
         formulario.txtnit.setText("");
         formulario.txtnombre.setText("");
         formulario.txtcelular1.setText("");
-        formulario.txtcelular2.setText("");
+        formulario.txtnombrereferido.setText("");
         formulario.txtdv.setText("");
         formulario.txtcodigo.setText("");
         formulario.txtemail.setText("");
@@ -402,6 +439,15 @@ public class ClienteController implements ActionListener {
     public void limpiarservicios() {
         if (formulario.tablaservicios.getRowCount() >= 0) {
             int count = formulario.tablaservicios.getRowCount();
+            for (int i = 0; i < count; i++) {
+                model.removeRow(0);
+            }
+        }
+    }
+    
+      public void limpiarprocesos() {
+        if (formulario.tablaprocesos.getRowCount() >= 0) {
+            int count = formulario.tablaprocesos.getRowCount();
             for (int i = 0; i < count; i++) {
                 model.removeRow(0);
             }

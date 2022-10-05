@@ -5,16 +5,7 @@
  */
 package Controladores;
 
-import Consultas.Consultas_Clase;
-import Consultas.Consultas_Cliente;
-import Consultas.Consultas_Configuraciones;
-import Consultas.Consultas_Directorio;
-import Consultas.Consultas_Documentos;
-import Consultas.Consultas_Llego;
-import Consultas.Consultas_Mac;
-import Consultas.Consultas_Servicios;
-import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
-import Consultas.Consultas_usuario;
+import Consultas.*;
 import Modelos.Actividad;
 import Organizador.Recursos;
 import java.awt.Desktop;
@@ -34,16 +25,7 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import Modelos.Clases;
-import Modelos.Cliente;
-import Modelos.Configuracion;
-import Modelos.Directorio;
-import Modelos.Documentos;
-import Modelos.Llego;
-import Modelos.Mac;
-import Modelos.Servicio;
-import Modelos.Servicios_has_Clientes_Potenciales;
-import Modelos.Usuario;
+import Modelos.*;
 import Organizador.Fecha;
 import Vistas.AgregarActividad;
 import org.json.simple.parser.ParseException;
@@ -91,6 +73,7 @@ public class TablaClientesController implements ActionListener {
 
     Consultas_usuario consultasusuario = new Consultas_usuario();
 
+    Consultas_Procesos_Electronicos mpe = new Consultas_Procesos_Electronicos();
     Consultas_Mac cmac = new Consultas_Mac();
     Mac mmac = new Mac();
     ArrayList<Configuracion> mconfig;
@@ -222,9 +205,7 @@ public class TablaClientesController implements ActionListener {
             int selecionar = busqueda.tabladatos.getSelectedRow();
             if (selecionar != -1) {
                 modelo.setIdclientes_potenciales(Integer.parseInt(String.valueOf(busqueda.tabladatos.getValueAt(selecionar, 0))));
-                EditarClienteController editarcli = new EditarClienteController(modelo, mods, shcp, documento,
-                        mconfiguracion, servicio, consulta, cshcp, cdocumentos, cconfiguraciones, conc, conl,
-                        editarcliente);
+                EditarClienteController editarcli = new EditarClienteController(modelo, mods, shcp, documento,mconfiguracion, servicio, consulta, cshcp, cdocumentos, cconfiguraciones, conc, conl, editarcliente,mpe);
                 try {
                     editarcli.iniciar();
                 } catch (IOException ex) {
@@ -258,7 +239,7 @@ public class TablaClientesController implements ActionListener {
             Actividad model = new Actividad();
             int selecionar = busqueda.tabladatos.getSelectedRow();
             if (selecionar != -1) {
-                model.setEmpresa(String.valueOf(busqueda.tabladatos.getValueAt(selecionar, 4)));
+                model.setEmpresa(String.valueOf(busqueda.tabladatos.getValueAt(selecionar, 6)));
                 model.setCodigo(String.valueOf(busqueda.tabladatos.getValueAt(selecionar, 5)));
                 AgregarActividadesController cbackup = new AgregarActividadesController(model, aga, mod);
                 try {
@@ -336,7 +317,7 @@ public class TablaClientesController implements ActionListener {
                 || busqueda.filtro.getSelectedItem().equals("sucursal")
                 || busqueda.filtro.getSelectedItem().equals("cliente potencial")
                 || busqueda.filtro.getSelectedItem().equals("clientes retirados")
-                ||busqueda.txtbuscar2.getText().length() > 0) {
+                || busqueda.txtbuscar2.getText().length() > 0) {
             limpiartabla();
             ArrayList<Cliente> lista;
             lista = consulta.buscarcaracter(busqueda.txtbuscar.getText(),

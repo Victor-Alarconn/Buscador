@@ -5,16 +5,7 @@
  */
 package Controladores;
 
-import Consultas.Consultas_Clase;
-import Consultas.Consultas_Cliente;
-import Consultas.Consultas_Configuraciones;
-import Consultas.Consultas_Directorio;
-import Consultas.Consultas_Documentos;
-import Consultas.Consultas_Llego;
-import Consultas.Consultas_Modalidad;
-import Consultas.Consultas_Servicios;
-import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
-import Consultas.Consultas_usuario;
+import Consultas.*;
 import Organizador.Recursos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -24,26 +15,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import Modelos.Actividad;
-import Modelos.Clases;
-import Modelos.Cliente;
-import Modelos.Configuracion;
-import Modelos.Directorio;
-import Modelos.Documentos;
-import Modelos.Llego;
-import Modelos.Modalidad;
-import Modelos.Servicio;
-import Modelos.Servicios_has_Clientes_Potenciales;
-import Modelos.Usuario;
+import Modelos.*;
 import org.json.simple.parser.ParseException;
-import Vistas.Actividades;
-import Vistas.Busqueda;
-import Vistas.Carpetas;
-import Vistas.Configuraciones;
-import Vistas.Cotizaciones;
-import Vistas.Formulario;
-import Vistas.Otros;
-import Vistas.Principal;
+import Vistas.*;
 
 import Vistas.Usuarios;
 
@@ -85,6 +59,11 @@ public class OrganizadorController implements ActionListener {
 
     Modalidad mm = new Modalidad();
     Consultas_Modalidad mcm = new Consultas_Modalidad();
+    
+//     Modalidad mm = new Modalidad();
+    Consultas_Procesos_Electronicos mpe = new Consultas_Procesos_Electronicos();
+    Procesos_Electronicos_has_Clientes phcp = new Procesos_Electronicos_has_Clientes();
+    Consultas_Procesos_Electronicos_has_Clientes cphcp = new Consultas_Procesos_Electronicos_has_Clientes();
     
     Actividad mactividad = new Actividad();
 
@@ -146,7 +125,7 @@ public class OrganizadorController implements ActionListener {
                 formulario = new Formulario(principal, false);
                 ClienteController controlador = new ClienteController(modelo, consulta,
                         formulario, servicio, mods, shcp, cshcp, documento, cdocumentos,
-                        mconfiguracion, cconfiguraciones, mod);
+                        mconfiguracion, cconfiguraciones, mod,mpe,phcp,cphcp);
                 try {
                     controlador.iniciar();
                 } catch (IOException ex) {

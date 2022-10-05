@@ -5,16 +5,7 @@
  */
 package Controladores;
 
-import Consultas.Consultas_Clase;
-import Consultas.Consultas_Cliente;
-import Consultas.Consultas_Configuraciones;
-import Consultas.Consultas_Directorio;
-import Consultas.Consultas_Documentos;
-import Consultas.Consultas_Llego;
-import Consultas.Consultas_Mac;
-import Consultas.Consultas_Modalidad;
-import Consultas.Consultas_Servicios;
-import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
+import Consultas.*;
 import Organizador.Recursos;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
@@ -31,16 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import Modelos.Clases;
-import Modelos.Cliente;
-import Modelos.Configuracion;
-import Modelos.Directorio;
-import Modelos.Documentos;
-import Modelos.Llego;
-import Modelos.Mac;
-import Modelos.Modalidad;
-import Modelos.Servicio;
-import Modelos.Servicios_has_Clientes_Potenciales;
+import Modelos.*;
 import Vistas.Editarcliente;
 
 /**
@@ -60,6 +42,7 @@ public class EditarClienteController implements ActionListener {
     private final Consultas_Servicios cons;
     private final Consultas_Cliente consultas;
     private final Consultas_Servicios_has_Clientes_Potenciales cshcp;
+    private final Consultas_Procesos_Electronicos consp;
     private final Consultas_Documentos cdocumentos;
     private final Consultas_Configuraciones cconfiguraciones;
     private final Consultas_Clase cc;
@@ -70,10 +53,13 @@ public class EditarClienteController implements ActionListener {
     private String prefijo = null;
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model1 = new DefaultTableModel();
+    DefaultTableModel modeltablaproceso = new DefaultTableModel();
+
 
     ArrayList<Servicio> lista;
     ArrayList<Servicio> servicio;
-
+    ArrayList<Proceso_Electronico> arrayprocesos;
+    ArrayList<Proceso_Electronico> listaprocesos;
     Consultas_Llego cllego = new Consultas_Llego();
     Consultas_Modalidad mmodalidad = new Consultas_Modalidad();
     Consultas_Servicios modc = new Consultas_Servicios();
@@ -93,13 +79,14 @@ public class EditarClienteController implements ActionListener {
             Consultas_Servicios cons, Consultas_Cliente consultas,
             Consultas_Servicios_has_Clientes_Potenciales cshcp, Consultas_Documentos cdocumentos,
             Consultas_Configuraciones cconfiguraciones, Consultas_Clase cc, Consultas_Llego cl,
-            Editarcliente formulario) {
+            Editarcliente formulario,Consultas_Procesos_Electronicos consp) {
         this.modelo = modelo;
         this.mods = mods;
         this.shcp = shcp;
         this.mdocumento = mdocumento;
         this.mconfiguracion = mconfiguracion;
         this.cons = cons;
+         this.consp = consp;
         this.consultas = consultas;
         this.cshcp = cshcp;
         this.cdocumentos = cdocumentos;
@@ -112,7 +99,7 @@ public class EditarClienteController implements ActionListener {
         this.formulario.eliminarservicio1.addActionListener(this);
         this.formulario.agregardocumento1.addActionListener(this);
         this.formulario.eliminardocumento1.addActionListener(this);
-        this.formulario.clientepotencial.addActionListener(this);
+//        this.formulario.clientepotencial.addActionListener(this);
     }
 
     public void iniciar() throws IOException, org.json.simple.parser.ParseException {
@@ -134,6 +121,8 @@ public class EditarClienteController implements ActionListener {
         formulario.tablaservicios1.getColumn("ID").setMaxWidth(0);
         DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
         modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+        modeltablaproceso.addColumn("Proceso");
+        formulario.tablaprocesos.setModel(modeltablaproceso);
         formulario.tablaservicios1.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
         formulario.tabladocumentos1.getColumnModel().getColumn(1).setCellRenderer(modelocentrar);
         formulario.tabladocumentos1.getColumnModel().getColumn(2).setCellRenderer(modelocentrar);
@@ -153,6 +142,12 @@ public class EditarClienteController implements ActionListener {
         for (int i = 0; i < modulo.size(); i++) {
             formulario.txtllego1.addItem(modulo.get(i));
         }
+        formulario.txtprocesos.removeAllItems();
+        listaprocesos = consp.llenar();
+        for (int i = 0; i < listaprocesos.size(); i++) {
+            formulario.txtprocesos.addItem(listaprocesos.get(i));
+        }       
+        
         formulario.txtservicio1.removeAllItems();
         lista = modc.llenar();
         for (int i = 0; i < lista.size(); i++) {
@@ -176,7 +171,7 @@ public class EditarClienteController implements ActionListener {
             modelo.setNombre(formulario.txtnombre1.getText());
             modelo.setEmpresa(formulario.txtempresa1.getText());
             modelo.setCelular1(formulario.txtcelular11.getText());
-            modelo.setCelular2(formulario.txtcelular21.getText());
+            modelo.setNombre_referido(formulario.txtnombrereferido.getText());
             modelo.setEmail(formulario.txtemail1.getText());
             modelo.setClase(formulario.txtclase1.getSelectedItem().toString());
             modelo.setLlego(formulario.txtllego1.getSelectedItem().toString());
@@ -192,20 +187,20 @@ public class EditarClienteController implements ActionListener {
             modelo.setNumequipos(Integer.parseInt(formulario.txtnumequipos1.getText()));
             modelo.setVlrterminal(Integer.parseInt(formulario.txtvlrterminal1.getText()));
             modelo.setValor_total(formulario.txtvalor_total1.getText());
-            if (!formulario.clientepotencial.isSelected()) {
-                modelo.setCodigo(formulario.txtcodigo1.getText());
-                modelo.setRuta(File.separator + formulario.txtcodigo1.getText().toUpperCase() + "_" + formulario.txtnombre1.getText().toUpperCase().trim());
-            }
-            if (formulario.clientepotencial.isSelected()) {
-                modelo.setCliente_potencial(1);
-            } else {
-                modelo.setCliente_potencial(0);
-            }
-            if (formulario.electronica.isSelected()) {
-                modelo.setElectronica(1);
-            } else {
-                modelo.setElectronica(0);
-            }
+//            if (!formulario.clientepotencial.isSelected()) {
+//                modelo.setCodigo(formulario.txtcodigo1.getText());
+//                modelo.setRuta(File.separator + formulario.txtcodigo1.getText().toUpperCase() + "_" + formulario.txtnombre1.getText().toUpperCase().trim());
+//            }
+//            if (formulario.clientepotencial.isSelected()) {
+//                modelo.setCliente_potencial(1);
+//            } else {
+//                modelo.setCliente_potencial(0);
+//            }
+//            if (formulario.electronica.isSelected()) {
+//                modelo.setElectronica(1);
+//            } else {
+//                modelo.setElectronica(0);
+//            }
             if (formulario.sucursal.isSelected()) {
                 modelo.setSucursal(1);
             } else {
@@ -298,13 +293,13 @@ public class EditarClienteController implements ActionListener {
             }
 
         }
-        if (e.getSource() == formulario.clientepotencial) {
-            if (!formulario.clientepotencial.isSelected()) {
-                formulario.txtcodigo1.setEnabled(true);
-            } else {
-                formulario.txtcodigo1.setEnabled(false);
-            }
-        }
+//        if (e.getSource() == formulario.clientepotencial) {
+//            if (!formulario.clientepotencial.isSelected()) {
+//                formulario.txtcodigo1.setEnabled(true);
+//            } else {
+//                formulario.txtcodigo1.setEnabled(false);
+//            }
+//        }
         //boton eliminar documnento
         if (e.getSource() == formulario.eliminardocumento1) {
             int fila = formulario.tabladocumentos1.getSelectedRow();
@@ -378,7 +373,7 @@ public class EditarClienteController implements ActionListener {
         formulario.txtnit1.setText("");
         formulario.txtnombre1.setText("");
         formulario.txtcelular11.setText("");
-        formulario.txtcelular21.setText("");
+        formulario.txtnombrereferido.setText("");
         formulario.txtdv1.setText("");
         formulario.txtcodigo1.setText("");
         formulario.txtemail1.setText("");
@@ -419,6 +414,16 @@ public class EditarClienteController implements ActionListener {
             model.addRow(datos);
             formulario.tablaservicios1.setModel(model);
         }
+        
+        //llena la tabla de procesos 
+        arrayprocesos = consultas.llenarprocesos(modelo);
+        Object[] procesos = new Object[3];
+        for (int i = 0; i < arrayprocesos.size(); i++) {
+            procesos[0] = arrayprocesos.get(i).getProceso();
+            procesos[1] = arrayprocesos.get(i).getUsuarios_idusuarios();
+            modeltablaproceso.addRow(procesos);
+            formulario.tablaprocesos.setModel(modeltablaproceso);
+        }
 
         ArrayList<Documentos> documentos;
         documentos = consultas.clientedocumentos(modelo);
@@ -434,6 +439,9 @@ public class EditarClienteController implements ActionListener {
 //
         if (consultas.buscar(modelo)) {
             try {
+                formulario.txtsoporte.setSelectedItem(modelo.getTsoporte());
+                
+                
                 formulario.txtnit1.setText(modelo.getNit());
                 formulario.txtnombre1.setText(modelo.getNombre());
                 formulario.txtcelular11.setText(modelo.getCelular1());
@@ -445,6 +453,8 @@ public class EditarClienteController implements ActionListener {
                 }
 
                 formulario.txtvlrprincipal1.setText(String.valueOf(modelo.getVlrprincipal()));
+                formulario.txtvlrnomina.setText(String.valueOf(modelo.getVlrnomina()));
+                formulario.txtvlrecepcion.setText(String.valueOf(modelo.getVlrecepcion()));
                 formulario.txtnumequipos1.setText(String.valueOf(modelo.getNumequipos()));
                 formulario.txtvlrterminal1.setText(String.valueOf(modelo.getVlrterminal()));
                 formulario.txtvalor_total1.setText(String.valueOf(modelo.getValor_total()));
@@ -469,7 +479,7 @@ public class EditarClienteController implements ActionListener {
                 formulario.txtnotas1.setText(modelo.getNotas());
                 formulario.txtdv1.setText(modelo.getDv());
                 formulario.txtcodigo1.setText(modelo.getCodigo());
-                formulario.txtcelular21.setText(modelo.getCelular2());
+                formulario.txtnombrereferido.setText(modelo.getNombre_referido());
                 formulario.txtemail1.setText(modelo.getEmail());
 
                 for (int i = 0; i < modulo1.size(); i++) {
@@ -480,16 +490,16 @@ public class EditarClienteController implements ActionListener {
                 }
                 formulario.txtempresa1.setText(modelo.getEmpresa());
                 formulario.txtcontacto1.setText(modelo.getContacto());
-                if (modelo.getCliente_potencial() == 1) {
-                    formulario.clientepotencial.setSelected(true);
-                } else {
-                    formulario.clientepotencial.setSelected(false);
-                }
-                if (modelo.getElectronica() == 1) {
-                    formulario.electronica.setSelected(true);
-                } else {
-                    formulario.electronica.setSelected(false);
-                }
+//                if (modelo.getCliente_potencial() == 1) {
+//                    formulario.clientepotencial.setSelected(true);
+//                } else {
+//                    formulario.clientepotencial.setSelected(false);
+//                }
+//                if (modelo.getElectronica() == 1) {
+//                    formulario.electronica.setSelected(true);
+//                } else {
+//                    formulario.electronica.setSelected(false);
+//                }
                 if (modelo.getSucursal() == 1) {
                     formulario.sucursal.setSelected(true);
                 } else {

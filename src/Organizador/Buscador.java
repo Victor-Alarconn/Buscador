@@ -5,30 +5,16 @@
  */
 package Organizador;
 
-import Consultas.Consultas_Actividad;
-import Consultas.Consultas_Clase;
-import Consultas.Consultas_Cliente;
-import Consultas.Consultas_Configuraciones;
-import Consultas.Consultas_Documentos;
-import Consultas.Consultas_Llego;
-import Consultas.Consultas_Mac;
-import Consultas.Consultas_Modalidad;
-import Consultas.Consultas_Modulos;
-import Consultas.Consultas_Servicios;
-import Consultas.Consultas_Servicios_has_Clientes_Potenciales;
-import Consultas.Consultas_roles;
-import Consultas.Consultas_usuario;
+import Consultas.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Modelos.Mac;
-import Modelos.Modulo;
-import Modelos.Rol;
-import Modelos.Usuario;
+import Modelos.*;
 import org.json.simple.parser.ParseException;
 
 import Vistas.login;
+import java.sql.SQLException;
 
 /**
  *
@@ -141,7 +127,7 @@ public class Buscador {
         return cr.registrar(rol);
     }
 
-    public void jsons() throws IOException {
+    public void jsons() throws IOException, SQLException {
         Consultas_Clase cc = new Consultas_Clase();
         //llamda al metodo que crea el archivo clases.json
         cc.jsonclases();
@@ -157,6 +143,14 @@ public class Buscador {
         Consultas_Servicios servicios = new Consultas_Servicios();
         //llamda al metodo que crea el archivo servicios.json 
         servicios.jsonservicios();
+        
+        Consultas_Procesos_Electronicos_has_Clientes cpehc = new Consultas_Procesos_Electronicos_has_Clientes();
+        cpehc.jsonserviciosclientes();
+        
+        
+        Consultas_Procesos_Electronicos procesos = new Consultas_Procesos_Electronicos();
+        //llamda al metodo que crea el archivo procesos.json 
+        procesos.jsonprocesos();
         //llamda al metodo que crea el archivo clientes.json 
         Consultas_Cliente cliente = new Consultas_Cliente();
         cliente.jsonclientes();

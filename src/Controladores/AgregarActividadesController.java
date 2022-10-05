@@ -91,9 +91,7 @@ public class AgregarActividadesController implements ActionListener {
                 }
             } catch (IOException ex) {
                 Logger.getLogger(AgregarActividadesController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
+            }          
         }
     }
     

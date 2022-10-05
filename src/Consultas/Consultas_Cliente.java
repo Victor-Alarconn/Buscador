@@ -17,9 +17,7 @@ import java.io.Reader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Modelos.Cliente;
-import Modelos.Documentos;
-import Modelos.Servicio;
+import Modelos.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -39,20 +37,20 @@ public class Consultas_Cliente extends Conexion {
         Connection con = getConexion();
         ResultSet rs = null;
         String sql = "INSERT INTO clientes_potenciales (nit,nombre,empresa,"
-                + "celular1,celular2,email,fecha_llegada,clase,"
+                + "celular1,nombre_referido,email,fecha_llegada,clase,"
                 + "modalidad,notas,codigo,llego,categoria,ruta,dv,"
                 + "usuarios_idusuario,fecha_arriendo,contacto,"
                 + "cliente_potencial,vlrprincipal,numequipos,vlrterminal,"
                 + "electronica,sucursal,fechacotizacion,rutacotizacion,numero_cotizacion,"
-                + "programa,equipos,valor_total,referido) VALUES(?,?,?,?,"
-                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "programa,equipos,valor_total,referido,tsoporte,vlrnomina,vlrecepcion) VALUES(?,?,?,?,"
+                + "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, cliente.getNit());
             ps.setString(2, cliente.getNombre());
             ps.setString(3, cliente.getEmpresa());
             ps.setString(4, cliente.getCelular1());
-            ps.setString(5, cliente.getCelular2());
+            ps.setString(5, cliente.getNombre_referido());
             ps.setString(6, cliente.getEmail());
             ps.setString(7, cliente.getFecha_llegada());
             ps.setString(8, cliente.getClase());
@@ -79,6 +77,9 @@ public class Consultas_Cliente extends Conexion {
             ps.setInt(29, cliente.getEqipos());
             ps.setString(30, cliente.getValor_total());
             ps.setString(31, cliente.getReferido());
+            ps.setString(32, cliente.getTsoporte());
+            ps.setInt(33, cliente.getVlrnomina());
+            ps.setInt(34, cliente.getVlrecepcion());
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();// recupera el id autoincrementable del registro hecho
             if (rs != null && rs.next()) {
@@ -105,9 +106,9 @@ public class Consultas_Cliente extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
         String sql = "UPDATE  clientes_potenciales SET nit=?, nombre=?, empresa=?,"
-                + " celular1=?, celular2=?, email=?, fecha_llegada=?, clase=?, modalidad=?, notas=?, codigo=?, llego=?, categoria=?,dv=?,"
+                + " celular1=?, nombre_referido=?, email=?, fecha_llegada=?, clase=?, modalidad=?, notas=?, codigo=?, llego=?, categoria=?,dv=?,"
                 + " fecha_arriendo=?, contacto=?, vlrprincipal=?,"
-                + " numequipos=?,vlrterminal=?, electronica=?, sucursal=?,cliente_potencial=?,ruta=?,valor_total=?"
+                + " numequipos=?,vlrterminal=?, electronica=?, sucursal=?,cliente_potencial=?,ruta=?,valor_total=?,tsoporte=?,vlrnomina=?,vlrecepcion=?"
                 + " WHERE idclientes_potenciales=? ";
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
@@ -115,7 +116,7 @@ public class Consultas_Cliente extends Conexion {
             ps.setString(2, cliente.getNombre());
             ps.setString(3, cliente.getEmpresa());
             ps.setString(4, cliente.getCelular1());
-            ps.setString(5, cliente.getCelular2());
+            ps.setString(5, cliente.getNombre_referido());
             ps.setString(6, cliente.getEmail());
             ps.setString(7, cliente.getFecha_llegada());
             ps.setString(8, cliente.getClase());
@@ -135,7 +136,10 @@ public class Consultas_Cliente extends Conexion {
             ps.setInt(22, cliente.getCliente_potencial());
             ps.setString(23, cliente.getRuta());
             ps.setString(24, cliente.getValor_total());
-            ps.setInt(25, cliente.getIdclientes_potenciales());
+            ps.setString(25, cliente.getTsoporte());
+            ps.setString(26, cliente.getTsoporte());
+            ps.setString(27, cliente.getTsoporte());
+            ps.setInt(28, cliente.getIdclientes_potenciales());
             ps.execute();
             jsonclientes();
             return true;
@@ -216,7 +220,7 @@ public class Consultas_Cliente extends Conexion {
                     cliente.setNombre((String) jsonObject.get("nombre"));
                     cliente.setEmpresa((String) jsonObject.get("empresa"));
                     cliente.setCelular1((String) jsonObject.get("celular1"));
-                    cliente.setCelular2((String) jsonObject.get("celular2"));
+                    cliente.setNombre_referido((String) jsonObject.get("nombre_referido"));
                     cliente.setEmail((String) jsonObject.get("email"));
                     cliente.setFecha_llegada((String) jsonObject.get("fecha_llegada"));
                     cliente.setClase((String) jsonObject.get("clase"));
@@ -242,6 +246,11 @@ public class Consultas_Cliente extends Conexion {
                     Long suc = (Long) jsonObject.get("sucursal");
                     cliente.setSucursal(Math.toIntExact(suc));
                     cliente.setValor_total((String) jsonObject.get("valor_total"));
+                    cliente.setTsoporte((String) jsonObject.get("tsoporte"));
+                    Long vlrn = (Long) jsonObject.get("vlrnomina");
+                    cliente.setVlrnomina(Math.toIntExact(vlrn));
+                    Long vlrr = (Long) jsonObject.get("vlrecepcion");
+                    cliente.setVlrecepcion(Math.toIntExact(vlrr));
                     return true;
                 }
             }
@@ -282,28 +291,30 @@ public class Consultas_Cliente extends Conexion {
         JSONParser parser = new JSONParser();
         try ( Reader reader = new FileReader("temp" + File.separator + "clientes.json")) {
             JSONArray jsonarray = (JSONArray) parser.parse(reader);
-            for (int i = 166; i < jsonarray.size(); i++) {
+            for (int i = 0; i < jsonarray.size(); i++) {
                 JSONObject jsonObject = (JSONObject) jsonarray.get(i);
-                if (cliente.getCodigo().toLowerCase().equals((String) jsonObject.get("codigo").toString().toLowerCase())) {
-                    Long myLong = (Long) jsonObject.get("idclientes_potenciales");
-                    cliente.setIdclientes_potenciales(Math.toIntExact(myLong));
-                    cliente.setNit((String) jsonObject.get("nit"));
-                    cliente.setNombre((String) jsonObject.get("nombre"));
-                    cliente.setEmpresa((String) jsonObject.get("empresa"));
-                    cliente.setCelular1((String) jsonObject.get("celular1"));
-                    cliente.setCelular2((String) jsonObject.get("celular2"));
-                    cliente.setEmail((String) jsonObject.get("email"));
-                    cliente.setFecha_llegada((String) jsonObject.get("fecha_llegada"));
-                    cliente.setClase((String) jsonObject.get("clase"));
-                    cliente.setModalidad((String) jsonObject.get("modalidad"));
-                    cliente.setNotas((String) jsonObject.get("notas"));
-                    cliente.setCodigo((String) jsonObject.get("codigo"));
-                    cliente.setLlego((String) jsonObject.get("llego"));
-                    cliente.setCategoria((String) jsonObject.get("categoria"));
-                    cliente.setRuta((String) jsonObject.get("ruta"));
-                    cliente.setDv((String) jsonObject.get("dv"));
-                    cliente.setBackupruta((String) jsonObject.get("backupruta"));
-                    return true;
+                if (!jsonObject.get("codigo").equals(null)) {
+                    if (cliente.getCodigo().toLowerCase().equals((String) jsonObject.get("codigo").toString().toLowerCase())) {
+                        Long myLong = (Long) jsonObject.get("idclientes_potenciales");
+                        cliente.setIdclientes_potenciales(Math.toIntExact(myLong));
+                        cliente.setNit((String) jsonObject.get("nit"));
+                        cliente.setNombre((String) jsonObject.get("nombre"));
+                        cliente.setEmpresa((String) jsonObject.get("empresa"));
+                        cliente.setCelular1((String) jsonObject.get("celular1"));
+                        cliente.setNombre_referido((String) jsonObject.get("nombre_referido"));
+                        cliente.setEmail((String) jsonObject.get("email"));
+                        cliente.setFecha_llegada((String) jsonObject.get("fecha_llegada"));
+                        cliente.setClase((String) jsonObject.get("clase"));
+                        cliente.setModalidad((String) jsonObject.get("modalidad"));
+                        cliente.setNotas((String) jsonObject.get("notas"));
+                        cliente.setCodigo((String) jsonObject.get("codigo"));
+                        cliente.setLlego((String) jsonObject.get("llego"));
+                        cliente.setCategoria((String) jsonObject.get("categoria"));
+                        cliente.setRuta((String) jsonObject.get("ruta"));
+                        cliente.setDv((String) jsonObject.get("dv"));
+                        cliente.setBackupruta((String) jsonObject.get("backupruta"));
+                        return true;
+                    }
                 }
             }
         } catch (IOException e) {
@@ -327,7 +338,7 @@ public class Consultas_Cliente extends Conexion {
                     cliente.setEmpresa((String) jsonObject.get("empresa"));
                     cliente.setContacto((String) jsonObject.get("contacto"));
                     cliente.setCelular1((String) jsonObject.get("celular1"));
-                    cliente.setCelular2((String) jsonObject.get("celular2"));
+                    cliente.setNombre_referido((String) jsonObject.get("nombre_referido"));
                     cliente.setEmail((String) jsonObject.get("email"));
                     cliente.setClase((String) jsonObject.get("clase"));
                     cliente.setModalidad((String) jsonObject.get("modalidad"));
@@ -388,6 +399,30 @@ public class Consultas_Cliente extends Conexion {
                     servicio.setServicio((String) jsonObject.get("servicio"));
                     servicio.setIdservicio(Math.toIntExact((Long) jsonObject.get("idservicio")));
                     lista.add(servicio);
+                }
+            }
+            return lista;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    //consulta para llenar la tabla de servicios del formulario editar 
+    public ArrayList<Proceso_Electronico> llenarprocesos(Cliente cliente) {
+        ArrayList lista = new ArrayList();
+        JSONParser parser = new JSONParser();
+        try ( Reader reader = new FileReader("temp" + File.separator + "proceoso_has_clientes.json")) {
+            JSONArray jsonarray = (JSONArray) parser.parse(reader);
+            for (int i = 0; i < jsonarray.size(); i++) {
+                JSONObject jsonObject = (JSONObject) jsonarray.get(i);
+                if (cliente.getIdclientes_potenciales() == Math.toIntExact((Long) jsonObject.get("idclientes_potenciales"))) {
+                    Proceso_Electronico proceso = new Proceso_Electronico();
+                    proceso.setProceso((String) jsonObject.get("proceso"));
+                    proceso.setUsuarios_idusuarios(Math.toIntExact((Long) jsonObject.get("idclientes_potenciales")));
+                    lista.add(proceso);
                 }
             }
             return lista;
@@ -609,6 +644,7 @@ public class Consultas_Cliente extends Conexion {
         cliente.setEmail((String) jsonObject.get("email"));
         cliente.setContacto((String) jsonObject.get("contacto"));
         cliente.setBackupruta((String) jsonObject.get("backupruta"));
+        cliente.setNombre_referido((String) jsonObject.get("nombre_referido"));
         cliente.setRutacotizacon((String) jsonObject.get("rutacotizacion"));
         Long myLongi = (Long) jsonObject.get("cliente_potencial");
         int idcliente = Math.toIntExact(myLongi);
@@ -616,5 +652,4 @@ public class Consultas_Cliente extends Conexion {
         cliente.setFecha_retiro((String) jsonObject.get("fecha_retiro"));
         return cliente;
     }
-
 }

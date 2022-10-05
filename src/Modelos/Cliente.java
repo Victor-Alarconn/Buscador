@@ -44,8 +44,45 @@ public class Cliente {
     private String valor_total;
     private String referido;
     private String fecha_retiro;
+    private String Nombre_referido;
     private int retiro;
+    private String tsoporte;
+    private int vlrnomina;
+    private int vlrecepcion;
 
+    public int getVlrnomina() {
+        return vlrnomina;
+    }
+
+    public void setVlrnomina(int vlrnomina) {
+        this.vlrnomina = vlrnomina;
+    }
+
+    public int getVlrecepcion() {
+        return vlrecepcion;
+    }
+
+    public void setVlrecepcion(int vlrecepcion) {
+        this.vlrecepcion = vlrecepcion;
+    }
+    
+
+    public String getTsoporte() {
+        return tsoporte;
+    }
+
+    public void setTsoporte(String tsoporte) {
+        this.tsoporte = tsoporte;
+    }
+
+    public String getNombre_referido() {
+        return Nombre_referido;
+    }
+
+    public void setNombre_referido(String Nombre_referido) {
+        this.Nombre_referido = Nombre_referido;
+    }    
+    
     public String getFecha_retiro() {
         return fecha_retiro;
     }
